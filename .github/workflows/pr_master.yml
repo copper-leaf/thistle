@@ -1,0 +1,56 @@
+# On PRs to master, run tests on all supported platforms. Also do a dry publish of Orchid to validate its publishing
+# pipeline is configured correctly and changelog entries are present
+
+name: 'PR to `master` (Verify Release)'
+
+on:
+  pull_request:
+    branches: ['master']
+
+jobs:
+  buildCachesOnAll:
+    strategy:
+      matrix:
+        os: ['ubuntu-latest', 'macos-latest']
+    name: 'Build on ${{ matrix.os }} JDK 8'
+    runs-on: '${{ matrix.os }}'
+    steps:
+      - uses: 'actions/checkout@v2'
+      - run: 'git fetch --prune --unshallow --tags'
+      - name: 'Set up JDK 8'
+        uses: 'actions/setup-java@v2'
+        with:
+          distribution: 'adopt'
+          java-version: 8
+      - name: 'Cache Gradle packages'
+        uses: 'actions/cache@v1'
+        with:
+          path: '~/.gradle/caches'
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: '${{ runner.os }}-gradle'
+      - name: 'Assemble with Gradle'
+        run: './gradlew assemble --no-daemon --stacktrace -Prelease'
+  testOnAll:
+    needs: ['buildCachesOnAll']
+    strategy:
+      matrix:
+        java: [8, 9, 10, 11, 12, 13, 14, 15, 16]
+        os: ['ubuntu-latest', 'macos-latest']
+    name: 'Test on ${{ matrix.os }} JDK ${{ matrix.java }}'
+    runs-on: '${{ matrix.os }}'
+    steps:
+      - uses: 'actions/checkout@v2'
+      - run: 'git fetch --prune --unshallow --tags'
+      - name: 'Set up JDK ${{ matrix.java }}'
+        uses: 'actions/setup-java@v2'
+        with:
+          distribution: 'adopt'
+          java-version: '${{ matrix.java }}'
+      - name: 'Cache Gradle packages'
+        uses: 'actions/cache@v1'
+        with:
+          path: '~/.gradle/caches'
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: '${{ runner.os }}-gradle'
+      - name: 'Run checks with Gradle'
+        run: './gradlew check :docs:publish --no-daemon --stacktrace -Prelease -PorchidEnvironment=prod -PorchidDryDeploy=true -PorchidDiagnose=true'

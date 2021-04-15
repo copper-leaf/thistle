@@ -1,0 +1,65 @@
+site:
+  theme: 'BsDoc'
+  baseUrl: 'https://copper-leaf.github.io/clog'
+  about:
+    siteName: Clog
+    siteDescription: Zero-config Kotlin multiplatform logging utility
+
+theme:
+  primaryColor: '#2a623d'
+  trianglifyOptions:
+    x_colors: ['#000', '#2a623d', '#000']
+  metaComponents:
+    - type: "prism"
+      githubTheme: 'duotone-light'
+      languages:
+        - java
+        - kotlin
+        - groovy
+        - swift
+  menu:
+    - type: 'page'
+      itemId: 'Home'
+    - type: 'page'
+      itemId: 'Releases'
+    - type: 'sourcedocModules'
+      moduleType:  'kotlindoc'
+      asSubmenu: true
+      submenuTitle: 'Supported Platforms'
+
+changelog:
+  adapter:
+    type: "file"
+    baseDir: "./../../../../"
+
+snippets:
+  sections:
+    - tags: ['embedded_snippets']
+      adapter:
+        type: 'embedded'
+        recursive: true
+        baseDirs:
+          - './../../../../core/src/commonTest/kotlin/'
+          - './../../../../core/src/jvmTest/kotlin/'
+          - './../../../../core/src/androidTest/kotlin/'
+          - './../../../../core/src/jsTest/kotlin/'
+          - './../../../../core/src/iosTest/kotlin/'
+
+kotlindoc:
+  modules:
+    - { name: 'Common',  slug: 'common',  sourceDirs: './../../../../core/src/commonMain/kotlin/'                              }
+    - { name: 'JVM',     slug: 'jvm',     sourceDirs: './../../../../core/src/jvmMain/kotlin/',     relatedModules: ['Common'] }
+    - { name: 'Android', slug: 'android', sourceDirs: './../../../../core/src/androidMain/kotlin/', relatedModules: ['Common'] }
+    - { name: 'JS',      slug: 'js',      sourceDirs: './../../../../core/src/jsMain/kotlin/',      relatedModules: ['Common'] }
+    - { name: 'iOS',     slug: 'ios',     sourceDirs: './../../../../core/src/iosMain/kotlin/',     relatedModules: ['Common'] }
+
+services:
+  publications:
+    stages:
+      - type: githubReleases
+        repo: 'copper-leaf/clog'
+        username: 'cjbrooks12'
+        commitish: 'master'
+      - type: githubPages
+        repo: 'copper-leaf/clog'
+        username: 'cjbrooks12'
