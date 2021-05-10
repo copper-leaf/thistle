@@ -111,7 +111,7 @@ not using `checkArgs` and pulling values from the `args` map manually.
 ```kotlin
 // create a custom implementation of ThistleTag
 class CustomStyle : ThistleTag {
-    override fun invoke(args: Map<String, Any>): Any {
+    override fun invoke(context: Map<String, Any>, args: Map<String, Any>): Any {
         // use checkArgs to safely pull properties from the input args and ensure incorrect args are not set 
         return checkArgs(args) {
             val color: Int by int()

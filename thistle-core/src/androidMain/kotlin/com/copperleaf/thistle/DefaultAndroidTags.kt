@@ -20,9 +20,6 @@ object DefaultAndroidTags : (ThistleSyntaxBuilder) -> Unit {
         tag("background") { BackgroundColor() }
 
         tag("style") { Style() }
-        tag("b") { Style(android.graphics.Typeface.BOLD) }
-        tag("i") { Style(android.graphics.Typeface.ITALIC) }
-        tag("u") { Underline() }
 
         tag("typeface") { Typeface() }
         tag("monospace") { Typeface(android.graphics.Typeface.MONOSPACE) }
@@ -35,5 +32,9 @@ object DefaultAndroidTags : (ThistleSyntaxBuilder) -> Unit {
         tag("superscript") { Superscript() }
 
         tag("url") { Url() }
+
+        tag("b") { Style(android.graphics.Typeface.BOLD) }
+        tag("i") { Style(android.graphics.Typeface.ITALIC) }
+        tag("u") { Underline() }
     }
 }

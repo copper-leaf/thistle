@@ -13,9 +13,13 @@ val ThistleParser.renderer: AndroidThistleRenderer
     }
 
 @ExperimentalStdlibApi
-fun TextView.applyStyledText(thistle: ThistleParser, input: String) {
+fun TextView.applyStyledText(
+    thistle: ThistleParser,
+    input: String,
+    context: Map<String, Any> = emptyMap()
+) {
     val (rootNode, _) = thistle.parser.parse(ParserContext.fromString(input))
-    val rendered = thistle.renderer.render(rootNode)
+    val rendered = thistle.renderer.render(rootNode, context)
     movementMethod = LinkMovementMethod.getInstance()
     text = rendered
 }

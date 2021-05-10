@@ -1,17 +1,16 @@
-package com.copperleaf.thistle.tags
+package com.copperleaf.thistle.app.ui.main
 
+import android.graphics.Color
 import android.text.style.ForegroundColorSpan
 import com.copperleaf.thistle.checkArgs
 import com.copperleaf.thistle.parser.ThistleTag
 
-class ForegroundColor(
-    private val hardcodedColor: Int? = null
-) : ThistleTag {
+class ForegroundColorFromString : ThistleTag {
     override fun invoke(context: Map<String, Any>, args: Map<String, Any>): Any {
         return checkArgs(args) {
-            val color: Int by int(hardcodedColor)
+            val color: String by string()
 
-            ForegroundColorSpan(color)
+            ForegroundColorSpan(Color.parseColor(color))
         }
     }
 }

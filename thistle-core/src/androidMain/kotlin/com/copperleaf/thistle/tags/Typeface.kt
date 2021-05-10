@@ -11,7 +11,7 @@ class Typeface(
 ) : ThistleTag {
 
     @SuppressLint("NewApi")
-    override fun invoke(args: Map<String, Any>): Any {
+    override fun invoke(context: Map<String, Any>, args: Map<String, Any>): Any {
         return checkArgs(args) {
             val typeface: Typeface by enum(hardcodedTypeface) {
                 mapOf(

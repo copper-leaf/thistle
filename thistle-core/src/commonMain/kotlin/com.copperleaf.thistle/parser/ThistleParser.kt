@@ -6,5 +6,7 @@ import com.copperleaf.kudzu.parser.tag.TagParser
 class ThistleParser(
     val tags: List<ThistleTagBuilder>
 ) {
+    constructor(block: ThistleSyntaxBuilder.() -> Unit = {}) : this(ThistleSyntax.builder(block))
+
     val parser = TagParser(tags = tags.map { it.kudzuTagBuilder })
 }

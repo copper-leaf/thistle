@@ -21,6 +21,9 @@ import com.copperleaf.kudzu.parser.value.CharLiteralParser
 import com.copperleaf.kudzu.parser.value.DoubleLiteralParser
 import com.copperleaf.kudzu.parser.value.IntLiteralParser
 import com.copperleaf.kudzu.parser.value.StringLiteralParser
+import com.copperleaf.thistle.asThistleValueParser
+import com.copperleaf.thistle.node.ThistleValueMapNode
+import com.copperleaf.thistle.node.ThistleValueNode
 
 @ExperimentalStdlibApi
 class ThistleSyntaxBuilder {
@@ -39,13 +42,13 @@ class ThistleSyntaxBuilder {
         tags[tagName] = tag
     }
 
-    fun literalFormat(
-        parser: () -> Parser<ValueNode<Any>>
+    fun valueFormat(
+        parser: () -> Parser<ThistleValueNode>
     ) {
-        literals.add(parser())
+        valueParsers.add(parser())
     }
 
-    fun customSyntax(syntax: (Parser<ValueNode<Map<String, Any>>>) -> ThistleSyntax) {
+    fun customSyntax(syntax: (Parser<ThistleValueMapNode>) -> ThistleSyntax) {
         this.syntax = syntax
     }
 
@@ -56,7 +59,7 @@ class ThistleSyntaxBuilder {
         closeTagEndToken: Parser<*> = LiteralTokenParser("}}"),
     ) {
         syntax = {
-            ThistleSyntax.Impl(
+            DefaultThistleSyntax(
                 openTagStartToken = openTagStartToken,
                 openTagEndToken = openTagEndToken,
                 closeTagStartToken = closeTagStartToken,
@@ -69,39 +72,19 @@ class ThistleSyntaxBuilder {
 // Private Implementation
 // ---------------------------------------------------------------------------------------------------------------------
 
-    val hexColorAsIntValueParser = MappedParser(
-        SequenceParser(
-            CharInParser('#'),
-            TimesParser(
-                HexDigitParser(),
-                times = 6
-            ),
-        )
-    ) {
-        val (_, hexDigits) = it.children
-
-        // TODO: does this need to be converted by the platform? Wrapped in some other manner?
-        hexDigits.text.toInt(16) or -0x1000000 // Set the alpha value
-    }
-
-    val unquotedStringValueParser = MappedParser(
-        AnyTokenParser()
-    ) {
-        it.text
-    }
-
-    private val literals: MutableList<Parser<ValueNode<Any>>> = mutableListOf(
-        BooleanLiteralParser() as Parser<ValueNode<Any>>,
-        DoubleLiteralParser() as Parser<ValueNode<Any>>,
-        IntLiteralParser() as Parser<ValueNode<Any>>,
-        StringLiteralParser() as Parser<ValueNode<Any>>,
-        CharLiteralParser() as Parser<ValueNode<Any>>,
-        hexColorAsIntValueParser as Parser<ValueNode<Any>>,
-        unquotedStringValueParser as Parser<ValueNode<Any>>,
+    internal val valueParsers: MutableList<Parser<ThistleValueNode>> = mutableListOf(
+        BooleanLiteralParser().asThistleValueParser(),
+        DoubleLiteralParser().asThistleValueParser(),
+        IntLiteralParser().asThistleValueParser(),
+        StringLiteralParser().asThistleValueParser(),
+        CharLiteralParser().asThistleValueParser(),
+        hexColorAsIntValueParser,
+        contextValueParser,
+        unquotedStringValueValueParser,
     )
 
-    private var syntax: (Parser<ValueNode<Map<String, Any>>>) -> ThistleSyntax = {
-        ThistleSyntax.Impl(
+    private var syntax: (Parser<ThistleValueMapNode>) -> ThistleSyntax = {
+        DefaultThistleSyntax(
             openTagStartToken = LiteralTokenParser("{{"),
             openTagEndToken = LiteralTokenParser("}}"),
             closeTagStartToken = LiteralTokenParser("{{/"),
@@ -112,43 +95,44 @@ class ThistleSyntaxBuilder {
 
     private val tags: LinkedHashMap<String, () -> ThistleTag> = linkedMapOf()
 
-    private fun buildAttrMapParser(): Parser<ValueNode<Map<String, Any>>> {
-        val attrValue = FlatMappedParser(
-            ExactChoiceParser(
-                literals
-            )
-        ) { it.node }
+    internal fun buildAttrValueParser(): Parser<ThistleValueNode> = FlatMappedParser(
+        ExactChoiceParser(
+            valueParsers
+        )
+    ) { it.node as ThistleValueNode }
 
-        val attrParser: Parser<ValueNode<Pair<String, Any>>> = MappedParser(
-            SequenceParser(
-                IdentifierTokenParser(),
-                CharInParser('='),
-                attrValue
-            )
-        ) {
-            val (key, _, value) = it.children
-            key.text to (value as ValueNode<Any>).value
-        }
-
-        val attrListParser: Parser<ValueNode<Map<String, Any>>> = MappedParser(
-            SeparatedByParser(
-                term = attrParser,
-                separator = RequiredWhitespaceParser()
-            )
-        ) {
-            it.nodeList.map { it.value }.toMap()
-        }
-
-        val optionalAttrListParser: Parser<ValueNode<Map<String, Any>>> = MappedParser(
-            MaybeParser(
-                attrListParser
-            )
-        ) {
-            it.node?.value ?: emptyMap()
-        }
-
-        return optionalAttrListParser
+    internal fun buildAttrParser(): Parser<ValueNode<Pair<String, ThistleValueNode>>> = MappedParser(
+        SequenceParser(
+            IdentifierTokenParser(),
+            CharInParser('='),
+            buildAttrValueParser()
+        )
+    ) {
+        val (key, _, value) = it.children
+        key.text to (value as ThistleValueNode)
     }
+
+    internal fun buildAttrListParser(): Parser<ValueNode<Map<String, ThistleValueNode>>> = MappedParser(
+        SeparatedByParser(
+            term = buildAttrParser(),
+            separator = RequiredWhitespaceParser()
+        )
+    ) {
+        it.nodeList.map { it.value }.toMap()
+    }
+
+    internal fun buildAttrMapParser(): Parser<ThistleValueMapNode> = FlatMappedParser(
+        MaybeParser(
+            buildAttrListParser()
+        )
+    ) {
+        ThistleValueMapNode(
+            it.node?.value ?: emptyMap(),
+            it.context
+        )
+    }
+
+    internal fun buildSyntaxParser() : ThistleSyntax = syntax(buildAttrMapParser())
 
     fun build(): List<ThistleTagBuilder> {
         val syntax = syntax(buildAttrMapParser())
@@ -165,5 +149,48 @@ class ThistleSyntaxBuilder {
                     tag = builder()
                 )
             }
+    }
+
+// Companion
+// ---------------------------------------------------------------------------------------------------------------------
+
+    companion object {
+        val hexColorAsIntValueParser: Parser<ThistleValueNode> = MappedParser(
+            SequenceParser(
+                CharInParser('#'),
+                TimesParser(
+                    HexDigitParser(),
+                    times = 6
+                ),
+            )
+        ) {
+            val (_, hexDigits) = it.children
+
+            // TODO: does this need to be converted by the platform? Wrapped in some other manner?
+            hexDigits.text.toInt(16) or -0x1000000 // Set the alpha value
+        }.asThistleValueParser()
+
+        val unquotedStringValueValueParser: Parser<ThistleValueNode> = MappedParser(AnyTokenParser()) { it.text }
+            .asThistleValueParser()
+
+        val contextValueParser: Parser<ThistleValueNode> = FlatMappedParser(
+            SequenceParser(
+                LiteralTokenParser("context."),
+                AnyTokenParser(),
+            )
+        ) {
+            val (_, mapKeyNode) = it.children
+            ThistleValueNode.ContextValue(
+                it.text,
+                { context: Map<String, Any> ->
+                    check(context.containsKey(mapKeyNode.text)) {
+                        "Error: Context must contain value for key '${mapKeyNode.text}'"
+                    }
+
+                    context[mapKeyNode.text]!!
+                },
+                it.context
+            )
+        }
     }
 }

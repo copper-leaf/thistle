@@ -12,27 +12,30 @@ import com.copperleaf.thistle.parser.ThistleTagBuilder
 abstract class ThistleRenderer<T : Any>(
     protected val tags: List<ThistleTagBuilder>
 ) {
-    abstract fun render(rootNode: Node): T
+    abstract fun render(
+        rootNode: Node,
+        context: Map<String, Any> = emptyMap()
+    ): T
 
-    fun ThistleTagStringBuilder.renderToBuilder(node: Node) {
+    fun ThistleTagStringBuilder.renderToBuilder(node: Node, context: Map<String, Any>) {
         when (node) {
             is TextNode -> {
                 append(node.text)
             }
             is ManyNode<*> -> {
                 node.nodeList.forEach {
-                    renderToBuilder(it)
+                    renderToBuilder(it, context)
                 }
             }
             is TagNode<*, *> -> {
                 val openingTag = node.opening as ThistleTagStartNode
                 val tagName = openingTag.tagName
-                val tagArgs = openingTag.tagArgs
+                val tagArgs = openingTag.tagArgs.getValueMap(context)
                 val span = tags.first { it.kudzuTagBuilder.name == tagName }.tag
 
-                pushTag(span(tagArgs)) {
+                pushTag(span(context, tagArgs)) {
                     (node.content as ManyNode<Node>).nodeList.forEach {
-                        renderToBuilder(it)
+                        renderToBuilder(it, context)
                     }
                 }
             }

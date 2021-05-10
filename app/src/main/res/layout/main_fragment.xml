@@ -41,6 +41,12 @@
             android:text="Show AST"
             />
 
+        <EditText
+            android:id="@+id/etContextColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="context.color"/>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

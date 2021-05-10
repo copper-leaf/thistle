@@ -6,13 +6,13 @@ import com.copperleaf.kudzu.node.TerminalNode
 @ExperimentalStdlibApi
 class ThistleTagStartNode(
     val tagName: String,
-    val tagArgs: Map<String, Any>,
+    val tagArgs: ThistleValueMapNode,
     context: NodeContext
 ) : TerminalNode(context) {
     override val text: String
-        get() = if (tagArgs.isEmpty()) {
+        get() = if (tagArgs.valueMap.isEmpty()) {
             tagName
         } else {
-            "$tagName$tagArgs)"
+            "$tagName${tagArgs.valueMap})"
         }
 }

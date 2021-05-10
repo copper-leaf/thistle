@@ -7,7 +7,7 @@ import com.copperleaf.thistle.parser.ThistleTag
 class BackgroundColor(
     private val hardcodedColor: Int? = null
 ) : ThistleTag {
-    override fun invoke(args: Map<String, Any>): Any {
+    override fun invoke(context: Map<String, Any>, args: Map<String, Any>): Any {
         return checkArgs(args) {
             val color: Int by int(hardcodedColor)
 

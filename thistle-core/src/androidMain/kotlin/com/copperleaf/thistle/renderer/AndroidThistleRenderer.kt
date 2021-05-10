@@ -9,9 +9,9 @@ class AndroidThistleRenderer(
     tags: List<ThistleTagBuilder>
 ) : ThistleRenderer<Spanned>(tags) {
 
-    override fun render(rootNode: Node): Spanned {
+    override fun render(rootNode: Node, context: Map<String, Any>): Spanned {
         return AndroidThistleTagStringBuilder()
-            .apply { renderToBuilder(rootNode) }
+            .apply { renderToBuilder(rootNode, context) }
             .toSpanned()
     }
 }
