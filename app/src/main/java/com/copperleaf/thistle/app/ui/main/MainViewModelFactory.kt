@@ -20,6 +20,7 @@ import kotlin.time.measureTime
 
 @ExperimentalStdlibApi
 @ExperimentalTime
+@ExperimentalUnsignedTypes
 class MainViewModelFactory : ViewModelProvider.Factory {
 
     private lateinit var vm: MainViewModel
@@ -48,6 +49,15 @@ class MainViewModelFactory : ViewModelProvider.Factory {
                 tag("italic") { Style(Typeface.ITALIC) }
                 tag("underline") { Underline() }
 
+                tag("incAlpha") { Link { vm.updateCounter( 0x08__00_00_00) } }
+                tag("decAlpha") { Link { vm.updateCounter(-0x08__00_00_00) } }
+                tag("incRed") { Link { vm.updateCounter(   0x00__08_00_00) } }
+                tag("decRed") { Link { vm.updateCounter(  -0x00__08_00_00) } }
+                tag("incGreen") { Link { vm.updateCounter( 0x00__00_08_00) } }
+                tag("decGreen") { Link { vm.updateCounter(-0x00__00_08_00) } }
+                tag("incBlue") { Link { vm.updateCounter(  0x00__00_00_08) } }
+                tag("decBlue") { Link { vm.updateCounter( -0x00__00_00_08) } }
+
                 tag("inc") { Link { vm.updateCounter(1) } }
                 tag("dec") { Link { vm.updateCounter(-1) } }
 
@@ -60,7 +70,19 @@ class MainViewModelFactory : ViewModelProvider.Factory {
 
         val initialState = MainViewModel.State(
             thistle = thistle,
-            headerText = "{{foreground color=@color/red}}{{inc}}Click Me!{{/inc}}{{/foreground}}    |    {{colorFromContext color=context.color}}{{dec}}Don't Click Me!{{/dec}}{{/colorFromContext}}",
+            headerTextContextCounter = """
+                |{{monospace}}
+                |{{foreground color=context.counter}}count: {counterHex}{{/foreground}}
+                |
+                |{{foreground color=#000000}}{{decAlpha}}-alpha{{/decAlpha}} | {{incAlpha}}+alpha{{/incAlpha}}{{/foreground}}
+                |{{foreground color=#FF0000}}{{decRed  }}-red  {{/decRed  }} | {{incRed  }}+red  {{/incRed  }}{{/foreground}}
+                |{{foreground color=#00FF00}}{{decGreen}}-green{{/decGreen}} | {{incGreen}}+green{{/incGreen}}{{/foreground}}
+                |{{foreground color=#0000FF}}{{decBlue }}-blue {{/decBlue }} | {{incBlue }}+blue {{/incBlue }}{{/foreground}}
+                |{{/monospace}}
+                """.trimMargin(),
+            headerTextContextColor = """
+                |{{colorFromContext color=context.color}}color: {color}{{/colorFromContext}}
+                """.trimMargin(),
             inputs = listOf(
                 "this has a {{bgRed}}red{{/bgRed}} background",
                 "this has a {{bgGreen}}green{{/bgGreen}} background",
@@ -117,9 +139,11 @@ class MainViewModelFactory : ViewModelProvider.Factory {
                     |{{/monospace}}
                     """.trimMargin().replace("\\s+".toRegex(), " "),
             ),
-            counter = 0,
             showAst = false,
-            thistleContext = emptyMap()
+            thistleContext = mapOf(
+                "counter" to 0xFF000000u.toInt(),
+                "counterHex" to 0xFF000000u.toString(16)
+            )
         )
 
         vm = MainViewModel(initialState)

@@ -1,7 +1,12 @@
 package com.copperleaf.thistle.parser
 
+import com.copperleaf.kudzu.node.Node
+import com.copperleaf.kudzu.node.NodeContext
+import com.copperleaf.kudzu.node.TerminalNode
 import com.copperleaf.kudzu.node.mapped.ValueNode
 import com.copperleaf.kudzu.parser.Parser
+import com.copperleaf.kudzu.parser.ParserContext
+import com.copperleaf.kudzu.parser.ParserResult
 import com.copperleaf.kudzu.parser.chars.CharInParser
 import com.copperleaf.kudzu.parser.chars.HexDigitParser
 import com.copperleaf.kudzu.parser.choice.ExactChoiceParser
@@ -57,6 +62,8 @@ class ThistleSyntaxBuilder {
         openTagEndToken: Parser<*> = LiteralTokenParser("}}"),
         closeTagStartToken: Parser<*> = LiteralTokenParser("{{/"),
         closeTagEndToken: Parser<*> = LiteralTokenParser("}}"),
+        interpolateStartToken: Parser<*> = LiteralTokenParser("{"),
+        interpolateEndToken: Parser<*> = LiteralTokenParser("}"),
     ) {
         syntax = {
             DefaultThistleSyntax(
@@ -64,6 +71,8 @@ class ThistleSyntaxBuilder {
                 openTagEndToken = openTagEndToken,
                 closeTagStartToken = closeTagStartToken,
                 closeTagEndToken = closeTagEndToken,
+                interpolateStartToken = interpolateStartToken,
+                interpolateEndToken = interpolateEndToken,
                 attrMapParser = it
             )
         }
@@ -89,6 +98,8 @@ class ThistleSyntaxBuilder {
             openTagEndToken = LiteralTokenParser("}}"),
             closeTagStartToken = LiteralTokenParser("{{/"),
             closeTagEndToken = LiteralTokenParser("}}"),
+            interpolateStartToken = LiteralTokenParser("{"),
+            interpolateEndToken = LiteralTokenParser("}"),
             attrMapParser = it
         )
     }
@@ -134,10 +145,26 @@ class ThistleSyntaxBuilder {
 
     internal fun buildSyntaxParser() : ThistleSyntax = syntax(buildAttrMapParser())
 
-    fun build(): List<ThistleTagBuilder> {
+    class NoopNode(context: NodeContext) : TerminalNode(context) {
+        override val text: String = ""
+    }
+
+    class NoopParser : Parser<Node> {
+        override fun predict(input: ParserContext): Boolean {
+            return true
+        }
+
+        override val parse = DeepRecursiveFunction<ParserContext, ParserResult<Node>> { input ->
+            NoopNode(NodeContext(input, input)) to input
+        }
+    }
+
+    fun build(): Pair<TagBuilder<*>, List<ThistleTagBuilder>> {
         val syntax = syntax(buildAttrMapParser())
 
-        return tags
+        val interpolate = TagBuilder("interpolate", syntax.interpolate(), NoopParser())
+
+        val tags = tags
             .entries
             .map { (name, builder) ->
                 ThistleTagBuilder(
@@ -149,6 +176,8 @@ class ThistleSyntaxBuilder {
                     tag = builder()
                 )
             }
+
+        return interpolate to tags
     }
 
 // Companion

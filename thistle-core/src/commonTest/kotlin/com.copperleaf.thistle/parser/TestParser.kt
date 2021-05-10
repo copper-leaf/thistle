@@ -10,6 +10,7 @@ import com.copperleaf.thistle.isFalse
 import com.copperleaf.thistle.isNotNull
 import com.copperleaf.thistle.isTrue
 import com.copperleaf.thistle.node
+import com.copperleaf.thistle.node.ThistleInterpolateNode
 import com.copperleaf.thistle.node.ThistleTagStartNode
 import com.copperleaf.thistle.parsedCorrectly
 import com.copperleaf.thistle.parsedIncorrectly
@@ -366,7 +367,7 @@ class TestParser {
         val thistle = ThistleParser {
             tag("one") { ThistleTag { _, _ -> } }
         }
-        val contextMap = mapOf("one" to 1, "two" to 2.2)
+        val contextMap = mapOf("one" to 1, "two" to 2.2, "username" to "AliceBob123")
         val underTest = thistle.parser
 
         "{{one}}two{{/one}}".apply {
@@ -424,6 +425,23 @@ class TestParser {
                         .isA<IllegalStateException>()
                         .message
                         .isEqualTo("Error: Context must contain value for key 'four'")
+                }
+        }
+
+        "interpolate {username} here".apply {
+            val parserContext = ParserContext.fromString(this)
+            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.test(parserContext, logErrors = true)
+                .parsedCorrectly()
+                .node()
+                .isNotNull()
+                .also {
+                    println(it)
+                    val tagNode = it.nodeList[1].isA<TagNode<*, *>>()
+
+                    val interpolateNode = tagNode.opening as ThistleInterpolateNode
+                    interpolateNode.key.isEqualTo("username")
+                    interpolateNode.getValue(contextMap).isEqualTo("AliceBob123")
                 }
         }
     }

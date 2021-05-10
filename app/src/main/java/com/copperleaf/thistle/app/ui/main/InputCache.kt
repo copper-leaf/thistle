@@ -10,6 +10,7 @@ import kotlin.time.measureTime
 
 @ExperimentalStdlibApi
 @ExperimentalTime
+@ExperimentalUnsignedTypes
 data class InputCache(
     val text: String,
     val rootNode: Node,

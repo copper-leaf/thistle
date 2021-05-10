@@ -21,31 +21,74 @@
         android:paddingBottom="8dp"
         >
 
-        <TextView
-            android:id="@+id/tvCounter"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="count: 0"
-            />
-        <TextView
-            android:id="@+id/clickMe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Click Me"
-            />
+            android:orientation="horizontal"
+            android:weightSum="2">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+                <TextView
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Counter"
+                    />
+                <TextView
+                    android:id="@+id/tvCounter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="count: 0"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Input"
+                    />
+                <TextView
+                    android:id="@+id/tvColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Click Me"
+                    />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etContextColor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="context.color"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <TextView
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Options"
+            />
         <CheckBox
             android:id="@+id/cbShowAst"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Show AST"
             />
-
-        <EditText
-            android:id="@+id/etContextColor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="context.color"/>
 
         <View
             android:layout_width="match_parent"

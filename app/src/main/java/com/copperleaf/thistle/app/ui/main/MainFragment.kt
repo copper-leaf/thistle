@@ -15,7 +15,7 @@ import com.copperleaf.thistle.app.databinding.MainFragmentBinding
 import kotlinx.coroutines.flow.collect
 import kotlin.time.ExperimentalTime
 
-@OptIn(ExperimentalStdlibApi::class, ExperimentalTime::class)
+@OptIn(ExperimentalStdlibApi::class, ExperimentalTime::class, ExperimentalUnsignedTypes::class)
 class MainFragment : Fragment() {
 
     private var binding: MainFragmentBinding? = null
@@ -30,7 +30,8 @@ class MainFragment : Fragment() {
             .inflate(inflater, container, false)
             .also { binding = it }
             .apply {
-                clickMe.movementMethod = LinkMovementMethod.getInstance()
+                tvCounter.movementMethod = LinkMovementMethod.getInstance()
+                tvColor.movementMethod = LinkMovementMethod.getInstance()
 
                 etContextColor.doAfterTextChanged {
                     vm.updateColorInContext(it.toString())
@@ -59,15 +60,20 @@ class MainFragment : Fragment() {
     private fun MainFragmentBinding.applyState(state: MainViewModel.State) {
         // attempt to display the 'clickMe' text, which may throw an exception based on the user's input
         try {
-            clickMe.text = state.headerText.render(state.thistle, state.thistleContext)
+            tvCounter.text = state.headerTextContextCounter.render(state.thistle, state.thistleContext)
         }
         catch (e: Throwable) {
             e.printStackTrace()
-            clickMe.text = e.message
+            tvCounter.text = e.message
         }
 
-        // TODO: update Thistle to interpolate values from the context into the output, and use that feature here
-        tvCounter.text = "count: ${state.counter}"
+        try {
+            tvColor.text = state.headerTextContextColor.render(state.thistle, state.thistleContext)
+        }
+        catch (e: Throwable) {
+            e.printStackTrace()
+            tvColor.text = e.message
+        }
 
         // re-render all items in the adapter
         (rvExamples.adapter as? ExampleAdapter)?.onNewState(state)

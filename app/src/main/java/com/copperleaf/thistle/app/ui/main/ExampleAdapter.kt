@@ -10,6 +10,7 @@ import kotlin.time.ExperimentalTime
 
 @ExperimentalStdlibApi
 @ExperimentalTime
+@ExperimentalUnsignedTypes
 class ExampleAdapter(
     private var state: MainViewModel.State
 ) : RecyclerView.Adapter<ExampleAdapter.ViewHolder>() {

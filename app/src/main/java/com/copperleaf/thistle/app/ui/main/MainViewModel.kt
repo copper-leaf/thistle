@@ -11,28 +11,29 @@ import kotlin.time.measureTime
 
 @ExperimentalStdlibApi
 @ExperimentalTime
+@ExperimentalUnsignedTypes
 class MainViewModel(initialState: MainViewModel.State) : ViewModel() {
 
     data class State(
         val thistle: ThistleParser,
-        val headerText: InputCache,
+        val headerTextContextCounter: InputCache,
+        val headerTextContextColor: InputCache,
         val inputs: List<InputCache>,
-        val counter: Int,
         val showAst: Boolean,
         val thistleContext: Map<String, Any>,
     ) {
         constructor(
             thistle: ThistleParser,
-            headerText: String,
+            headerTextContextCounter: String,
+            headerTextContextColor: String,
             inputs: List<String>,
-            counter: Int,
             showAst: Boolean,
             thistleContext: Map<String, Any>
         ) : this(
             thistle,
-            headerText.let { it.parseFromThistle(thistle) },
+            headerTextContextCounter.parseFromThistle(thistle),
+            headerTextContextColor.parseFromThistle(thistle),
             inputs.map { it.parseFromThistle(thistle) },
-            counter,
             showAst,
             thistleContext
         )
@@ -65,14 +66,27 @@ class MainViewModel(initialState: MainViewModel.State) : ViewModel() {
 
     fun updateCounter(delta: Int) {
         _state.value = _state.value.let {
-            it.copy(counter = it.counter + delta)
+            val currentContext = it.thistleContext.toMutableMap()
+            val currentCounterValue = currentContext["counter"] as? Int ?: 0
+            val nextCounterValue = currentCounterValue + delta
+
+            currentContext["counter"] = nextCounterValue
+            currentContext["counterHex"] = nextCounterValue.toUInt().toString(16)
+            it.copy(thistleContext = currentContext.toMap())
         }
     }
 
     fun updateColorInContext(color: String) {
         _state.value = _state.value.let {
             val currentContext = it.thistleContext.toMutableMap()
-            currentContext["color"] = color
+
+            if(color.isBlank()) {
+                currentContext.remove("color")
+            }
+            else {
+                currentContext["color"] = color
+            }
+
             it.copy(thistleContext = currentContext.toMap())
         }
     }

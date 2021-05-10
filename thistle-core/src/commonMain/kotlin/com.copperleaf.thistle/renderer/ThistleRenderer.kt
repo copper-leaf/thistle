@@ -4,6 +4,7 @@ import com.copperleaf.kudzu.node.Node
 import com.copperleaf.kudzu.node.many.ManyNode
 import com.copperleaf.kudzu.node.tag.TagNode
 import com.copperleaf.kudzu.node.text.TextNode
+import com.copperleaf.thistle.node.ThistleInterpolateNode
 import com.copperleaf.thistle.node.ThistleTagStartNode
 import com.copperleaf.thistle.parser.ThistleTagBuilder
 
@@ -28,14 +29,22 @@ abstract class ThistleRenderer<T : Any>(
                 }
             }
             is TagNode<*, *> -> {
-                val openingTag = node.opening as ThistleTagStartNode
-                val tagName = openingTag.tagName
-                val tagArgs = openingTag.tagArgs.getValueMap(context)
-                val span = tags.first { it.kudzuTagBuilder.name == tagName }.tag
+                val tagNode = node.opening
+                when(tagNode) {
+                    is ThistleInterpolateNode -> {
+                        val interpolatedValue = tagNode.getValue(context)
+                        append(interpolatedValue.toString())
+                    }
+                    is ThistleTagStartNode -> {
+                        val tagName = tagNode.tagName
+                        val tagArgs = tagNode.tagArgs.getValueMap(context)
+                        val span = tags.first { it.kudzuTagBuilder.name == tagName }.tag
 
-                pushTag(span(context, tagArgs)) {
-                    (node.content as ManyNode<Node>).nodeList.forEach {
-                        renderToBuilder(it, context)
+                        pushTag(span(context, tagArgs)) {
+                            (node.content as ManyNode<Node>).nodeList.forEach {
+                                renderToBuilder(it, context)
+                            }
+                        }
                     }
                 }
             }
