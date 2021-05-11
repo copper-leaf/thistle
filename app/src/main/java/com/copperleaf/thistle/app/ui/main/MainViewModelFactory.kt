@@ -1,27 +1,32 @@
 package com.copperleaf.thistle.app.ui.main
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.util.Log
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.copperleaf.kudzu.parser.mapped.MappedParser
 import com.copperleaf.kudzu.parser.text.LiteralTokenParser
 import com.copperleaf.thistle.DefaultAndroidTags
+import com.copperleaf.thistle.app.R
 import com.copperleaf.thistle.asThistleValueParser
 import com.copperleaf.thistle.parser.ThistleParser
 import com.copperleaf.thistle.tags.BackgroundColor
 import com.copperleaf.thistle.tags.ForegroundColor
+import com.copperleaf.thistle.tags.Icon
 import com.copperleaf.thistle.tags.Link
 import com.copperleaf.thistle.tags.Style
 import com.copperleaf.thistle.tags.Underline
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime
 
+@Suppress("UNCHECKED_CAST")
 @ExperimentalStdlibApi
 @ExperimentalTime
 @ExperimentalUnsignedTypes
-class MainViewModelFactory : ViewModelProvider.Factory {
+class MainViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
 
     private lateinit var vm: MainViewModel
 
@@ -49,27 +54,30 @@ class MainViewModelFactory : ViewModelProvider.Factory {
                 tag("italic") { Style(Typeface.ITALIC) }
                 tag("underline") { Underline() }
 
-                tag("incAlpha") { Link { vm.updateCounter( 0x08__00_00_00) } }
+                tag("androidIcon") { Icon(ContextCompat.getDrawable(context, R.drawable.ic_android)) }
+
+                tag("incAlpha") { Link { vm.updateCounter(0x08__00_00_00) } }
                 tag("decAlpha") { Link { vm.updateCounter(-0x08__00_00_00) } }
-                tag("incRed") { Link { vm.updateCounter(   0x00__08_00_00) } }
-                tag("decRed") { Link { vm.updateCounter(  -0x00__08_00_00) } }
-                tag("incGreen") { Link { vm.updateCounter( 0x00__00_08_00) } }
+                tag("incRed") { Link { vm.updateCounter(0x00__08_00_00) } }
+                tag("decRed") { Link { vm.updateCounter(-0x00__08_00_00) } }
+                tag("incGreen") { Link { vm.updateCounter(0x00__00_08_00) } }
                 tag("decGreen") { Link { vm.updateCounter(-0x00__00_08_00) } }
-                tag("incBlue") { Link { vm.updateCounter(  0x00__00_00_08) } }
-                tag("decBlue") { Link { vm.updateCounter( -0x00__00_00_08) } }
+                tag("incBlue") { Link { vm.updateCounter(0x00__00_00_08) } }
+                tag("decBlue") { Link { vm.updateCounter(-0x00__00_00_08) } }
 
                 tag("inc") { Link { vm.updateCounter(1) } }
                 tag("dec") { Link { vm.updateCounter(-1) } }
 
                 tag("colorFromContext") { ForegroundColorFromString() }
 
-                from(DefaultAndroidTags)
+                from(DefaultAndroidTags(context, "com.copperleaf.thistle.app"))
             }
         }
         Log.i("MainViewModelFactory", "creating thistle -> $duration")
 
         val initialState = MainViewModel.State(
             thistle = thistle,
+            /* ktlint-disable max-line-length */
             headerTextContextCounter = """
                 |{{monospace}}
                 |{{foreground color=context.counter}}count: {counterHex}{{/foreground}}
@@ -107,6 +115,9 @@ class MainViewModelFactory : ViewModelProvider.Factory {
                 "this is an {{dec}}decrement{{/dec}} link",
                 "this is an {{url url=\"https://www.example.com/\"}}www.example.com{{/url}} link",
 
+                "this is an {{icon drawable=@drawable/ic_android}}icon{{/icon}}",
+                "this is an {{androidIcon}}androidIcon{{/androidIcon}}",
+
                 "this is {{monospace}}monospace{{/monospace}} text",
                 "this is {{sans}}sans-serif{{/sans}} text",
                 "this is {{serif}}serif{{/serif}} text",
@@ -138,11 +149,23 @@ class MainViewModelFactory : ViewModelProvider.Factory {
                     |    {{/strikethrough}}
                     |{{/monospace}}
                     """.trimMargin().replace("\\s+".toRegex(), " "),
+
+                // examples from the "syntax" documentation
+                "This text will be {{foreground color=#FF0000}}red{{/foreground}}, while this one has a {{background color=#0000FF}}blue{{/background}} background.",
+                "{{foreground color=#FF0000}}red{{/foreground}}",
+                "{{foreground color=context.themeRed}}red{{/foreground}}",
+                "Account: {{b}} {username} {{/b}} ({userId})",
             ),
+            /* ktlint-enable max-line-length */
             showAst = false,
             thistleContext = mapOf(
                 "counter" to 0xFF000000u.toInt(),
-                "counterHex" to 0xFF000000u.toString(16)
+                "counterHex" to 0xFF000000u.toString(16),
+
+                // context for examples from the "syntax" documentation
+                "themeRed" to Color.RED,
+                "username" to "AliceBob123",
+                "userId" to "123456789",
             )
         )
 

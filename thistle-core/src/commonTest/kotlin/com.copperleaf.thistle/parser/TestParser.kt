@@ -271,13 +271,15 @@ class TestParser {
         val contextMap = mapOf("one" to 1, "two" to 2.2)
 
         // boolean value
-        ("truthy=true " +
+        (
+            "truthy=true " +
                 "one=1 " +
                 "two=2.2 " +
                 "color=#00ff00 " +
                 "string=\"a string value\" " +
                 "char='c' " +
-                "unquoted=monospace cxt1=context.one cxt2=context.two").apply {
+                "unquoted=monospace cxt1=context.one cxt2=context.two"
+            ).apply {
             val parserContext = ParserContext.fromString(this)
             expectThat(underTest.predict(parserContext)).isTrue()
             underTest.test(parserContext)

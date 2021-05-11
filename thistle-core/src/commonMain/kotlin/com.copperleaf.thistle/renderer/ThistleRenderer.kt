@@ -30,7 +30,7 @@ abstract class ThistleRenderer<T : Any>(
             }
             is TagNode<*, *> -> {
                 val tagNode = node.opening
-                when(tagNode) {
+                when (tagNode) {
                     is ThistleInterpolateNode -> {
                         val interpolatedValue = tagNode.getValue(context)
                         append(interpolatedValue.toString())

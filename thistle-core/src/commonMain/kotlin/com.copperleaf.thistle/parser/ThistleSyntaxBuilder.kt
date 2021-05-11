@@ -1,12 +1,7 @@
 package com.copperleaf.thistle.parser
 
-import com.copperleaf.kudzu.node.Node
-import com.copperleaf.kudzu.node.NodeContext
-import com.copperleaf.kudzu.node.TerminalNode
 import com.copperleaf.kudzu.node.mapped.ValueNode
 import com.copperleaf.kudzu.parser.Parser
-import com.copperleaf.kudzu.parser.ParserContext
-import com.copperleaf.kudzu.parser.ParserResult
 import com.copperleaf.kudzu.parser.chars.CharInParser
 import com.copperleaf.kudzu.parser.chars.HexDigitParser
 import com.copperleaf.kudzu.parser.choice.ExactChoiceParser
@@ -15,6 +10,7 @@ import com.copperleaf.kudzu.parser.many.TimesParser
 import com.copperleaf.kudzu.parser.mapped.FlatMappedParser
 import com.copperleaf.kudzu.parser.mapped.MappedParser
 import com.copperleaf.kudzu.parser.maybe.MaybeParser
+import com.copperleaf.kudzu.parser.noop.NoopParser
 import com.copperleaf.kudzu.parser.sequence.SequenceParser
 import com.copperleaf.kudzu.parser.tag.TagBuilder
 import com.copperleaf.kudzu.parser.text.AnyTokenParser
@@ -143,21 +139,7 @@ class ThistleSyntaxBuilder {
         )
     }
 
-    internal fun buildSyntaxParser() : ThistleSyntax = syntax(buildAttrMapParser())
-
-    class NoopNode(context: NodeContext) : TerminalNode(context) {
-        override val text: String = ""
-    }
-
-    class NoopParser : Parser<Node> {
-        override fun predict(input: ParserContext): Boolean {
-            return true
-        }
-
-        override val parse = DeepRecursiveFunction<ParserContext, ParserResult<Node>> { input ->
-            NoopNode(NodeContext(input, input)) to input
-        }
-    }
+    internal fun buildSyntaxParser(): ThistleSyntax = syntax(buildAttrMapParser())
 
     fun build(): Pair<TagBuilder<*>, List<ThistleTagBuilder>> {
         val syntax = syntax(buildAttrMapParser())

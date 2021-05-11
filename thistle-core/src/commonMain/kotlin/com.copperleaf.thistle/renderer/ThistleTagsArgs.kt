@@ -2,7 +2,10 @@ package com.copperleaf.thistle.renderer
 
 import com.copperleaf.thistle.parser.ThistleTag
 import kotlin.properties.ReadOnlyProperty
+import kotlin.reflect.KClass
+import kotlin.reflect.KProperty
 
+@Suppress("NOTHING_TO_INLINE")
 class ThistleTagsArgs(
     val tag: ThistleTag,
     val args: Map<String, Any>
@@ -29,7 +32,7 @@ class ThistleTagsArgs(
         name: String? = null,
     ): ReadOnlyProperty<Nothing?, Boolean> = parameter(value, name)
 
-    inline fun <reified ParameterType> enum(
+    inline fun <reified ParameterType : Any> enum(
         value: ParameterType? = null,
         name: String? = null,
         crossinline options: () -> Map<String, ParameterType>,
@@ -52,72 +55,97 @@ class ThistleTagsArgs(
         }
     }
 
-    inline fun <reified ParameterType> parameter(
+    inline fun <reified ParameterType : Any> parameter(
         hardcodedValue: ParameterType? = null,
         name: String? = null,
-    ): ReadOnlyProperty<Nothing?, ParameterType> = ReadOnlyProperty { _, prop ->
-        val paramName = name ?: prop.name
+    ): ReadOnlyProperty<Nothing?, ParameterType> = LazyThistleParameterProvider<ParameterType, ParameterType>(
+        thistleTagsArgs = this,
+        hardcodedValue = hardcodedValue,
+        name = name,
+        checkInputType = { it is ParameterType },
+        inputParameterTypeClass = ParameterType::class,
+        checkOutputType = { true },
+        outputParameterTypeClass = ParameterType::class,
+        mapper = { _, it -> it }
+    )
 
-        check(paramName !in argsVisited) {
-            "$tag has multiple properties named '$paramName'!"
-        }
-        argsVisited.add(paramName)
-
-        // if hardcodedValue is provided, do not allow the value to be read from the param map
-        if (hardcodedValue != null) {
-            check(!args.containsKey(paramName)) {
-                "Unknown parameter '$paramName' for $tag!"
-            }
-
-            return@ReadOnlyProperty hardcodedValue
-        } else {
-            check(args.containsKey(paramName)) {
-                "$tag is missing required value for '$paramName'!"
-            }
-
-            val value: Any = args[paramName]!!
-
-            check(value is ParameterType) {
-                "$tag expects '$paramName' to be ${ParameterType::class.simpleName}, got $value"
-            }
-
-            value
-        }
-    }
-
-    inline fun <reified InputParameterType, reified OutputParameterType> parameter(
+    inline fun <reified InputParameterType : Any, reified OutputParameterType : Any> parameter(
         hardcodedValue: OutputParameterType? = null,
         name: String? = null,
-        crossinline mapper: (String, InputParameterType) -> OutputParameterType
-    ): ReadOnlyProperty<Nothing?, OutputParameterType> = ReadOnlyProperty { _, prop ->
-        val paramName = name ?: prop.name
+        noinline mapper: (String, InputParameterType) -> OutputParameterType
+    ): ReadOnlyProperty<Nothing?, OutputParameterType> = LazyThistleParameterProvider(
+        thistleTagsArgs = this,
+        hardcodedValue = hardcodedValue,
+        name = name,
+        checkInputType = { it is InputParameterType },
+        inputParameterTypeClass = InputParameterType::class,
+        checkOutputType = { it is OutputParameterType },
+        outputParameterTypeClass = OutputParameterType::class,
+        mapper = mapper
+    )
+}
 
-        check(paramName !in argsVisited) {
-            "$tag has multiple properties named '$paramName'!"
+@Suppress("UNCHECKED_CAST")
+class LazyThistleParameterProvider<InputParameterType : Any, OutputParameterType : Any>(
+    private val thistleTagsArgs: ThistleTagsArgs,
+    private val hardcodedValue: OutputParameterType? = null,
+    private val name: String? = null,
+
+    private val inputParameterTypeClass: KClass<InputParameterType>,
+    private val checkInputType: (Any) -> Boolean,
+
+    private val outputParameterTypeClass: KClass<OutputParameterType>,
+    private val checkOutputType: (InputParameterType) -> Boolean,
+
+    private val mapper: (String, InputParameterType) -> OutputParameterType
+) : ReadOnlyProperty<Nothing?, OutputParameterType>, Lazy<OutputParameterType> {
+
+    private var _value: OutputParameterType? = null
+    override val value: OutputParameterType get() = _value!!
+
+    override fun isInitialized(): Boolean {
+        return _value != null
+    }
+
+    override fun getValue(thisRef: Nothing?, property: KProperty<*>): OutputParameterType {
+        if (!isInitialized()) {
+            _value = with(thistleTagsArgs) {
+                val paramName = name ?: property.name
+
+                check(paramName !in argsVisited) {
+                    "$tag has multiple properties named '$paramName'!"
+                }
+                argsVisited.add(paramName)
+
+                // if hardcodedValue is provided, do not allow the value to be read from the param map
+                if (hardcodedValue != null) {
+                    check(!args.containsKey(paramName)) {
+                        "Unknown parameter '$paramName' for $tag!"
+                    }
+
+                    hardcodedValue
+                } else {
+                    check(args.containsKey(paramName)) {
+                        "$tag is missing required value for '$paramName'!"
+                    }
+
+                    val value: Any = args[paramName]!!
+
+                    check(checkInputType(value)) {
+                        "$tag expects '$paramName' to be ${inputParameterTypeClass.simpleName}, got $value"
+                    }
+
+                    val result = mapper(paramName, value as InputParameterType)
+
+                    check(checkOutputType(result as InputParameterType)) {
+                        "$tag expects '$paramName' to be ${outputParameterTypeClass.simpleName}, got $value"
+                    }
+
+                    result
+                }
+            }
         }
-        argsVisited.add(paramName)
 
-        // if hardcodedValue is provided, do not allow the value to be read from the param map
-        if (hardcodedValue != null) {
-            check(!args.containsKey(paramName)) {
-                "Unknown parameter '$paramName' for $tag!"
-            }
-
-            return@ReadOnlyProperty hardcodedValue
-        } else {
-            check(args.containsKey(paramName)) {
-                "$tag is missing required value for '$paramName'!"
-            }
-
-            val value: Any = args[paramName]!!
-
-            check(value is InputParameterType) {
-                "$tag expects '$paramName' to be ${InputParameterType::class.simpleName}, got $value"
-            }
-
-            val result = mapper(paramName, value)
-
-            result
-        }
+        return value
     }
 }

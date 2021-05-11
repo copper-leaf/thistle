@@ -3,7 +3,6 @@ package com.copperleaf.thistle.node
 import com.copperleaf.kudzu.node.NodeContext
 import com.copperleaf.kudzu.node.TerminalNode
 
-
 @ExperimentalStdlibApi
 sealed class ThistleValueNode(
     context: NodeContext
@@ -25,7 +24,7 @@ sealed class ThistleValueNode(
 
     class ContextValue(
         override val text: String,
-        val valueFn: (Map<String, Any>)->Any,
+        val valueFn: (Map<String, Any>) -> Any,
         context: NodeContext
     ) : ThistleValueNode(context) {
         override fun getValue(context: Map<String, Any>): Any {

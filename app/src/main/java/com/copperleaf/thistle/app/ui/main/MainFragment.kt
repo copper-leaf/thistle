@@ -19,7 +19,7 @@ import kotlin.time.ExperimentalTime
 class MainFragment : Fragment() {
 
     private var binding: MainFragmentBinding? = null
-    private val vm: MainViewModel by activityViewModels { MainViewModelFactory() }
+    private val vm: MainViewModel by activityViewModels { MainViewModelFactory(requireActivity()) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,16 +61,14 @@ class MainFragment : Fragment() {
         // attempt to display the 'clickMe' text, which may throw an exception based on the user's input
         try {
             tvCounter.text = state.headerTextContextCounter.render(state.thistle, state.thistleContext)
-        }
-        catch (e: Throwable) {
+        } catch (e: Throwable) {
             e.printStackTrace()
             tvCounter.text = e.message
         }
 
         try {
             tvColor.text = state.headerTextContextColor.render(state.thistle, state.thistleContext)
-        }
-        catch (e: Throwable) {
+        } catch (e: Throwable) {
             e.printStackTrace()
             tvColor.text = e.message
         }

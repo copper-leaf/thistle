@@ -7,7 +7,7 @@ plugins {
     `copper-leaf-publish`
 }
 
-description = "Multiplatform String markup"
+description = "Kotlin Multiplatform String markup and formatting utility"
 
 android {
     compileSdkVersion(30)
@@ -61,7 +61,7 @@ kotlin {
         // Common Sourcesets
         val commonMain by getting {
             dependencies {
-                api("io.github.copper-leaf:kudzu-core:2.4.0")
+                api("io.github.copper-leaf:kudzu-core:2.5.0")
             }
         }
         val commonTest by getting {

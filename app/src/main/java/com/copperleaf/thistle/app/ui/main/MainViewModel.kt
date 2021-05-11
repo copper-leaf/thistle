@@ -80,10 +80,9 @@ class MainViewModel(initialState: MainViewModel.State) : ViewModel() {
         _state.value = _state.value.let {
             val currentContext = it.thistleContext.toMutableMap()
 
-            if(color.isBlank()) {
+            if (color.isBlank()) {
                 currentContext.remove("color")
-            }
-            else {
+            } else {
                 currentContext["color"] = color
             }
 
@@ -96,5 +95,4 @@ class MainViewModel(initialState: MainViewModel.State) : ViewModel() {
             it.copy(showAst = !it.showAst)
         }
     }
-
 }

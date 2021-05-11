@@ -1,36 +1,84 @@
 site:
-  theme: 'BsDoc'
-  baseUrl: 'https://copper-leaf.github.io/clog'
+  theme: Copper
+  baseUrl: 'https://copper-leaf.github.io/thistle/'
   about:
-    siteName: Clog
-    siteDescription: Zero-config Kotlin multiplatform logging utility
+    siteName: Thistle
+    siteDescription: Kotlin Multiplatform String markup and formatting utility
 
 theme:
-  primaryColor: '#2a623d'
-  trianglifyOptions:
-    x_colors: ['#000', '#2a623d', '#000']
-  metaComponents:
-    - type: "prism"
-      githubTheme: 'duotone-light'
-      languages:
-        - java
-        - kotlin
-        - groovy
-        - swift
+  social:
+    other:
+      - link: 'https://copper-leaf.github.io/thistle'
+        label: 'Home'
+        icon: 'fas fa-home'
+      - link: 'https://github.com/copper-leaf/thistle'
+        label: 'Github'
+        icon: 'fab fa-github'
+      - link: 'https://twitter.com/OrchidSSG'
+        label: 'Twitter'
+        icon: 'fab fa-twitter'
   menu:
     - type: 'page'
+      title: 'Home'
       itemId: 'Home'
+    - type: 'wikiSections'
     - type: 'page'
-      itemId: 'Releases'
-    - type: 'sourcedocModules'
-      moduleType:  'kotlindoc'
-      asSubmenu: true
-      submenuTitle: 'Supported Platforms'
+      itemId: 'Changelog'
+  sidebarBackground: 'primary'
+  sidebarBackgroundType: GRADIENT
+  colors:
+    green: '#D8BFD8'
+  palette:
+    primary: 'PURPLE'
+    link: 'PURPLE'
+    linkVisited: 'BLUE'
 
 changelog:
   adapter:
     type: "file"
     baseDir: "./../../../../"
+
+services:
+  publications:
+    stages:
+      - type: githubReleases
+        repo: 'copper-leaf/thistle'
+        username: 'cjbrooks12'
+        commitish: 'master'
+      - type: githubPages
+        repo: 'copper-leaf/thistle'
+        username: 'cjbrooks12'
+  generators:
+    disabled:
+      - 'kotlindoc'
+      - 'indices'
+
+wiki:
+  wikiPages:
+    layout: wiki
+    menu:
+      - type: wiki
+
+allPages:
+  layoutConfig:
+    wrapPageInBox: true
+    wrapTitleInBox: true
+    includeTitle: false
+    includeBreadcrumbs: true
+    pageContentsMenu:
+      - type: 'separator'
+        title: 'In This Page'
+      - type: 'pageIds'
+        structure: nested
+        maxLevel: 2
+  components:
+    - type: "pageContent"
+    - type: "prism"
+      githubTheme: 'duotone-light'
+      languages:
+        - kotlin
+        - java
+        - groovy
 
 snippets:
   sections:
@@ -39,27 +87,5 @@ snippets:
         type: 'embedded'
         recursive: true
         baseDirs:
-          - './../../../../core/src/commonTest/kotlin/'
-          - './../../../../core/src/jvmTest/kotlin/'
-          - './../../../../core/src/androidTest/kotlin/'
-          - './../../../../core/src/jsTest/kotlin/'
-          - './../../../../core/src/iosTest/kotlin/'
+          - './../../../../thistle-core/'
 
-kotlindoc:
-  modules:
-    - { name: 'Common',  slug: 'common',  sourceDirs: './../../../../core/src/commonMain/kotlin/'                              }
-    - { name: 'JVM',     slug: 'jvm',     sourceDirs: './../../../../core/src/jvmMain/kotlin/',     relatedModules: ['Common'] }
-    - { name: 'Android', slug: 'android', sourceDirs: './../../../../core/src/androidMain/kotlin/', relatedModules: ['Common'] }
-    - { name: 'JS',      slug: 'js',      sourceDirs: './../../../../core/src/jsMain/kotlin/',      relatedModules: ['Common'] }
-    - { name: 'iOS',     slug: 'ios',     sourceDirs: './../../../../core/src/iosMain/kotlin/',     relatedModules: ['Common'] }
-
-services:
-  publications:
-    stages:
-      - type: githubReleases
-        repo: 'copper-leaf/clog'
-        username: 'cjbrooks12'
-        commitish: 'master'
-      - type: githubPages
-        repo: 'copper-leaf/clog'
-        username: 'cjbrooks12'

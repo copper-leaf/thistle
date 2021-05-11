@@ -11,6 +11,6 @@ class ThistleValueMapNode(
     override val text: String = valueMap.toString()
 
     fun getValueMap(context: Map<String, Any>): Map<String, Any> {
-        return valueMap.mapValues { (key, valueNode) -> valueNode.getValue(context) }
+        return valueMap.mapValues { (_, valueNode) -> valueNode.getValue(context) }
     }
 }
