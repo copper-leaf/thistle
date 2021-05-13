@@ -3,7 +3,8 @@
 
 ## Thistle
 
-Kotlin multiplatform String markup library, inspired by [SRML](https://github.com/jasonwyatt/SRML).
+Kotlin multiplatform String markup library, inspired by [SRML](https://github.com/jasonwyatt/SRML). Thistle is a common 
+parser which produces an AST that can be rendered to a variety of platform-specific UIs.
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/copper-leaf/thistle)
 ![Maven Central](https://img.shields.io/maven-central/v/io.github.copper-leaf/thistle-core)
@@ -26,11 +27,14 @@ binding.textView.applyStyledText(
 
 ### Supported Platforms/Features
 
-| Platform | Markup Target             |
-| -------- | ------------------------- |
-| Android  | android.text.Spannable    |
-| iOS      | NSAttributedString (TODO) |
-| JS       | <span> (TODO)             |
+| Platform   | Markup Target                      |
+| ---------- | ---------------------------------- |
+| Android    | android.text.Spannable             |
+| Compose UI | AttributedString (TODO)            |
+| iOS        | NSAttributedString (TODO)          |
+| JS         | HTML DOM (TODO)                    |
+| Any        | HTML Text (TODO)                   |
+| Any        | HTML Console ANSI Sequences (TODO) |
 
 ### Installation
 

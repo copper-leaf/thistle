@@ -54,7 +54,7 @@ and customizations, but here's a rundown of the basic syntax (which can be [twea
 
 The following examples all demonstrate usage on Android.
 
-**Tags**
+### Tags
 
 Tags work similar to inline HTML tags. They can be interspersed throughout the main text, and they can also be nested
 within each other arbitrarily deep.
@@ -69,7 +69,7 @@ This text will be {{foreground color=#FF0000}}red{{/foreground}}, while this one
 
 ![syntax_tags]({{ 'assets/media/syntax_tags.png'|asset }})
 
-**Tag Parameters**
+### Tag Parameters
 
 Also like HTML tags, Thistle tags may be parameterized to tweak their rendering behavior. Parameters are assumed to be
 required (though this may be relaxed in the future), and they are strongly-typed. Values of a different type will not be
@@ -103,7 +103,7 @@ Thistle recognizes the following formats for parameter values. You are also able
 | Unquoted String | `monospace`          | Unquoted string must be a single ASCII word                       |
 {.table}
 
-**Context Data**
+### Context Data
 
 Thistle renders each format string with an optional "context data" map. The values in this map can be accessed as tag
 parameters, and they can also be interpolated into the output as dynamic text.
@@ -126,7 +126,7 @@ You can reference `themeRed` from the foreground tag parameters:
 
 ![syntax_context_data]({{ 'assets/media/syntax_context_data.png'|asset }})
 
-**Interpolation**
+### Interpolation
 
 Another useful feature of the context data is to render dynamic text into the output. This may be at the top-level, or
 within a tag's content. All objects in the context map are converted to text with `.toString()`, and Thistle does not
@@ -152,7 +152,7 @@ Account: {{b}} {username} {{/b}} ({userId})
 
 ![syntax_interpolation]({{ 'assets/media/syntax_interpolation.png'|asset }})
 
-## Usage
+## Targets
 
 Thistle uses a common parser, and a variety of renderers to format text at runtime. It supports both inline-styling, and 
 basic interpolation. Currently, only the Android renderer is built, but more targets are planned.
@@ -164,7 +164,9 @@ can be quite useful for text that gets re-rendered many times per second.
 
 Both the parser and the resulting AST are fully immutable and thus are completely thread-safe.
 
-### Android
+Each target will naturally have different rendering capabilities, which are documented in the sections below.
+
+### Android (Spanned String)
 
 #### Basic Usage
 
@@ -201,13 +203,25 @@ makes this simpler, and also allows you to change the span formatting at runtime
 
 {% endverbatim %}
 
-### iOS
+### Compose UI (AnnotatedString)
 
-TODO
+TODO (follow issue [here](https://github.com/copper-leaf/thistle/issues/1))
 
-### JS
+### iOS (NSAttributedString)
 
-TODO
+TODO (follow issue [here](https://github.com/copper-leaf/thistle/issues/2))
+
+### JS (HTML DOM)
+
+TODO (follow issue [here](https://github.com/copper-leaf/thistle/issues/3))
+
+### Any (HTML Text)
+
+TODO (follow issue [here](https://github.com/copper-leaf/thistle/issues/4))
+
+### Any (Console ANSI Sequences)
+
+TODO (follow issue [here](https://github.com/copper-leaf/thistle/issues/5))
 
 ## Customization
 
