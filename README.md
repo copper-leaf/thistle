@@ -22,7 +22,6 @@ binding.textView.applyStyledText(
 ```
 
 ![sample_app](https://copper-leaf.github.io/thistle/assets/media/sample_app.gif)
-
 [View sample app source](https://github.com/copper-leaf/thistle/tree/master/app)
 
 ### Supported Platforms/Features
@@ -56,3 +55,7 @@ kotlin {
     }
 }
 ```
+
+### Usage
+
+See the [documentation website](https://copper-leaf.github.io/thistle/) for complete usage instructions.
