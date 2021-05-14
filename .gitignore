@@ -21,6 +21,7 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+*.hprof
 
 ### https://raw.github.com/github/gitignore/7792e50daeaa6c07460484704671d1dc9f0045a7/Global/Eclipse.gitignore
 

@@ -1,16 +1,11 @@
----
----
+# Thistle
 
-## Thistle
-
-Kotlin multiplatform String markup library, inspired by [SRML](https://github.com/jasonwyatt/SRML). Thistle is a common 
-parser which produces an AST that can be rendered to a variety of platform-specific UIs.
+> Kotlin multiplatform String markup library, inspired by [SRML](https://github.com/jasonwyatt/SRML). Thistle is a 
+> common parser which produces an AST that can be rendered to a variety of platform-specific UIs.
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/copper-leaf/thistle)
 ![Maven Central](https://img.shields.io/maven-central/v/io.github.copper-leaf/thistle-core)
 ![Kotlin Version](https://img.shields.io/badge/Kotlin-1.4.32-orange)
-
-**Example Usage**
 
 ```kotlin
 val thistle = ThistleParser {
@@ -25,7 +20,7 @@ binding.textView.applyStyledText(
 ![sample_app](https://copper-leaf.github.io/thistle/assets/media/sample_app.gif)
 [View sample app source](https://github.com/copper-leaf/thistle/tree/master/app)
 
-### Supported Platforms/Features
+# Supported Platforms/Features
 
 | Platform   | Markup Target                      |
 | ---------- | ---------------------------------- |
@@ -36,7 +31,7 @@ binding.textView.applyStyledText(
 | Any        | HTML Text (TODO)                   |
 | Any        | HTML Console ANSI Sequences (TODO) |
 
-### Installation
+# Installation
 
 ```kotlin
 repositories {
@@ -60,6 +55,14 @@ kotlin {
 }
 ```
 
-### Usage
+# Documentation
 
-See the [documentation website](https://copper-leaf.github.io/thistle/) for complete usage instructions.
+See the [website](https://copper-leaf.github.io/thistle/) for detailed documentation and usage instructions.
+
+# License 
+
+Thistle is licensed under the BSD 3-Clause License, see [LICENSE.md](https://github.com/copper-leaf/thistle/tree/master/LICENSE.md). 
+
+# References
+
+- [SRML](https://github.com/jasonwyatt/SRML)
