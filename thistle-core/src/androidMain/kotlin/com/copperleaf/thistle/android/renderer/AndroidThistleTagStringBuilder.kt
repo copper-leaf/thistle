@@ -4,7 +4,7 @@ import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.SpannedString
-import com.copperleaf.thistle.renderer.ThistleTagStringBuilder
+import com.copperleaf.thistle.core.renderer.ThistleTagStringBuilder
 
 internal class AndroidThistleTagStringBuilder : ThistleTagStringBuilder {
     private val delegate = SpannableStringBuilder()

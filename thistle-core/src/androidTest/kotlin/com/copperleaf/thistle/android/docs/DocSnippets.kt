@@ -1,4 +1,4 @@
-package com.copperleaf.thistle.docs
+package com.copperleaf.thistle.android.docs
 
 import android.graphics.Color
 import android.text.style.BackgroundColorSpan
@@ -6,13 +6,13 @@ import android.view.View
 import android.widget.TextView
 import com.copperleaf.kudzu.parser.mapped.MappedParser
 import com.copperleaf.kudzu.parser.text.LiteralTokenParser
-import com.copperleaf.thistle.android.DefaultAndroidTags
+import com.copperleaf.thistle.android.AndroidDefaults
 import com.copperleaf.thistle.android.applyStyledText
-import com.copperleaf.thistle.asThistleValueParser
-import com.copperleaf.thistle.checkArgs
-import com.copperleaf.thistle.parser.ThistleParser
-import com.copperleaf.thistle.parser.ThistleTag
 import com.copperleaf.thistle.android.tags.Link
+import com.copperleaf.thistle.core.asThistleValueParser
+import com.copperleaf.thistle.core.checkArgs
+import com.copperleaf.thistle.core.parser.ThistleParser
+import com.copperleaf.thistle.core.parser.ThistleTag
 
 /**
  * The snippets in this file are not actually tested now, but they are used in documentation.
@@ -33,7 +33,7 @@ class DocSnippets {
     fun mainBasicUsage() {
         // snippet::main-basic-usage[]
         val thistle = ThistleParser {
-            from(DefaultAndroidTags)
+            from(AndroidDefaults)
         }
         binding.textView.applyStyledText(
             thistle,
@@ -47,7 +47,7 @@ class DocSnippets {
         // create the Thistle parser. It's best to create this once and inject it wherever needed
         val thistle = ThistleParser {
             // add the default tags for Android
-            from(DefaultAndroidTags)
+            from(AndroidDefaults)
         }
 
         // parse a formatted string to a Spanned instance, and set that as the text of a TextView
@@ -82,7 +82,7 @@ class DocSnippets {
             tag("dec") { Link { widget: View -> /* do something on link-click */ } }
 
             // keep this at the end to ensure your tags override and do not clash with the default ones
-            from(DefaultAndroidTags)
+            from(AndroidDefaults)
         }
 
         binding.textView.applyStyledText(
@@ -101,7 +101,7 @@ class DocSnippets {
                 ) { Color.RED }.asThistleValueParser()
             }
 
-            from(DefaultAndroidTags)
+            from(AndroidDefaults)
         }
 
         binding.textView.applyStyledText(
@@ -124,7 +124,7 @@ class DocSnippets {
                 interpolateEndToken = LiteralTokenParser("}}"),
             )
 
-            from(DefaultAndroidTags)
+            from(AndroidDefaults)
         }
 
         binding.textView.applyStyledText(

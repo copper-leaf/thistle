@@ -1,4 +1,4 @@
-package com.copperleaf.thistle.parser
+package com.copperleaf.thistle.core.parser
 
 import com.copperleaf.kudzu.parser.tag.TagBuilder
 import com.copperleaf.kudzu.parser.tag.TagParser

@@ -1,12 +1,12 @@
-package com.copperleaf.thistle.renderer
+package com.copperleaf.thistle.core.renderer
 
 import com.copperleaf.kudzu.node.Node
 import com.copperleaf.kudzu.node.many.ManyNode
 import com.copperleaf.kudzu.node.tag.TagNode
 import com.copperleaf.kudzu.node.text.TextNode
-import com.copperleaf.thistle.node.ThistleInterpolateNode
-import com.copperleaf.thistle.node.ThistleTagStartNode
-import com.copperleaf.thistle.parser.ThistleTagBuilder
+import com.copperleaf.thistle.core.node.ThistleInterpolateNode
+import com.copperleaf.thistle.core.node.ThistleTagStartNode
+import com.copperleaf.thistle.core.parser.ThistleTagBuilder
 
 @ExperimentalStdlibApi
 @Suppress("UNCHECKED_CAST")

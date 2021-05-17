@@ -1,11 +1,11 @@
-package com.copperleaf.thistle
+package com.copperleaf.thistle.core
 
 import com.copperleaf.kudzu.node.mapped.ValueNode
 import com.copperleaf.kudzu.parser.Parser
 import com.copperleaf.kudzu.parser.mapped.FlatMappedParser
-import com.copperleaf.thistle.node.ThistleValueNode
-import com.copperleaf.thistle.parser.ThistleTag
-import com.copperleaf.thistle.renderer.ThistleTagsArgs
+import com.copperleaf.thistle.core.node.ThistleValueNode
+import com.copperleaf.thistle.core.parser.ThistleTag
+import com.copperleaf.thistle.core.renderer.ThistleTagsArgs
 
 inline fun ThistleTag.checkArgs(
     args: Map<String, Any>,

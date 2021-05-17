@@ -2,8 +2,8 @@ package com.copperleaf.thistle.android.tags
 
 import android.graphics.drawable.Drawable
 import android.text.style.ImageSpan
-import com.copperleaf.thistle.checkArgs
-import com.copperleaf.thistle.parser.ThistleTag
+import com.copperleaf.thistle.core.checkArgs
+import com.copperleaf.thistle.core.parser.ThistleTag
 
 class Icon(
     private val hardcodedDrawable: Drawable? = null

@@ -1,10 +1,10 @@
-package com.copperleaf.thistle.parser
+package com.copperleaf.thistle.core.parser
 
 import com.copperleaf.kudzu.node.Node
 import com.copperleaf.kudzu.parser.Parser
 import com.copperleaf.kudzu.parser.tag.TagBuilder
-import com.copperleaf.thistle.node.ThistleInterpolateNode
-import com.copperleaf.thistle.node.ThistleTagStartNode
+import com.copperleaf.thistle.core.node.ThistleInterpolateNode
+import com.copperleaf.thistle.core.node.ThistleTagStartNode
 
 @ExperimentalStdlibApi
 interface ThistleSyntax {

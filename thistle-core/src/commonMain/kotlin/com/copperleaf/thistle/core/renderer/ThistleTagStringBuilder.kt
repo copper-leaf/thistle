@@ -1,4 +1,4 @@
-package com.copperleaf.thistle.renderer
+package com.copperleaf.thistle.core.renderer
 
 interface ThistleTagStringBuilder {
     fun append(text: String)

@@ -2,8 +2,8 @@ package com.copperleaf.thistle.android.tags
 
 import android.graphics.Typeface
 import android.text.style.StyleSpan
-import com.copperleaf.thistle.checkArgs
-import com.copperleaf.thistle.parser.ThistleTag
+import com.copperleaf.thistle.core.checkArgs
+import com.copperleaf.thistle.core.parser.ThistleTag
 
 class Style(
     private val hardcodedStyle: Int? = null

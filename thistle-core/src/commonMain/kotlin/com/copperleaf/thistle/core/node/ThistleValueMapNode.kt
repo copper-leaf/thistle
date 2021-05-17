@@ -1,4 +1,4 @@
-package com.copperleaf.thistle.node
+package com.copperleaf.thistle.core.node
 
 import com.copperleaf.kudzu.node.NodeContext
 import com.copperleaf.kudzu.node.TerminalNode

@@ -9,7 +9,7 @@
 
 ```kotlin
 val thistle = ThistleParser {
-    from(DefaultAndroidTags)
+    from(AndroidDefaults)
 }
 binding.textView.applyStyledText(
     thistle,

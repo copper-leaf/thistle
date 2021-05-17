@@ -8,22 +8,22 @@ import com.copperleaf.kudzu.parser.mapped.MappedParser
 import com.copperleaf.kudzu.parser.sequence.SequenceParser
 import com.copperleaf.kudzu.parser.text.IdentifierTokenParser
 import com.copperleaf.kudzu.parser.text.LiteralTokenParser
-import com.copperleaf.thistle.parser.ThistleSyntaxBuilder
 import com.copperleaf.thistle.android.tags.BackgroundColor
 import com.copperleaf.thistle.android.tags.ForegroundColor
 import com.copperleaf.thistle.android.tags.Icon
 import com.copperleaf.thistle.android.tags.Strikethrough
 import com.copperleaf.thistle.android.tags.Style
 import com.copperleaf.thistle.android.tags.Subscript
-import com.copperleaf.thistle.asThistleValueParser
 import com.copperleaf.thistle.android.tags.Superscript
 import com.copperleaf.thistle.android.tags.Typeface
 import com.copperleaf.thistle.android.tags.Underline
 import com.copperleaf.thistle.android.tags.Url
+import com.copperleaf.thistle.core.asThistleValueParser
+import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
 
 @ExperimentalStdlibApi
 @SuppressLint("NewApi")
-object DefaultAndroidTags : (ThistleSyntaxBuilder) -> Unit {
+object AndroidDefaults : (ThistleSyntaxBuilder) -> Unit {
 
     /**
      * Adds the default set of Android tags to the [ThistleSyntaxBuilder]. Also add a value format for `@`-type

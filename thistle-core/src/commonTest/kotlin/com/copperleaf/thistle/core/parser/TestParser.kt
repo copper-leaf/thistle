@@ -1,4 +1,4 @@
-package com.copperleaf.thistle.parser
+package com.copperleaf.thistle.core.parser
 
 import com.copperleaf.kudzu.node.tag.TagNode
 import com.copperleaf.kudzu.parser.ParserContext
@@ -10,8 +10,8 @@ import com.copperleaf.thistle.isFalse
 import com.copperleaf.thistle.isNotNull
 import com.copperleaf.thistle.isTrue
 import com.copperleaf.thistle.node
-import com.copperleaf.thistle.node.ThistleInterpolateNode
-import com.copperleaf.thistle.node.ThistleTagStartNode
+import com.copperleaf.thistle.core.node.ThistleInterpolateNode
+import com.copperleaf.thistle.core.node.ThistleTagStartNode
 import com.copperleaf.thistle.parsedCorrectly
 import com.copperleaf.thistle.parsedIncorrectly
 import com.copperleaf.thistle.test

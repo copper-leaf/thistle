@@ -1,4 +1,4 @@
-package com.copperleaf.thistle.parser
+package com.copperleaf.thistle.core.parser
 
 import com.copperleaf.kudzu.node.mapped.ValueNode
 import com.copperleaf.kudzu.parser.Parser
@@ -22,9 +22,9 @@ import com.copperleaf.kudzu.parser.value.CharLiteralParser
 import com.copperleaf.kudzu.parser.value.DoubleLiteralParser
 import com.copperleaf.kudzu.parser.value.IntLiteralParser
 import com.copperleaf.kudzu.parser.value.StringLiteralParser
-import com.copperleaf.thistle.asThistleValueParser
-import com.copperleaf.thistle.node.ThistleValueMapNode
-import com.copperleaf.thistle.node.ThistleValueNode
+import com.copperleaf.thistle.core.asThistleValueParser
+import com.copperleaf.thistle.core.node.ThistleValueMapNode
+import com.copperleaf.thistle.core.node.ThistleValueNode
 
 @ExperimentalStdlibApi
 class ThistleSyntaxBuilder {

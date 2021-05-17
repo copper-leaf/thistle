@@ -3,7 +3,7 @@ package com.copperleaf.thistle.app.ui.main
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.copperleaf.kudzu.parser.ParserContext
-import com.copperleaf.thistle.parser.ThistleParser
+import com.copperleaf.thistle.core.parser.ThistleParser
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlin.time.ExperimentalTime

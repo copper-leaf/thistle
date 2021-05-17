@@ -1,8 +1,8 @@
 package com.copperleaf.thistle.android.tags
 
 import android.text.style.URLSpan
-import com.copperleaf.thistle.checkArgs
-import com.copperleaf.thistle.parser.ThistleTag
+import com.copperleaf.thistle.core.checkArgs
+import com.copperleaf.thistle.core.parser.ThistleTag
 
 class Url(
     private val hardcodedUrl: String? = null

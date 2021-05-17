@@ -3,7 +3,7 @@ package com.copperleaf.thistle.app.ui.main
 import android.text.Spanned
 import android.util.Log
 import com.copperleaf.kudzu.node.Node
-import com.copperleaf.thistle.parser.ThistleParser
+import com.copperleaf.thistle.core.parser.ThistleParser
 import com.copperleaf.thistle.android.androidRenderer
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime

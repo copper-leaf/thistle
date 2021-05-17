@@ -1,6 +1,6 @@
-package com.copperleaf.thistle.renderer
+package com.copperleaf.thistle.core.renderer
 
-import com.copperleaf.thistle.parser.ThistleTag
+import com.copperleaf.thistle.core.parser.ThistleTag
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty

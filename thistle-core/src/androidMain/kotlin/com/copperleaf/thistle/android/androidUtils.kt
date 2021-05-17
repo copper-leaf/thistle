@@ -3,8 +3,8 @@ package com.copperleaf.thistle.android
 import android.text.method.LinkMovementMethod
 import android.widget.TextView
 import com.copperleaf.kudzu.parser.ParserContext
-import com.copperleaf.thistle.parser.ThistleParser
 import com.copperleaf.thistle.android.renderer.AndroidThistleRenderer
+import com.copperleaf.thistle.core.parser.ThistleParser
 
 @ExperimentalStdlibApi
 val ThistleParser.androidRenderer: AndroidThistleRenderer

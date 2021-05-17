@@ -9,10 +9,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.copperleaf.kudzu.parser.mapped.MappedParser
 import com.copperleaf.kudzu.parser.text.LiteralTokenParser
-import com.copperleaf.thistle.android.DefaultAndroidTags
+import com.copperleaf.thistle.android.AndroidDefaults
 import com.copperleaf.thistle.app.R
-import com.copperleaf.thistle.asThistleValueParser
-import com.copperleaf.thistle.parser.ThistleParser
+import com.copperleaf.thistle.core.asThistleValueParser
+import com.copperleaf.thistle.core.parser.ThistleParser
 import com.copperleaf.thistle.android.tags.BackgroundColor
 import com.copperleaf.thistle.android.tags.ForegroundColor
 import com.copperleaf.thistle.android.tags.Icon
@@ -70,7 +70,7 @@ class MainViewModelFactory(private val context: Context) : ViewModelProvider.Fac
 
                 tag("colorFromContext") { ForegroundColorFromString() }
 
-                from(DefaultAndroidTags(context, "com.copperleaf.thistle.app"))
+                from(AndroidDefaults(context, "com.copperleaf.thistle.app"))
             }
         }
         Log.i("MainViewModelFactory", "creating thistle -> $duration")

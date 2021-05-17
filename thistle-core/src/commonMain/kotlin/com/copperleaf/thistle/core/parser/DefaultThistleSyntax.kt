@@ -1,4 +1,4 @@
-package com.copperleaf.thistle.parser
+package com.copperleaf.thistle.core.parser
 
 import com.copperleaf.kudzu.node.Node
 import com.copperleaf.kudzu.node.mapped.ValueNode
@@ -10,9 +10,9 @@ import com.copperleaf.kudzu.parser.sequence.SequenceParser
 import com.copperleaf.kudzu.parser.text.AnyTokenParser
 import com.copperleaf.kudzu.parser.text.LiteralTokenParser
 import com.copperleaf.kudzu.parser.text.OptionalWhitespaceParser
-import com.copperleaf.thistle.node.ThistleInterpolateNode
-import com.copperleaf.thistle.node.ThistleTagStartNode
-import com.copperleaf.thistle.node.ThistleValueMapNode
+import com.copperleaf.thistle.core.node.ThistleInterpolateNode
+import com.copperleaf.thistle.core.node.ThistleTagStartNode
+import com.copperleaf.thistle.core.node.ThistleValueMapNode
 
 @ExperimentalStdlibApi
 @Suppress("UNCHECKED_CAST")
