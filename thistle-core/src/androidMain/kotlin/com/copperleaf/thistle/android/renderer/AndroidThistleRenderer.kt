@@ -1,8 +1,9 @@
-package com.copperleaf.thistle.renderer
+package com.copperleaf.thistle.android.renderer
 
 import android.text.Spanned
 import com.copperleaf.kudzu.node.Node
 import com.copperleaf.thistle.parser.ThistleTagBuilder
+import com.copperleaf.thistle.renderer.ThistleRenderer
 
 @ExperimentalStdlibApi
 class AndroidThistleRenderer(

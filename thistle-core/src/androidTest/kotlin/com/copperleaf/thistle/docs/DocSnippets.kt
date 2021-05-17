@@ -6,13 +6,13 @@ import android.view.View
 import android.widget.TextView
 import com.copperleaf.kudzu.parser.mapped.MappedParser
 import com.copperleaf.kudzu.parser.text.LiteralTokenParser
-import com.copperleaf.thistle.DefaultAndroidTags
-import com.copperleaf.thistle.applyStyledText
+import com.copperleaf.thistle.android.DefaultAndroidTags
+import com.copperleaf.thistle.android.applyStyledText
 import com.copperleaf.thistle.asThistleValueParser
 import com.copperleaf.thistle.checkArgs
 import com.copperleaf.thistle.parser.ThistleParser
 import com.copperleaf.thistle.parser.ThistleTag
-import com.copperleaf.thistle.tags.Link
+import com.copperleaf.thistle.android.tags.Link
 
 /**
  * The snippets in this file are not actually tested now, but they are used in documentation.

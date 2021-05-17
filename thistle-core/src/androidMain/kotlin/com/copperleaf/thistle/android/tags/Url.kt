@@ -1,4 +1,4 @@
-package com.copperleaf.thistle.tags
+package com.copperleaf.thistle.android.tags
 
 import android.text.style.URLSpan
 import com.copperleaf.thistle.checkArgs

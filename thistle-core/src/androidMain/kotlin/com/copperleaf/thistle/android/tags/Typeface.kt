@@ -1,4 +1,4 @@
-package com.copperleaf.thistle.tags
+package com.copperleaf.thistle.android.tags
 
 import android.annotation.SuppressLint
 import android.graphics.Typeface

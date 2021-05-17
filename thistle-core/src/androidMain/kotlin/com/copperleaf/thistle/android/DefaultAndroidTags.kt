@@ -1,4 +1,4 @@
-package com.copperleaf.thistle
+package com.copperleaf.thistle.android
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -9,16 +9,17 @@ import com.copperleaf.kudzu.parser.sequence.SequenceParser
 import com.copperleaf.kudzu.parser.text.IdentifierTokenParser
 import com.copperleaf.kudzu.parser.text.LiteralTokenParser
 import com.copperleaf.thistle.parser.ThistleSyntaxBuilder
-import com.copperleaf.thistle.tags.BackgroundColor
-import com.copperleaf.thistle.tags.ForegroundColor
-import com.copperleaf.thistle.tags.Icon
-import com.copperleaf.thistle.tags.Strikethrough
-import com.copperleaf.thistle.tags.Style
-import com.copperleaf.thistle.tags.Subscript
-import com.copperleaf.thistle.tags.Superscript
-import com.copperleaf.thistle.tags.Typeface
-import com.copperleaf.thistle.tags.Underline
-import com.copperleaf.thistle.tags.Url
+import com.copperleaf.thistle.android.tags.BackgroundColor
+import com.copperleaf.thistle.android.tags.ForegroundColor
+import com.copperleaf.thistle.android.tags.Icon
+import com.copperleaf.thistle.android.tags.Strikethrough
+import com.copperleaf.thistle.android.tags.Style
+import com.copperleaf.thistle.android.tags.Subscript
+import com.copperleaf.thistle.asThistleValueParser
+import com.copperleaf.thistle.android.tags.Superscript
+import com.copperleaf.thistle.android.tags.Typeface
+import com.copperleaf.thistle.android.tags.Underline
+import com.copperleaf.thistle.android.tags.Url
 
 @ExperimentalStdlibApi
 @SuppressLint("NewApi")

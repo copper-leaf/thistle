@@ -1,4 +1,4 @@
-package com.copperleaf.thistle.tags
+package com.copperleaf.thistle.android.tags
 
 import android.graphics.drawable.Drawable
 import android.text.style.ImageSpan

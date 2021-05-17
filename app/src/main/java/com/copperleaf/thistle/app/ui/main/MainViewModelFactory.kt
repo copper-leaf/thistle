@@ -9,16 +9,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.copperleaf.kudzu.parser.mapped.MappedParser
 import com.copperleaf.kudzu.parser.text.LiteralTokenParser
-import com.copperleaf.thistle.DefaultAndroidTags
+import com.copperleaf.thistle.android.DefaultAndroidTags
 import com.copperleaf.thistle.app.R
 import com.copperleaf.thistle.asThistleValueParser
 import com.copperleaf.thistle.parser.ThistleParser
-import com.copperleaf.thistle.tags.BackgroundColor
-import com.copperleaf.thistle.tags.ForegroundColor
-import com.copperleaf.thistle.tags.Icon
-import com.copperleaf.thistle.tags.Link
-import com.copperleaf.thistle.tags.Style
-import com.copperleaf.thistle.tags.Underline
+import com.copperleaf.thistle.android.tags.BackgroundColor
+import com.copperleaf.thistle.android.tags.ForegroundColor
+import com.copperleaf.thistle.android.tags.Icon
+import com.copperleaf.thistle.android.tags.Link
+import com.copperleaf.thistle.android.tags.Style
+import com.copperleaf.thistle.android.tags.Underline
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime
 
