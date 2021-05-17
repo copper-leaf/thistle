@@ -43,13 +43,14 @@ android {
 }
 
 kotlin {
+    jvm { }
     android {
         publishAllLibraryVariants()
     }
 //    js(BOTH) {
 //        browser { }
 //    }
-//    ios { }
+    ios { }
 
     sourceSets {
         all {
@@ -71,6 +72,18 @@ kotlin {
             }
         }
 
+        val jvmMain by getting {
+            dependencies {
+            }
+        }
+        val jvmTest by getting {
+            dependencies {
+                implementation(kotlin("test-junit"))
+                implementation("io.mockk:mockk:1.11.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
+            }
+        }
+
         // Android JVM Sourcesets
         val androidMain by getting {
             dependencies {
@@ -83,7 +96,7 @@ kotlin {
             }
         }
 
-//        // JS Sourcesets
+        // JS Sourcesets
 //        val jsMain by getting {
 //            dependencies {
 //            }
@@ -93,14 +106,14 @@ kotlin {
 //                implementation(kotlin("test-js"))
 //            }
 //        }
-//
-//        // iOS Sourcesets
-//        val iosMain by getting {
-//            dependencies { }
-//        }
-//        val iosTest by getting {
-//            dependencies { }
-//        }
+
+        // iOS Sourcesets
+        val iosMain by getting {
+            dependencies { }
+        }
+        val iosTest by getting {
+            dependencies { }
+        }
     }
 }
 

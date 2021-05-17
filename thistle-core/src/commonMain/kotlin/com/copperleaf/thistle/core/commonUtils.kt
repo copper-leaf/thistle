@@ -7,10 +7,10 @@ import com.copperleaf.thistle.core.node.ThistleValueNode
 import com.copperleaf.thistle.core.parser.ThistleTag
 import com.copperleaf.thistle.core.renderer.ThistleTagsArgs
 
-inline fun ThistleTag.checkArgs(
+inline fun <TagRendererType : Any> ThistleTag<TagRendererType>.checkArgs(
     args: Map<String, Any>,
-    crossinline block: ThistleTagsArgs.() -> Any
-): Any {
+    crossinline block: ThistleTagsArgs.() -> TagRendererType
+): TagRendererType {
     val validator = ThistleTagsArgs(this, args)
     val result = validator.block()
     validator.checkNoMoreArgs()

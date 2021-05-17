@@ -10,15 +10,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.copperleaf.kudzu.parser.mapped.MappedParser
 import com.copperleaf.kudzu.parser.text.LiteralTokenParser
 import com.copperleaf.thistle.android.AndroidDefaults
-import com.copperleaf.thistle.app.R
-import com.copperleaf.thistle.core.asThistleValueParser
-import com.copperleaf.thistle.core.parser.ThistleParser
 import com.copperleaf.thistle.android.tags.BackgroundColor
 import com.copperleaf.thistle.android.tags.ForegroundColor
 import com.copperleaf.thistle.android.tags.Icon
 import com.copperleaf.thistle.android.tags.Link
 import com.copperleaf.thistle.android.tags.Style
 import com.copperleaf.thistle.android.tags.Underline
+import com.copperleaf.thistle.app.R
+import com.copperleaf.thistle.core.asThistleValueParser
+import com.copperleaf.thistle.core.parser.ThistleParser
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime
 
@@ -31,11 +31,11 @@ class MainViewModelFactory(private val context: Context) : ViewModelProvider.Fac
     private lateinit var vm: MainViewModel
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        val thistle: ThistleParser
+        val thistle: ThistleParser<Any>
 
         Log.i("MainViewModelFactory", "creating thistle...")
         val duration = measureTime {
-            thistle = ThistleParser {
+            thistle = ThistleParser(AndroidDefaults(context, "com.copperleaf.thistle.app")) {
                 valueFormat {
                     MappedParser(
                         LiteralTokenParser("@color/red")
@@ -69,8 +69,6 @@ class MainViewModelFactory(private val context: Context) : ViewModelProvider.Fac
                 tag("dec") { Link { vm.updateCounter(-1) } }
 
                 tag("colorFromContext") { ForegroundColorFromString() }
-
-                from(AndroidDefaults(context, "com.copperleaf.thistle.app"))
             }
         }
         Log.i("MainViewModelFactory", "creating thistle -> $duration")

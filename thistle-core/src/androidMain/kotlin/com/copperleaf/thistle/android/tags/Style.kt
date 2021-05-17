@@ -7,7 +7,7 @@ import com.copperleaf.thistle.core.parser.ThistleTag
 
 class Style(
     private val hardcodedStyle: Int? = null
-) : ThistleTag {
+) : ThistleTag<Any> {
     override fun invoke(context: Map<String, Any>, args: Map<String, Any>): Any {
         return checkArgs(args) {
             val style: Int by enum(hardcodedStyle) {

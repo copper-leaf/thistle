@@ -22,7 +22,7 @@ import com.copperleaf.thistle.core.parser.ThistleTag
 /* ktlint-disable max-line-length */
 @Suppress("UNUSED_ANONYMOUS_PARAMETER")
 @ExperimentalStdlibApi
-class DocSnippets {
+class AndroidSnippets {
 
     class Binding(
         val textView: TextView
@@ -32,9 +32,7 @@ class DocSnippets {
 
     fun mainBasicUsage() {
         // snippet::main-basic-usage[]
-        val thistle = ThistleParser {
-            from(AndroidDefaults)
-        }
+        val thistle = ThistleParser(AndroidDefaults)
         binding.textView.applyStyledText(
             thistle,
             "This is a {{b}}very important{{/b}}, {{foreground color=#ff0000}}urgent{{/foreground}} message!"
@@ -45,10 +43,7 @@ class DocSnippets {
     fun androidBasicUsage() {
         // snippet::android-basic-usage[android]
         // create the Thistle parser. It's best to create this once and inject it wherever needed
-        val thistle = ThistleParser {
-            // add the default tags for Android
-            from(AndroidDefaults)
-        }
+        val thistle = ThistleParser(AndroidDefaults) // add the default tags for Android
 
         // parse a formatted string to a Spanned instance, and set that as the text of a TextView
         binding.textView.applyStyledText(
@@ -61,7 +56,7 @@ class DocSnippets {
     fun androidCustomTags() {
         // snippet::android-custom-tags[android]
         // create a custom implementation of ThistleTag
-        class CustomStyle : ThistleTag {
+        class CustomStyle : ThistleTag<Any> {
             override fun invoke(context: Map<String, Any>, args: Map<String, Any>): Any {
                 // use checkArgs to safely pull properties from the input args and ensure incorrect args are not set
                 return checkArgs(args) {
@@ -73,16 +68,13 @@ class DocSnippets {
             }
         }
 
-        val thistle = ThistleParser {
+        val thistle = ThistleParser(AndroidDefaults) {
             // register your custom tab with the Thistle parser
             tag("customStyle") { CustomStyle() }
 
             // the Link ThistleTag is useful for making portions of text clickable
             tag("inc") { Link { widget: View -> /* do something on link-click */ } }
             tag("dec") { Link { widget: View -> /* do something on link-click */ } }
-
-            // keep this at the end to ensure your tags override and do not clash with the default ones
-            from(AndroidDefaults)
         }
 
         binding.textView.applyStyledText(
@@ -94,14 +86,12 @@ class DocSnippets {
 
     fun androidCustomValueFormats() {
         // snippet::android-custom-value-formats[android]
-        val thistle = ThistleParser {
+        val thistle = ThistleParser(AndroidDefaults) {
             valueFormat {
                 MappedParser(
                     LiteralTokenParser("@color/red")
                 ) { Color.RED }.asThistleValueParser()
             }
-
-            from(AndroidDefaults)
         }
 
         binding.textView.applyStyledText(
@@ -113,7 +103,7 @@ class DocSnippets {
 
     fun androidCustomStartEndTokens() {
         // snippet::android-custom-start-end-tokens[android]
-        val thistle = ThistleParser {
+        val thistle = ThistleParser(AndroidDefaults) {
             // customize syntax to use Django/Twig/Pebble-style tags
             customSyntax(
                 openTagStartToken = LiteralTokenParser("{%"),
@@ -123,8 +113,6 @@ class DocSnippets {
                 interpolateStartToken = LiteralTokenParser("{{"),
                 interpolateEndToken = LiteralTokenParser("}}"),
             )
-
-            from(AndroidDefaults)
         }
 
         binding.textView.applyStyledText(

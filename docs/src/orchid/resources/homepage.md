@@ -168,8 +168,6 @@ Each target will naturally have different rendering capabilities, which are docu
 
 ### Android (Spanned String)
 
-#### Basic Usage
-
 On Android, Thistle parses a String into a `Spanned` instance that can be set to a TextView. The Thistle format replaces
 "tags" with Android `Span`s, wrapping the appropriate text. The normal Span API can be a bit of a pain, and Thistle
 makes this simpler, and also allows you to change the span formatting at runtime rather than compile time.
@@ -177,6 +175,8 @@ makes this simpler, and also allows you to change the span formatting at runtime
 ```kotlin
 {% snippet 'android-basic-usage' %}
 ```
+
+![sample_android_app]({{ 'assets/media/sample_app.gif'|asset }})
 
 **Default Tags**
 
@@ -221,7 +221,50 @@ TODO (follow issue [here](https://github.com/copper-leaf/thistle/issues/4))
 
 ### Any (Console ANSI Sequences)
 
-TODO (follow issue [here](https://github.com/copper-leaf/thistle/issues/5))
+For rendering to a console, Thistle converts the normal markup tags into 
+[ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code). It currently supports 16-bit colors for both 
+foreground and background, and some other basic styling options.
+
+```kotlin
+{% snippet 'console-basic-usage' %}
+```
+
+![sample_console]({{ 'assets/media/sample_console.png'|asset }})
+
+**Default Tags**
+
+For rendering to the console, color tags support both normal and "bright" or "bold" colors. Typically, a tag name that 
+is all uppercase letters will render the color in "bold", while all lowercase letters will either render in normal style
+or offer a parameter for manually configuring it.
+
+Unless otherwise specified, in the table below `ansi color` will refer to one of the following color values: `black`, 
+`red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `white`.
+
+By default, when an ANSI "reset" code is encountered, all styling is reset. Thistle automatically handles re-applying
+nested tags after a reset, so using nested tags works exactly as you would expect them to.
+
+{% verbatim %}
+
+| Tag Name              | Params                                         | Description                                                        | Example |
+| --------------------- | ---------------------------------------------- | ------------------------------------------------------------------ | ------- |
+| foreground/FOREGROUND | `color=[ansi color]`, `bold=[true,false]`      | Change text color                                                  | `{{foreground color=#FFFF00}}Text{{/foreground}}`    |
+| background/FOREGROUND | `color=[ansi color]`, `bold=[true,false]`      | Change background color                                            | `{{background color=#FFFF00}}Text{{/background}}`    |
+| style                 | `style=[bold,underline,strikethrough,reverse]` | Set text to bold, underline, strikethrough, or reverse by argument | `{{style style=bold}}Text{{/style}}`                 |
+| black/BLACK           | none                                           | Set foreground color to black                                      | `{{b}}Text{{/b}}`                                    |
+| red/RED               | none                                           | Set foreground color to red                                        | `{{b}}Text{{/b}}`                                    |
+| green/GREEN           | none                                           | Set foreground color to green                                      | `{{b}}Text{{/b}}`                                    |
+| yellow/YELLOW         | none                                           | Set foreground color to yellow                                     | `{{b}}Text{{/b}}`                                    |
+| blue/BLUE             | none                                           | Set foreground color to blue                                       | `{{b}}Text{{/b}}`                                    |
+| magenta/MAGENTA       | none                                           | Set foreground color to magenta                                    | `{{b}}Text{{/b}}`                                    |
+| cyan/CYAN             | none                                           | Set foreground color to cyan                                       | `{{b}}Text{{/b}}`                                    |
+| white/WHITE           | none                                           | Set foreground color to white                                      | `{{b}}Text{{/b}}`                                    |
+| b                     | none                                           | Set text style to bold                                             | `{{b}}Text{{/b}}`                                    |
+| u                     | none                                           | Add underline to text                                              | `{{u}}Text{{/u}}`                                    |
+| reverse               | none                                           | Add underline to text                                              | `{{u}}Text{{/u}}`                                    |
+| strikethrough         | none                                           | Add strikethrough to text                                          | `{{strikethrough}}Text{{/strikethrough}}`            |
+{.table}
+
+{% endverbatim %}
 
 ## Customization
 

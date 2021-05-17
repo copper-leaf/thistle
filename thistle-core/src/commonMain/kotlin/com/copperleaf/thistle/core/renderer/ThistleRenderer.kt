@@ -6,19 +6,20 @@ import com.copperleaf.kudzu.node.tag.TagNode
 import com.copperleaf.kudzu.node.text.TextNode
 import com.copperleaf.thistle.core.node.ThistleInterpolateNode
 import com.copperleaf.thistle.core.node.ThistleTagStartNode
+import com.copperleaf.thistle.core.parser.ThistleTag
 import com.copperleaf.thistle.core.parser.ThistleTagBuilder
 
 @ExperimentalStdlibApi
 @Suppress("UNCHECKED_CAST")
-abstract class ThistleRenderer<T : Any>(
-    protected val tags: List<ThistleTagBuilder>
+abstract class ThistleRenderer<TagRendererType : Any, ResultType : Any>(
+    protected val tags: List<ThistleTagBuilder<TagRendererType>>
 ) {
     abstract fun render(
         rootNode: Node,
         context: Map<String, Any> = emptyMap()
-    ): T
+    ): ResultType
 
-    fun ThistleTagStringBuilder.renderToBuilder(node: Node, context: Map<String, Any>) {
+    fun ThistleTagStringBuilder<TagRendererType>.renderToBuilder(node: Node, context: Map<String, Any>) {
         when (node) {
             is TextNode -> {
                 append(node.text)
@@ -38,7 +39,7 @@ abstract class ThistleRenderer<T : Any>(
                     is ThistleTagStartNode -> {
                         val tagName = tagNode.tagName
                         val tagArgs = tagNode.tagArgs.getValueMap(context)
-                        val span = tags.first { it.kudzuTagBuilder.name == tagName }.tag
+                        val span: ThistleTag<TagRendererType> = tags.first { it.kudzuTagBuilder.name == tagName }.tag
 
                         pushTag(span(context, tagArgs)) {
                             (node.content as ManyNode<Node>).nodeList.forEach {

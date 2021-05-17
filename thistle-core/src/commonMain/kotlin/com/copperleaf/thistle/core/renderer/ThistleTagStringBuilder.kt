@@ -1,6 +1,6 @@
 package com.copperleaf.thistle.core.renderer
 
-interface ThistleTagStringBuilder {
+interface ThistleTagStringBuilder<TagRendererType : Any> {
     fun append(text: String)
-    fun pushTag(tag: Any, tagContentBuilder: ThistleTagStringBuilder.() -> Unit)
+    fun pushTag(tag: TagRendererType, tagContentBuilder: ThistleTagStringBuilder<TagRendererType>.() -> Unit)
 }

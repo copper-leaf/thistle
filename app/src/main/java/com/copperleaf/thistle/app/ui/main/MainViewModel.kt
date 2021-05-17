@@ -15,7 +15,7 @@ import kotlin.time.measureTime
 class MainViewModel(initialState: MainViewModel.State) : ViewModel() {
 
     data class State(
-        val thistle: ThistleParser,
+        val thistle: ThistleParser<Any>,
         val headerTextContextCounter: InputCache,
         val headerTextContextColor: InputCache,
         val inputs: List<InputCache>,
@@ -23,7 +23,7 @@ class MainViewModel(initialState: MainViewModel.State) : ViewModel() {
         val thistleContext: Map<String, Any>,
     ) {
         constructor(
-            thistle: ThistleParser,
+            thistle: ThistleParser<Any>,
             headerTextContextCounter: String,
             headerTextContextColor: String,
             inputs: List<String>,
@@ -40,7 +40,7 @@ class MainViewModel(initialState: MainViewModel.State) : ViewModel() {
 
         companion object {
             @ExperimentalTime
-            fun String.parseFromThistle(thistle: ThistleParser): InputCache {
+            fun String.parseFromThistle(thistle: ThistleParser<Any>): InputCache {
                 Log.i("MainViewModel", "parsing thistle string... [$this]")
 
                 val inputCache: InputCache

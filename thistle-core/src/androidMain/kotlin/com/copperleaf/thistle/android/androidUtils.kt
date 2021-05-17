@@ -7,14 +7,14 @@ import com.copperleaf.thistle.android.renderer.AndroidThistleRenderer
 import com.copperleaf.thistle.core.parser.ThistleParser
 
 @ExperimentalStdlibApi
-val ThistleParser.androidRenderer: AndroidThistleRenderer
+val ThistleParser<Any>.androidRenderer: AndroidThistleRenderer
     get() {
         return AndroidThistleRenderer(tags)
     }
 
 @ExperimentalStdlibApi
 fun TextView.applyStyledText(
-    thistle: ThistleParser,
+    thistle: ThistleParser<Any>,
     input: String,
     context: Map<String, Any> = emptyMap()
 ) {

@@ -6,7 +6,7 @@ import com.copperleaf.thistle.core.parser.ThistleTag
 
 class Url(
     private val hardcodedUrl: String? = null
-) : ThistleTag {
+) : ThistleTag<Any> {
     override fun invoke(context: Map<String, Any>, args: Map<String, Any>): Any {
         return checkArgs(args) {
             val url: String by string(hardcodedUrl)

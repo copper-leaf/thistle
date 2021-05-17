@@ -23,17 +23,17 @@ import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
 
 @ExperimentalStdlibApi
 @SuppressLint("NewApi")
-object AndroidDefaults : (ThistleSyntaxBuilder) -> Unit {
+object AndroidDefaults : ThistleSyntaxBuilder.Defaults<Any> {
 
     /**
      * Adds the default set of Android tags to the [ThistleSyntaxBuilder]. Also add a value format for `@`-type
      * resources defined in Android XML Resources, matching the format typically used in layouts. It currently only
      * recognizes `@color/`, `@string/`, and `@drawable/` resources
      */
-    operator fun invoke(context: Context, packageName: String): (ThistleSyntaxBuilder) -> Unit {
-        return { syntax: ThistleSyntaxBuilder ->
-            with(syntax) {
-                invoke(this)
+    operator fun invoke(context: Context, packageName: String): ThistleSyntaxBuilder.Defaults<Any> {
+        return ThistleSyntaxBuilder.Defaults { builder ->
+            with(builder) {
+                apply(this)
 
                 valueFormat {
                     MappedParser(
@@ -73,8 +73,8 @@ object AndroidDefaults : (ThistleSyntaxBuilder) -> Unit {
     /**
      * Adds the default set of Android tags to the [ThistleSyntaxBuilder].
      */
-    override operator fun invoke(syntax: ThistleSyntaxBuilder) {
-        with(syntax) {
+    override fun apply(builder: ThistleSyntaxBuilder<Any>) {
+        with(builder) {
             tag("foreground") { ForegroundColor() }
             tag("background") { BackgroundColor() }
 

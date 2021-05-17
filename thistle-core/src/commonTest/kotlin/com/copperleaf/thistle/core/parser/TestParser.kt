@@ -2,6 +2,8 @@ package com.copperleaf.thistle.core.parser
 
 import com.copperleaf.kudzu.node.tag.TagNode
 import com.copperleaf.kudzu.parser.ParserContext
+import com.copperleaf.thistle.core.node.ThistleInterpolateNode
+import com.copperleaf.thistle.core.node.ThistleTagStartNode
 import com.copperleaf.thistle.expectCatching
 import com.copperleaf.thistle.expectThat
 import com.copperleaf.thistle.isA
@@ -10,8 +12,6 @@ import com.copperleaf.thistle.isFalse
 import com.copperleaf.thistle.isNotNull
 import com.copperleaf.thistle.isTrue
 import com.copperleaf.thistle.node
-import com.copperleaf.thistle.core.node.ThistleInterpolateNode
-import com.copperleaf.thistle.core.node.ThistleTagStartNode
 import com.copperleaf.thistle.parsedCorrectly
 import com.copperleaf.thistle.parsedIncorrectly
 import com.copperleaf.thistle.test
@@ -20,6 +20,11 @@ import kotlin.test.Test
 @ExperimentalUnsignedTypes
 @ExperimentalStdlibApi
 class TestParser {
+
+    object TestDefaults : ThistleSyntaxBuilder.Defaults<Any> {
+        override fun apply(builder: ThistleSyntaxBuilder<Any>) {
+        }
+    }
 
     @Test
     fun testHexColorAsIntValueParser() {
@@ -108,7 +113,7 @@ class TestParser {
 
     @Test
     fun testAttrValueParser() {
-        val underTest = ThistleSyntaxBuilder().buildAttrValueParser()
+        val underTest = ThistleSyntaxBuilder<Any>().buildAttrValueParser()
         val contextMap = mapOf("one" to 1, "two" to 2.2)
 
         // boolean value
@@ -267,7 +272,7 @@ class TestParser {
 
     @Test
     fun testAttrMapParser() {
-        val underTest = ThistleSyntaxBuilder().buildAttrMapParser()
+        val underTest = ThistleSyntaxBuilder<Any>().buildAttrMapParser()
         val contextMap = mapOf("one" to 1, "two" to 2.2)
 
         // boolean value
@@ -306,7 +311,7 @@ class TestParser {
 
     @Test
     fun testSyntaxTagStartParser() {
-        val syntax = ThistleSyntaxBuilder().buildSyntaxParser()
+        val syntax = ThistleSyntaxBuilder<Any>().buildSyntaxParser()
         val contextMap = mapOf("one" to 1, "two" to 2.2)
         val underTest = syntax.tagStart("one")
 
@@ -366,7 +371,7 @@ class TestParser {
 
     @Test
     fun testFullParser() {
-        val thistle = ThistleParser {
+        val thistle = ThistleParser(TestDefaults) {
             tag("one") { ThistleTag { _, _ -> } }
         }
         val contextMap = mapOf("one" to 1, "two" to 2.2, "username" to "AliceBob123")

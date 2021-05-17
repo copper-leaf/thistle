@@ -7,7 +7,7 @@ import kotlin.reflect.KProperty
 
 @Suppress("NOTHING_TO_INLINE")
 class ThistleTagsArgs(
-    val tag: ThistleTag,
+    val tag: ThistleTag<*>,
     val args: Map<String, Any>
 ) {
     val argsVisited: MutableList<String> = mutableListOf()

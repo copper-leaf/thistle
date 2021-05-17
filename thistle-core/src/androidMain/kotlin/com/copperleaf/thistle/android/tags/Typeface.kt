@@ -8,7 +8,7 @@ import com.copperleaf.thistle.core.parser.ThistleTag
 
 class Typeface(
     private val hardcodedTypeface: Typeface? = null
-) : ThistleTag {
+) : ThistleTag<Any> {
 
     @SuppressLint("NewApi")
     override fun invoke(context: Map<String, Any>, args: Map<String, Any>): Any {

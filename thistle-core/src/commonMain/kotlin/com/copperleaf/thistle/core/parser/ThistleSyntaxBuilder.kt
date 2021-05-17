@@ -27,18 +27,22 @@ import com.copperleaf.thistle.core.node.ThistleValueMapNode
 import com.copperleaf.thistle.core.node.ThistleValueNode
 
 @ExperimentalStdlibApi
-class ThistleSyntaxBuilder {
+class ThistleSyntaxBuilder<TagRendererType : Any> {
+
+    fun interface Defaults<TagRendererType : Any> {
+        fun apply(builder: ThistleSyntaxBuilder<TagRendererType>)
+    }
 
 // Public API
 // ---------------------------------------------------------------------------------------------------------------------
 
-    fun from(other: (ThistleSyntaxBuilder) -> Unit) {
-        other(this)
+    fun from(other: ThistleSyntaxBuilder.Defaults<TagRendererType>) {
+        other.apply(this)
     }
 
     fun tag(
         tagName: String,
-        tag: () -> ThistleTag
+        tag: () -> ThistleTag<TagRendererType>
     ) {
         tags[tagName] = tag
     }
@@ -100,7 +104,7 @@ class ThistleSyntaxBuilder {
         )
     }
 
-    private val tags: LinkedHashMap<String, () -> ThistleTag> = linkedMapOf()
+    private val tags: LinkedHashMap<String, () -> ThistleTag<TagRendererType>> = linkedMapOf()
 
     internal fun buildAttrValueParser(): Parser<ThistleValueNode> = FlatMappedParser(
         ExactChoiceParser(
@@ -141,7 +145,7 @@ class ThistleSyntaxBuilder {
 
     internal fun buildSyntaxParser(): ThistleSyntax = syntax(buildAttrMapParser())
 
-    fun build(): Pair<TagBuilder<*>, List<ThistleTagBuilder>> {
+    fun build(): Pair<TagBuilder<*>, List<ThistleTagBuilder<TagRendererType>>> {
         val syntax = syntax(buildAttrMapParser())
 
         val interpolate = TagBuilder("interpolate", syntax.interpolate(), NoopParser())

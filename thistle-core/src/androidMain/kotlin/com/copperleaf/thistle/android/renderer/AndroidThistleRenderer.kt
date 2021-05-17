@@ -7,8 +7,8 @@ import com.copperleaf.thistle.core.renderer.ThistleRenderer
 
 @ExperimentalStdlibApi
 class AndroidThistleRenderer(
-    tags: List<ThistleTagBuilder>
-) : ThistleRenderer<Spanned>(tags) {
+    tags: List<ThistleTagBuilder<Any>>
+) : ThistleRenderer<Any, Spanned>(tags) {
 
     override fun render(rootNode: Node, context: Map<String, Any>): Spanned {
         return AndroidThistleTagStringBuilder()

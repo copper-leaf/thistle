@@ -16,8 +16,16 @@ interface ThistleSyntax {
     fun interpolate(): Parser<ThistleInterpolateNode>
 
     companion object {
-        fun builder(block: ThistleSyntaxBuilder.() -> Unit = {}): Pair<TagBuilder<*>, List<ThistleTagBuilder>> {
-            return ThistleSyntaxBuilder().apply(block).build()
+        fun <TagRendererType : Any> builder(
+            defaults: ThistleSyntaxBuilder.Defaults<TagRendererType>,
+            block: ThistleSyntaxBuilder<TagRendererType>.() -> Unit = {}
+        ): Pair<TagBuilder<*>, List<ThistleTagBuilder<TagRendererType>>> {
+            return ThistleSyntaxBuilder<TagRendererType>()
+                .apply {
+                    block()
+                    from(defaults)
+                }
+                .build()
         }
     }
 }
