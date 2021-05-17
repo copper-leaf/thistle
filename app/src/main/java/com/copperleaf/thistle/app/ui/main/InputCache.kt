@@ -4,7 +4,7 @@ import android.text.Spanned
 import android.util.Log
 import com.copperleaf.kudzu.node.Node
 import com.copperleaf.thistle.parser.ThistleParser
-import com.copperleaf.thistle.renderer
+import com.copperleaf.thistle.androidRenderer
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime
 
@@ -21,7 +21,7 @@ data class InputCache(
 
         val spanned: Spanned
         val duration = measureTime {
-            spanned = thistle.renderer.render(rootNode, context)
+            spanned = thistle.androidRenderer.render(rootNode, context)
         }
 
         Log.i("InputCache", "Rendering thistle string -> $duration")

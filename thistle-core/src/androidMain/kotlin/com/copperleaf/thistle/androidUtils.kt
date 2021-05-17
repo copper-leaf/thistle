@@ -7,7 +7,7 @@ import com.copperleaf.thistle.parser.ThistleParser
 import com.copperleaf.thistle.renderer.AndroidThistleRenderer
 
 @ExperimentalStdlibApi
-val ThistleParser.renderer: AndroidThistleRenderer
+val ThistleParser.androidRenderer: AndroidThistleRenderer
     get() {
         return AndroidThistleRenderer(tags)
     }
@@ -19,7 +19,7 @@ fun TextView.applyStyledText(
     context: Map<String, Any> = emptyMap()
 ) {
     val (rootNode, _) = thistle.parser.parse(ParserContext.fromString(input))
-    val rendered = thistle.renderer.render(rootNode, context)
+    val rendered = thistle.androidRenderer.render(rootNode, context)
     movementMethod = LinkMovementMethod.getInstance()
     text = rendered
 }
