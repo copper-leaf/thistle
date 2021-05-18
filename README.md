@@ -23,7 +23,7 @@ binding.textView.applyStyledText(
 )
 ```
 
-![sample_app](https://copper-leaf.github.io/thistle/assets/media/sample_app.gif)
+![sample_app](https://github.com/copper-leaf/thistle/blob/master/docs/src/orchid/resources/assets/media/sample_app.gif?raw=true)
 [View sample app source](https://github.com/copper-leaf/thistle/tree/master/app)
 
 ![sample_console](https://copper-leaf.github.io/thistle/assets/media/sample_console.png)

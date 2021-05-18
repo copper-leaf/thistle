@@ -245,23 +245,23 @@ nested tags after a reset, so using nested tags works exactly as you would expec
 
 {% verbatim %}
 
-| Tag Name              | Params                                         | Description                                                        | Example |
-| --------------------- | ---------------------------------------------- | ------------------------------------------------------------------ | ------- |
-| foreground/FOREGROUND | `color=[ansi color]`, `bold=[true,false]`      | Change text color                                                  | `{{foreground color=#FFFF00}}Text{{/foreground}}`    |
-| background/FOREGROUND | `color=[ansi color]`, `bold=[true,false]`      | Change background color                                            | `{{background color=#FFFF00}}Text{{/background}}`    |
-| style                 | `style=[bold,underline,strikethrough,reverse]` | Set text to bold, underline, strikethrough, or reverse by argument | `{{style style=bold}}Text{{/style}}`                 |
-| black/BLACK           | none                                           | Set foreground color to black                                      | `{{b}}Text{{/b}}`                                    |
-| red/RED               | none                                           | Set foreground color to red                                        | `{{b}}Text{{/b}}`                                    |
-| green/GREEN           | none                                           | Set foreground color to green                                      | `{{b}}Text{{/b}}`                                    |
-| yellow/YELLOW         | none                                           | Set foreground color to yellow                                     | `{{b}}Text{{/b}}`                                    |
-| blue/BLUE             | none                                           | Set foreground color to blue                                       | `{{b}}Text{{/b}}`                                    |
-| magenta/MAGENTA       | none                                           | Set foreground color to magenta                                    | `{{b}}Text{{/b}}`                                    |
-| cyan/CYAN             | none                                           | Set foreground color to cyan                                       | `{{b}}Text{{/b}}`                                    |
-| white/WHITE           | none                                           | Set foreground color to white                                      | `{{b}}Text{{/b}}`                                    |
-| b                     | none                                           | Set text style to bold                                             | `{{b}}Text{{/b}}`                                    |
-| u                     | none                                           | Add underline to text                                              | `{{u}}Text{{/u}}`                                    |
-| reverse               | none                                           | Add underline to text                                              | `{{u}}Text{{/u}}`                                    |
-| strikethrough         | none                                           | Add strikethrough to text                                          | `{{strikethrough}}Text{{/strikethrough}}`            |
+| Tag Name              | Params                                         | Description                                                        | Example                                                 |
+| --------------------- | ---------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------- |
+| foreground/FOREGROUND | `color=[ansi color]`, `bold=[true,false]`      | Change text color                                                  | `{{foreground color=red bold=true}}Text{{/foreground}}` |
+| background/FOREGROUND | `color=[ansi color]`, `bold=[true,false]`      | Change background color                                            | `{{background color=red bold=true}}Text{{/background}}` |
+| style                 | `style=[bold,underline,strikethrough,reverse]` | Set text to bold, underline, strikethrough, or reverse by argument | `{{style style=bold}}Text{{/style}}`                    |
+| black/BLACK           | none                                           | Set foreground color to black                                      | `{{black}}Text{{/black}}`                               |
+| red/RED               | none                                           | Set foreground color to red                                        | `{{red}}Text{{/red}}`                                   |
+| green/GREEN           | none                                           | Set foreground color to green                                      | `{{green}}Text{{/green}}`                               |
+| yellow/YELLOW         | none                                           | Set foreground color to yellow                                     | `{{yellow}}Text{{/yellow}}`                             |
+| blue/BLUE             | none                                           | Set foreground color to blue                                       | `{{blue}}Text{{/blue}}`                                 |
+| magenta/MAGENTA       | none                                           | Set foreground color to magenta                                    | `{{magenta}}Text{{/magenta}}`                           |
+| cyan/CYAN             | none                                           | Set foreground color to cyan                                       | `{{cyan}}Text{{/cyan}}`                                 |
+| white/WHITE           | none                                           | Set foreground color to white                                      | `{{white}}Text{{/white}}`                               |
+| b                     | none                                           | Set text style to bold                                             | `{{b}}Text{{/b}}`                                       |
+| u                     | none                                           | Add underline to text                                              | `{{u}}Text{{/u}}`                                       |
+| reverse               | none                                           | Add underline to text                                              | `{{reverse}}Text{{/reverse}}`                           |
+| strikethrough         | none                                           | Add strikethrough to text                                          | `{{strikethrough}}Text{{/strikethrough}}`               |
 {.table}
 
 {% endverbatim %}
