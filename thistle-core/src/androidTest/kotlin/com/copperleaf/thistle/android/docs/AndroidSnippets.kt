@@ -8,6 +8,7 @@ import com.copperleaf.kudzu.parser.mapped.MappedParser
 import com.copperleaf.kudzu.parser.text.LiteralTokenParser
 import com.copperleaf.thistle.android.AndroidDefaults
 import com.copperleaf.thistle.android.applyStyledText
+import com.copperleaf.thistle.android.renderer.AndroidThistleRenderContext
 import com.copperleaf.thistle.android.tags.Link
 import com.copperleaf.thistle.core.asThistleValueParser
 import com.copperleaf.thistle.core.checkArgs
@@ -56,10 +57,10 @@ class AndroidSnippets {
     fun androidCustomTags() {
         // snippet::android-custom-tags[android]
         // create a custom implementation of ThistleTag
-        class CustomStyle : ThistleTag<Any> {
-            override fun invoke(context: Map<String, Any>, args: Map<String, Any>): Any {
+        class CustomStyle : ThistleTag<AndroidThistleRenderContext, Any> {
+            override fun invoke(renderContext: AndroidThistleRenderContext): Any {
                 // use checkArgs to safely pull properties from the input args and ensure incorrect args are not set
-                return checkArgs(args) {
+                return checkArgs(renderContext) {
                     val color: Int by int()
 
                     // return anything that can be set to a `SpannableStringBuilder`

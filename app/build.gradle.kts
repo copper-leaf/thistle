@@ -26,6 +26,14 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    lintOptions {
+        disable(
+            "GradleDependency",
+            "AllowBackup",
+            "HardcodedText",
+            "ObsoleteLintCustomCheck"
+        )
+    }
 }
 
 dependencies {
@@ -38,4 +46,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha01")
 
     implementation(project(":thistle-core"))
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
 }

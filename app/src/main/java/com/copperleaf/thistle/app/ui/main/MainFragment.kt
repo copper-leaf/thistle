@@ -60,14 +60,22 @@ class MainFragment : Fragment() {
     private fun MainFragmentBinding.applyState(state: MainViewModel.State) {
         // attempt to display the 'clickMe' text, which may throw an exception based on the user's input
         try {
-            tvCounter.text = state.headerTextContextCounter.render(state.thistle, state.thistleContext)
+            tvCounter.text = state.headerTextContextCounter.render(
+                requireContext(),
+                state.thistle,
+                state.thistleContext
+            )
         } catch (e: Throwable) {
             e.printStackTrace()
             tvCounter.text = e.message
         }
 
         try {
-            tvColor.text = state.headerTextContextColor.render(state.thistle, state.thistleContext)
+            tvColor.text = state.headerTextContextColor.render(
+                requireContext(),
+                state.thistle,
+                state.thistleContext
+            )
         } catch (e: Throwable) {
             e.printStackTrace()
             tvColor.text = e.message

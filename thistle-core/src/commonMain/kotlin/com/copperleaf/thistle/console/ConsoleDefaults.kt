@@ -1,6 +1,7 @@
 package com.copperleaf.thistle.console
 
 import com.copperleaf.thistle.console.renderer.AnsiEscapeCode
+import com.copperleaf.thistle.console.renderer.ConsoleThistleRenderContext
 import com.copperleaf.thistle.console.tags.BackgroundColor
 import com.copperleaf.thistle.console.tags.ForegroundColor
 import com.copperleaf.thistle.console.tags.Style
@@ -11,12 +12,12 @@ import com.copperleaf.thistle.console.tags.Style.Companion.CONSOLE_UNDERLINE
 import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
 
 @ExperimentalStdlibApi
-object ConsoleDefaults : ThistleSyntaxBuilder.Defaults<AnsiEscapeCode> {
+object ConsoleDefaults : ThistleSyntaxBuilder.Defaults<ConsoleThistleRenderContext, AnsiEscapeCode> {
 
     /**
      * Adds the default set of Console tags to the [ThistleSyntaxBuilder].
      */
-    override fun apply(builder: ThistleSyntaxBuilder<AnsiEscapeCode>) {
+    override fun apply(builder: ThistleSyntaxBuilder<ConsoleThistleRenderContext, AnsiEscapeCode>) {
         with(builder) {
             tag("background") { BackgroundColor() }
             tag("foreground") { ForegroundColor() }

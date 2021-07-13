@@ -1,17 +1,16 @@
-package com.copperleaf.thistle.android.tags
+package com.copperleaf.thistle.app.ui.main
 
 import android.text.style.ClickableSpan
 import android.view.View
+import android.widget.Toast
 import com.copperleaf.thistle.android.renderer.AndroidThistleRenderContext
 import com.copperleaf.thistle.core.parser.ThistleTag
 
-class Link(
-    val handler: (widget: View) -> Unit
-) : ThistleTag<AndroidThistleRenderContext, Any> {
+class OnClickDisplayInnerContent : ThistleTag<AndroidThistleRenderContext, Any> {
     override fun invoke(renderContext: AndroidThistleRenderContext): Any {
         return object : ClickableSpan() {
             override fun onClick(widget: View) {
-                handler(widget)
+                Toast.makeText(renderContext.uiContext, renderContext.content, Toast.LENGTH_SHORT).show()
             }
         }
     }

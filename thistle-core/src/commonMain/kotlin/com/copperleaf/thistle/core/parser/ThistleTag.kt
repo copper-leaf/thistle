@@ -1,5 +1,7 @@
 package com.copperleaf.thistle.core.parser
 
-fun interface ThistleTag<TagRendererType : Any> {
-    operator fun invoke(context: Map<String, Any>, args: Map<String, Any>): TagRendererType
+import com.copperleaf.thistle.core.renderer.ThistleRenderContext
+
+fun interface ThistleTag<RenderContext : ThistleRenderContext, TagRendererResult : Any> {
+    operator fun invoke(renderContext: RenderContext): TagRendererResult
 }

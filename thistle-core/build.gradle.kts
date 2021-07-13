@@ -89,7 +89,9 @@ kotlin {
             dependencies {
             }
         }
+        val androidAndroidTestRelease by getting { }
         val androidTest by getting {
+            dependsOn(androidAndroidTestRelease)
             dependencies {
                 implementation(kotlin("test-junit"))
                 implementation("io.mockk:mockk:1.11.0")

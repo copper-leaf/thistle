@@ -25,24 +25,25 @@ import com.copperleaf.kudzu.parser.value.StringLiteralParser
 import com.copperleaf.thistle.core.asThistleValueParser
 import com.copperleaf.thistle.core.node.ThistleValueMapNode
 import com.copperleaf.thistle.core.node.ThistleValueNode
+import com.copperleaf.thistle.core.renderer.ThistleRenderContext
 
 @ExperimentalStdlibApi
-class ThistleSyntaxBuilder<TagRendererType : Any> {
+class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, TagRendererResult : Any> {
 
-    fun interface Defaults<TagRendererType : Any> {
-        fun apply(builder: ThistleSyntaxBuilder<TagRendererType>)
+    fun interface Defaults<RenderContext : ThistleRenderContext, TagRendererResult : Any> {
+        fun apply(builder: ThistleSyntaxBuilder<RenderContext, TagRendererResult>)
     }
 
 // Public API
 // ---------------------------------------------------------------------------------------------------------------------
 
-    fun from(other: ThistleSyntaxBuilder.Defaults<TagRendererType>) {
+    fun from(other: ThistleSyntaxBuilder.Defaults<RenderContext, TagRendererResult>) {
         other.apply(this)
     }
 
     fun tag(
         tagName: String,
-        tag: () -> ThistleTag<TagRendererType>
+        tag: () -> ThistleTag<RenderContext, TagRendererResult>
     ) {
         tags[tagName] = tag
     }
@@ -104,7 +105,7 @@ class ThistleSyntaxBuilder<TagRendererType : Any> {
         )
     }
 
-    private val tags: LinkedHashMap<String, () -> ThistleTag<TagRendererType>> = linkedMapOf()
+    private val tags: LinkedHashMap<String, () -> ThistleTag<RenderContext, TagRendererResult>> = linkedMapOf()
 
     internal fun buildAttrValueParser(): Parser<ThistleValueNode> = FlatMappedParser(
         ExactChoiceParser(
@@ -145,7 +146,7 @@ class ThistleSyntaxBuilder<TagRendererType : Any> {
 
     internal fun buildSyntaxParser(): ThistleSyntax = syntax(buildAttrMapParser())
 
-    fun build(): Pair<TagBuilder<*>, List<ThistleTagBuilder<TagRendererType>>> {
+    fun build(): Pair<TagBuilder<*>, List<ThistleTagBuilder<RenderContext, TagRendererResult>>> {
         val syntax = syntax(buildAttrMapParser())
 
         val interpolate = TagBuilder("interpolate", syntax.interpolate(), NoopParser())

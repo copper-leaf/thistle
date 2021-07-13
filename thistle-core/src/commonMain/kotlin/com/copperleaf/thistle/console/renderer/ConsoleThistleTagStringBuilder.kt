@@ -1,8 +1,6 @@
 package com.copperleaf.thistle.console.renderer
 
-import com.copperleaf.thistle.core.renderer.ThistleTagStringBuilder
-
-internal class ConsoleThistleTagStringBuilder : ThistleTagStringBuilder<AnsiEscapeCode> {
+internal class ConsoleThistleTagStringBuilder {
     companion object {
         internal const val ansiControlCode = '\u001B'
         internal const val ansiReset = "[0m"
@@ -11,11 +9,11 @@ internal class ConsoleThistleTagStringBuilder : ThistleTagStringBuilder<AnsiEsca
     private val currentSequenceStack = mutableListOf<AnsiEscapeCode>()
     private val delegate = StringBuilder()
 
-    override fun append(text: String) {
+    fun append(text: String) {
         delegate.append(text)
     }
 
-    override fun pushTag(tag: AnsiEscapeCode, tagContentBuilder: ThistleTagStringBuilder<AnsiEscapeCode>.() -> Unit) {
+    fun pushTag(tag: AnsiEscapeCode, tagContentBuilder: ConsoleThistleTagStringBuilder.() -> Unit) {
         // push this tag into the escape code stack
         currentSequenceStack.add(tag)
 

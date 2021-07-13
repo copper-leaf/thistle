@@ -8,6 +8,7 @@ import com.copperleaf.kudzu.parser.mapped.MappedParser
 import com.copperleaf.kudzu.parser.sequence.SequenceParser
 import com.copperleaf.kudzu.parser.text.IdentifierTokenParser
 import com.copperleaf.kudzu.parser.text.LiteralTokenParser
+import com.copperleaf.thistle.android.renderer.AndroidThistleRenderContext
 import com.copperleaf.thistle.android.tags.BackgroundColor
 import com.copperleaf.thistle.android.tags.ForegroundColor
 import com.copperleaf.thistle.android.tags.Icon
@@ -23,14 +24,17 @@ import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
 
 @ExperimentalStdlibApi
 @SuppressLint("NewApi")
-object AndroidDefaults : ThistleSyntaxBuilder.Defaults<Any> {
+object AndroidDefaults : ThistleSyntaxBuilder.Defaults<AndroidThistleRenderContext, Any> {
 
     /**
      * Adds the default set of Android tags to the [ThistleSyntaxBuilder]. Also add a value format for `@`-type
      * resources defined in Android XML Resources, matching the format typically used in layouts. It currently only
      * recognizes `@color/`, `@string/`, and `@drawable/` resources
      */
-    operator fun invoke(context: Context, packageName: String): ThistleSyntaxBuilder.Defaults<Any> {
+    operator fun invoke(
+        context: Context,
+        packageName: String
+    ): ThistleSyntaxBuilder.Defaults<AndroidThistleRenderContext, Any> {
         return ThistleSyntaxBuilder.Defaults { builder ->
             with(builder) {
                 apply(this)
@@ -73,7 +77,7 @@ object AndroidDefaults : ThistleSyntaxBuilder.Defaults<Any> {
     /**
      * Adds the default set of Android tags to the [ThistleSyntaxBuilder].
      */
-    override fun apply(builder: ThistleSyntaxBuilder<Any>) {
+    override fun apply(builder: ThistleSyntaxBuilder<AndroidThistleRenderContext, Any>) {
         with(builder) {
             tag("foreground") { ForegroundColor() }
             tag("background") { BackgroundColor() }

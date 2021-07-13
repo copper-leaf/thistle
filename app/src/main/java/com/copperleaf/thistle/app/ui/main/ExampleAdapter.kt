@@ -26,7 +26,7 @@ class ExampleAdapter(
         fun bind(input: InputCache, state: MainViewModel.State) {
             binding.input.text = input.text
             binding.ast.text = input.astString
-            binding.output.text = input.render(state.thistle, state.thistleContext)
+            binding.output.text = input.render(binding.root.context, state.thistle, state.thistleContext)
 
             binding.astLayout.isVisible = state.showAst
         }

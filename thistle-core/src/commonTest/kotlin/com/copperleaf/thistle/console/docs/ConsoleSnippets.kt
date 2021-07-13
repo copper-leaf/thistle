@@ -1,8 +1,10 @@
+@file:Suppress("UNUSED_VARIABLE", "UNUSED")
 package com.copperleaf.thistle.console.docs
 
 import com.copperleaf.thistle.console.ConsoleDefaults
 import com.copperleaf.thistle.console.printlnStyledText
 import com.copperleaf.thistle.console.renderer.AnsiEscapeCode
+import com.copperleaf.thistle.console.renderer.ConsoleThistleRenderContext
 import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleParser
 import com.copperleaf.thistle.core.parser.ThistleTag
@@ -33,10 +35,10 @@ class ConsoleSnippets {
     fun consoleCustomTags() {
         // snippet::console-custom-tags[console]
         // create a custom implementation of ThistleTag
-        class CustomStyle : ThistleTag<AnsiEscapeCode> {
-            override fun invoke(context: Map<String, Any>, args: Map<String, Any>): AnsiEscapeCode {
+        class CustomStyle : ThistleTag<ConsoleThistleRenderContext, AnsiEscapeCode> {
+            override fun invoke(renderContext: ConsoleThistleRenderContext): AnsiEscapeCode {
                 // use checkArgs to safely pull properties from the input args and ensure incorrect args are not set
-                return checkArgs(args) {
+                return checkArgs(renderContext) {
                     val color: Int by int()
 
                     AnsiEscapeCode("")

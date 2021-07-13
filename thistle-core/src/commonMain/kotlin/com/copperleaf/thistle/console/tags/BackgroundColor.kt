@@ -1,13 +1,14 @@
 package com.copperleaf.thistle.console.tags
 
 import com.copperleaf.thistle.console.renderer.AnsiEscapeCode
+import com.copperleaf.thistle.console.renderer.ConsoleThistleRenderContext
 import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleTag
 
 class BackgroundColor(
     private val hardcodedColor: Int? = null,
     private val hardcodedBright: Boolean? = null,
-) : ThistleTag<AnsiEscapeCode> {
+) : ThistleTag<ConsoleThistleRenderContext, AnsiEscapeCode> {
     companion object {
         const val BLACK = 40
         const val RED = 41
@@ -19,8 +20,8 @@ class BackgroundColor(
         const val WHITE = 47
     }
 
-    override fun invoke(context: Map<String, Any>, args: Map<String, Any>): AnsiEscapeCode {
-        return checkArgs(args) {
+    override fun invoke(renderContext: ConsoleThistleRenderContext): AnsiEscapeCode {
+        return checkArgs(renderContext) {
             val color: Int by enum(hardcodedColor) {
                 mapOf(
                     "black" to BackgroundColor.BLACK,

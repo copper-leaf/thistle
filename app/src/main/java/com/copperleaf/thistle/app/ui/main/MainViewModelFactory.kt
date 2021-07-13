@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.copperleaf.kudzu.parser.mapped.MappedParser
 import com.copperleaf.kudzu.parser.text.LiteralTokenParser
 import com.copperleaf.thistle.android.AndroidDefaults
+import com.copperleaf.thistle.android.renderer.AndroidThistleRenderContext
 import com.copperleaf.thistle.android.tags.BackgroundColor
 import com.copperleaf.thistle.android.tags.ForegroundColor
 import com.copperleaf.thistle.android.tags.Icon
@@ -31,7 +32,7 @@ class MainViewModelFactory(private val context: Context) : ViewModelProvider.Fac
     private lateinit var vm: MainViewModel
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        val thistle: ThistleParser<Any>
+        val thistle: ThistleParser<AndroidThistleRenderContext, Any>
 
         Log.i("MainViewModelFactory", "creating thistle...")
         val duration = measureTime {
@@ -69,6 +70,8 @@ class MainViewModelFactory(private val context: Context) : ViewModelProvider.Fac
                 tag("dec") { Link { vm.updateCounter(-1) } }
 
                 tag("colorFromContext") { ForegroundColorFromString() }
+
+                tag("toast") { OnClickDisplayInnerContent() }
             }
         }
         Log.i("MainViewModelFactory", "creating thistle -> $duration")
@@ -153,6 +156,7 @@ class MainViewModelFactory(private val context: Context) : ViewModelProvider.Fac
                 "{{foreground color=#FF0000}}red{{/foreground}}",
                 "{{foreground color=context.themeRed}}red{{/foreground}}",
                 "Account: {{b}} {username} {{/b}} ({userId})",
+                "{{toast}}Toast one{{/toast}} has different text than {{toast}}Toast 2 - ({counterHex}){{/toast}}.",
             ),
             /* ktlint-enable max-line-length */
             showAst = false,

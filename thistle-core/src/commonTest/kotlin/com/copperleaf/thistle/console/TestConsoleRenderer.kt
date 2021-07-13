@@ -38,7 +38,7 @@ class TestConsoleRenderer {
             "begin {{style style=reverse}}reverse{{/style}} end",
             "begin {{style style=strikethrough}}reverse{{/style}} end",
             """
-            |start:all 
+            |start:all
             |{{reverse}}
             |    start:reverse
             |    {{red}}
@@ -58,7 +58,7 @@ class TestConsoleRenderer {
             |        end:blue
             |    {{/CYAN}}
             |    end:background
-            |{{/background}} 
+            |{{/background}}
             |end:all
             """.trimMargin().replace('\n', ' ').replace("\\s+".toRegex(), " "),
         ).forEach {
