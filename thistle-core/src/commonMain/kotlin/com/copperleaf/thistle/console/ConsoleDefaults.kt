@@ -1,14 +1,22 @@
 package com.copperleaf.thistle.console
 
-import com.copperleaf.thistle.console.renderer.AnsiEscapeCode
+import com.copperleaf.thistle.console.ansi.AnsiEscapeCode
+import com.copperleaf.thistle.console.ansi.FG_BLACK
+import com.copperleaf.thistle.console.ansi.FG_BLUE
+import com.copperleaf.thistle.console.ansi.FG_CYAN
+import com.copperleaf.thistle.console.ansi.FG_GREEN
+import com.copperleaf.thistle.console.ansi.FG_MAGENTA
+import com.copperleaf.thistle.console.ansi.FG_RED
+import com.copperleaf.thistle.console.ansi.FG_WHITE
+import com.copperleaf.thistle.console.ansi.FG_YELLOW
+import com.copperleaf.thistle.console.ansi.STYLE_BOLD
+import com.copperleaf.thistle.console.ansi.STYLE_REVERSE
+import com.copperleaf.thistle.console.ansi.STYLE_STRIKETHROUGH
+import com.copperleaf.thistle.console.ansi.STYLE_UNDERLINE
 import com.copperleaf.thistle.console.renderer.ConsoleThistleRenderContext
 import com.copperleaf.thistle.console.tags.BackgroundColor
 import com.copperleaf.thistle.console.tags.ForegroundColor
 import com.copperleaf.thistle.console.tags.Style
-import com.copperleaf.thistle.console.tags.Style.Companion.CONSOLE_BOLD
-import com.copperleaf.thistle.console.tags.Style.Companion.CONSOLE_REVERSE
-import com.copperleaf.thistle.console.tags.Style.Companion.CONSOLE_STRIKETHROUGH
-import com.copperleaf.thistle.console.tags.Style.Companion.CONSOLE_UNDERLINE
 import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
 
 @ExperimentalStdlibApi
@@ -21,32 +29,32 @@ object ConsoleDefaults : ThistleSyntaxBuilder.Defaults<ConsoleThistleRenderConte
         with(builder) {
             tag("background") { BackgroundColor() }
             tag("foreground") { ForegroundColor() }
-            tag("black") { ForegroundColor(ForegroundColor.BLACK, false) }
-            tag("red") { ForegroundColor(ForegroundColor.RED, false) }
-            tag("green") { ForegroundColor(ForegroundColor.GREEN, false) }
-            tag("yellow") { ForegroundColor(ForegroundColor.YELLOW, false) }
-            tag("blue") { ForegroundColor(ForegroundColor.BLUE, false) }
-            tag("magenta") { ForegroundColor(ForegroundColor.MAGENTA, false) }
-            tag("cyan") { ForegroundColor(ForegroundColor.CYAN, false) }
-            tag("white") { ForegroundColor(ForegroundColor.WHITE, false) }
+            tag("black") { ForegroundColor(FG_BLACK, false) }
+            tag("red") { ForegroundColor(FG_RED, false) }
+            tag("green") { ForegroundColor(FG_GREEN, false) }
+            tag("yellow") { ForegroundColor(FG_YELLOW, false) }
+            tag("blue") { ForegroundColor(FG_BLUE, false) }
+            tag("magenta") { ForegroundColor(FG_MAGENTA, false) }
+            tag("cyan") { ForegroundColor(FG_CYAN, false) }
+            tag("white") { ForegroundColor(FG_WHITE, false) }
 
             tag("BACKGROUND") { BackgroundColor(hardcodedBright = true) }
             tag("FOREGROUND") { ForegroundColor(hardcodedBright = true) }
-            tag("BLACK") { ForegroundColor(ForegroundColor.BLACK, hardcodedBright = true) }
-            tag("RED") { ForegroundColor(ForegroundColor.RED, hardcodedBright = true) }
-            tag("GREEN") { ForegroundColor(ForegroundColor.GREEN, hardcodedBright = true) }
-            tag("YELLOW") { ForegroundColor(ForegroundColor.YELLOW, hardcodedBright = true) }
-            tag("BLUE") { ForegroundColor(ForegroundColor.BLUE, hardcodedBright = true) }
-            tag("MAGENTA") { ForegroundColor(ForegroundColor.MAGENTA, hardcodedBright = true) }
-            tag("CYAN") { ForegroundColor(ForegroundColor.CYAN, hardcodedBright = true) }
-            tag("WHITE") { ForegroundColor(ForegroundColor.WHITE, hardcodedBright = true) }
+            tag("BLACK") { ForegroundColor(FG_BLACK, hardcodedBright = true) }
+            tag("RED") { ForegroundColor(FG_RED, hardcodedBright = true) }
+            tag("GREEN") { ForegroundColor(FG_GREEN, hardcodedBright = true) }
+            tag("YELLOW") { ForegroundColor(FG_YELLOW, hardcodedBright = true) }
+            tag("BLUE") { ForegroundColor(FG_BLUE, hardcodedBright = true) }
+            tag("MAGENTA") { ForegroundColor(FG_MAGENTA, hardcodedBright = true) }
+            tag("CYAN") { ForegroundColor(FG_CYAN, hardcodedBright = true) }
+            tag("WHITE") { ForegroundColor(FG_WHITE, hardcodedBright = true) }
 
             tag("style") { Style() }
 
-            tag("strikethrough") { Style(CONSOLE_STRIKETHROUGH) }
-            tag("reverse") { Style(CONSOLE_REVERSE) }
-            tag("b") { Style(CONSOLE_BOLD) }
-            tag("u") { Style(CONSOLE_UNDERLINE) }
+            tag("strikethrough") { Style(STYLE_STRIKETHROUGH) }
+            tag("reverse") { Style(STYLE_REVERSE) }
+            tag("b") { Style(STYLE_BOLD) }
+            tag("u") { Style(STYLE_UNDERLINE) }
         }
     }
 }

@@ -4,6 +4,11 @@ import com.copperleaf.kudzu.node.Node
 import com.copperleaf.kudzu.node.many.ManyNode
 import com.copperleaf.kudzu.node.tag.TagNode
 import com.copperleaf.kudzu.node.text.TextNode
+import com.copperleaf.thistle.console.ansi.AnsiEscapeCode
+import com.copperleaf.thistle.console.ansi.AnsiNodeScope
+import com.copperleaf.thistle.console.ansi.buildAnsiString
+import com.copperleaf.thistle.console.ansi.flatten
+import com.copperleaf.thistle.console.ansi.renderToString
 import com.copperleaf.thistle.core.node.ThistleInterpolateNode
 import com.copperleaf.thistle.core.node.ThistleTagStartNode
 import com.copperleaf.thistle.core.parser.ThistleTag
@@ -16,16 +21,17 @@ class ConsoleThistleRenderer(
 ) : ThistleRenderer<ConsoleThistleRenderContext, AnsiEscapeCode, String>(tags) {
 
     override fun render(rootNode: Node, context: Map<String, Any>): String {
-        return ConsoleThistleTagStringBuilder()
-            .apply { renderToBuilder(rootNode, context) }
-            .toString()
+        return buildAnsiString {
+            renderToBuilder(rootNode, context)
+        }.flatten()
+            .renderToString()
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun ConsoleThistleTagStringBuilder.renderToBuilder(node: Node, context: Map<String, Any>) {
+    private fun AnsiNodeScope.renderToBuilder(node: Node, context: Map<String, Any>) {
         when (node) {
             is TextNode -> {
-                append(node.text)
+                appendText(node.text)
             }
             is ManyNode<*> -> {
                 node.nodeList.forEach {
@@ -37,7 +43,7 @@ class ConsoleThistleRenderer(
                 when (tagNode) {
                     is ThistleInterpolateNode -> {
                         val interpolatedValue = tagNode.getValue(context)
-                        append(interpolatedValue.toString())
+                        appendText(interpolatedValue.toString())
                     }
                     is ThistleTagStartNode -> {
                         val tagName = tagNode.tagName
@@ -46,9 +52,14 @@ class ConsoleThistleRenderer(
                             .first { it.kudzuTagBuilder.name == tagName }
                             .tag
 
-                        val renderContext = ConsoleThistleRenderContext(context = context, args = tagArgs)
-
-                        pushTag(span(renderContext)) {
+                        appendChild({
+                            val renderContext = ConsoleThistleRenderContext(
+                                context = context,
+                                args = tagArgs,
+                                content = it
+                            )
+                            span(renderContext)
+                        }) {
                             (node.content as ManyNode<Node>).nodeList.forEach {
                                 renderToBuilder(it, context)
                             }

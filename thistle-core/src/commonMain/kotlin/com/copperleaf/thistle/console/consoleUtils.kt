@@ -1,7 +1,7 @@
 package com.copperleaf.thistle.console
 
 import com.copperleaf.kudzu.parser.ParserContext
-import com.copperleaf.thistle.console.renderer.AnsiEscapeCode
+import com.copperleaf.thistle.console.ansi.AnsiEscapeCode
 import com.copperleaf.thistle.console.renderer.ConsoleThistleRenderContext
 import com.copperleaf.thistle.console.renderer.ConsoleThistleRenderer
 import com.copperleaf.thistle.core.parser.ThistleParser

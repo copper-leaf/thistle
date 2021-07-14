@@ -3,7 +3,7 @@ package com.copperleaf.thistle.console.docs
 
 import com.copperleaf.thistle.console.ConsoleDefaults
 import com.copperleaf.thistle.console.printlnStyledText
-import com.copperleaf.thistle.console.renderer.AnsiEscapeCode
+import com.copperleaf.thistle.console.ansi.AnsiEscapeCode
 import com.copperleaf.thistle.console.renderer.ConsoleThistleRenderContext
 import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleParser
