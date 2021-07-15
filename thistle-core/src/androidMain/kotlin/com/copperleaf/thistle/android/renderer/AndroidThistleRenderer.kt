@@ -9,13 +9,13 @@ import com.copperleaf.kudzu.node.text.TextNode
 import com.copperleaf.thistle.core.node.ThistleInterpolateNode
 import com.copperleaf.thistle.core.node.ThistleRootNode
 import com.copperleaf.thistle.core.node.ThistleValueMapNode
-import com.copperleaf.thistle.core.parser.ThistleTag
+import com.copperleaf.thistle.core.parser.ThistleTagFactory
 import com.copperleaf.thistle.core.renderer.ThistleRenderer
 
 @ExperimentalStdlibApi
 class AndroidThistleRenderer(
     val uiContext: Context,
-    tags: Map<String, ThistleTag<AndroidThistleRenderContext, Any>>
+    tags: Map<String, ThistleTagFactory<AndroidThistleRenderContext, Any>>
 ) : ThistleRenderer<AndroidThistleRenderContext, Any, Spanned>(tags) {
 
     override fun render(rootNode: ThistleRootNode, context: Map<String, Any>): Spanned {
@@ -51,7 +51,7 @@ class AndroidThistleRenderer(
                     is ThistleValueMapNode -> {
                         // get the info parsed from the opening tag
                         val tagArgs = openingTagNode.getValueMap(context)
-                        val span: ThistleTag<AndroidThistleRenderContext, Any> =
+                        val span: ThistleTagFactory<AndroidThistleRenderContext, Any> =
                             tags[tagName] ?: error("unknown tag: $tagName")
 
                         // sub-parse to get the tag content

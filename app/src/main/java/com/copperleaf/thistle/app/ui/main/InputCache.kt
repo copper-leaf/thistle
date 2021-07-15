@@ -3,9 +3,9 @@ package com.copperleaf.thistle.app.ui.main
 import android.content.Context
 import android.text.Spanned
 import android.util.Log
-import com.copperleaf.kudzu.node.Node
 import com.copperleaf.thistle.android.androidRenderer
 import com.copperleaf.thistle.android.renderer.AndroidThistleRenderContext
+import com.copperleaf.thistle.core.node.ThistleRootNode
 import com.copperleaf.thistle.core.parser.ThistleParser
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime
@@ -15,7 +15,7 @@ import kotlin.time.measureTime
 @ExperimentalUnsignedTypes
 data class InputCache(
     val text: String,
-    val rootNode: Node,
+    val rootNode: ThistleRootNode,
     val astString: String,
 ) {
     fun render(

@@ -21,7 +21,7 @@ interface ThistleSyntax {
         fun <RenderContext : ThistleRenderContext, TagRendererResult : Any> builder(
             defaults: ThistleSyntaxBuilder.Defaults<RenderContext, TagRendererResult>,
             block: ThistleSyntaxBuilder<RenderContext, TagRendererResult>.() -> Unit = {}
-        ): Pair<TagBuilder<*, *>, Map<String, ThistleTagBuilder<RenderContext, TagRendererResult>>> {
+        ): Pair<TagBuilder<*, *>, Map<String, ThistleTagConfiguration<RenderContext, TagRendererResult>>> {
             return ThistleSyntaxBuilder<RenderContext, TagRendererResult>()
                 .apply {
                     block()

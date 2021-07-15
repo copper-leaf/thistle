@@ -11,7 +11,7 @@ import com.copperleaf.thistle.core.renderer.ThistleRenderContext
 @ExperimentalStdlibApi
 class ThistleParser<RenderContext : ThistleRenderContext, TagRendererResult : Any> internal constructor(
     interpolate: TagBuilder<*, *>,
-    tags: Map<String, ThistleTagBuilder<RenderContext, TagRendererResult>>,
+    tags: Map<String, ThistleTagConfiguration<RenderContext, TagRendererResult>>,
 ) {
 
     constructor(
@@ -20,11 +20,11 @@ class ThistleParser<RenderContext : ThistleRenderContext, TagRendererResult : An
     ) : this(ThistleSyntax.builder(defaults, block))
 
     private constructor(
-        built: Pair<TagBuilder<*, *>, Map<String, ThistleTagBuilder<RenderContext, TagRendererResult>>>
+        built: Pair<TagBuilder<*, *>, Map<String, ThistleTagConfiguration<RenderContext, TagRendererResult>>>
     ) : this(built.first, built.second)
 
     internal val tagNames = tags.keys
-    internal val tagFactories = tags.mapValues { it.value.tag }
+    internal val tagFactories = tags.mapValues { it.value.tagFactory }
     internal val parser = FlatMappedParser(
         TagParser(tags = tags.values.map { it.kudzuTagBuilder } + interpolate)
     ) {

@@ -45,9 +45,9 @@ class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, TagRendererResu
 
     fun tag(
         tagName: String,
-        tag: () -> ThistleTag<RenderContext, TagRendererResult>
+        tagFactory: () -> ThistleTagFactory<RenderContext, TagRendererResult>
     ) {
-        tags[tagName] = tag
+        tags[tagName] = tagFactory
     }
 
     fun valueFormat(
@@ -107,7 +107,7 @@ class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, TagRendererResu
         )
     }
 
-    private val tags: LinkedHashMap<String, () -> ThistleTag<RenderContext, TagRendererResult>> = linkedMapOf()
+    private val tags: LinkedHashMap<String, () -> ThistleTagFactory<RenderContext, TagRendererResult>> = linkedMapOf()
 
     internal fun buildAttrValueParser(): Parser<ThistleValueNode> = FlatMappedParser(
         ExactChoiceParser(
@@ -148,11 +148,11 @@ class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, TagRendererResu
 
     internal fun buildSyntaxParser(): ThistleSyntax = syntax(buildAttrMapParser())
 
-    private fun <T: Node> Parser<T>.wrapInTagName(tagName: String): Parser<TagNameNode<T>> {
+    private fun <T : Node> Parser<T>.wrapInTagName(tagName: String): Parser<TagNameNode<T>> {
         return FlatMappedParser(this) { TagNameNode(tagName, it, it.context) }
     }
 
-    fun build(): Pair<TagBuilder<*, *>, Map<String, ThistleTagBuilder<RenderContext, TagRendererResult>>> {
+    fun build(): Pair<TagBuilder<*, *>, Map<String, ThistleTagConfiguration<RenderContext, TagRendererResult>>> {
         val syntax = syntax(buildAttrMapParser())
 
         val interpolate = TagBuilder(
@@ -164,13 +164,13 @@ class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, TagRendererResu
         val tags = tags
             .entries
             .map { (name, builder) ->
-                name to ThistleTagBuilder(
+                name to ThistleTagConfiguration(
                     kudzuTagBuilder = TagBuilder(
                         name,
                         syntax.tagStart(),
                         syntax.tagEnd()
                     ),
-                    tag = builder()
+                    tagFactory = builder()
                 )
             }
             .toMap()

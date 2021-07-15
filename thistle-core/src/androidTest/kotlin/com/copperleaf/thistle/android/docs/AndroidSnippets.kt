@@ -13,7 +13,7 @@ import com.copperleaf.thistle.android.tags.Link
 import com.copperleaf.thistle.core.asThistleValueParser
 import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleParser
-import com.copperleaf.thistle.core.parser.ThistleTag
+import com.copperleaf.thistle.core.parser.ThistleTagFactory
 
 /**
  * The snippets in this file are not actually tested now, but they are used in documentation.
@@ -57,7 +57,7 @@ class AndroidSnippets {
     fun androidCustomTags() {
         // snippet::android-custom-tags[android]
         // create a custom implementation of ThistleTag
-        class CustomStyle : ThistleTag<AndroidThistleRenderContext, Any> {
+        class CustomStyle : ThistleTagFactory<AndroidThistleRenderContext, Any> {
             override fun invoke(renderContext: AndroidThistleRenderContext): Any {
                 // use checkArgs to safely pull properties from the input args and ensure incorrect args are not set
                 return checkArgs(renderContext) {

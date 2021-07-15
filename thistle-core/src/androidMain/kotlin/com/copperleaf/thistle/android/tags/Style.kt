@@ -4,11 +4,11 @@ import android.graphics.Typeface
 import android.text.style.StyleSpan
 import com.copperleaf.thistle.android.renderer.AndroidThistleRenderContext
 import com.copperleaf.thistle.core.checkArgs
-import com.copperleaf.thistle.core.parser.ThistleTag
+import com.copperleaf.thistle.core.parser.ThistleTagFactory
 
 class Style(
     private val hardcodedStyle: Int? = null
-) : ThistleTag<AndroidThistleRenderContext, Any> {
+) : ThistleTagFactory<AndroidThistleRenderContext, Any> {
     override fun invoke(renderContext: AndroidThistleRenderContext): Any {
         return checkArgs(renderContext) {
             val style: Int by enum(hardcodedStyle) {

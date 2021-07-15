@@ -1,3 +1,10 @@
+## 1.4.0 - 2021-07-15
+
+- Make tag names dynamic and checked against configured tags to ensure no tag is left unparsed, and undeclared tags throw and error
+- Renames a couple classes to prevent ambiguity:
+    - `ThistleTag` is now `ThistleTagFactory`
+    - `ThistleTagBuilder` is now `ThistleTagConfiguration`
+
 ## 1.3.0 - 2021-07-14
 
 - Rewrites Console renderer builder to use an intermediary tree structure to collect nested ASNI codes, rather than 

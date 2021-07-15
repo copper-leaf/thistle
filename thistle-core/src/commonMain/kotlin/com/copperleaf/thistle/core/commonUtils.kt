@@ -3,7 +3,6 @@ package com.copperleaf.thistle.core
 import com.copperleaf.kudzu.node.Node
 import com.copperleaf.kudzu.node.many.ManyNode
 import com.copperleaf.kudzu.node.mapped.ValueNode
-import com.copperleaf.kudzu.node.tag.TagNameNode
 import com.copperleaf.kudzu.node.tag.TagNode
 import com.copperleaf.kudzu.node.text.TextNode
 import com.copperleaf.kudzu.parser.Parser
@@ -15,12 +14,12 @@ import com.copperleaf.thistle.core.node.ThistleRootNode
 import com.copperleaf.thistle.core.node.ThistleValueMapNode
 import com.copperleaf.thistle.core.node.ThistleValueNode
 import com.copperleaf.thistle.core.parser.ThistleParser
-import com.copperleaf.thistle.core.parser.ThistleTag
+import com.copperleaf.thistle.core.parser.ThistleTagFactory
 import com.copperleaf.thistle.core.renderer.ThistleRenderContext
 import com.copperleaf.thistle.core.renderer.ThistleTagsArgs
 
 inline fun <RenderContext : ThistleRenderContext, RendererResult : Any>
-ThistleTag<RenderContext, RendererResult>.checkArgs(
+ThistleTagFactory<RenderContext, RendererResult>.checkArgs(
     renderContext: RenderContext,
     crossinline block: ThistleTagsArgs.() -> RendererResult
 ): RendererResult {
@@ -47,7 +46,7 @@ internal fun checkParsedCorrectly(
     parser: ThistleParser<*, *>,
     parserContext: ParserContext,
     parserResult: ParserResult<ThistleRootNode>
-) : ThistleRootNode {
+): ThistleRootNode {
     check(parserResult.second.isEmpty()) { "$parserContext did not parse to completion" }
     checkValidNode(parser, parserResult.first)
     return parserResult.first
@@ -61,7 +60,6 @@ private fun checkValidNode(
 ) {
     when (node) {
         is TextNode -> {
-
         }
         is ThistleRootNode -> {
             node.nodeList.forEach {
@@ -78,10 +76,9 @@ private fun checkValidNode(
             val openingTagNode = node.opening.wrapped
             when (openingTagNode) {
                 is ThistleInterpolateNode -> {
-
                 }
                 is ThistleValueMapNode -> {
-                    check(node.opening.tagName in parser.tagNames) { "Unknown tag: ${node.opening.tagName}" }
+                    check(tagName in parser.tagNames) { "Unknown tag: ${node.opening.tagName}" }
                     (node.content as ManyNode<Node>).nodeList.forEach {
                         checkValidNode(parser, it)
                     }

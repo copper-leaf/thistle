@@ -2,9 +2,9 @@ package com.copperleaf.thistle.android.tags
 
 import android.text.style.SuperscriptSpan
 import com.copperleaf.thistle.android.renderer.AndroidThistleRenderContext
-import com.copperleaf.thistle.core.parser.ThistleTag
+import com.copperleaf.thistle.core.parser.ThistleTagFactory
 
-class Superscript : ThistleTag<AndroidThistleRenderContext, Any> {
+class Superscript : ThistleTagFactory<AndroidThistleRenderContext, Any> {
     override fun invoke(renderContext: AndroidThistleRenderContext): Any {
         return SuperscriptSpan()
     }

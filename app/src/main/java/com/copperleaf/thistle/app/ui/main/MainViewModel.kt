@@ -46,7 +46,7 @@ class MainViewModel(initialState: MainViewModel.State) : ViewModel() {
 
                 val inputCache: InputCache
                 val duration = measureTime {
-                    val (rootNode, _) = thistle.parser.parse(ParserContext.fromString(this))
+                    val rootNode = thistle.parse(ParserContext.fromString(this))
                     val rootNodeAst = rootNode.toString()
                     inputCache = InputCache(
                         this,

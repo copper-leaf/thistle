@@ -7,7 +7,7 @@ import com.copperleaf.thistle.console.ansi.AnsiEscapeCode
 import com.copperleaf.thistle.console.renderer.ConsoleThistleRenderContext
 import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleParser
-import com.copperleaf.thistle.core.parser.ThistleTag
+import com.copperleaf.thistle.core.parser.ThistleTagFactory
 
 /**
  * The snippets in this file are not actually tested now, but they are used in documentation.
@@ -35,7 +35,7 @@ class ConsoleSnippets {
     fun consoleCustomTags() {
         // snippet::console-custom-tags[console]
         // create a custom implementation of ThistleTag
-        class CustomStyle : ThistleTag<ConsoleThistleRenderContext, AnsiEscapeCode> {
+        class CustomStyle : ThistleTagFactory<ConsoleThistleRenderContext, AnsiEscapeCode> {
             override fun invoke(renderContext: ConsoleThistleRenderContext): AnsiEscapeCode {
                 // use checkArgs to safely pull properties from the input args and ensure incorrect args are not set
                 return checkArgs(renderContext) {

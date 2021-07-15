@@ -1,13 +1,13 @@
 package com.copperleaf.thistle.core.renderer
 
-import com.copperleaf.thistle.core.parser.ThistleTag
+import com.copperleaf.thistle.core.parser.ThistleTagFactory
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
 @Suppress("NOTHING_TO_INLINE")
 class ThistleTagsArgs(
-    val tag: ThistleTag<*, *>,
+    val tagFactory: ThistleTagFactory<*, *>,
     val args: Map<String, Any>
 ) {
     val argsVisited: MutableList<String> = mutableListOf()
@@ -42,7 +42,7 @@ class ThistleTagsArgs(
     ) { parameterKey, stringValue ->
         val optionsMap = options()
         check(optionsMap.containsKey(stringValue)) {
-            "Property '$parameterKey' must be one of ${optionsMap.keys} for $tag"
+            "Property '$parameterKey' must be one of ${optionsMap.keys} for $tagFactory"
         }
 
         optionsMap[stringValue]!!
@@ -51,7 +51,7 @@ class ThistleTagsArgs(
     fun checkNoMoreArgs() {
         val extraParams = args.keys - argsVisited
         check(extraParams.isEmpty()) {
-            "Unknown parameters '$extraParams' for $tag"
+            "Unknown parameters '$extraParams' for $tagFactory"
         }
     }
 
@@ -113,32 +113,32 @@ class LazyThistleParameterProvider<InputParameterType : Any, OutputParameterType
                 val paramName = name ?: property.name
 
                 check(paramName !in argsVisited) {
-                    "$tag has multiple properties named '$paramName'!"
+                    "$tagFactory has multiple properties named '$paramName'!"
                 }
                 argsVisited.add(paramName)
 
                 // if hardcodedValue is provided, do not allow the value to be read from the param map
                 if (hardcodedValue != null) {
                     check(!args.containsKey(paramName)) {
-                        "Unknown parameter '$paramName' for $tag!"
+                        "Unknown parameter '$paramName' for $tagFactory!"
                     }
 
                     hardcodedValue
                 } else {
                     check(args.containsKey(paramName)) {
-                        "$tag is missing required value for '$paramName'!"
+                        "$tagFactory is missing required value for '$paramName'!"
                     }
 
                     val value: Any = args[paramName]!!
 
                     check(checkInputType(value)) {
-                        "$tag expects '$paramName' to be ${inputParameterTypeClass.simpleName}, got $value"
+                        "$tagFactory expects '$paramName' to be ${inputParameterTypeClass.simpleName}, got $value"
                     }
 
                     val result = mapper(paramName, value as InputParameterType)
 
                     check(checkOutputType(result as InputParameterType)) {
-                        "$tag expects '$paramName' to be ${outputParameterTypeClass.simpleName}, got $value"
+                        "$tagFactory expects '$paramName' to be ${outputParameterTypeClass.simpleName}, got $value"
                     }
 
                     result

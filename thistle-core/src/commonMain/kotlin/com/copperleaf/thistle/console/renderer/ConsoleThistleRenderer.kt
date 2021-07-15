@@ -12,12 +12,12 @@ import com.copperleaf.thistle.console.ansi.renderToString
 import com.copperleaf.thistle.core.node.ThistleInterpolateNode
 import com.copperleaf.thistle.core.node.ThistleRootNode
 import com.copperleaf.thistle.core.node.ThistleValueMapNode
-import com.copperleaf.thistle.core.parser.ThistleTag
+import com.copperleaf.thistle.core.parser.ThistleTagFactory
 import com.copperleaf.thistle.core.renderer.ThistleRenderer
 
 @ExperimentalStdlibApi
 class ConsoleThistleRenderer(
-    tags: Map<String, ThistleTag<ConsoleThistleRenderContext, AnsiEscapeCode>>
+    tags: Map<String, ThistleTagFactory<ConsoleThistleRenderContext, AnsiEscapeCode>>
 ) : ThistleRenderer<ConsoleThistleRenderContext, AnsiEscapeCode, String>(tags) {
 
     override fun render(rootNode: ThistleRootNode, context: Map<String, Any>): String {
@@ -53,7 +53,7 @@ class ConsoleThistleRenderer(
                     }
                     is ThistleValueMapNode -> {
                         val tagArgs = openingTagNode.getValueMap(context)
-                        val span: ThistleTag<ConsoleThistleRenderContext, AnsiEscapeCode> =
+                        val span: ThistleTagFactory<ConsoleThistleRenderContext, AnsiEscapeCode> =
                             tags[tagName] ?: error("Unknown tag: $tagName. Valid tag names: ${tags.keys}")
 
                         appendChild({

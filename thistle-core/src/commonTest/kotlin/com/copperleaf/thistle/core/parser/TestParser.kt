@@ -374,7 +374,7 @@ class TestParser {
     @Test
     fun testFullParser() {
         val thistle = ThistleParser(TestDefaults) {
-            tag("one") { ThistleTag { } }
+            tag("one") { ThistleTagFactory { } }
         }
         val contextMap = mapOf("one" to 1, "two" to 2.2, "username" to "AliceBob123")
         val underTest = thistle.parser
@@ -447,7 +447,7 @@ class TestParser {
                 .also {
                     val tagNode = it.nodeList[1].isA<TagNode<*, *, *>>()
 
-                    val interpolateNode = tagNode.opening as ThistleInterpolateNode
+                    val interpolateNode = tagNode.opening.wrapped as ThistleInterpolateNode
                     interpolateNode.key.isEqualTo("username")
                     interpolateNode.getValue(contextMap).isEqualTo("AliceBob123")
                 }

@@ -77,7 +77,7 @@ class TestConsoleRenderer {
         }.also {
             assertEquals(
                 "Parse error: Mismatched closing tag: Expected tag name to be 'black', got 'blue' " +
-                        "(SimpleTagParser at 1:7)",
+                    "(SimpleTagParser at 1:7)",
                 it.message
             )
         }
@@ -90,9 +90,9 @@ class TestConsoleRenderer {
             printlnStyledText(thistle, "begin {{orange}}normal orange foreground{{/orange}}")
         }.also {
             assertEquals(
-                "unknown tag: orange. Valid tag names: [background, foreground, black, red, green, yellow, blue, " +
-                        "magenta, cyan, white, BACKGROUND, FOREGROUND, BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, " +
-                        "WHITE, style, strikethrough, reverse, b, u]",
+                "Unknown tag: orange. Valid tag names: [background, foreground, black, red, green, yellow, blue, " +
+                    "magenta, cyan, white, BACKGROUND, FOREGROUND, BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, " +
+                    "WHITE, style, strikethrough, reverse, b, u]",
                 it.message
             )
         }
