@@ -1,15 +1,15 @@
 package com.copperleaf.thistle.core.renderer
 
-import com.copperleaf.kudzu.node.Node
-import com.copperleaf.thistle.core.parser.ThistleTagBuilder
+import com.copperleaf.thistle.core.node.ThistleRootNode
+import com.copperleaf.thistle.core.parser.ThistleTag
 
 @ExperimentalStdlibApi
 @Suppress("UNCHECKED_CAST")
 abstract class ThistleRenderer<RenderContext : ThistleRenderContext, TagRendererResult : Any, ResultType : Any>(
-    protected val tags: List<ThistleTagBuilder<RenderContext, TagRendererResult>>
+    protected val tags: Map<String, ThistleTag<RenderContext, TagRendererResult>>
 ) {
     abstract fun render(
-        rootNode: Node,
+        rootNode: ThistleRootNode,
         context: Map<String, Any> = emptyMap()
     ): ResultType
 }

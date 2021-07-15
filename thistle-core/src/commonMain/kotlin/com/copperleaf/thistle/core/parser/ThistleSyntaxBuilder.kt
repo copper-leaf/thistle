@@ -1,6 +1,8 @@
 package com.copperleaf.thistle.core.parser
 
+import com.copperleaf.kudzu.node.Node
 import com.copperleaf.kudzu.node.mapped.ValueNode
+import com.copperleaf.kudzu.node.tag.TagNameNode
 import com.copperleaf.kudzu.parser.Parser
 import com.copperleaf.kudzu.parser.chars.CharInParser
 import com.copperleaf.kudzu.parser.chars.HexDigitParser
@@ -146,23 +148,32 @@ class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, TagRendererResu
 
     internal fun buildSyntaxParser(): ThistleSyntax = syntax(buildAttrMapParser())
 
-    fun build(): Pair<TagBuilder<*>, List<ThistleTagBuilder<RenderContext, TagRendererResult>>> {
+    private fun <T: Node> Parser<T>.wrapInTagName(tagName: String): Parser<TagNameNode<T>> {
+        return FlatMappedParser(this) { TagNameNode(tagName, it, it.context) }
+    }
+
+    fun build(): Pair<TagBuilder<*, *>, Map<String, ThistleTagBuilder<RenderContext, TagRendererResult>>> {
         val syntax = syntax(buildAttrMapParser())
 
-        val interpolate = TagBuilder("interpolate", syntax.interpolate(), NoopParser())
+        val interpolate = TagBuilder(
+            "interpolate",
+            syntax.interpolate().wrapInTagName("interpolate"),
+            NoopParser().wrapInTagName("interpolate")
+        )
 
         val tags = tags
             .entries
             .map { (name, builder) ->
-                ThistleTagBuilder(
+                name to ThistleTagBuilder(
                     kudzuTagBuilder = TagBuilder(
                         name,
-                        syntax.tagStart(name),
-                        syntax.tagEnd(name)
+                        syntax.tagStart(),
+                        syntax.tagEnd()
                     ),
                     tag = builder()
                 )
             }
+            .toMap()
 
         return interpolate to tags
     }

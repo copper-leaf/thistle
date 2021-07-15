@@ -1,10 +1,11 @@
 package com.copperleaf.thistle.core.parser
 
+import com.copperleaf.kudzu.node.tag.TagNameNode
 import com.copperleaf.kudzu.node.tag.TagNode
 import com.copperleaf.kudzu.parser.ParserContext
 import com.copperleaf.thistle.console.renderer.ConsoleThistleRenderContext
 import com.copperleaf.thistle.core.node.ThistleInterpolateNode
-import com.copperleaf.thistle.core.node.ThistleTagStartNode
+import com.copperleaf.thistle.core.node.ThistleValueMapNode
 import com.copperleaf.thistle.expectCatching
 import com.copperleaf.thistle.expectThat
 import com.copperleaf.thistle.isA
@@ -314,7 +315,7 @@ class TestParser {
     fun testSyntaxTagStartParser() {
         val syntax = ThistleSyntaxBuilder<ConsoleThistleRenderContext, Any>().buildSyntaxParser()
         val contextMap = mapOf("one" to 1, "two" to 2.2)
-        val underTest = syntax.tagStart("one")
+        val underTest = syntax.tagStart()
 
         "{{one".apply {
             val parserContext = ParserContext.fromString(this)
@@ -323,7 +324,7 @@ class TestParser {
 
         "{{two".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isFalse()
+            expectThat(underTest.predict(parserContext)).isTrue()
         }
 
         "{{one}}".apply {
@@ -335,7 +336,7 @@ class TestParser {
                 .isNotNull()
                 .apply {
                     tagName.isEqualTo("one")
-                    tagArgs.getValueMap(contextMap).isEqualTo(emptyMap<String, Any>())
+                    wrapped.getValueMap(contextMap).isEqualTo(emptyMap<String, Any>())
                 }
         }
 
@@ -348,7 +349,7 @@ class TestParser {
                 .isNotNull()
                 .apply {
                     tagName.isEqualTo("one")
-                    tagArgs.getValueMap(contextMap).isEqualTo(mapOf<String, Any>("one" to 1))
+                    wrapped.getValueMap(contextMap).isEqualTo(mapOf<String, Any>("one" to 1))
                 }
         }
         "{{one one=context.four}}".apply {
@@ -360,7 +361,7 @@ class TestParser {
                 .isNotNull()
                 .apply {
                     tagName.isEqualTo("one")
-                    expectCatching { tagArgs.getValueMap(contextMap) }
+                    expectCatching { wrapped.getValueMap(contextMap) }
                         .second
                         .isNotNull()
                         .isA<IllegalStateException>()
@@ -387,12 +388,12 @@ class TestParser {
                 .isNotNull()
                 .nodeList
                 .first()
-                .isA<TagNode<*, *>>()
+                .isA<TagNode<*, *, *>>()
                 .opening
-                .isA<ThistleTagStartNode>()
+                .isA<TagNameNode<ThistleValueMapNode>>()
                 .apply {
                     tagName.isEqualTo("one")
-                    tagArgs.getValueMap(contextMap).isEqualTo(emptyMap<String, Any>())
+                    wrapped.getValueMap(contextMap).isEqualTo(emptyMap<String, Any>())
                 }
         }
 
@@ -405,12 +406,12 @@ class TestParser {
                 .isNotNull()
                 .nodeList
                 .first()
-                .isA<TagNode<*, *>>()
+                .isA<TagNode<*, *, *>>()
                 .opening
-                .isA<ThistleTagStartNode>()
+                .isA<TagNameNode<ThistleValueMapNode>>()
                 .apply {
                     tagName.isEqualTo("one")
-                    tagArgs.getValueMap(contextMap).isEqualTo(mapOf<String, Any>("one" to 1))
+                    wrapped.getValueMap(contextMap).isEqualTo(mapOf<String, Any>("one" to 1))
                 }
         }
         "{{one one=context.four}}two{{/one}}".apply {
@@ -422,12 +423,12 @@ class TestParser {
                 .isNotNull()
                 .nodeList
                 .first()
-                .isA<TagNode<*, *>>()
+                .isA<TagNode<*, *, *>>()
                 .opening
-                .isA<ThistleTagStartNode>()
+                .isA<TagNameNode<ThistleValueMapNode>>()
                 .apply {
                     tagName.isEqualTo("one")
-                    expectCatching { tagArgs.getValueMap(contextMap) }
+                    expectCatching { wrapped.getValueMap(contextMap) }
                         .second
                         .isNotNull()
                         .isA<IllegalStateException>()
@@ -444,7 +445,7 @@ class TestParser {
                 .node()
                 .isNotNull()
                 .also {
-                    val tagNode = it.nodeList[1].isA<TagNode<*, *>>()
+                    val tagNode = it.nodeList[1].isA<TagNode<*, *, *>>()
 
                     val interpolateNode = tagNode.opening as ThistleInterpolateNode
                     interpolateNode.key.isEqualTo("username")

@@ -10,7 +10,7 @@ import com.copperleaf.thistle.core.parser.ThistleParser
 
 @ExperimentalStdlibApi
 fun ThistleParser<AndroidThistleRenderContext, Any>.androidRenderer(uiContext: Context): AndroidThistleRenderer {
-    return AndroidThistleRenderer(uiContext, tags)
+    return AndroidThistleRenderer(uiContext, tagFactories)
 }
 
 @ExperimentalStdlibApi

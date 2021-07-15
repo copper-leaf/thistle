@@ -1,7 +1,10 @@
 package com.copperleaf.thistle.console
 
+import com.copperleaf.kudzu.parser.ParserException
 import com.copperleaf.thistle.core.parser.ThistleParser
 import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 @OptIn(ExperimentalStdlibApi::class)
 /* ktlint-disable max-line-length */
@@ -63,6 +66,35 @@ class TestConsoleRenderer {
             """.trimMargin().replace('\n', ' ').replace("\\s+".toRegex(), " "),
         ).forEach {
             printlnStyledText(thistle, it)
+        }
+    }
+
+    @Test
+    fun testMismatchedEndTag() {
+        val thistle = ThistleParser(ConsoleDefaults)
+        assertFailsWith<ParserException> {
+            printlnStyledText(thistle, "begin {{black}}normal black foreground{{/blue}}")
+        }.also {
+            assertEquals(
+                "Parse error: Mismatched closing tag: Expected tag name to be 'black', got 'blue' " +
+                        "(SimpleTagParser at 1:7)",
+                it.message
+            )
+        }
+    }
+
+    @Test
+    fun testUnknownTagName() {
+        val thistle = ThistleParser(ConsoleDefaults)
+        assertFailsWith<IllegalStateException> {
+            printlnStyledText(thistle, "begin {{orange}}normal orange foreground{{/orange}}")
+        }.also {
+            assertEquals(
+                "unknown tag: orange. Valid tag names: [background, foreground, black, red, green, yellow, blue, " +
+                        "magenta, cyan, white, BACKGROUND, FOREGROUND, BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, " +
+                        "WHITE, style, strikethrough, reverse, b, u]",
+                it.message
+            )
         }
     }
 }

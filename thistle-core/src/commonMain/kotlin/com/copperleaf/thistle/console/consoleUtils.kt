@@ -9,7 +9,7 @@ import com.copperleaf.thistle.core.parser.ThistleParser
 @ExperimentalStdlibApi
 val ThistleParser<ConsoleThistleRenderContext, AnsiEscapeCode>.consoleRenderer: ConsoleThistleRenderer
     get() {
-        return ConsoleThistleRenderer(tags)
+        return ConsoleThistleRenderer(tagFactories)
     }
 
 @ExperimentalStdlibApi
@@ -19,6 +19,8 @@ fun printlnStyledText(
     context: Map<String, Any> = emptyMap()
 ) {
     val (rootNode, _) = thistle.parser.parse(ParserContext.fromString(input))
+//    println(rootNode.printAst(0))
+
     val rendered = thistle.consoleRenderer.render(rootNode, context)
     println(rendered)
 }

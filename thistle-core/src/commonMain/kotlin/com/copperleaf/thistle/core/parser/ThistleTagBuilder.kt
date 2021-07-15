@@ -5,6 +5,6 @@ import com.copperleaf.thistle.core.renderer.ThistleRenderContext
 
 @ExperimentalStdlibApi
 data class ThistleTagBuilder<RenderContext : ThistleRenderContext, TagRendererResult : Any>(
-    val kudzuTagBuilder: TagBuilder<*>,
+    val kudzuTagBuilder: TagBuilder<*, *>,
     val tag: ThistleTag<RenderContext, TagRendererResult>
 )

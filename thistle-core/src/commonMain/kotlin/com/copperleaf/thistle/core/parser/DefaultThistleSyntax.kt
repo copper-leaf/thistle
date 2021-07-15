@@ -1,17 +1,15 @@
 package com.copperleaf.thistle.core.parser
 
 import com.copperleaf.kudzu.node.Node
-import com.copperleaf.kudzu.node.mapped.ValueNode
+import com.copperleaf.kudzu.node.tag.TagNameNode
+import com.copperleaf.kudzu.node.text.TextNode
 import com.copperleaf.kudzu.parser.Parser
 import com.copperleaf.kudzu.parser.mapped.FlatMappedParser
-import com.copperleaf.kudzu.parser.mapped.MappedParser
 import com.copperleaf.kudzu.parser.predict.PredictionParser
 import com.copperleaf.kudzu.parser.sequence.SequenceParser
 import com.copperleaf.kudzu.parser.text.AnyTokenParser
-import com.copperleaf.kudzu.parser.text.LiteralTokenParser
 import com.copperleaf.kudzu.parser.text.OptionalWhitespaceParser
 import com.copperleaf.thistle.core.node.ThistleInterpolateNode
-import com.copperleaf.thistle.core.node.ThistleTagStartNode
 import com.copperleaf.thistle.core.node.ThistleValueMapNode
 
 @ExperimentalStdlibApi
@@ -26,47 +24,49 @@ class DefaultThistleSyntax(
     private val attrMapParser: Parser<ThistleValueMapNode>
 ) : ThistleSyntax {
 
-    override fun tagStart(tagName: String): Parser<ThistleTagStartNode> {
+    override fun tagStart(): Parser<TagNameNode<ThistleValueMapNode>> {
         return FlatMappedParser(
             SequenceParser(
                 PredictionParser(
-                    MappedParser(
-                        SequenceParser(
-                            openTagStartToken,
-                            OptionalWhitespaceParser(),
-                            LiteralTokenParser(tagName),
-                            OptionalWhitespaceParser(),
-                        )
-                    ) {
-                        val (_, _, tagNameNode, _) = it.children
-
-                        tagNameNode.text
-                    }
+                    SequenceParser(
+                        openTagStartToken,
+                        OptionalWhitespaceParser(),
+                        AnyTokenParser(),
+                        OptionalWhitespaceParser(),
+                    )
                 ),
                 attrMapParser,
                 OptionalWhitespaceParser(),
                 openTagEndToken,
             )
-        ) {
-            val (tagNameNode, attrsNode, _, _) = it.children
+        ) { (nodeContext, tagNameStartNode, attrsNode, _, _) ->
+            val (_, _, _, tagNameNode: TextNode) = tagNameStartNode
 
-            ThistleTagStartNode(
-                tagName = (tagNameNode as ValueNode<String>).value,
-                tagArgs = attrsNode as ThistleValueMapNode,
-                context = it.context
+            TagNameNode(
+                tagName = tagNameNode.text,
+                wrapped = attrsNode,
+                context = nodeContext
             )
         }
     }
 
-    override fun tagEnd(tagName: String): Parser<Node> {
+    override fun tagEnd(): Parser<TagNameNode<Node>> {
         return PredictionParser(
-            SequenceParser(
-                closeTagStartToken,
-                OptionalWhitespaceParser(),
-                LiteralTokenParser(tagName),
-                OptionalWhitespaceParser(),
-                closeTagEndToken,
-            ) as Parser<Node>
+            FlatMappedParser(
+                SequenceParser(
+                    closeTagStartToken,
+                    OptionalWhitespaceParser(),
+                    AnyTokenParser(),
+                    OptionalWhitespaceParser(),
+                    closeTagEndToken,
+                )
+            ) { (nodeContext, _, _, tagNameNode) ->
+                TagNameNode(
+                    tagName = tagNameNode.text,
+                    wrapped = tagNameNode,
+                    context = nodeContext
+                )
+            }
         )
     }
 

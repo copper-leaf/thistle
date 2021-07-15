@@ -7,18 +7,18 @@ import com.copperleaf.kudzu.node.many.ManyNode
 import com.copperleaf.kudzu.node.tag.TagNode
 import com.copperleaf.kudzu.node.text.TextNode
 import com.copperleaf.thistle.core.node.ThistleInterpolateNode
-import com.copperleaf.thistle.core.node.ThistleTagStartNode
+import com.copperleaf.thistle.core.node.ThistleRootNode
+import com.copperleaf.thistle.core.node.ThistleValueMapNode
 import com.copperleaf.thistle.core.parser.ThistleTag
-import com.copperleaf.thistle.core.parser.ThistleTagBuilder
 import com.copperleaf.thistle.core.renderer.ThistleRenderer
 
 @ExperimentalStdlibApi
 class AndroidThistleRenderer(
     val uiContext: Context,
-    tags: List<ThistleTagBuilder<AndroidThistleRenderContext, Any>>
+    tags: Map<String, ThistleTag<AndroidThistleRenderContext, Any>>
 ) : ThistleRenderer<AndroidThistleRenderContext, Any, Spanned>(tags) {
 
-    override fun render(rootNode: Node, context: Map<String, Any>): Spanned {
+    override fun render(rootNode: ThistleRootNode, context: Map<String, Any>): Spanned {
         return AndroidThistleTagStringBuilder(uiContext)
             .apply { renderToBuilder(rootNode, context) }
             .toSpanned()
@@ -30,25 +30,29 @@ class AndroidThistleRenderer(
             is TextNode -> {
                 append(node.text)
             }
+            is ThistleRootNode -> {
+                node.nodeList.forEach {
+                    renderToBuilder(it, context)
+                }
+            }
             is ManyNode<*> -> {
                 node.nodeList.forEach {
                     renderToBuilder(it, context)
                 }
             }
-            is TagNode<*, *> -> {
-                val tagNode = node.opening
-                when (tagNode) {
+            is TagNode<*, *, *> -> {
+                val tagName = node.opening.tagName
+                val openingTagNode = node.opening.wrapped
+                when (openingTagNode) {
                     is ThistleInterpolateNode -> {
-                        val interpolatedValue = tagNode.getValue(context)
+                        val interpolatedValue = openingTagNode.getValue(context)
                         append(interpolatedValue.toString())
                     }
-                    is ThistleTagStartNode -> {
+                    is ThistleValueMapNode -> {
                         // get the info parsed from the opening tag
-                        val tagName = tagNode.tagName
-                        val tagArgs = tagNode.tagArgs.getValueMap(context)
-                        val span: ThistleTag<AndroidThistleRenderContext, Any> = tags
-                            .first { it.kudzuTagBuilder.name == tagName }
-                            .tag
+                        val tagArgs = openingTagNode.getValueMap(context)
+                        val span: ThistleTag<AndroidThistleRenderContext, Any> =
+                            tags[tagName] ?: error("unknown tag: $tagName")
 
                         // sub-parse to get the tag content
                         val renderContext = pushTag(
@@ -66,7 +70,7 @@ class AndroidThistleRenderer(
                         // push the tag into the string builder
                         setTag(renderContext, rendered)
                     }
-                    else -> error("unknown content in tagNode: $tagNode")
+                    else -> error("unknown content in openingTagNode: $openingTagNode")
                 }
             }
             else -> error("unknown node: $node")

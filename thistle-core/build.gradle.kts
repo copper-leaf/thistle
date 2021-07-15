@@ -62,7 +62,7 @@ kotlin {
         // Common Sourcesets
         val commonMain by getting {
             dependencies {
-                api("io.github.copper-leaf:kudzu-core:2.5.0")
+                api("io.github.copper-leaf:kudzu-core:2.6.0")
             }
         }
         val commonTest by getting {

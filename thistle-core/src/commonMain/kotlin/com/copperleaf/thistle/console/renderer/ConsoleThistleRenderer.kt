@@ -10,17 +10,17 @@ import com.copperleaf.thistle.console.ansi.buildAnsiString
 import com.copperleaf.thistle.console.ansi.flatten
 import com.copperleaf.thistle.console.ansi.renderToString
 import com.copperleaf.thistle.core.node.ThistleInterpolateNode
-import com.copperleaf.thistle.core.node.ThistleTagStartNode
+import com.copperleaf.thistle.core.node.ThistleRootNode
+import com.copperleaf.thistle.core.node.ThistleValueMapNode
 import com.copperleaf.thistle.core.parser.ThistleTag
-import com.copperleaf.thistle.core.parser.ThistleTagBuilder
 import com.copperleaf.thistle.core.renderer.ThistleRenderer
 
 @ExperimentalStdlibApi
 class ConsoleThistleRenderer(
-    tags: List<ThistleTagBuilder<ConsoleThistleRenderContext, AnsiEscapeCode>>
+    tags: Map<String, ThistleTag<ConsoleThistleRenderContext, AnsiEscapeCode>>
 ) : ThistleRenderer<ConsoleThistleRenderContext, AnsiEscapeCode, String>(tags) {
 
-    override fun render(rootNode: Node, context: Map<String, Any>): String {
+    override fun render(rootNode: ThistleRootNode, context: Map<String, Any>): String {
         return buildAnsiString {
             renderToBuilder(rootNode, context)
         }.flatten()
@@ -33,24 +33,28 @@ class ConsoleThistleRenderer(
             is TextNode -> {
                 appendText(node.text)
             }
+            is ThistleRootNode -> {
+                node.nodeList.forEach {
+                    renderToBuilder(it, context)
+                }
+            }
             is ManyNode<*> -> {
                 node.nodeList.forEach {
                     renderToBuilder(it, context)
                 }
             }
-            is TagNode<*, *> -> {
-                val tagNode = node.opening
-                when (tagNode) {
+            is TagNode<*, *, *> -> {
+                val tagName = node.opening.tagName
+                val openingTagNode = node.opening.wrapped
+                when (openingTagNode) {
                     is ThistleInterpolateNode -> {
-                        val interpolatedValue = tagNode.getValue(context)
+                        val interpolatedValue = openingTagNode.getValue(context)
                         appendText(interpolatedValue.toString())
                     }
-                    is ThistleTagStartNode -> {
-                        val tagName = tagNode.tagName
-                        val tagArgs = tagNode.tagArgs.getValueMap(context)
-                        val span: ThistleTag<ConsoleThistleRenderContext, AnsiEscapeCode> = tags
-                            .first { it.kudzuTagBuilder.name == tagName }
-                            .tag
+                    is ThistleValueMapNode -> {
+                        val tagArgs = openingTagNode.getValueMap(context)
+                        val span: ThistleTag<ConsoleThistleRenderContext, AnsiEscapeCode> =
+                            tags[tagName] ?: error("Unknown tag: $tagName. Valid tag names: ${tags.keys}")
 
                         appendChild({
                             val renderContext = ConsoleThistleRenderContext(
@@ -65,7 +69,7 @@ class ConsoleThistleRenderer(
                             }
                         }
                     }
-                    else -> error("unknown content in tagNode: $tagNode")
+                    else -> error("unknown content in openingTagNode: $openingTagNode")
                 }
             }
             else -> error("unknown node: $node")
