@@ -18,6 +18,9 @@ pluginManagement {
 rootProject.name = "thistle"
 
 include(":thistle-core")
+include(":thistle-compose-jetbrains")
 
 include(":examples:android")
+include(":examples:compose-desktop")
+
 include(":docs")
