@@ -18,5 +18,6 @@ pluginManagement {
 rootProject.name = "thistle"
 
 include(":thistle-core")
+
+include(":examples:android")
 include(":docs")
-include(":app")

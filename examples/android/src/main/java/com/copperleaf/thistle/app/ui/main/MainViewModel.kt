@@ -1,5 +1,6 @@
 package com.copperleaf.thistle.app.ui.main
 
+import android.text.Spanned
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.copperleaf.kudzu.parser.ParserContext
@@ -16,7 +17,7 @@ import kotlin.time.measureTime
 class MainViewModel(initialState: MainViewModel.State) : ViewModel() {
 
     data class State(
-        val thistle: ThistleParser<AndroidThistleRenderContext, Any>,
+        val thistle: ThistleParser<AndroidThistleRenderContext, Any, Spanned>,
         val headerTextContextCounter: InputCache,
         val headerTextContextColor: InputCache,
         val inputs: List<InputCache>,
@@ -24,7 +25,7 @@ class MainViewModel(initialState: MainViewModel.State) : ViewModel() {
         val thistleContext: Map<String, Any>,
     ) {
         constructor(
-            thistle: ThistleParser<AndroidThistleRenderContext, Any>,
+            thistle: ThistleParser<AndroidThistleRenderContext, Any, Spanned>,
             headerTextContextCounter: String,
             headerTextContextColor: String,
             inputs: List<String>,
@@ -41,7 +42,7 @@ class MainViewModel(initialState: MainViewModel.State) : ViewModel() {
 
         companion object {
             @ExperimentalTime
-            fun String.parseFromThistle(thistle: ThistleParser<AndroidThistleRenderContext, Any>): InputCache {
+            fun String.parseFromThistle(thistle: ThistleParser<AndroidThistleRenderContext, Any, Spanned>): InputCache {
                 Log.i("MainViewModel", "parsing thistle string... [$this]")
 
                 val inputCache: InputCache

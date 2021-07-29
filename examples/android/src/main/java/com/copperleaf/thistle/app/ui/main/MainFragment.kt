@@ -61,7 +61,6 @@ class MainFragment : Fragment() {
         // attempt to display the 'clickMe' text, which may throw an exception based on the user's input
         try {
             tvCounter.text = state.headerTextContextCounter.render(
-                requireContext(),
                 state.thistle,
                 state.thistleContext
             )
@@ -72,7 +71,6 @@ class MainFragment : Fragment() {
 
         try {
             tvColor.text = state.headerTextContextColor.render(
-                requireContext(),
                 state.thistle,
                 state.thistleContext
             )

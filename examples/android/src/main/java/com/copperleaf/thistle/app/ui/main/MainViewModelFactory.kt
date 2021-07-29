@@ -3,6 +3,7 @@ package com.copperleaf.thistle.app.ui.main
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
+import android.text.Spanned
 import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
@@ -32,7 +33,7 @@ class MainViewModelFactory(private val context: Context) : ViewModelProvider.Fac
     private lateinit var vm: MainViewModel
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        val thistle: ThistleParser<AndroidThistleRenderContext, Any>
+        val thistle: ThistleParser<AndroidThistleRenderContext, Any, Spanned>
 
         Log.i("MainViewModelFactory", "creating thistle...")
         val duration = measureTime {

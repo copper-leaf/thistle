@@ -1,9 +1,7 @@
 package com.copperleaf.thistle.app.ui.main
 
-import android.content.Context
 import android.text.Spanned
 import android.util.Log
-import com.copperleaf.thistle.android.androidRenderer
 import com.copperleaf.thistle.android.renderer.AndroidThistleRenderContext
 import com.copperleaf.thistle.core.node.ThistleRootNode
 import com.copperleaf.thistle.core.parser.ThistleParser
@@ -19,15 +17,14 @@ data class InputCache(
     val astString: String,
 ) {
     fun render(
-        uiContext: Context,
-        thistle: ThistleParser<AndroidThistleRenderContext, Any>,
+        thistle: ThistleParser<AndroidThistleRenderContext, Any, Spanned>,
         context: Map<String, Any>
     ): Spanned {
         Log.i("InputCache", "Rendering thistle string... [$text]")
 
         val spanned: Spanned
         val duration = measureTime {
-            spanned = thistle.androidRenderer(uiContext).render(rootNode, context)
+            spanned = thistle.newRenderer().render(rootNode, context)
         }
 
         Log.i("InputCache", "Rendering thistle string -> $duration")
