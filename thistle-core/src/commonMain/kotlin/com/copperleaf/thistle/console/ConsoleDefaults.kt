@@ -14,18 +14,25 @@ import com.copperleaf.thistle.console.ansi.STYLE_REVERSE
 import com.copperleaf.thistle.console.ansi.STYLE_STRIKETHROUGH
 import com.copperleaf.thistle.console.ansi.STYLE_UNDERLINE
 import com.copperleaf.thistle.console.renderer.ConsoleThistleRenderContext
+import com.copperleaf.thistle.console.renderer.ConsoleThistleRenderer
 import com.copperleaf.thistle.console.tags.BackgroundColor
 import com.copperleaf.thistle.console.tags.ForegroundColor
 import com.copperleaf.thistle.console.tags.Style
+import com.copperleaf.thistle.core.ThistleTagMap
 import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
+import com.copperleaf.thistle.core.renderer.ThistleRenderer
 
 @ExperimentalStdlibApi
-object ConsoleDefaults : ThistleSyntaxBuilder.Defaults<ConsoleThistleRenderContext, AnsiEscapeCode> {
+object ConsoleDefaults : ThistleSyntaxBuilder.Defaults<ConsoleThistleRenderContext, AnsiEscapeCode, String> {
+
+    override fun rendererFactory(): (ThistleTagMap<ConsoleThistleRenderContext, AnsiEscapeCode, String>) -> ThistleRenderer<ConsoleThistleRenderContext, AnsiEscapeCode, String> {
+        return { ConsoleThistleRenderer(it) }
+    }
 
     /**
      * Adds the default set of Console tags to the [ThistleSyntaxBuilder].
      */
-    override fun apply(builder: ThistleSyntaxBuilder<ConsoleThistleRenderContext, AnsiEscapeCode>) {
+    override fun applyToBuilder(builder: ThistleSyntaxBuilder<ConsoleThistleRenderContext, AnsiEscapeCode, String>) {
         with(builder) {
             tag("background") { BackgroundColor() }
             tag("foreground") { ForegroundColor() }

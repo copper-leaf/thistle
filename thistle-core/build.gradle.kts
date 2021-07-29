@@ -80,7 +80,6 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-junit"))
                 implementation("io.mockk:mockk:1.11.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
             }
         }
 

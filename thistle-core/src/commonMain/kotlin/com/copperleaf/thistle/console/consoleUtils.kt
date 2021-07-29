@@ -3,24 +3,15 @@ package com.copperleaf.thistle.console
 import com.copperleaf.kudzu.parser.ParserContext
 import com.copperleaf.thistle.console.ansi.AnsiEscapeCode
 import com.copperleaf.thistle.console.renderer.ConsoleThistleRenderContext
-import com.copperleaf.thistle.console.renderer.ConsoleThistleRenderer
 import com.copperleaf.thistle.core.parser.ThistleParser
 
 @ExperimentalStdlibApi
-val ThistleParser<ConsoleThistleRenderContext, AnsiEscapeCode>.consoleRenderer: ConsoleThistleRenderer
-    get() {
-        return ConsoleThistleRenderer(tagFactories)
-    }
-
-@ExperimentalStdlibApi
 fun printlnStyledText(
-    thistle: ThistleParser<ConsoleThistleRenderContext, AnsiEscapeCode>,
+    thistle: ThistleParser<ConsoleThistleRenderContext, AnsiEscapeCode, String>,
     input: String,
     context: Map<String, Any> = emptyMap()
 ) {
-    val (rootNode, _) = thistle.parser.parse(ParserContext.fromString(input))
-//    println(rootNode.printAst(0))
-
-    val rendered = thistle.consoleRenderer.render(rootNode, context)
+    val rootNode = thistle.parse(ParserContext.fromString(input))
+    val rendered = thistle.newRenderer().render(rootNode, context)
     println(rendered)
 }

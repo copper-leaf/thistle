@@ -43,7 +43,7 @@ fun <T : Any> Parser<ValueNode<T>>.asThistleValueParser(): Parser<ThistleValueNo
 
 @ExperimentalStdlibApi
 internal fun checkParsedCorrectly(
-    parser: ThistleParser<*, *>,
+    parser: ThistleParser<*, *, *>,
     parserContext: ParserContext,
     parserResult: ParserResult<ThistleRootNode>
 ): ThistleRootNode {
@@ -55,7 +55,7 @@ internal fun checkParsedCorrectly(
 @ExperimentalStdlibApi
 @Suppress("UNCHECKED_CAST")
 private fun checkValidNode(
-    parser: ThistleParser<*, *>,
+    parser: ThistleParser<*, *, *>,
     node: Node
 ) {
     when (node) {
@@ -89,3 +89,7 @@ private fun checkValidNode(
         else -> error("unknown node: $node")
     }
 }
+
+@Suppress("UNUSED_TYPEALIAS_PARAMETER")
+typealias ThistleTagMap<RenderContext, TagRendererResult, ResultType> =
+        Map<String, ThistleTagFactory<RenderContext, TagRendererResult>>

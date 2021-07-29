@@ -24,23 +24,27 @@ import com.copperleaf.kudzu.parser.value.CharLiteralParser
 import com.copperleaf.kudzu.parser.value.DoubleLiteralParser
 import com.copperleaf.kudzu.parser.value.IntLiteralParser
 import com.copperleaf.kudzu.parser.value.StringLiteralParser
+import com.copperleaf.thistle.core.ThistleTagMap
 import com.copperleaf.thistle.core.asThistleValueParser
 import com.copperleaf.thistle.core.node.ThistleValueMapNode
 import com.copperleaf.thistle.core.node.ThistleValueNode
 import com.copperleaf.thistle.core.renderer.ThistleRenderContext
+import com.copperleaf.thistle.core.renderer.ThistleRenderer
 
 @ExperimentalStdlibApi
-class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, TagRendererResult : Any> {
+class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, TagRendererResult : Any, ResultType: Any> {
 
-    fun interface Defaults<RenderContext : ThistleRenderContext, TagRendererResult : Any> {
-        fun apply(builder: ThistleSyntaxBuilder<RenderContext, TagRendererResult>)
+    interface Defaults<RenderContext : ThistleRenderContext, TagRendererResult : Any, ResultType: Any> {
+        fun applyToBuilder(builder: ThistleSyntaxBuilder<RenderContext, TagRendererResult, ResultType>)
+
+        fun rendererFactory(): (ThistleTagMap<RenderContext, TagRendererResult, ResultType>) -> ThistleRenderer<RenderContext, TagRendererResult, ResultType>
     }
 
 // Public API
 // ---------------------------------------------------------------------------------------------------------------------
 
-    fun from(other: ThistleSyntaxBuilder.Defaults<RenderContext, TagRendererResult>) {
-        other.apply(this)
+    fun from(other: ThistleSyntaxBuilder.Defaults<RenderContext, TagRendererResult, ResultType>) {
+        other.applyToBuilder(this)
     }
 
     fun tag(

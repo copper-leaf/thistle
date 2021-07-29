@@ -9,6 +9,7 @@ import com.copperleaf.thistle.console.ansi.AnsiNodeScope
 import com.copperleaf.thistle.console.ansi.buildAnsiString
 import com.copperleaf.thistle.console.ansi.flatten
 import com.copperleaf.thistle.console.ansi.renderToString
+import com.copperleaf.thistle.core.ThistleTagMap
 import com.copperleaf.thistle.core.node.ThistleInterpolateNode
 import com.copperleaf.thistle.core.node.ThistleRootNode
 import com.copperleaf.thistle.core.node.ThistleValueMapNode
@@ -17,7 +18,7 @@ import com.copperleaf.thistle.core.renderer.ThistleRenderer
 
 @ExperimentalStdlibApi
 class ConsoleThistleRenderer(
-    tags: Map<String, ThistleTagFactory<ConsoleThistleRenderContext, AnsiEscapeCode>>
+    tags: ThistleTagMap<ConsoleThistleRenderContext, AnsiEscapeCode, String>
 ) : ThistleRenderer<ConsoleThistleRenderContext, AnsiEscapeCode, String>(tags) {
 
     override fun render(rootNode: ThistleRootNode, context: Map<String, Any>): String {
