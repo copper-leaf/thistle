@@ -21,10 +21,9 @@ import com.copperleaf.thistle.android.tags.Superscript
 import com.copperleaf.thistle.android.tags.Typeface
 import com.copperleaf.thistle.android.tags.Underline
 import com.copperleaf.thistle.android.tags.Url
-import com.copperleaf.thistle.core.ThistleTagMap
+import com.copperleaf.thistle.core.ThistleRendererFactory
 import com.copperleaf.thistle.core.asThistleValueParser
 import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
-import com.copperleaf.thistle.core.renderer.ThistleRenderer
 
 @ExperimentalStdlibApi
 @SuppressLint("NewApi")
@@ -33,8 +32,8 @@ class AndroidDefaults(
     private val packageName: String? = null
 ) : ThistleSyntaxBuilder.Defaults<AndroidThistleRenderContext, Any, Spanned> {
 
-    override fun rendererFactory(): (ThistleTagMap<AndroidThistleRenderContext, Any, Spanned>) -> ThistleRenderer<AndroidThistleRenderContext, Any, Spanned> {
-        return { AndroidThistleRenderer(uiContext, it) }
+    override fun rendererFactory(): ThistleRendererFactory<AndroidThistleRenderContext, Any, Spanned> {
+        return ThistleRendererFactory { AndroidThistleRenderer(uiContext, it) }
     }
 
     /**
@@ -70,7 +69,7 @@ class AndroidDefaults(
             tag("i") { Style(android.graphics.Typeface.ITALIC) }
             tag("u") { Underline() }
 
-            if(packageName != null) {
+            if (packageName != null) {
                 valueFormat {
                     MappedParser(
                         SequenceParser(

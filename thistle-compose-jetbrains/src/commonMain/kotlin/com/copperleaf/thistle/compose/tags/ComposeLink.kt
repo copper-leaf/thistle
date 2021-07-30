@@ -14,7 +14,7 @@ class ComposeLink(
 ) : ThistleTagFactory<ComposeThistleRenderContext, ComposeSpanWrapper> {
     override fun invoke(renderContext: ComposeThistleRenderContext): ComposeSpanWrapper {
         return checkArgs(renderContext) {
-            if(color != null) {
+            if (color != null) {
                 ComposeSpanWrapper(
                     spanStyle = SpanStyle(
                         color = color,
@@ -22,8 +22,7 @@ class ComposeLink(
                     ),
                     clickHandler = handler
                 )
-            }
-            else {
+            } else {
                 ComposeSpanWrapper(
                     clickHandler = handler
                 )

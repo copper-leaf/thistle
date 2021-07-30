@@ -4,7 +4,7 @@ import com.copperleaf.kudzu.parser.tag.TagBuilder
 import com.copperleaf.thistle.core.renderer.ThistleRenderContext
 
 @ExperimentalStdlibApi
-data class ThistleTagConfiguration<RenderContext : ThistleRenderContext, TagRendererResult : Any>(
+data class ThistleTagConfiguration<RenderContext : ThistleRenderContext, Tag : Any>(
     val kudzuTagBuilder: TagBuilder<*, *>,
-    val tagFactory: ThistleTagFactory<RenderContext, TagRendererResult>
+    val tagFactory: ThistleTagFactory<RenderContext, Tag>
 )

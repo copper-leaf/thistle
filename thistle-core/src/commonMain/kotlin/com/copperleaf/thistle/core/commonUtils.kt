@@ -16,6 +16,7 @@ import com.copperleaf.thistle.core.node.ThistleValueNode
 import com.copperleaf.thistle.core.parser.ThistleParser
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
 import com.copperleaf.thistle.core.renderer.ThistleRenderContext
+import com.copperleaf.thistle.core.renderer.ThistleRenderer
 import com.copperleaf.thistle.core.renderer.ThistleTagsArgs
 
 inline fun <RenderContext : ThistleRenderContext, RendererResult : Any>
@@ -91,5 +92,11 @@ private fun checkValidNode(
 }
 
 @Suppress("UNUSED_TYPEALIAS_PARAMETER")
-typealias ThistleTagMap<RenderContext, TagRendererResult, ResultType> =
-        Map<String, ThistleTagFactory<RenderContext, TagRendererResult>>
+typealias ThistleTagMap<RenderContext, Tag, RichText> = Map<String, ThistleTagFactory<RenderContext, Tag>>
+
+@ExperimentalStdlibApi
+fun interface ThistleRendererFactory<RenderContext : ThistleRenderContext, Tag : Any, RichText : Any> {
+    fun newRenderer(
+        tags: ThistleTagMap<RenderContext, Tag, RichText>
+    ): ThistleRenderer<RenderContext, Tag, RichText>
+}

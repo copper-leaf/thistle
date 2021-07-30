@@ -18,15 +18,14 @@ import com.copperleaf.thistle.console.renderer.ConsoleThistleRenderer
 import com.copperleaf.thistle.console.tags.BackgroundColor
 import com.copperleaf.thistle.console.tags.ForegroundColor
 import com.copperleaf.thistle.console.tags.Style
-import com.copperleaf.thistle.core.ThistleTagMap
+import com.copperleaf.thistle.core.ThistleRendererFactory
 import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
-import com.copperleaf.thistle.core.renderer.ThistleRenderer
 
 @ExperimentalStdlibApi
 object ConsoleDefaults : ThistleSyntaxBuilder.Defaults<ConsoleThistleRenderContext, AnsiEscapeCode, String> {
 
-    override fun rendererFactory(): (ThistleTagMap<ConsoleThistleRenderContext, AnsiEscapeCode, String>) -> ThistleRenderer<ConsoleThistleRenderContext, AnsiEscapeCode, String> {
-        return { ConsoleThistleRenderer(it) }
+    override fun rendererFactory(): ThistleRendererFactory<ConsoleThistleRenderContext, AnsiEscapeCode, String> {
+        return ThistleRendererFactory { ConsoleThistleRenderer(it) }
     }
 
     /**

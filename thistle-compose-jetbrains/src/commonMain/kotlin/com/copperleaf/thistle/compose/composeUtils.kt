@@ -35,14 +35,13 @@ fun rememberRichText(
     thistle: ThistleParser<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText>,
     input: String,
     context: Map<String, Any> = emptyMap(),
-    onErrorDefaultTo: ((ParserException)-> String)? = null
+    onErrorDefaultTo: ((ParserException) -> String)? = null
 ): ComposeRichText {
     val rootNode = remember(input) {
         val inputContext = ParserContext.fromString(input)
         try {
             thistle.parse(inputContext)
-        }
-        catch (e: ParserException) {
+        } catch (e: ParserException) {
             onErrorDefaultTo
                 ?.invoke(e)
                 ?.let {
@@ -63,7 +62,7 @@ fun rememberRichText(
 
 data class ComposeSpanWrapper(
     val spanStyle: SpanStyle? = null,
-    val clickHandler: (()->Unit)? = null,
+    val clickHandler: (() -> Unit)? = null,
     val inlineContent: InlineTextContent? = null,
 )
 

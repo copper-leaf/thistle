@@ -44,21 +44,27 @@ fun main() = application {
         title = "Compose for Desktop",
         state = rememberWindowState(width = 300.dp, height = 300.dp)
     ) {
+        val initialText = "{{b}}bold{{/b}}, {count} clicks. {{inc}}++{{/inc}}{{div}}{{/div}}{{dec}}--{{/dec}}"
+
         var count by remember { mutableStateOf(0) }
-        var inputText by remember { mutableStateOf(TextFieldValue("This text is {{b}}bold{{/b}}, {ending}, and has {count} clicks. {{inc}}++{{/inc}}{{div}}{{/div}}{{dec}}--{{/dec}}")) }
+        var inputText by remember { mutableStateOf(TextFieldValue(initialText)) }
 
         MaterialTheme {
             Column(Modifier.fillMaxSize(), Arrangement.spacedBy(5.dp)) {
-                Button(modifier = Modifier.align(Alignment.CenterHorizontally),
+                Button(
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
                     onClick = {
                         count++
-                    }) {
+                    }
+                ) {
                     Text(if (count == 0) "Hello World" else "Clicked $count!")
                 }
-                Button(modifier = Modifier.align(Alignment.CenterHorizontally),
+                Button(
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
                     onClick = {
                         count = 0
-                    }) {
+                    }
+                ) {
                     Text("Reset")
                 }
                 TextField(
@@ -66,7 +72,7 @@ fun main() = application {
                     onValueChange = { inputText = it }
                 )
 
-                val linkColor  = MaterialTheme.colors.primary
+                val linkColor = MaterialTheme.colors.primary
 
                 val thistle = ThistleParser(ComposeDefaults) {
                     tag("inc") { ComposeLink(linkColor) { count++ } }
@@ -97,7 +103,6 @@ fun main() = application {
                     thistle,
                     inputText.text,
                     context = mapOf(
-                        "ending" to "yo",
                         "count" to count,
                     )
                 ) { inputText.text }

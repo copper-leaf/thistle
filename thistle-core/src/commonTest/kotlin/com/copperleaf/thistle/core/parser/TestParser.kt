@@ -3,9 +3,12 @@ package com.copperleaf.thistle.core.parser
 import com.copperleaf.kudzu.node.tag.TagNameNode
 import com.copperleaf.kudzu.node.tag.TagNode
 import com.copperleaf.kudzu.parser.ParserContext
-import com.copperleaf.thistle.console.renderer.ConsoleThistleRenderContext
+import com.copperleaf.thistle.core.ThistleRendererFactory
 import com.copperleaf.thistle.core.node.ThistleInterpolateNode
+import com.copperleaf.thistle.core.node.ThistleRootNode
 import com.copperleaf.thistle.core.node.ThistleValueMapNode
+import com.copperleaf.thistle.core.renderer.ThistleRenderContext
+import com.copperleaf.thistle.core.renderer.ThistleRenderer
 import com.copperleaf.thistle.expectCatching
 import com.copperleaf.thistle.expectThat
 import com.copperleaf.thistle.isA
@@ -23,8 +26,25 @@ import kotlin.test.Test
 @ExperimentalStdlibApi
 class TestParser {
 
-    object TestDefaults : ThistleSyntaxBuilder.Defaults<ConsoleThistleRenderContext, Any> {
-        override fun apply(builder: ThistleSyntaxBuilder<ConsoleThistleRenderContext, Any>) {
+    class TestRenderContext(
+        override val context: Map<String, Any> = emptyMap(),
+        override val args: Map<String, Any> = emptyMap()
+    ) : ThistleRenderContext
+
+    class TestRenderer : ThistleRenderer<TestRenderContext, Any, Any>(emptyMap()) {
+        override fun render(rootNode: ThistleRootNode, context: Map<String, Any>): Any {
+            return Unit
+        }
+    }
+
+    object TestDefaults : ThistleSyntaxBuilder.Defaults<TestRenderContext, Any, Any> {
+        override fun applyToBuilder(builder: ThistleSyntaxBuilder<TestRenderContext, Any, Any>) {
+            with(builder) {
+            }
+        }
+
+        override fun rendererFactory(): ThistleRendererFactory<TestRenderContext, Any, Any> {
+            return ThistleRendererFactory { TestRenderer() }
         }
     }
 
@@ -115,7 +135,7 @@ class TestParser {
 
     @Test
     fun testAttrValueParser() {
-        val underTest = ThistleSyntaxBuilder<ConsoleThistleRenderContext, Any>().buildAttrValueParser()
+        val underTest = ThistleSyntaxBuilder<TestRenderContext, Any, Any>().buildAttrValueParser()
         val contextMap = mapOf("one" to 1, "two" to 2.2)
 
         // boolean value
@@ -274,7 +294,7 @@ class TestParser {
 
     @Test
     fun testAttrMapParser() {
-        val underTest = ThistleSyntaxBuilder<ConsoleThistleRenderContext, Any>().buildAttrMapParser()
+        val underTest = ThistleSyntaxBuilder<TestRenderContext, Any, Any>().buildAttrMapParser()
         val contextMap = mapOf("one" to 1, "two" to 2.2)
 
         // boolean value
@@ -313,7 +333,7 @@ class TestParser {
 
     @Test
     fun testSyntaxTagStartParser() {
-        val syntax = ThistleSyntaxBuilder<ConsoleThistleRenderContext, Any>().buildSyntaxParser()
+        val syntax = ThistleSyntaxBuilder<TestRenderContext, Any, Any>().buildSyntaxParser()
         val contextMap = mapOf("one" to 1, "two" to 2.2)
         val underTest = syntax.tagStart()
 
@@ -377,7 +397,7 @@ class TestParser {
             tag("one") { ThistleTagFactory { } }
         }
         val contextMap = mapOf("one" to 1, "two" to 2.2, "username" to "AliceBob123")
-        val underTest = thistle.parser
+        val underTest = thistle
 
         "{{one}}two{{/one}}".apply {
             val parserContext = ParserContext.fromString(this)

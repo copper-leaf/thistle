@@ -24,32 +24,31 @@ import com.copperleaf.kudzu.parser.value.CharLiteralParser
 import com.copperleaf.kudzu.parser.value.DoubleLiteralParser
 import com.copperleaf.kudzu.parser.value.IntLiteralParser
 import com.copperleaf.kudzu.parser.value.StringLiteralParser
-import com.copperleaf.thistle.core.ThistleTagMap
+import com.copperleaf.thistle.core.ThistleRendererFactory
 import com.copperleaf.thistle.core.asThistleValueParser
 import com.copperleaf.thistle.core.node.ThistleValueMapNode
 import com.copperleaf.thistle.core.node.ThistleValueNode
 import com.copperleaf.thistle.core.renderer.ThistleRenderContext
-import com.copperleaf.thistle.core.renderer.ThistleRenderer
 
 @ExperimentalStdlibApi
-class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, TagRendererResult : Any, ResultType: Any> {
+class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, Tag : Any, RichText : Any> {
 
-    interface Defaults<RenderContext : ThistleRenderContext, TagRendererResult : Any, ResultType: Any> {
-        fun applyToBuilder(builder: ThistleSyntaxBuilder<RenderContext, TagRendererResult, ResultType>)
+    interface Defaults<RenderContext : ThistleRenderContext, Tag : Any, RichText : Any> {
+        fun applyToBuilder(builder: ThistleSyntaxBuilder<RenderContext, Tag, RichText>)
 
-        fun rendererFactory(): (ThistleTagMap<RenderContext, TagRendererResult, ResultType>) -> ThistleRenderer<RenderContext, TagRendererResult, ResultType>
+        fun rendererFactory(): ThistleRendererFactory<RenderContext, Tag, RichText>
     }
 
 // Public API
 // ---------------------------------------------------------------------------------------------------------------------
 
-    fun from(other: ThistleSyntaxBuilder.Defaults<RenderContext, TagRendererResult, ResultType>) {
+    fun from(other: ThistleSyntaxBuilder.Defaults<RenderContext, Tag, RichText>) {
         other.applyToBuilder(this)
     }
 
     fun tag(
         tagName: String,
-        tagFactory: () -> ThistleTagFactory<RenderContext, TagRendererResult>
+        tagFactory: () -> ThistleTagFactory<RenderContext, Tag>
     ) {
         tags[tagName] = tagFactory
     }
@@ -111,7 +110,7 @@ class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, TagRendererResu
         )
     }
 
-    private val tags: LinkedHashMap<String, () -> ThistleTagFactory<RenderContext, TagRendererResult>> = linkedMapOf()
+    private val tags: LinkedHashMap<String, () -> ThistleTagFactory<RenderContext, Tag>> = linkedMapOf()
 
     internal fun buildAttrValueParser(): Parser<ThistleValueNode> = FlatMappedParser(
         ExactChoiceParser(
@@ -156,7 +155,7 @@ class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, TagRendererResu
         return FlatMappedParser(this) { TagNameNode(tagName, it, it.context) }
     }
 
-    fun build(): Pair<TagBuilder<*, *>, Map<String, ThistleTagConfiguration<RenderContext, TagRendererResult>>> {
+    fun build(): Pair<TagBuilder<*, *>, Map<String, ThistleTagConfiguration<RenderContext, Tag>>> {
         val syntax = syntax(buildAttrMapParser())
 
         val interpolate = TagBuilder(

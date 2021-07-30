@@ -46,6 +46,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha01")
 
     implementation(project(":thistle-core"))
+    implementation(project(":thistle-android"))
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
