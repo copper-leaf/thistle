@@ -66,8 +66,7 @@ class ComposeThistleRenderer(
                     }
                     is ThistleValueMapNode -> {
                         val tagArgs = openingTagNode.getValueMap(context)
-                        val span: ThistleTagFactory<ComposeThistleRenderContext, ComposeSpanWrapper> =
-                            tags[tagName] ?: error("Unknown tag: $tagName. Valid tag names: ${tags.keys}")
+                        val span: ThistleTagFactory<ComposeThistleRenderContext, ComposeSpanWrapper> = tags[tagName]!!
 
                         val renderContext = ComposeThistleRenderContext(
                             context = context,

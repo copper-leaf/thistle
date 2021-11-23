@@ -1,14 +1,8 @@
 package com.copperleaf.thistle.android
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.text.Spanned
-import com.copperleaf.kudzu.parser.chars.CharInParser
-import com.copperleaf.kudzu.parser.choice.ExactChoiceParser
-import com.copperleaf.kudzu.parser.mapped.MappedParser
-import com.copperleaf.kudzu.parser.sequence.SequenceParser
-import com.copperleaf.kudzu.parser.text.IdentifierTokenParser
-import com.copperleaf.kudzu.parser.text.LiteralTokenParser
+import com.copperleaf.thistle.android.parser.ResourceReferenceParser
 import com.copperleaf.thistle.android.renderer.AndroidThistleRenderContext
 import com.copperleaf.thistle.android.renderer.AndroidThistleRenderer
 import com.copperleaf.thistle.android.tags.BackgroundColor
@@ -26,7 +20,6 @@ import com.copperleaf.thistle.core.asThistleValueParser
 import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
 
 @ExperimentalStdlibApi
-@SuppressLint("NewApi")
 class AndroidDefaults(
     private val uiContext: Context,
     private val packageName: String? = null
@@ -71,35 +64,7 @@ class AndroidDefaults(
 
             if (packageName != null) {
                 valueFormat {
-                    MappedParser(
-                        SequenceParser(
-                            CharInParser('@'),
-                            ExactChoiceParser(
-                                LiteralTokenParser("string"),
-                                LiteralTokenParser("color"),
-                                LiteralTokenParser("drawable"),
-                            ),
-                            CharInParser('/'),
-                            IdentifierTokenParser()
-                        )
-                    ) {
-                        val (_, stringOrColorChoiceNode, _, resourceNameNode) = it.children
-
-                        val resourceType = stringOrColorChoiceNode.text
-
-                        val resourceId = uiContext.resources.getIdentifier(
-                            resourceNameNode.text,
-                            resourceType,
-                            packageName
-                        )
-
-                        when (resourceType) {
-                            "string" -> uiContext.resources.getString(resourceId)
-                            "color" -> uiContext.resources.getColor(resourceId, uiContext.theme)
-                            "drawable" -> uiContext.resources.getDrawable(resourceId, uiContext.theme)
-                            else -> error("Unknown resource type: $resourceType")
-                        }
-                    }.asThistleValueParser()
+                    ResourceReferenceParser(uiContext, packageName).asThistleValueParser()
                 }
             }
         }

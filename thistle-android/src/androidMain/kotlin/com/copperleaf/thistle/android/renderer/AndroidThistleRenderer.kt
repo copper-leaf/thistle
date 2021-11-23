@@ -51,8 +51,7 @@ class AndroidThistleRenderer(
                     is ThistleValueMapNode -> {
                         // get the info parsed from the opening tag
                         val tagArgs = openingTagNode.getValueMap(context)
-                        val span: ThistleTagFactory<AndroidThistleRenderContext, Any> =
-                            tags[tagName] ?: error("unknown tag: $tagName")
+                        val span: ThistleTagFactory<AndroidThistleRenderContext, Any> = tags[tagName]!!
 
                         // sub-parse to get the tag content
                         val renderContext = pushTag(

@@ -6,12 +6,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion(30)
-
+    compileSdk = 31
     defaultConfig {
+        minSdk = 21
+        targetSdk = 31
+        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+
         applicationId = "com.copperleaf.thistle.app"
-        minSdkVersion(21)
-        targetSdkVersion(30)
         versionCode = 1
         versionName = "1.0"
     }

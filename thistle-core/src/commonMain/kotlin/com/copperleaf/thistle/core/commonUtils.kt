@@ -15,6 +15,7 @@ import com.copperleaf.thistle.core.node.ThistleValueMapNode
 import com.copperleaf.thistle.core.node.ThistleValueNode
 import com.copperleaf.thistle.core.parser.ThistleParser
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
+import com.copperleaf.thistle.core.parser.ThistleUnknownTagException
 import com.copperleaf.thistle.core.renderer.ThistleRenderContext
 import com.copperleaf.thistle.core.renderer.ThistleRenderer
 import com.copperleaf.thistle.core.renderer.ThistleTagsArgs
@@ -79,7 +80,14 @@ private fun checkValidNode(
                 is ThistleInterpolateNode -> {
                 }
                 is ThistleValueMapNode -> {
-                    check(tagName in parser.tagNames) { "Unknown tag: ${node.opening.tagName}" }
+                    if(tagName !in parser.tagNames) {
+                        throw ThistleUnknownTagException(
+                            input = "",
+                            position = node.opening.context,
+                            unknownTagName = node.opening.tagName,
+                            validTagNames = parser.tagNames,
+                        )
+                    }
                     (node.content as ManyNode<Node>).nodeList.forEach {
                         checkValidNode(parser, it)
                     }
