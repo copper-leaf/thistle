@@ -24,6 +24,9 @@ class ComposeLink(
                 )
             } else {
                 ComposeSpanWrapper(
+                    spanStyle = SpanStyle(
+                        textDecoration = TextDecoration.Underline
+                    ),
                     clickHandler = handler
                 )
             }

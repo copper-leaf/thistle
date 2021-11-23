@@ -6,8 +6,9 @@ import android.text.style.TypefaceSpan
 import com.copperleaf.thistle.android.renderer.AndroidThistleRenderContext
 import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
+import com.copperleaf.thistle.core.renderer.enum
 
-class Typeface(
+class AndroidTypeface(
     private val hardcodedTypeface: Typeface? = null
 ) : ThistleTagFactory<AndroidThistleRenderContext, Any> {
 

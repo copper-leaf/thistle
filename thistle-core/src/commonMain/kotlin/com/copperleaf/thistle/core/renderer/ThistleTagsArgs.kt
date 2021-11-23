@@ -12,41 +12,7 @@ class ThistleTagsArgs(
 ) {
     val argsVisited: MutableList<String> = mutableListOf()
 
-    inline fun int(
-        value: Int? = null,
-        name: String? = null,
-    ): ReadOnlyProperty<Nothing?, Int> = parameter(value, name)
 
-    inline fun double(
-        value: Double? = null,
-        name: String? = null,
-    ): ReadOnlyProperty<Nothing?, Double> = parameter(value, name)
-
-    inline fun string(
-        value: String? = null,
-        name: String? = null,
-    ): ReadOnlyProperty<Nothing?, String> = parameter(value, name)
-
-    inline fun boolean(
-        value: Boolean? = null,
-        name: String? = null,
-    ): ReadOnlyProperty<Nothing?, Boolean> = parameter(value, name)
-
-    inline fun <reified ParameterType : Any> enum(
-        value: ParameterType? = null,
-        name: String? = null,
-        crossinline options: () -> Map<String, ParameterType>,
-    ): ReadOnlyProperty<Nothing?, ParameterType> = parameter<String, ParameterType>(
-        value,
-        name
-    ) { parameterKey, stringValue ->
-        val optionsMap = options()
-        check(optionsMap.containsKey(stringValue)) {
-            "Property '$parameterKey' must be one of ${optionsMap.keys} for $tagFactory"
-        }
-
-        optionsMap[stringValue]!!
-    }
 
     fun checkNoMoreArgs() {
         val extraParams = args.keys - argsVisited
@@ -148,4 +114,41 @@ class LazyThistleParameterProvider<InputParameterType : Any, OutputParameterType
 
         return value
     }
+}
+
+
+inline fun ThistleTagsArgs.int(
+    value: Int? = null,
+    name: String? = null,
+): ReadOnlyProperty<Nothing?, Int> = parameter(value, name)
+
+inline fun ThistleTagsArgs.double(
+    value: Double? = null,
+    name: String? = null,
+): ReadOnlyProperty<Nothing?, Double> = parameter(value, name)
+
+inline fun ThistleTagsArgs.string(
+    value: String? = null,
+    name: String? = null,
+): ReadOnlyProperty<Nothing?, String> = parameter(value, name)
+
+inline fun ThistleTagsArgs.boolean(
+    value: Boolean? = null,
+    name: String? = null,
+): ReadOnlyProperty<Nothing?, Boolean> = parameter(value, name)
+
+inline fun <reified ParameterType : Any> ThistleTagsArgs.enum(
+    value: ParameterType? = null,
+    name: String? = null,
+    crossinline options: () -> Map<String, ParameterType>,
+): ReadOnlyProperty<Nothing?, ParameterType> = parameter<String, ParameterType>(
+    value,
+    name
+) { parameterKey, stringValue ->
+    val optionsMap = options()
+    check(optionsMap.containsKey(stringValue)) {
+        "Property '$parameterKey' must be one of ${optionsMap.keys} for $tagFactory"
+    }
+
+    optionsMap[stringValue]!!
 }

@@ -21,7 +21,7 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(project(":thistle-core"))
-                implementation(project(":thistle-compose-jetbrains"))
+                implementation(project(":thistle-compose-ui"))
                 implementation(compose.desktop.currentOs)
                 implementation(compose.material)
                 implementation(compose.uiTooling)
