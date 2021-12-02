@@ -114,7 +114,7 @@ fun MainContent(
                                 TextField(
                                     inputText,
                                     { inputText = it },
-                                    label = { Text("context.color")}
+                                    label = { Text("context.color") }
                                 )
                             }
                         }
@@ -145,7 +145,7 @@ fun MainContent(
                                                     .padding(16.dp)
                                             ) {
                                                 Text(item)
-                                                if(showAst) {
+                                                if (showAst) {
                                                     Divider(Modifier.padding(vertical = 8.dp))
                                                     val richTextAst = rememberRichText(
                                                         input = item,
@@ -179,5 +179,3 @@ fun MainContent(
         }
     }
 }
-
-

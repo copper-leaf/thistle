@@ -13,7 +13,6 @@ class ThistleTagsArgs(
     val argsVisited: MutableList<String> = mutableListOf()
 
 
-
     fun checkNoMoreArgs() {
         val extraParams = args.keys - argsVisited
         check(extraParams.isEmpty()) {
@@ -116,27 +115,31 @@ class LazyThistleParameterProvider<InputParameterType : Any, OutputParameterType
     }
 }
 
-
+@Suppress("NOTHING_TO_INLINE")
 inline fun ThistleTagsArgs.int(
     value: Int? = null,
     name: String? = null,
 ): ReadOnlyProperty<Nothing?, Int> = parameter(value, name)
 
+@Suppress("NOTHING_TO_INLINE")
 inline fun ThistleTagsArgs.double(
     value: Double? = null,
     name: String? = null,
 ): ReadOnlyProperty<Nothing?, Double> = parameter(value, name)
 
+@Suppress("NOTHING_TO_INLINE")
 inline fun ThistleTagsArgs.string(
     value: String? = null,
     name: String? = null,
 ): ReadOnlyProperty<Nothing?, String> = parameter(value, name)
 
+@Suppress("NOTHING_TO_INLINE")
 inline fun ThistleTagsArgs.boolean(
     value: Boolean? = null,
     name: String? = null,
 ): ReadOnlyProperty<Nothing?, Boolean> = parameter(value, name)
 
+@Suppress("NOTHING_TO_INLINE")
 inline fun <reified ParameterType : Any> ThistleTagsArgs.enum(
     value: ParameterType? = null,
     name: String? = null,

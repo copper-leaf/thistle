@@ -126,7 +126,7 @@ class ComposeThistleRenderer(
     //  look for a better way to do it. I'm not sure if there is one since I can't get sub-strings directly from builder.
     //  Maybe make a custom Compose AnnotatedString builder that would let me do what I want?
     private fun Node.textContent(context: Map<String, Any>): String {
-        return when(this) {
+        return when (this) {
             is ThistleInterpolateNode -> getValue(context).toString()
             is TextNode -> text
             is NonTerminalNode -> { children.joinToString(separator = "") { it.textContent(context) } }

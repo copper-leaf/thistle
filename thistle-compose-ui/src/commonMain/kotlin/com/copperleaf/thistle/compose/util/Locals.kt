@@ -9,7 +9,19 @@ import com.copperleaf.thistle.core.parser.ThistleParser
 import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
 
 @ExperimentalStdlibApi
-val LocalThistle = staticCompositionLocalOf<ThistleParser<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText>> {
+typealias ComposeSyntaxBuilder
+    = ThistleSyntaxBuilder<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText>
+
+@ExperimentalStdlibApi
+typealias ComposeSyntaxBuilderDefaults
+    = ThistleSyntaxBuilder.Defaults<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText>
+
+@ExperimentalStdlibApi
+typealias ComposeThistleParser
+    = ThistleParser<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText>
+
+@ExperimentalStdlibApi
+val LocalThistle = staticCompositionLocalOf<ComposeThistleParser> {
     error("CompositionLocal LocalThistle not present")
 }
 
@@ -19,12 +31,12 @@ val LocalThistleContext = staticCompositionLocalOf<Map<String, Any>> {
 }
 
 @ExperimentalStdlibApi
-private val LocalThistleDefaults = staticCompositionLocalOf<ThistleSyntaxBuilder.Defaults<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText>> {
+private val LocalThistleDefaults = staticCompositionLocalOf<ComposeSyntaxBuilderDefaults> {
     error("CompositionLocal LocalThistleDefaults not present")
 }
 
 @ExperimentalStdlibApi
-private val LocalThistleConfiguration = staticCompositionLocalOf<List<ThistleSyntaxBuilder<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText>.() -> Unit>> {
+private val LocalThistleConfiguration = staticCompositionLocalOf<List<ComposeSyntaxBuilder.() -> Unit>> {
     error("CompositionLocal LocalThistleConfiguration not present")
 }
 
@@ -34,10 +46,10 @@ private val LocalThistleConfiguration = staticCompositionLocalOf<List<ThistleSyn
 @ExperimentalStdlibApi
 @Composable
 fun ProvideThistle(
-    defaults: ThistleSyntaxBuilder.Defaults<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText> = ComposeDefaults,
-    additionalConfiguration: ThistleSyntaxBuilder<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText>.() -> Unit = {},
+    defaults: ComposeSyntaxBuilderDefaults = ComposeDefaults,
+    additionalConfiguration: ComposeSyntaxBuilder.() -> Unit = {},
     context: Map<String, Any> = emptyMap(),
-    content: @Composable ()->Unit,
+    content: @Composable () -> Unit,
 ) {
     val thistle = ThistleParser(defaults, additionalConfiguration)
     CompositionLocalProvider(
@@ -56,8 +68,8 @@ fun ProvideThistle(
 @ExperimentalStdlibApi
 @Composable
 fun ProvideAdditionalThistleConfiguration(
-    additionalConfiguration: ThistleSyntaxBuilder<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText>.() -> Unit,
-    content: @Composable ()->Unit,
+    additionalConfiguration: ComposeSyntaxBuilder.() -> Unit,
+    content: @Composable () -> Unit,
 ) {
     val currentThistleDefaults = LocalThistleDefaults.current
     val currentThistleConfiguration = LocalThistleConfiguration.current
@@ -83,7 +95,7 @@ fun ProvideAdditionalThistleConfiguration(
 @Composable
 fun ProvideAdditionalThistleContext(
     additionalContext: Map<String, Any>,
-    content: @Composable ()->Unit,
+    content: @Composable () -> Unit,
 ) {
     val currentThistleContext = LocalThistleContext.current
     val newThistleContext = currentThistleContext + additionalContext

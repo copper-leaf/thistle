@@ -75,6 +75,9 @@ snippets:
         recursive: true
         baseDirs:
           - './../../../../thistle-core/'
+          - './../../../../thistle-android/'
+          - './../../../../thistle-compose-ui/'
+          - './../../../../thistle-console/'
 
 services:
   publications:

@@ -63,6 +63,7 @@ class ResourceReferenceParser(
         return uiContext.resources.getString(resourceId)
     }
 
+    @Suppress("DEPRECATION")
     private fun getColorResource(resourceId: Int): Int {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             uiContext.resources.getColor(resourceId, uiContext.theme)

@@ -5,6 +5,7 @@ import androidx.compose.ui.graphics.toArgb
 import com.copperleaf.thistle.core.renderer.ThistleTagsArgs
 import kotlin.properties.ReadOnlyProperty
 
+@Suppress("NOTHING_TO_INLINE")
 inline fun ThistleTagsArgs.color(
     value: Color? = null,
     name: String? = null,
@@ -12,11 +13,11 @@ inline fun ThistleTagsArgs.color(
     value,
     name
 ) { _, v ->
-    if(v is String) {
+    if (v is String) {
         Color.parse(v)
-    } else if(v is Int) {
+    } else if (v is Int) {
         Color(v)
-    } else if(v is Color) {
+    } else if (v is Color) {
         v
     } else {
         error("Color value must be an Int or String, got $v")
@@ -58,14 +59,13 @@ private fun parseColorAsName(input: String): Color? {
 }
 
 private fun parseColorAsHex(input: String): Color? {
-    if(input.startsWith("#")) {
-        if(input.length == 7) {
+    if (input.startsWith("#")) {
+        if (input.length == 7) {
             val r = input.substring(1..2).toInt(16)
             val g = input.substring(3..4).toInt(16)
             val b = input.substring(5..6).toInt(16)
             return Color(r, g, b)
-        }
-        else if(input.length == 9) {
+        } else if (input.length == 9) {
             val a = input.substring(1..2).toInt(16)
             val r = input.substring(3..4).toInt(16)
             val g = input.substring(5..6).toInt(16)

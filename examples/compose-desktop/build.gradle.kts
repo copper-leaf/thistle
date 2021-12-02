@@ -12,12 +12,6 @@ kotlin {
     jvm { }
 
     sourceSets {
-        all {
-            languageSettings.apply {
-                useExperimentalAnnotation("kotlin.Experimental")
-            }
-        }
-
         val jvmMain by getting {
             dependencies {
                 implementation(project(":thistle-core"))

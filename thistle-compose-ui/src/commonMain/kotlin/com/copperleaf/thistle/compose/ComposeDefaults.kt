@@ -21,9 +21,9 @@ import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
 
 @ExperimentalStdlibApi
 object ComposeDefaults : ThistleSyntaxBuilder.Defaults<
-    ComposeThistleRenderContext,
-    ComposeSpanWrapper,
-    ComposeRichText> {
+        ComposeThistleRenderContext,
+        ComposeSpanWrapper,
+        ComposeRichText> {
 
     override fun rendererFactory(): ThistleRendererFactory<
         ComposeThistleRenderContext,

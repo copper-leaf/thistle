@@ -5,21 +5,16 @@ import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import com.copperleaf.kudzu.node.NodeContext
 import com.copperleaf.kudzu.node.text.TextNode
@@ -29,11 +24,11 @@ import com.copperleaf.thistle.compose.renderer.ComposeThistleRenderContext
 import com.copperleaf.thistle.core.node.ThistleRootNode
 import com.copperleaf.thistle.core.parser.ThistleParser
 import com.copperleaf.thistle.core.parser.ThistleUnknownTagException
-import com.copperleaf.thistle.core.renderer.ThistleTagsArgs
-import kotlin.properties.ReadOnlyProperty
 
 /**
- * Parse the [input] string and render it to [AnnotatedString] for use as the content of a [Text] composable.
+ * Parse the [input] string and render it to [AnnotatedString] for use as the content of a [Text] composable. By
+ * default, this uses the current values of [LocalThistle] and [LocalThistleContext] to allow you to configure Thistle
+ * once at the screen root, but you can override these if needed.
  *
  * The input string is parsed and the resulting AST is cached with [remember]. If an error happens during parsing, by
  * default Compose will crash with an exception, but it is handled internally and not exposed to the caller. To handle
@@ -95,7 +90,7 @@ sealed class ComposeRichText {
     data class Success(
         override val ast: ThistleRootNode,
         val result: AnnotatedString,
-        private val clickHandlers: List<()->Unit>,
+        private val clickHandlers: List<() -> Unit>,
         val inlineContent: Map<String, InlineTextContent>,
     ) : ComposeRichText() {
         fun onClick(offset: Int) {
@@ -112,6 +107,7 @@ sealed class ComposeRichText {
                 }
         }
     }
+
     data class Failure(
         override val ast: ThistleRootNode,
         val throwable: Throwable,
@@ -188,7 +184,7 @@ fun RichText(
     val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
 
     val displayedText: AnnotatedString by derivedStateOf {
-        when(richText) {
+        when (richText) {
             is ComposeRichText.Success -> richText.result
             is ComposeRichText.Failure -> buildAnnotatedString {
                 append(onErrorDefaultTo?.invoke(richText.throwable as Exception) ?: "")

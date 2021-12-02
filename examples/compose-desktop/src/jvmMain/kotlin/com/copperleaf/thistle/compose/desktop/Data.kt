@@ -77,7 +77,8 @@ object Data {
         reallyComplexExample,
 
         // examples from the "syntax" documentation
-        "This text will be {{foreground color=#FF0000}}red{{/foreground}}, while this one has a {{background color=#0000FF}}blue{{/background}} background.",
+        "This text will be {{foreground color=#FF0000}}red{{/foreground}}, while this one has a " +
+            "{{background color=#0000FF}}blue{{/background}} background.",
         "{{foreground color=#FF0000}}red{{/foreground}}",
         "{{foreground color=context.themeRed}}red{{/foreground}}",
         "Account: {{b}} {username} {{/b}} ({userId})",

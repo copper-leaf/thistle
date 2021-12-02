@@ -17,7 +17,7 @@ import com.copperleaf.thistle.core.asThistleValueParser
 @OptIn(ExperimentalStdlibApi::class)
 @Composable
 fun ThistleConfiguration(
-    content: @Composable ()->Unit
+    content: @Composable () -> Unit
 ) {
     ProvideThistle(additionalConfiguration = {
         valueFormat {

@@ -25,11 +25,13 @@ class AndroidTypeface(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 TypefaceSpan(typeface)
             } else {
-                val typefaceString = when(typeface) {
+                val typefaceString = when (typeface) {
                     Typeface.MONOSPACE -> "monospace"
                     Typeface.SANS_SERIF -> "sans"
                     Typeface.SERIF -> "serif"
-                    else -> { error("") }
+                    else -> {
+                        error("")
+                    }
                 }
 
                 TypefaceSpan(typefaceString)

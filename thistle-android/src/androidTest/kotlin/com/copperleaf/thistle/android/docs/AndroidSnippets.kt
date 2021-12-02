@@ -1,5 +1,6 @@
 package com.copperleaf.thistle.android.docs
 
+import android.content.Context
 import android.graphics.Color
 import android.text.style.BackgroundColorSpan
 import android.view.View
@@ -14,6 +15,7 @@ import com.copperleaf.thistle.core.asThistleValueParser
 import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleParser
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
+import com.copperleaf.thistle.core.renderer.int
 
 /**
  * The snippets in this file are not actually tested now, but they are used in documentation.
@@ -30,10 +32,11 @@ class AndroidSnippets {
     )
 
     lateinit var binding: Binding
+    lateinit var context: Context
 
     fun mainBasicUsage() {
         // snippet::main-basic-usage[]
-        val thistle = ThistleParser(AndroidDefaults)
+        val thistle = ThistleParser(AndroidDefaults(context))
         binding.textView.applyStyledText(
             thistle,
             "This is a {{b}}very important{{/b}}, {{foreground color=#ff0000}}urgent{{/foreground}} message!"
@@ -44,7 +47,7 @@ class AndroidSnippets {
     fun androidBasicUsage() {
         // snippet::android-basic-usage[android]
         // create the Thistle parser. It's best to create this once and inject it wherever needed
-        val thistle = ThistleParser(AndroidDefaults) // add the default tags for Android
+        val thistle = ThistleParser(AndroidDefaults(context)) // add the default tags for Android
 
         // parse a formatted string to a Spanned instance, and set that as the text of a TextView
         binding.textView.applyStyledText(
@@ -69,7 +72,7 @@ class AndroidSnippets {
             }
         }
 
-        val thistle = ThistleParser(AndroidDefaults) {
+        val thistle = ThistleParser(AndroidDefaults(context)) {
             // register your custom tab with the Thistle parser
             tag("customStyle") { CustomStyle() }
 
@@ -87,7 +90,7 @@ class AndroidSnippets {
 
     fun androidCustomValueFormats() {
         // snippet::android-custom-value-formats[android]
-        val thistle = ThistleParser(AndroidDefaults) {
+        val thistle = ThistleParser(AndroidDefaults(context)) {
             valueFormat {
                 MappedParser(
                     LiteralTokenParser("@color/red")
@@ -104,7 +107,7 @@ class AndroidSnippets {
 
     fun androidCustomStartEndTokens() {
         // snippet::android-custom-start-end-tokens[android]
-        val thistle = ThistleParser(AndroidDefaults) {
+        val thistle = ThistleParser(AndroidDefaults(context)) {
             // customize syntax to use Django/Twig/Pebble-style tags
             customSyntax(
                 openTagStartToken = LiteralTokenParser("{%"),

@@ -48,12 +48,6 @@ kotlin {
     }
 
     sourceSets {
-        all {
-            languageSettings.apply {
-                useExperimentalAnnotation("kotlin.Experimental")
-            }
-        }
-
         // Common Sourcesets
         val commonMain by getting {
             dependencies {
