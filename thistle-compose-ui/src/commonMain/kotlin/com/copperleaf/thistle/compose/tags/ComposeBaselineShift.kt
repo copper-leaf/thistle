@@ -4,15 +4,15 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.style.BaselineShift
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
-import com.copperleaf.thistle.compose.ComposeSpanWrapper
 import com.copperleaf.thistle.compose.renderer.ComposeThistleRenderContext
+import com.copperleaf.thistle.compose.util.ComposeSpanWrapper
 import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
 import com.copperleaf.thistle.core.renderer.enum
 
 class ComposeBaselineShift(
     private val hardcodedBaselineShift: BaselineShift? = null,
-    private val fontSize: TextUnit = 12.sp,
+    private val fontSize: TextUnit = 10.sp,
 ) : ThistleTagFactory<ComposeThistleRenderContext, ComposeSpanWrapper> {
     override fun invoke(renderContext: ComposeThistleRenderContext): ComposeSpanWrapper {
         return checkArgs(renderContext) {

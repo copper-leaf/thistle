@@ -14,14 +14,16 @@ import com.copperleaf.thistle.compose.tags.ComposeForegroundColor
 import com.copperleaf.thistle.compose.tags.ComposeStyle
 import com.copperleaf.thistle.compose.tags.ComposeTextDecoration
 import com.copperleaf.thistle.compose.tags.ComposeUrl
+import com.copperleaf.thistle.compose.util.ComposeRichText
+import com.copperleaf.thistle.compose.util.ComposeSpanWrapper
 import com.copperleaf.thistle.core.ThistleRendererFactory
 import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
 
 @ExperimentalStdlibApi
 object ComposeDefaults : ThistleSyntaxBuilder.Defaults<
-        ComposeThistleRenderContext,
-        ComposeSpanWrapper,
-        ComposeRichText> {
+    ComposeThistleRenderContext,
+    ComposeSpanWrapper,
+    ComposeRichText> {
 
     override fun rendererFactory(): ThistleRendererFactory<
         ComposeThistleRenderContext,

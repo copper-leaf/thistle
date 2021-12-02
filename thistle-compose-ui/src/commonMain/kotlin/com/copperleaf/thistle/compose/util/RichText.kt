@@ -1,4 +1,4 @@
-package com.copperleaf.thistle.compose
+package com.copperleaf.thistle.compose.util
 
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.text.BasicText
@@ -8,10 +8,12 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
@@ -45,9 +47,9 @@ import kotlin.properties.ReadOnlyProperty
 @ExperimentalStdlibApi
 @Composable
 fun rememberRichText(
-    thistle: ThistleParser<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText>,
     input: String,
-    context: Map<String, Any> = emptyMap(),
+    thistle: ThistleParser<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText> = LocalThistle.current,
+    context: Map<String, Any> = LocalThistleContext.current,
     onErrorDefaultTo: ((Throwable) -> String)? = null
 ): ComposeRichText {
     val rootNode = remember(input) {
@@ -167,9 +169,9 @@ fun Modifier.detectRichTextClicks(
 @Composable
 fun RichText(
     text: String,
-    thistle: ThistleParser<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText>,
     modifier: Modifier = Modifier,
-    context: Map<String, Any> = emptyMap(),
+    thistle: ThistleParser<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText> = LocalThistle.current,
+    context: Map<String, Any> = LocalThistleContext.current,
     onErrorDefaultTo: ((Throwable) -> String)? = null,
     style: TextStyle = TextStyle.Default,
     softWrap: Boolean = true,
@@ -178,8 +180,8 @@ fun RichText(
     onTextLayout: (TextLayoutResult) -> Unit = {},
 ) {
     val richText = rememberRichText(
-        thistle,
-        text,
+        input = text,
+        thistle = thistle,
         context = context,
         onErrorDefaultTo = onErrorDefaultTo,
     )
@@ -189,7 +191,7 @@ fun RichText(
         when(richText) {
             is ComposeRichText.Success -> richText.result
             is ComposeRichText.Failure -> buildAnnotatedString {
-                append(onErrorDefaultTo?.invoke(richText.throwable) ?: "")
+                append(onErrorDefaultTo?.invoke(richText.throwable as Exception) ?: "")
             }
         }
     }
@@ -209,74 +211,3 @@ fun RichText(
     )
 }
 
-inline fun ThistleTagsArgs.color(
-    value: Color? = null,
-    name: String? = null,
-): ReadOnlyProperty<Nothing?, Color> = parameter<Any, Color>(
-    value,
-    name
-) { _, v ->
-    if(v is String) {
-        Color.parse(v)
-    } else if(v is Int) {
-        Color(v)
-    } else if(v is Color) {
-        v
-    } else {
-        error("Color value must be an Int or String, got $v")
-    }
-}
-
-fun Color.Companion.parse(input: String): Color {
-    val trimmed = input.trim()
-    return parseColorAsName(trimmed)
-        ?: parseColorAsHex(trimmed)
-        ?: Color.Unspecified
-}
-
-fun Color.serializeArgb(): String {
-    val v = (0xFFFFFFFFu and this.toArgb().toUInt()).toString(16).padStart(8, '0')
-    return "#$v"
-}
-
-fun Color.serializeRgb(): String {
-    val v = (0xFFFFFFu and this.toArgb().toUInt()).toString(16).padStart(6, '0')
-    return "#$v"
-}
-
-private fun parseColorAsName(input: String): Color? {
-    return when (input.lowercase()) {
-        "black" -> Color.Black
-        "blue" -> Color.Blue
-        "cyan" -> Color.Cyan
-        "darkgray" -> Color.DarkGray
-        "gray" -> Color.Gray
-        "green" -> Color.Green
-        "lightgray" -> Color.LightGray
-        "magenta" -> Color.Magenta
-        "red" -> Color.Red
-        "white" -> Color.White
-        "yellow" -> Color.Yellow
-        else -> null
-    }
-}
-
-private fun parseColorAsHex(input: String): Color? {
-    if(input.startsWith("#")) {
-        if(input.length == 7) {
-            val r = input.substring(1..2).toInt(16)
-            val g = input.substring(3..4).toInt(16)
-            val b = input.substring(5..6).toInt(16)
-            return Color(r, g, b)
-        }
-        else if(input.length == 9) {
-            val a = input.substring(1..2).toInt(16)
-            val r = input.substring(3..4).toInt(16)
-            val g = input.substring(5..6).toInt(16)
-            val b = input.substring(7..8).toInt(16)
-            return Color(r, g, b, a)
-        }
-    }
-
-    return null
-}

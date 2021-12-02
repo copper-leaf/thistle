@@ -10,8 +10,8 @@ import com.copperleaf.kudzu.node.NonTerminalNode
 import com.copperleaf.kudzu.node.many.ManyNode
 import com.copperleaf.kudzu.node.tag.TagNode
 import com.copperleaf.kudzu.node.text.TextNode
-import com.copperleaf.thistle.compose.ComposeRichText
-import com.copperleaf.thistle.compose.ComposeSpanWrapper
+import com.copperleaf.thistle.compose.util.ComposeRichText
+import com.copperleaf.thistle.compose.util.ComposeSpanWrapper
 import com.copperleaf.thistle.core.ThistleTagMap
 import com.copperleaf.thistle.core.node.ThistleInterpolateNode
 import com.copperleaf.thistle.core.node.ThistleRootNode
