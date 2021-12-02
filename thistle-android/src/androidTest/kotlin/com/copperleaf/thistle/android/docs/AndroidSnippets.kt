@@ -9,7 +9,7 @@ import com.copperleaf.kudzu.parser.text.LiteralTokenParser
 import com.copperleaf.thistle.android.AndroidDefaults
 import com.copperleaf.thistle.android.applyStyledText
 import com.copperleaf.thistle.android.renderer.AndroidThistleRenderContext
-import com.copperleaf.thistle.android.tags.Link
+import com.copperleaf.thistle.android.tags.AndroidLink
 import com.copperleaf.thistle.core.asThistleValueParser
 import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleParser
@@ -74,8 +74,8 @@ class AndroidSnippets {
             tag("customStyle") { CustomStyle() }
 
             // the Link ThistleTag is useful for making portions of text clickable
-            tag("inc") { Link { widget: View -> /* do something on link-click */ } }
-            tag("dec") { Link { widget: View -> /* do something on link-click */ } }
+            tag("inc") { AndroidLink { widget: View -> /* do something on link-click */ } }
+            tag("dec") { AndroidLink { widget: View -> /* do something on link-click */ } }
         }
 
         binding.textView.applyStyledText(

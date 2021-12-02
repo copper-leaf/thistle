@@ -73,13 +73,14 @@ kotlin {
 
         val jvmMain by getting {
             dependencies {
+                api("io.github.copper-leaf:kudzu-core:2.6.0")
             }
         }
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
                 implementation("io.mockk:mockk:1.11.0")
-                implementation("org.jetbrains.compose.ui:ui-test-junit4:0.5.0-build270")
+//                implementation(compose.uiTestJUnit4)
             }
         }
 

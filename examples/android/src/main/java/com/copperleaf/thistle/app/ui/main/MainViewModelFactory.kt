@@ -14,10 +14,10 @@ import com.copperleaf.thistle.android.AndroidDefaults
 import com.copperleaf.thistle.android.renderer.AndroidThistleRenderContext
 import com.copperleaf.thistle.android.tags.AndroidBackgroundColor
 import com.copperleaf.thistle.android.tags.AndroidForegroundColor
+import com.copperleaf.thistle.android.tags.AndroidIcon
+import com.copperleaf.thistle.android.tags.AndroidLink
 import com.copperleaf.thistle.android.tags.AndroidStyle
-import com.copperleaf.thistle.android.tags.Icon
-import com.copperleaf.thistle.android.tags.Link
-import com.copperleaf.thistle.android.tags.Underline
+import com.copperleaf.thistle.android.tags.AndroidUnderline
 import com.copperleaf.thistle.app.Data
 import com.copperleaf.thistle.app.R
 import com.copperleaf.thistle.core.asThistleValueParser
@@ -55,21 +55,21 @@ class MainViewModelFactory(private val context: Context) : ViewModelProvider.Fac
 
                 tag("bold") { AndroidStyle(Typeface.BOLD) }
                 tag("italic") { AndroidStyle(Typeface.ITALIC) }
-                tag("underline") { Underline() }
+                tag("underline") { AndroidUnderline() }
 
-                tag("androidIcon") { Icon(ContextCompat.getDrawable(context, R.drawable.ic_android)) }
+                tag("androidIcon") { AndroidIcon(ContextCompat.getDrawable(context, R.drawable.ic_android)) }
 
-                tag("incAlpha") { Link { vm.updateCounter(0x08__00_00_00) } }
-                tag("decAlpha") { Link { vm.updateCounter(-0x08__00_00_00) } }
-                tag("incRed") { Link { vm.updateCounter(0x00__08_00_00) } }
-                tag("decRed") { Link { vm.updateCounter(-0x00__08_00_00) } }
-                tag("incGreen") { Link { vm.updateCounter(0x00__00_08_00) } }
-                tag("decGreen") { Link { vm.updateCounter(-0x00__00_08_00) } }
-                tag("incBlue") { Link { vm.updateCounter(0x00__00_00_08) } }
-                tag("decBlue") { Link { vm.updateCounter(-0x00__00_00_08) } }
+                tag("incAlpha") { AndroidLink { vm.updateCounter(0x08__00_00_00) } }
+                tag("decAlpha") { AndroidLink { vm.updateCounter(-0x08__00_00_00) } }
+                tag("incRed") { AndroidLink { vm.updateCounter(0x00__08_00_00) } }
+                tag("decRed") { AndroidLink { vm.updateCounter(-0x00__08_00_00) } }
+                tag("incGreen") { AndroidLink { vm.updateCounter(0x00__00_08_00) } }
+                tag("decGreen") { AndroidLink { vm.updateCounter(-0x00__00_08_00) } }
+                tag("incBlue") { AndroidLink { vm.updateCounter(0x00__00_00_08) } }
+                tag("decBlue") { AndroidLink { vm.updateCounter(-0x00__00_00_08) } }
 
-                tag("inc") { Link { vm.updateCounter(1) } }
-                tag("dec") { Link { vm.updateCounter(-1) } }
+                tag("inc") { AndroidLink { vm.updateCounter(1) } }
+                tag("dec") { AndroidLink { vm.updateCounter(-1) } }
 
                 tag("colorFromContext") { ForegroundColorFromString() }
 

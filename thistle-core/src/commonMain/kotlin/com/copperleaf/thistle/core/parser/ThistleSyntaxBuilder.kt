@@ -213,8 +213,12 @@ class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, Tag : Any, Rich
             ThistleValueNode.ContextValue(
                 it.text,
                 { context: Map<String, Any> ->
-                    check(context.containsKey(mapKeyNode.text)) {
-                        "Error: Context must contain value for key '${mapKeyNode.text}'"
+                    if(!context.containsKey(mapKeyNode.text)) {
+                        throw ThistleMissingContextValueException(
+                            nodeContext = mapKeyNode.context,
+                            key = mapKeyNode.text,
+                            context = context,
+                        )
                     }
 
                     context[mapKeyNode.text]!!

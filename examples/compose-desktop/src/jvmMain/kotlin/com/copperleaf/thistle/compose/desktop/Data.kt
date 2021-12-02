@@ -51,15 +51,15 @@ object Data {
         "this text is in {{b}}bold{{/b}} style",
         "this text is in {{italic}}italic{{/italic}} style",
         "this text is in {{i}}italic{{/i}} style",
-        "this text is in {{style style=\"bold\"}}bold{{/style}} style",
-        "this text is in {{style style=italic}}italic{{/style}} style",
+//        "this text is in {{style style=\"bold\"}}bold{{/style}} style",
+//        "this text is in {{style style=italic}}italic{{/style}} style",
 
         "this is an {{inc}}increment{{/inc}} link",
         "this is an {{dec}}decrement{{/dec}} link",
-        "this is an {{url url=\"https://www.example.com/\"}}www.example.com{{/url}} link",
+//        "this is an {{url url=\"https://www.example.com/\"}}www.example.com{{/url}} link",
 
-        "this is an {{icon drawable=@drawable/ic_android}}icon{{/icon}}",
-        "this is an {{androidIcon}}androidIcon{{/androidIcon}}",
+//        "this is an {{icon drawable=@drawable/ic_android}}icon{{/icon}}",
+//        "this is an {{androidIcon}}androidIcon{{/androidIcon}}",
 
         "this is {{monospace}}monospace{{/monospace}} text",
         "this is {{sans}}sans-serif{{/sans}} text",

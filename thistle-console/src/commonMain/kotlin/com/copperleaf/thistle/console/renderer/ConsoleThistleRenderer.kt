@@ -54,7 +54,6 @@ class ConsoleThistleRenderer(
                     }
                     is ThistleValueMapNode -> {
                         val tagArgs = openingTagNode.getValueMap(context)
-                        println("tags.keys=${tags.keys}")
                         val span: ThistleTagFactory<ConsoleThistleRenderContext, AnsiEscapeCode> = tags[tagName]!!
 
                         appendChild({

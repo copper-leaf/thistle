@@ -7,13 +7,13 @@ import com.copperleaf.thistle.android.renderer.AndroidThistleRenderContext
 import com.copperleaf.thistle.android.renderer.AndroidThistleRenderer
 import com.copperleaf.thistle.android.tags.AndroidBackgroundColor
 import com.copperleaf.thistle.android.tags.AndroidForegroundColor
-import com.copperleaf.thistle.android.tags.Icon
-import com.copperleaf.thistle.android.tags.Strikethrough
+import com.copperleaf.thistle.android.tags.AndroidIcon
+import com.copperleaf.thistle.android.tags.AndroidStrikethrough
 import com.copperleaf.thistle.android.tags.AndroidStyle
-import com.copperleaf.thistle.android.tags.Subscript
-import com.copperleaf.thistle.android.tags.Superscript
+import com.copperleaf.thistle.android.tags.AndroidSubscript
+import com.copperleaf.thistle.android.tags.AndroidSuperscript
 import com.copperleaf.thistle.android.tags.AndroidTypeface
-import com.copperleaf.thistle.android.tags.Underline
+import com.copperleaf.thistle.android.tags.AndroidUnderline
 import com.copperleaf.thistle.android.tags.AndroidUrl
 import com.copperleaf.thistle.core.ThistleRendererFactory
 import com.copperleaf.thistle.core.asThistleValueParser
@@ -43,20 +43,20 @@ class AndroidDefaults(
 
             tag("typeface") { AndroidTypeface() }
             tag("monospace") { AndroidTypeface(android.graphics.Typeface.MONOSPACE) }
-            tag("sans") { AndroidTypeface(android.graphics.Typeface.MONOSPACE) }
-            tag("serif") { AndroidTypeface(android.graphics.Typeface.MONOSPACE) }
+            tag("sans") { AndroidTypeface(android.graphics.Typeface.SANS_SERIF) }
+            tag("serif") { AndroidTypeface(android.graphics.Typeface.SERIF) }
 
-            tag("strikethrough") { Strikethrough() }
+            tag("strikethrough") { AndroidStrikethrough() }
 
-            tag("subscript") { Subscript() }
-            tag("superscript") { Superscript() }
+            tag("subscript") { AndroidSubscript() }
+            tag("superscript") { AndroidSuperscript() }
 
             tag("url") { AndroidUrl() }
-            tag("icon") { Icon() }
+            tag("icon") { AndroidIcon() }
 
             tag("b") { AndroidStyle(android.graphics.Typeface.BOLD) }
             tag("i") { AndroidStyle(android.graphics.Typeface.ITALIC) }
-            tag("u") { Underline() }
+            tag("u") { AndroidUnderline() }
 
             valueFormat {
                 ResourceReferenceParser(uiContext, packageName).asThistleValueParser()

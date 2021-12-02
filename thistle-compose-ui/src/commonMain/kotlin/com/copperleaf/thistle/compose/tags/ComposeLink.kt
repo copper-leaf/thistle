@@ -9,27 +9,18 @@ import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
 
 class ComposeLink(
-    val color: Color? = null,
-    private val handler: () -> Unit
+    private val color: Color = Color.Unspecified,
+    private val handler: (String) -> Unit
 ) : ThistleTagFactory<ComposeThistleRenderContext, ComposeSpanWrapper> {
     override fun invoke(renderContext: ComposeThistleRenderContext): ComposeSpanWrapper {
         return checkArgs(renderContext) {
-            if (color != null) {
-                ComposeSpanWrapper(
-                    spanStyle = SpanStyle(
-                        color = color,
-                        textDecoration = TextDecoration.Underline
-                    ),
-                    clickHandler = handler
-                )
-            } else {
-                ComposeSpanWrapper(
-                    spanStyle = SpanStyle(
-                        textDecoration = TextDecoration.Underline
-                    ),
-                    clickHandler = handler
-                )
-            }
+            ComposeSpanWrapper(
+                spanStyle = SpanStyle(
+                    color = color,
+                    textDecoration = TextDecoration.Underline
+                ),
+                clickHandler = { handler(renderContext.content) }
+            )
         }
     }
 }

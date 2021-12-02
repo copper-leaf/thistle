@@ -1,23 +1,31 @@
 package com.copperleaf.thistle.compose.tags
 
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.font.FontFamily
 import com.copperleaf.thistle.compose.ComposeSpanWrapper
-import com.copperleaf.thistle.compose.color
 import com.copperleaf.thistle.compose.renderer.ComposeThistleRenderContext
 import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
+import com.copperleaf.thistle.core.renderer.enum
 
-class ComposeForegroundColor(
-    private val hardcodedColor: Color? = null
+class ComposeFontFamily(
+    private val hardcodedFontFamily: FontFamily? = null,
 ) : ThistleTagFactory<ComposeThistleRenderContext, ComposeSpanWrapper> {
     override fun invoke(renderContext: ComposeThistleRenderContext): ComposeSpanWrapper {
         return checkArgs(renderContext) {
-            val color: Color by color(hardcodedColor)
+            val typeface: FontFamily by enum(hardcodedFontFamily) {
+                mapOf(
+                    "monospace" to FontFamily.Monospace,
+                    "sans" to FontFamily.SansSerif,
+                    "serif" to FontFamily.Serif,
+                    "cursive" to FontFamily.Cursive,
+                    "default" to FontFamily.Default,
+                )
+            }
 
             ComposeSpanWrapper(
                 SpanStyle(
-                    color = color
+                    fontFamily = typeface,
                 )
             )
         }

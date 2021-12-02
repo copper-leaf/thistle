@@ -30,3 +30,27 @@ class ThistleUnknownTagException(
         }
     }
 }
+
+class ThistleMissingContextValueException(
+    val nodeContext: NodeContext,
+    val key: String,
+    val context: Map<String, Any>,
+) : ThistleException(
+    createErrorMessage(
+        nodeContext,
+        key,
+        context
+    )
+) {
+
+    companion object {
+        @Suppress("UNUSED_PARAMETER")
+        private fun createErrorMessage(
+            nodeContext: NodeContext,
+            key: String,
+            context: Map<String, Any>,
+        ): String {
+            return "At $nodeContext: Context must contain value for key '$key'"
+        }
+    }
+}

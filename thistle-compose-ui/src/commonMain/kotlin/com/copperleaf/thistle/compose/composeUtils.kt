@@ -2,17 +2,21 @@ package com.copperleaf.thistle.compose
 
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.text.BasicText
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import com.copperleaf.kudzu.node.NodeContext
@@ -23,6 +27,8 @@ import com.copperleaf.thistle.compose.renderer.ComposeThistleRenderContext
 import com.copperleaf.thistle.core.node.ThistleRootNode
 import com.copperleaf.thistle.core.parser.ThistleParser
 import com.copperleaf.thistle.core.parser.ThistleUnknownTagException
+import com.copperleaf.thistle.core.renderer.ThistleTagsArgs
+import kotlin.properties.ReadOnlyProperty
 
 /**
  * Parse the [input] string and render it to [AnnotatedString] for use as the content of a [Text] composable.
@@ -42,12 +48,12 @@ fun rememberRichText(
     thistle: ThistleParser<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText>,
     input: String,
     context: Map<String, Any> = emptyMap(),
-    onErrorDefaultTo: ((Exception) -> String)? = null
+    onErrorDefaultTo: ((Throwable) -> String)? = null
 ): ComposeRichText {
     val rootNode = remember(input) {
         val inputContext = ParserContext.fromString(input)
 
-        val errorHandler = { e: Exception ->
+        val errorHandler = { e: Throwable ->
             onErrorDefaultTo
                 ?.invoke(e)
                 ?.let {
@@ -80,24 +86,34 @@ data class ComposeSpanWrapper(
     val inlineContent: InlineTextContent? = null,
 )
 
-data class ComposeRichText(
-    val result: AnnotatedString,
-    private val clickHandlers: List<()->Unit>,
-    val inlineContent: Map<String, InlineTextContent>,
-) {
-    fun onClick(offset: Int) {
-        result
-            .getStringAnnotations(
-                tag = "thistleLinkHandler",
-                start = offset,
-                end = offset,
-            )
-            .firstOrNull()
-            ?.let { annotation ->
-                val index = annotation.item.toInt()
-                clickHandlers[index].invoke()
-            }
+sealed class ComposeRichText {
+
+    abstract val ast: ThistleRootNode
+
+    data class Success(
+        override val ast: ThistleRootNode,
+        val result: AnnotatedString,
+        private val clickHandlers: List<()->Unit>,
+        val inlineContent: Map<String, InlineTextContent>,
+    ) : ComposeRichText() {
+        fun onClick(offset: Int) {
+            result
+                .getStringAnnotations(
+                    tag = "thistleLinkHandler",
+                    start = offset,
+                    end = offset,
+                )
+                .firstOrNull()
+                ?.let { annotation ->
+                    val index = annotation.item.toInt()
+                    clickHandlers[index].invoke()
+                }
+        }
     }
+    data class Failure(
+        override val ast: ThistleRootNode,
+        val throwable: Throwable,
+    ) : ComposeRichText()
 }
 
 fun Modifier.detectRichTextClicks(
@@ -107,7 +123,7 @@ fun Modifier.detectRichTextClicks(
     return this.pointerInput(layoutResult, richText) {
         detectTapGestures { pos ->
             layoutResult?.let {
-                richText.onClick(it.getOffsetForPosition(pos))
+                (richText as? ComposeRichText.Success)?.onClick(it.getOffsetForPosition(pos))
             }
         }
     }
@@ -154,7 +170,7 @@ fun RichText(
     thistle: ThistleParser<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText>,
     modifier: Modifier = Modifier,
     context: Map<String, Any> = emptyMap(),
-    onErrorDefaultTo: ((Exception) -> String)? = null,
+    onErrorDefaultTo: ((Throwable) -> String)? = null,
     style: TextStyle = TextStyle.Default,
     softWrap: Boolean = true,
     overflow: TextOverflow = TextOverflow.Clip,
@@ -169,8 +185,17 @@ fun RichText(
     )
     val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
 
+    val displayedText: AnnotatedString by derivedStateOf {
+        when(richText) {
+            is ComposeRichText.Success -> richText.result
+            is ComposeRichText.Failure -> buildAnnotatedString {
+                append(onErrorDefaultTo?.invoke(richText.throwable) ?: "")
+            }
+        }
+    }
+
     BasicText(
-        text = richText.result,
+        text = displayedText,
         modifier = modifier
             .detectRichTextClicks(layoutResult.value, richText),
         style = style,
@@ -182,4 +207,76 @@ fun RichText(
             onTextLayout(it)
         }
     )
+}
+
+inline fun ThistleTagsArgs.color(
+    value: Color? = null,
+    name: String? = null,
+): ReadOnlyProperty<Nothing?, Color> = parameter<Any, Color>(
+    value,
+    name
+) { _, v ->
+    if(v is String) {
+        Color.parse(v)
+    } else if(v is Int) {
+        Color(v)
+    } else if(v is Color) {
+        v
+    } else {
+        error("Color value must be an Int or String, got $v")
+    }
+}
+
+fun Color.Companion.parse(input: String): Color {
+    val trimmed = input.trim()
+    return parseColorAsName(trimmed)
+        ?: parseColorAsHex(trimmed)
+        ?: Color.Unspecified
+}
+
+fun Color.serializeArgb(): String {
+    val v = (0xFFFFFFFFu and this.toArgb().toUInt()).toString(16).padStart(8, '0')
+    return "#$v"
+}
+
+fun Color.serializeRgb(): String {
+    val v = (0xFFFFFFu and this.toArgb().toUInt()).toString(16).padStart(6, '0')
+    return "#$v"
+}
+
+private fun parseColorAsName(input: String): Color? {
+    return when (input.lowercase()) {
+        "black" -> Color.Black
+        "blue" -> Color.Blue
+        "cyan" -> Color.Cyan
+        "darkgray" -> Color.DarkGray
+        "gray" -> Color.Gray
+        "green" -> Color.Green
+        "lightgray" -> Color.LightGray
+        "magenta" -> Color.Magenta
+        "red" -> Color.Red
+        "white" -> Color.White
+        "yellow" -> Color.Yellow
+        else -> null
+    }
+}
+
+private fun parseColorAsHex(input: String): Color? {
+    if(input.startsWith("#")) {
+        if(input.length == 7) {
+            val r = input.substring(1..2).toInt(16)
+            val g = input.substring(3..4).toInt(16)
+            val b = input.substring(5..6).toInt(16)
+            return Color(r, g, b)
+        }
+        else if(input.length == 9) {
+            val a = input.substring(1..2).toInt(16)
+            val r = input.substring(3..4).toInt(16)
+            val g = input.substring(5..6).toInt(16)
+            val b = input.substring(7..8).toInt(16)
+            return Color(r, g, b, a)
+        }
+    }
+
+    return null
 }
