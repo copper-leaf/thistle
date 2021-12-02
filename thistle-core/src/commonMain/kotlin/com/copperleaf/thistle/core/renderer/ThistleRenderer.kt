@@ -5,11 +5,11 @@ import com.copperleaf.thistle.core.node.ThistleRootNode
 
 @ExperimentalStdlibApi
 @Suppress("UNCHECKED_CAST")
-abstract class ThistleRenderer<RenderContext : ThistleRenderContext, Tag : Any, RichText : Any>(
-    protected val tags: ThistleTagMap<RenderContext, Tag, RichText>
+abstract class ThistleRenderer<RenderContext : ThistleRenderContext, Tag : Any, StyledText : Any>(
+    protected val tags: ThistleTagMap<RenderContext, Tag, StyledText>
 ) {
     abstract fun render(
         rootNode: ThistleRootNode,
         context: Map<String, Any> = emptyMap()
-    ): RichText
+    ): StyledText
 }

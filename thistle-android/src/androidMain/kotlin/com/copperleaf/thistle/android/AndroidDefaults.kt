@@ -1,6 +1,7 @@
 package com.copperleaf.thistle.android
 
 import android.content.Context
+import android.graphics.Typeface
 import android.text.Spanned
 import com.copperleaf.thistle.android.parser.ResourceReferenceParser
 import com.copperleaf.thistle.android.renderer.AndroidThistleRenderContext
@@ -42,9 +43,9 @@ class AndroidDefaults(
             tag("style") { AndroidStyle() }
 
             tag("typeface") { AndroidTypeface() }
-            tag("monospace") { AndroidTypeface(android.graphics.Typeface.MONOSPACE) }
-            tag("sans") { AndroidTypeface(android.graphics.Typeface.SANS_SERIF) }
-            tag("serif") { AndroidTypeface(android.graphics.Typeface.SERIF) }
+            tag("monospace") { AndroidTypeface(Typeface.MONOSPACE) }
+            tag("sans") { AndroidTypeface(Typeface.SANS_SERIF) }
+            tag("serif") { AndroidTypeface(Typeface.SERIF) }
 
             tag("strikethrough") { AndroidStrikethrough() }
 
@@ -54,8 +55,8 @@ class AndroidDefaults(
             tag("url") { AndroidUrl() }
             tag("icon") { AndroidIcon() }
 
-            tag("b") { AndroidStyle(android.graphics.Typeface.BOLD) }
-            tag("i") { AndroidStyle(android.graphics.Typeface.ITALIC) }
+            tag("b") { AndroidStyle(Typeface.BOLD) }
+            tag("i") { AndroidStyle(Typeface.ITALIC) }
             tag("u") { AndroidUnderline() }
 
             valueFormat {

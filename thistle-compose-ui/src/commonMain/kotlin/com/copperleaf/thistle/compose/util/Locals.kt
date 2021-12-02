@@ -10,15 +10,15 @@ import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
 
 @ExperimentalStdlibApi
 typealias ComposeSyntaxBuilder
-    = ThistleSyntaxBuilder<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText>
+    = ThistleSyntaxBuilder<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>
 
 @ExperimentalStdlibApi
 typealias ComposeSyntaxBuilderDefaults
-    = ThistleSyntaxBuilder.Defaults<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText>
+    = ThistleSyntaxBuilder.Defaults<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>
 
 @ExperimentalStdlibApi
 typealias ComposeThistleParser
-    = ThistleParser<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText>
+    = ThistleParser<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>
 
 @ExperimentalStdlibApi
 val LocalThistle = staticCompositionLocalOf<ComposeThistleParser> {
@@ -41,12 +41,12 @@ private val LocalThistleConfiguration = staticCompositionLocalOf<List<ComposeSyn
 }
 
 /**
- * Provide a LocalThistle for [RichText] composables.
+ * Provide a LocalThistle for [StyledText] composables.
  */
 @ExperimentalStdlibApi
 @Composable
 fun ProvideThistle(
-    defaults: ComposeSyntaxBuilderDefaults = ComposeDefaults,
+    defaults: ComposeSyntaxBuilderDefaults = ComposeDefaults(),
     additionalConfiguration: ComposeSyntaxBuilder.() -> Unit = {},
     context: Map<String, Any> = emptyMap(),
     content: @Composable () -> Unit,

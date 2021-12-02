@@ -1,3 +1,9 @@
+## 2.0.0 - 2021-12-03
+
+- Adds Compose target
+- Splits Android and Console targets into separate artifacts
+- Other minor refactoring of core APIs (some class names/packages may be slightly different)
+
 ## 1.4.0 - 2021-07-15
 
 - Make tag names dynamic and checked against configured tags to ensure no tag is left unparsed, and undeclared tags throw and error

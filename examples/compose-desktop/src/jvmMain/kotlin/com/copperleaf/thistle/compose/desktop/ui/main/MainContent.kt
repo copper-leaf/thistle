@@ -34,8 +34,8 @@ import androidx.compose.ui.unit.sp
 import com.copperleaf.thistle.compose.tags.ComposeLink
 import com.copperleaf.thistle.compose.util.ProvideAdditionalThistleConfiguration
 import com.copperleaf.thistle.compose.util.ProvideAdditionalThistleContext
-import com.copperleaf.thistle.compose.util.RichText
-import com.copperleaf.thistle.compose.util.rememberRichText
+import com.copperleaf.thistle.compose.util.StyledText
+import com.copperleaf.thistle.compose.util.rememberStyledText
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalStdlibApi::class)
@@ -60,7 +60,7 @@ fun MainContent(
                 tag("inc") { ComposeLink(linkColor) { count += 10 } }
                 tag("dec") { ComposeLink(linkColor) { count += -10 } }
             }) {
-                RichText(
+                StyledText(
                     text = "{{dec}}dec{{/dec}} | {{inc}}inc{{/inc}}",
                     onErrorDefaultTo = { it.message ?: "" },
                 )
@@ -99,7 +99,7 @@ fun MainContent(
                             Column(Modifier.weight(1f)) {
                                 Text("Counter", fontSize = 24.sp)
 
-                                RichText(
+                                StyledText(
                                     text = headerTextContextCounter,
                                     onErrorDefaultTo = { it.message ?: "" },
                                 )
@@ -107,7 +107,7 @@ fun MainContent(
                             Column(Modifier.weight(1f)) {
                                 Text("Input", fontSize = 24.sp)
 
-                                RichText(
+                                StyledText(
                                     text = headerTextContextColor,
                                     onErrorDefaultTo = { it.message ?: "" },
                                 )
@@ -147,11 +147,11 @@ fun MainContent(
                                                 Text(item)
                                                 if (showAst) {
                                                     Divider(Modifier.padding(vertical = 8.dp))
-                                                    val richTextAst = rememberRichText(
+                                                    val styledTextAst = rememberStyledText(
                                                         input = item,
                                                         onErrorDefaultTo = { it.message ?: "" },
                                                     )
-                                                    Text(richTextAst.ast.toString())
+                                                    Text(styledTextAst.ast.toString())
                                                 }
                                             }
 
@@ -163,7 +163,7 @@ fun MainContent(
                                                     .wrapContentHeight()
                                                     .padding(16.dp)
                                             ) {
-                                                RichText(
+                                                StyledText(
                                                     text = item,
                                                     onErrorDefaultTo = { it.message ?: "" },
                                                 )

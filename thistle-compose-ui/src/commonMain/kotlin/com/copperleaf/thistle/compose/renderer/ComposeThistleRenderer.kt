@@ -10,7 +10,7 @@ import com.copperleaf.kudzu.node.NonTerminalNode
 import com.copperleaf.kudzu.node.many.ManyNode
 import com.copperleaf.kudzu.node.tag.TagNode
 import com.copperleaf.kudzu.node.text.TextNode
-import com.copperleaf.thistle.compose.util.ComposeRichText
+import com.copperleaf.thistle.compose.util.ComposeStyledText
 import com.copperleaf.thistle.compose.util.ComposeSpanWrapper
 import com.copperleaf.thistle.core.ThistleTagMap
 import com.copperleaf.thistle.core.node.ThistleInterpolateNode
@@ -21,8 +21,8 @@ import com.copperleaf.thistle.core.renderer.ThistleRenderer
 
 @ExperimentalStdlibApi
 class ComposeThistleRenderer(
-    tags: ThistleTagMap<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText>
-) : ThistleRenderer<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText>(tags) {
+    tags: ThistleTagMap<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>
+) : ThistleRenderer<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>(tags) {
 
     private var linkId = 0
     private var linkHandlers = mutableListOf<() -> Unit>()
@@ -30,19 +30,19 @@ class ComposeThistleRenderer(
     private var inlineContentId = 0
     private var inlineContentHandlers = mutableMapOf<String, InlineTextContent>()
 
-    override fun render(rootNode: ThistleRootNode, context: Map<String, Any>): ComposeRichText {
+    override fun render(rootNode: ThistleRootNode, context: Map<String, Any>): ComposeStyledText {
         return kotlin.runCatching {
             val annotatedString = buildAnnotatedString {
                 renderToBuilder(rootNode, context)
             }
-            ComposeRichText.Success(
+            ComposeStyledText.Success(
                 rootNode,
                 annotatedString,
                 linkHandlers.toList(),
                 inlineContentHandlers.toMap()
             )
         }.getOrElse {
-            ComposeRichText.Failure(
+            ComposeStyledText.Failure(
                 rootNode,
                 it,
             )

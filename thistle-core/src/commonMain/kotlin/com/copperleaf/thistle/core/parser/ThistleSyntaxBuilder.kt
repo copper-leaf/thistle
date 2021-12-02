@@ -31,18 +31,18 @@ import com.copperleaf.thistle.core.node.ThistleValueNode
 import com.copperleaf.thistle.core.renderer.ThistleRenderContext
 
 @ExperimentalStdlibApi
-class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, Tag : Any, RichText : Any> {
+class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, Tag : Any, StyledText : Any> {
 
-    interface Defaults<RenderContext : ThistleRenderContext, Tag : Any, RichText : Any> {
-        fun applyToBuilder(builder: ThistleSyntaxBuilder<RenderContext, Tag, RichText>)
+    interface Defaults<RenderContext : ThistleRenderContext, Tag : Any, StyledText : Any> {
+        fun applyToBuilder(builder: ThistleSyntaxBuilder<RenderContext, Tag, StyledText>)
 
-        fun rendererFactory(): ThistleRendererFactory<RenderContext, Tag, RichText>
+        fun rendererFactory(): ThistleRendererFactory<RenderContext, Tag, StyledText>
     }
 
 // Public API
 // ---------------------------------------------------------------------------------------------------------------------
 
-    fun from(other: ThistleSyntaxBuilder.Defaults<RenderContext, Tag, RichText>) {
+    fun from(other: ThistleSyntaxBuilder.Defaults<RenderContext, Tag, StyledText>) {
         other.applyToBuilder(this)
     }
 

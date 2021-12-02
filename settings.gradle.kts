@@ -6,6 +6,7 @@ include(":thistle-console")
 include(":thistle-compose-ui")
 
 include(":examples:android")
+include(":examples:compose-android")
 include(":examples:compose-desktop")
 
 include(":docs")

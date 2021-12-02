@@ -12,7 +12,7 @@ android {
         targetSdk = 31
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
 
-        applicationId = "com.copperleaf.thistle.app"
+        applicationId = "com.copperleaf.thistle.android"
         versionCode = 1
         versionName = "1.0"
     }

@@ -100,11 +100,11 @@ private fun checkValidNode(
 }
 
 @Suppress("UNUSED_TYPEALIAS_PARAMETER")
-typealias ThistleTagMap<RenderContext, Tag, RichText> = Map<String, ThistleTagFactory<RenderContext, Tag>>
+typealias ThistleTagMap<RenderContext, Tag, StyledText> = Map<String, ThistleTagFactory<RenderContext, Tag>>
 
 @ExperimentalStdlibApi
-fun interface ThistleRendererFactory<RenderContext : ThistleRenderContext, Tag : Any, RichText : Any> {
+fun interface ThistleRendererFactory<RenderContext : ThistleRenderContext, Tag : Any, StyledText : Any> {
     fun newRenderer(
-        tags: ThistleTagMap<RenderContext, Tag, RichText>
-    ): ThistleRenderer<RenderContext, Tag, RichText>
+        tags: ThistleTagMap<RenderContext, Tag, StyledText>
+    ): ThistleRenderer<RenderContext, Tag, StyledText>
 }

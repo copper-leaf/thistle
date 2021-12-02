@@ -15,11 +15,11 @@ import com.copperleaf.thistle.core.renderer.ThistleRenderer
 class ThistleParser<
     RenderContext : ThistleRenderContext,
     Tag : Any,
-    RichText : Any
+    StyledText : Any
     > internal constructor(
-    private val tags: ThistleTagMap<RenderContext, Tag, RichText>,
+    private val tags: ThistleTagMap<RenderContext, Tag, StyledText>,
     private val parser: Parser<ThistleRootNode>,
-    private val rendererFactory: ThistleRendererFactory<RenderContext, Tag, RichText>,
+    private val rendererFactory: ThistleRendererFactory<RenderContext, Tag, StyledText>,
 ) : Parser<ThistleRootNode> by parser {
 
     internal val tagNames: Set<String> = tags.keys
@@ -32,14 +32,14 @@ class ThistleParser<
         )
     }
 
-    fun newRenderer(): ThistleRenderer<RenderContext, Tag, RichText> = rendererFactory.newRenderer(tags)
+    fun newRenderer(): ThistleRenderer<RenderContext, Tag, StyledText> = rendererFactory.newRenderer(tags)
 
     companion object {
-        operator fun <RenderContext : ThistleRenderContext, Tag : Any, RichText : Any> invoke(
-            defaults: ThistleSyntaxBuilder.Defaults<RenderContext, Tag, RichText>,
-            block: ThistleSyntaxBuilder<RenderContext, Tag, RichText>.() -> Unit = {}
-        ): ThistleParser<RenderContext, Tag, RichText> {
-            val (interpolate, tags) = ThistleSyntaxBuilder<RenderContext, Tag, RichText>()
+        operator fun <RenderContext : ThistleRenderContext, Tag : Any, StyledText : Any> invoke(
+            defaults: ThistleSyntaxBuilder.Defaults<RenderContext, Tag, StyledText>,
+            block: ThistleSyntaxBuilder<RenderContext, Tag, StyledText>.() -> Unit = {}
+        ): ThistleParser<RenderContext, Tag, StyledText> {
+            val (interpolate, tags) = ThistleSyntaxBuilder<RenderContext, Tag, StyledText>()
                 .apply {
                     block()
                     from(defaults)

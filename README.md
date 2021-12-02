@@ -5,7 +5,7 @@
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/copper-leaf/thistle)
 ![Maven Central](https://img.shields.io/maven-central/v/io.github.copper-leaf/thistle-core)
-![Kotlin Version](https://img.shields.io/badge/Kotlin-1.4.32-orange)
+![Kotlin Version](https://img.shields.io/badge/Kotlin-1.5.31-orange)
 
 ```kotlin
 // Android

@@ -13,22 +13,21 @@ import com.copperleaf.thistle.compose.tags.ComposeFontFamily
 import com.copperleaf.thistle.compose.tags.ComposeForegroundColor
 import com.copperleaf.thistle.compose.tags.ComposeStyle
 import com.copperleaf.thistle.compose.tags.ComposeTextDecoration
-import com.copperleaf.thistle.compose.tags.ComposeUrl
-import com.copperleaf.thistle.compose.util.ComposeRichText
 import com.copperleaf.thistle.compose.util.ComposeSpanWrapper
+import com.copperleaf.thistle.compose.util.ComposeStyledText
 import com.copperleaf.thistle.core.ThistleRendererFactory
 import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
 
 @ExperimentalStdlibApi
-object ComposeDefaults : ThistleSyntaxBuilder.Defaults<
+class ComposeDefaults() : ThistleSyntaxBuilder.Defaults<
         ComposeThistleRenderContext,
         ComposeSpanWrapper,
-        ComposeRichText> {
+        ComposeStyledText> {
 
     override fun rendererFactory(): ThistleRendererFactory<
         ComposeThistleRenderContext,
         ComposeSpanWrapper,
-        ComposeRichText> {
+        ComposeStyledText> {
         return ThistleRendererFactory { ComposeThistleRenderer(it) }
     }
 
@@ -36,7 +35,7 @@ object ComposeDefaults : ThistleSyntaxBuilder.Defaults<
      * Adds the default set of Compose tags to the [ThistleSyntaxBuilder].
      */
     override fun applyToBuilder(
-        builder: ThistleSyntaxBuilder<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeRichText>
+        builder: ThistleSyntaxBuilder<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>
     ) {
         with(builder) {
             tag("foreground") { ComposeForegroundColor() }
@@ -54,7 +53,7 @@ object ComposeDefaults : ThistleSyntaxBuilder.Defaults<
             tag("subscript") { ComposeBaselineShift(BaselineShift.Subscript) }
             tag("superscript") { ComposeBaselineShift(BaselineShift.Superscript) }
 
-            tag("url") { ComposeUrl() { } }
+//            tag("url") { ComposeUrl { } }
 //            tag("icon") { ComposeIcon() }
 
             tag("b") { ComposeStyle(hardcodedWeight = FontWeight.Bold, hardcodedStyle = FontStyle.Normal) }

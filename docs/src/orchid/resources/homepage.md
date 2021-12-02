@@ -7,7 +7,7 @@ Kotlin multiplatform String markup library, inspired by [SRML](https://github.co
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/copper-leaf/thistle)
 ![Maven Central](https://img.shields.io/maven-central/v/io.github.copper-leaf/thistle-core)
-![Kotlin Version](https://img.shields.io/badge/Kotlin-1.4.32-orange)
+![Kotlin Version](https://img.shields.io/badge/Kotlin-1.5.31-orange)
 
 ## Overview
 
@@ -19,9 +19,9 @@ Kotlin multiplatform String markup library, inspired by [SRML](https://github.co
 
 **Sample App**
 
-![sample_app]({{ 'assets/media/sample_app.gif'|asset }})
+![sample_app]({{ 'assets/media/sample_android.gif'|asset }})
 
-[View sample app source](https://github.com/copper-leaf/thistle/tree/master/app)
+[View sample app source](https://github.com/copper-leaf/thistle/tree/master/examples)
 
 ## Installation
 
@@ -33,6 +33,9 @@ repositories {
 // for plain JVM or Android projects
 dependencies {
     implementation("io.github.copper-leaf:thistle-core:{{site.version}}")
+    implementation("io.github.copper-leaf:thistle-android:{{site.version}}")
+    implementation("io.github.copper-leaf:thistle-compose:{{site.version}}")
+    implementation("io.github.copper-leaf:thistle-console:{{site.version}}")
 }
 
 // for multiplatform projects
@@ -41,6 +44,9 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("io.github.copper-leaf:thistle-core:{{site.version}}")
+                implementation("io.github.copper-leaf:thistle-android:{{site.version}}")
+                implementation("io.github.copper-leaf:thistle-compose:{{site.version}}")
+                implementation("io.github.copper-leaf:thistle-console:{{site.version}}")
             }
         }
     }
@@ -176,7 +182,7 @@ makes this simpler, and also allows you to change the span formatting at runtime
 {% snippet 'android-basic-usage' %}
 ```
 
-![sample_android_app]({{ 'assets/media/sample_app.gif'|asset }})
+![sample_android_app]({{ 'assets/media/sample_android.gif'|asset }})
 
 **Default Tags**
 
@@ -203,9 +209,47 @@ makes this simpler, and also allows you to change the span formatting at runtime
 
 {% endverbatim %}
 
+- [Android Example project](https://github.com/copper-leaf/thistle/tree/master/examples/android)
+
 ### Compose UI (AnnotatedString)
 
-TODO (follow issue [here](https://github.com/copper-leaf/thistle/issues/1))
+Thistle supporting rendering to Compose UI by building an `AnnotatedString`, which supports both 
+Android and Desktop. The set of available tags for Compose are the same as Android (except it is 
+missing `icon` and `url`), allowing one to freely share Thistle strings between the standard and 
+Compose Android renderers, if needed.
+
+```kotlin
+{% snippet 'compose-basic-usage' %}
+```
+
+![sample_android_app]({{ 'assets/media/sample_compose.png'|asset }})
+
+**Default Tags**
+
+{% verbatim %}
+
+| Tag Name      | Params                            | Description                                                        | Example |
+| ------------- | --------------------------------- | ------------------------------------------------------------------ | ------- |
+| foreground    | `color=[hex color]`               | Change text color                                                  | `{{foreground color=#FFFF00}}Text{{/foreground}}`    |
+| background    | `color=[hex color]`               | Change background color                                            | `{{background color=#FFFF00}}Text{{/background}}`    |
+| style         | `style=[bold,italic]`             | Set text to bold or italic by argument                             | `{{style style=bold}}Text{{/style}}`                 |
+| b             | none                              | Set text style to bold                                             | `{{b}}Text{{/b}}`                                    |
+| i             | none                              | Set text style to italic                                           | `{{i}}Text{{/i}}`                                    |
+| u             | none                              | Add underline to text                                              | `{{u}}Text{{/u}}`                                    |
+| strikethrough | none                              | Add strikethrough to text                                          | `{{strikethrough}}Text{{/strikethrough}}`            |
+| typeface      | `typeface=[monospace,sans,serif]` | Change the typeface to monospace, serif, or sans-serif by argument | `{{typeface typeface=serif}}Text{{/typeface}}`       |
+| monospace     | none                              | Change the typeface to monospace                                   | `{{monospace}}Text{{/monospace}}`                    |
+| sans          | none                              | Change the typeface to sans-serif                                  | `{{sans}}Text{{/sans}}`                              |
+| serif         | none                              | Change the typeface to serif                                       | `{{serif}}Text{{/serif}}`                            |
+| subscript     | none                              | Move text to a subscript                                           | `{{subscript}}Text{{/subscript}}`                    |
+| superscript   | none                              | Move text to a superscript                                         | `{{superscript}}Text{{/superscript}}`                |
+| url           | `url=[String]`                    | Make text a clickable link                                         | `{{url url="https://www.example.com/"}}Text{{/url}}` |
+{.table}
+
+{% endverbatim %}
+
+- [Compose Android Example project](https://github.com/copper-leaf/thistle/tree/master/examples/compose-android)
+- [Compose Desktop Example project](https://github.com/copper-leaf/thistle/tree/master/examples/compose-desktop)
 
 ### iOS (NSAttributedString)
 
