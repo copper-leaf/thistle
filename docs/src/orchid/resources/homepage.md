@@ -66,7 +66,7 @@ repositories {
 dependencies {
     implementation("io.github.copper-leaf:thistle-core:{{site.version}}")
     implementation("io.github.copper-leaf:thistle-android:{{site.version}}")
-    implementation("io.github.copper-leaf:thistle-compose:{{site.version}}")
+    implementation("io.github.copper-leaf:thistle-compose-ui:{{site.version}}")
     implementation("io.github.copper-leaf:thistle-console:{{site.version}}")
 }
 
@@ -77,7 +77,7 @@ kotlin {
             dependencies {
                 implementation("io.github.copper-leaf:thistle-core:{{site.version}}")
                 implementation("io.github.copper-leaf:thistle-android:{{site.version}}")
-                implementation("io.github.copper-leaf:thistle-compose:{{site.version}}")
+                implementation("io.github.copper-leaf:thistle-compose-ui:{{site.version}}")
                 implementation("io.github.copper-leaf:thistle-console:{{site.version}}")
             }
         }

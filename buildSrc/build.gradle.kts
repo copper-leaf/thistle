@@ -14,4 +14,5 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31")
     implementation("org.jlleitschuh.gradle:ktlint-gradle:10.2.0")
     implementation("org.jetbrains.compose:compose-gradle-plugin:1.0.0")
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
 }

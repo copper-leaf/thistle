@@ -57,6 +57,9 @@ repositories {
 // for plain JVM or Android projects
 dependencies {
     implementation("io.github.copper-leaf:thistle-core:{{site.version}}")
+    implementation("io.github.copper-leaf:thistle-android:{{site.version}}")
+    implementation("io.github.copper-leaf:thistle-compose-ui:{{site.version}}")
+    implementation("io.github.copper-leaf:thistle-console:{{site.version}}")
 }
 
 // for multiplatform projects
@@ -65,6 +68,9 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("io.github.copper-leaf:thistle-core:{{site.version}}")
+                implementation("io.github.copper-leaf:thistle-android:{{site.version}}")
+                implementation("io.github.copper-leaf:thistle-compose-ui:{{site.version}}")
+                implementation("io.github.copper-leaf:thistle-console:{{site.version}}")
             }
         }
     }
