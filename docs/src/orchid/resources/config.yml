@@ -85,7 +85,7 @@ services:
       - type: githubReleases
         repo: 'copper-leaf/thistle'
         username: 'cjbrooks12'
-        commitish: 'master'
+        commitish: 'main'
       - type: githubPages
         repo: 'copper-leaf/thistle'
         username: 'cjbrooks12'

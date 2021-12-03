@@ -12,7 +12,6 @@ class ThistleTagsArgs(
 ) {
     val argsVisited: MutableList<String> = mutableListOf()
 
-
     fun checkNoMoreArgs() {
         val extraParams = args.keys - argsVisited
         check(extraParams.isEmpty()) {

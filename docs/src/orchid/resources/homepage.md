@@ -87,7 +87,7 @@ kotlin {
 
 ## Syntax
 
-The [sample apps](https://github.com/copper-leaf/thistle/tree/master/examples) demo a variety of 
+The [sample apps](https://github.com/copper-leaf/thistle/tree/main/examples) demo a variety of 
 different tags, use-cases, and customizations, but here's a rundown of the basic syntax (which can 
 be [tweaked](#customization) to your needs).
 
@@ -252,7 +252,7 @@ same `@` syntax used in XML layouts.
 
 {% endverbatim %}
 
-- [Android Example project](https://github.com/copper-leaf/thistle/tree/master/examples/android)
+- [Android Example project](https://github.com/copper-leaf/thistle/tree/main/examples/android)
 
 ### Compose UI
 
@@ -290,8 +290,8 @@ Compose Android renderers, if needed.
 
 {% endverbatim %}
 
-- [Compose Android Example project](https://github.com/copper-leaf/thistle/tree/master/examples/compose-android)
-- [Compose Desktop Example project](https://github.com/copper-leaf/thistle/tree/master/examples/compose-desktop)
+- [Compose Android Example project](https://github.com/copper-leaf/thistle/tree/main/examples/compose-android)
+- [Compose Desktop Example project](https://github.com/copper-leaf/thistle/tree/main/examples/compose-desktop)
 
 ### Console
 
