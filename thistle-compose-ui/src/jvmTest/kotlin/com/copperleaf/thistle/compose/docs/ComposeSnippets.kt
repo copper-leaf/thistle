@@ -12,13 +12,23 @@ import com.copperleaf.thistle.compose.util.StyledText
  * TODO: setup Robolectric to actually test these
  */
 /* ktlint-disable max-line-length */
-@Suppress("UNUSED_ANONYMOUS_PARAMETER")
+@Suppress("UNUSED_ANONYMOUS_PARAMETER", "UNUSED_PARAMETER")
 @ExperimentalStdlibApi
 class ComposeSnippets {
 
     @Composable
     private fun MaterialTheme(block: @Composable () -> Unit) {
+    }
 
+    @Composable
+    fun composePreview() {
+        // snippet::compose-preview[compose,preview]
+        MaterialTheme {
+            ProvideThistle {
+                StyledText("Text with {{b}}bold{{/b}} or {{foreground color=#ff0000}}red{{/foreground}} styles")
+            }
+        }
+        // end::compose-preview
     }
 
     @Composable
@@ -36,7 +46,6 @@ class ComposeSnippets {
                 ProvideAdditionalThistleConfiguration({
                     tag("newTag") { TODO() }
                 }) {
-
                 }
 
                 // Add data to the Thistle Context variables for the UI sub-tree.
@@ -45,7 +54,6 @@ class ComposeSnippets {
                 ProvideAdditionalThistleContext(
                     mapOf("a" to "b")
                 ) {
-
                 }
 
                 // Parse a formatted string to an AnnotatedString instance, and set that as the text of a BasicText

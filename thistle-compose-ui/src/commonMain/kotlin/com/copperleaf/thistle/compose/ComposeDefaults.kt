@@ -53,9 +53,6 @@ class ComposeDefaults() : ThistleSyntaxBuilder.Defaults<
             tag("subscript") { ComposeBaselineShift(BaselineShift.Subscript) }
             tag("superscript") { ComposeBaselineShift(BaselineShift.Superscript) }
 
-//            tag("url") { ComposeUrl { } }
-//            tag("icon") { ComposeIcon() }
-
             tag("b") { ComposeStyle(hardcodedWeight = FontWeight.Bold, hardcodedStyle = FontStyle.Normal) }
             tag("i") { ComposeStyle(hardcodedWeight = FontWeight.Normal, hardcodedStyle = FontStyle.Italic) }
             tag("u") { ComposeTextDecoration(TextDecoration.Underline) }

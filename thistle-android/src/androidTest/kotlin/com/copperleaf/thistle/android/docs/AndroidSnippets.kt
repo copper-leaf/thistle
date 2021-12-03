@@ -35,13 +35,13 @@ class AndroidSnippets {
     lateinit var context: Context
 
     fun mainBasicUsage() {
-        // snippet::main-basic-usage[]
+        // snippet::android-preview[android,preview]
         val thistle = ThistleParser(AndroidDefaults(context))
         binding.textView.applyStyledText(
             thistle,
-            "This is a {{b}}very important{{/b}}, {{foreground color=#ff0000}}urgent{{/foreground}} message!"
+            "Text with {{b}}bold{{/b}} or {{foreground color=#ff0000}}red{{/foreground}} styles"
         )
-        // end::main-basic-usage
+        // end::android-preview
     }
 
     fun androidBasicUsage() {

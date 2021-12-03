@@ -1,0 +1,188 @@
+public final class com/copperleaf/thistle/core/BuildConfig {
+	public static final field BUILD_TYPE Ljava/lang/String;
+	public static final field DEBUG Z
+	public static final field LIBRARY_PACKAGE_NAME Ljava/lang/String;
+	public fun <init> ()V
+}
+
+public final class com/copperleaf/thistle/core/CommonUtilsKt {
+	public static final fun asThistleValueParser (Lcom/copperleaf/kudzu/parser/Parser;)Lcom/copperleaf/kudzu/parser/Parser;
+	public static final fun checkArgs (Lcom/copperleaf/thistle/core/parser/ThistleTagFactory;Lcom/copperleaf/thistle/core/renderer/ThistleRenderContext;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+}
+
+public abstract interface class com/copperleaf/thistle/core/ThistleRendererFactory {
+	public abstract fun newRenderer (Ljava/util/Map;)Lcom/copperleaf/thistle/core/renderer/ThistleRenderer;
+}
+
+public final class com/copperleaf/thistle/core/node/ThistleInterpolateNode : com/copperleaf/kudzu/node/TerminalNode {
+	public fun <init> (Ljava/lang/String;Lcom/copperleaf/kudzu/node/NodeContext;)V
+	public final fun getKey ()Ljava/lang/String;
+	public fun getText ()Ljava/lang/String;
+	public final fun getValue (Ljava/util/Map;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/core/node/ThistleRootNode : com/copperleaf/kudzu/node/NonTerminalNode {
+	public fun <init> (Ljava/util/List;Lcom/copperleaf/kudzu/node/NodeContext;)V
+	public fun getChildren ()Ljava/util/List;
+	public final fun getNodeList ()Ljava/util/List;
+}
+
+public final class com/copperleaf/thistle/core/node/ThistleValueMapNode : com/copperleaf/kudzu/node/TerminalNode {
+	public fun <init> (Ljava/util/Map;Lcom/copperleaf/kudzu/node/NodeContext;)V
+	public fun getText ()Ljava/lang/String;
+	public final fun getValueMap ()Ljava/util/Map;
+	public final fun getValueMap (Ljava/util/Map;)Ljava/util/Map;
+}
+
+public abstract class com/copperleaf/thistle/core/node/ThistleValueNode : com/copperleaf/kudzu/node/TerminalNode {
+	public synthetic fun <init> (Lcom/copperleaf/kudzu/node/NodeContext;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public abstract fun getValue (Ljava/util/Map;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/core/node/ThistleValueNode$ContextValue : com/copperleaf/thistle/core/node/ThistleValueNode {
+	public fun <init> (Ljava/lang/String;Lkotlin/jvm/functions/Function1;Lcom/copperleaf/kudzu/node/NodeContext;)V
+	public fun getText ()Ljava/lang/String;
+	public fun getValue (Ljava/util/Map;)Ljava/lang/Object;
+	public final fun getValueFn ()Lkotlin/jvm/functions/Function1;
+}
+
+public final class com/copperleaf/thistle/core/node/ThistleValueNode$StaticValue : com/copperleaf/thistle/core/node/ThistleValueNode {
+	public fun <init> (Ljava/lang/Object;Lcom/copperleaf/kudzu/node/NodeContext;)V
+	public fun getText ()Ljava/lang/String;
+	public final fun getValue ()Ljava/lang/Object;
+	public fun getValue (Ljava/util/Map;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/core/parser/DefaultThistleSyntax : com/copperleaf/thistle/core/parser/ThistleSyntax {
+	public fun <init> (Lcom/copperleaf/kudzu/parser/Parser;Lcom/copperleaf/kudzu/parser/Parser;Lcom/copperleaf/kudzu/parser/Parser;Lcom/copperleaf/kudzu/parser/Parser;Lcom/copperleaf/kudzu/parser/Parser;Lcom/copperleaf/kudzu/parser/Parser;Lcom/copperleaf/kudzu/parser/Parser;)V
+	public fun interpolate ()Lcom/copperleaf/kudzu/parser/Parser;
+	public fun tagEnd ()Lcom/copperleaf/kudzu/parser/Parser;
+	public fun tagStart ()Lcom/copperleaf/kudzu/parser/Parser;
+}
+
+public abstract class com/copperleaf/thistle/core/parser/ThistleException : java/lang/Exception {
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class com/copperleaf/thistle/core/parser/ThistleMissingContextValueException : com/copperleaf/thistle/core/parser/ThistleException {
+	public static final field Companion Lcom/copperleaf/thistle/core/parser/ThistleMissingContextValueException$Companion;
+	public fun <init> (Lcom/copperleaf/kudzu/node/NodeContext;Ljava/lang/String;Ljava/util/Map;)V
+	public final fun getContext ()Ljava/util/Map;
+	public final fun getKey ()Ljava/lang/String;
+	public final fun getNodeContext ()Lcom/copperleaf/kudzu/node/NodeContext;
+}
+
+public final class com/copperleaf/thistle/core/parser/ThistleMissingContextValueException$Companion {
+}
+
+public final class com/copperleaf/thistle/core/parser/ThistleParser : com/copperleaf/kudzu/parser/Parser {
+	public static final field Companion Lcom/copperleaf/thistle/core/parser/ThistleParser$Companion;
+	public fun getParse ()Lkotlin/DeepRecursiveFunction;
+	public final fun newRenderer ()Lcom/copperleaf/thistle/core/renderer/ThistleRenderer;
+	public final fun parse (Lcom/copperleaf/kudzu/parser/ParserContext;)Lcom/copperleaf/thistle/core/node/ThistleRootNode;
+	public fun predict (Lcom/copperleaf/kudzu/parser/ParserContext;)Z
+}
+
+public final class com/copperleaf/thistle/core/parser/ThistleParser$Companion {
+	public final fun invoke (Lcom/copperleaf/thistle/core/parser/ThistleSyntaxBuilder$Defaults;Lkotlin/jvm/functions/Function1;)Lcom/copperleaf/thistle/core/parser/ThistleParser;
+	public static synthetic fun invoke$default (Lcom/copperleaf/thistle/core/parser/ThistleParser$Companion;Lcom/copperleaf/thistle/core/parser/ThistleSyntaxBuilder$Defaults;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/copperleaf/thistle/core/parser/ThistleParser;
+}
+
+public abstract interface class com/copperleaf/thistle/core/parser/ThistleSyntax {
+	public abstract fun interpolate ()Lcom/copperleaf/kudzu/parser/Parser;
+	public abstract fun tagEnd ()Lcom/copperleaf/kudzu/parser/Parser;
+	public abstract fun tagStart ()Lcom/copperleaf/kudzu/parser/Parser;
+}
+
+public final class com/copperleaf/thistle/core/parser/ThistleSyntaxBuilder {
+	public static final field Companion Lcom/copperleaf/thistle/core/parser/ThistleSyntaxBuilder$Companion;
+	public fun <init> ()V
+	public final fun build ()Lkotlin/Pair;
+	public final fun customSyntax (Lcom/copperleaf/kudzu/parser/Parser;Lcom/copperleaf/kudzu/parser/Parser;Lcom/copperleaf/kudzu/parser/Parser;Lcom/copperleaf/kudzu/parser/Parser;Lcom/copperleaf/kudzu/parser/Parser;Lcom/copperleaf/kudzu/parser/Parser;)V
+	public final fun customSyntax (Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun customSyntax$default (Lcom/copperleaf/thistle/core/parser/ThistleSyntaxBuilder;Lcom/copperleaf/kudzu/parser/Parser;Lcom/copperleaf/kudzu/parser/Parser;Lcom/copperleaf/kudzu/parser/Parser;Lcom/copperleaf/kudzu/parser/Parser;Lcom/copperleaf/kudzu/parser/Parser;Lcom/copperleaf/kudzu/parser/Parser;ILjava/lang/Object;)V
+	public final fun from (Lcom/copperleaf/thistle/core/parser/ThistleSyntaxBuilder$Defaults;)V
+	public final fun tag (Ljava/lang/String;Lkotlin/jvm/functions/Function0;)V
+	public final fun valueFormat (Lkotlin/jvm/functions/Function0;)V
+}
+
+public final class com/copperleaf/thistle/core/parser/ThistleSyntaxBuilder$Companion {
+	public final fun getContextValueParser ()Lcom/copperleaf/kudzu/parser/Parser;
+	public final fun getHexColorAsIntValueParser ()Lcom/copperleaf/kudzu/parser/Parser;
+	public final fun getUnquotedStringValueValueParser ()Lcom/copperleaf/kudzu/parser/Parser;
+}
+
+public abstract interface class com/copperleaf/thistle/core/parser/ThistleSyntaxBuilder$Defaults {
+	public abstract fun applyToBuilder (Lcom/copperleaf/thistle/core/parser/ThistleSyntaxBuilder;)V
+	public abstract fun rendererFactory ()Lcom/copperleaf/thistle/core/ThistleRendererFactory;
+}
+
+public final class com/copperleaf/thistle/core/parser/ThistleTagConfiguration {
+	public fun <init> (Lcom/copperleaf/kudzu/parser/tag/TagBuilder;Lcom/copperleaf/thistle/core/parser/ThistleTagFactory;)V
+	public final fun component1 ()Lcom/copperleaf/kudzu/parser/tag/TagBuilder;
+	public final fun component2 ()Lcom/copperleaf/thistle/core/parser/ThistleTagFactory;
+	public final fun copy (Lcom/copperleaf/kudzu/parser/tag/TagBuilder;Lcom/copperleaf/thistle/core/parser/ThistleTagFactory;)Lcom/copperleaf/thistle/core/parser/ThistleTagConfiguration;
+	public static synthetic fun copy$default (Lcom/copperleaf/thistle/core/parser/ThistleTagConfiguration;Lcom/copperleaf/kudzu/parser/tag/TagBuilder;Lcom/copperleaf/thistle/core/parser/ThistleTagFactory;ILjava/lang/Object;)Lcom/copperleaf/thistle/core/parser/ThistleTagConfiguration;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getKudzuTagBuilder ()Lcom/copperleaf/kudzu/parser/tag/TagBuilder;
+	public final fun getTagFactory ()Lcom/copperleaf/thistle/core/parser/ThistleTagFactory;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/copperleaf/thistle/core/parser/ThistleTagFactory {
+	public abstract fun invoke (Lcom/copperleaf/thistle/core/renderer/ThistleRenderContext;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/core/parser/ThistleUnknownTagException : com/copperleaf/thistle/core/parser/ThistleException {
+	public static final field Companion Lcom/copperleaf/thistle/core/parser/ThistleUnknownTagException$Companion;
+	public fun <init> (Ljava/lang/String;Lcom/copperleaf/kudzu/node/NodeContext;Ljava/lang/String;Ljava/util/Set;)V
+	public final fun getInput ()Ljava/lang/String;
+	public final fun getPosition ()Lcom/copperleaf/kudzu/node/NodeContext;
+	public final fun getUnknownTagName ()Ljava/lang/String;
+	public final fun getValidTagNames ()Ljava/util/Set;
+}
+
+public final class com/copperleaf/thistle/core/parser/ThistleUnknownTagException$Companion {
+}
+
+public final class com/copperleaf/thistle/core/renderer/LazyThistleParameterProvider : kotlin/Lazy, kotlin/properties/ReadOnlyProperty {
+	public fun <init> (Lcom/copperleaf/thistle/core/renderer/ThistleTagsArgs;Ljava/lang/Object;Ljava/lang/String;Lkotlin/reflect/KClass;Lkotlin/jvm/functions/Function1;Lkotlin/reflect/KClass;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Lcom/copperleaf/thistle/core/renderer/ThistleTagsArgs;Ljava/lang/Object;Ljava/lang/String;Lkotlin/reflect/KClass;Lkotlin/jvm/functions/Function1;Lkotlin/reflect/KClass;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getValue ()Ljava/lang/Object;
+	public synthetic fun getValue (Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+	public fun getValue (Ljava/lang/Void;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+	public fun isInitialized ()Z
+}
+
+public abstract interface class com/copperleaf/thistle/core/renderer/ThistleRenderContext {
+	public abstract fun getArgs ()Ljava/util/Map;
+	public abstract fun getContext ()Ljava/util/Map;
+}
+
+public abstract class com/copperleaf/thistle/core/renderer/ThistleRenderer {
+	public fun <init> (Ljava/util/Map;)V
+	protected final fun getTags ()Ljava/util/Map;
+	public abstract fun render (Lcom/copperleaf/thistle/core/node/ThistleRootNode;Ljava/util/Map;)Ljava/lang/Object;
+	public static synthetic fun render$default (Lcom/copperleaf/thistle/core/renderer/ThistleRenderer;Lcom/copperleaf/thistle/core/node/ThistleRootNode;Ljava/util/Map;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/core/renderer/ThistleTagsArgs {
+	public fun <init> (Lcom/copperleaf/thistle/core/parser/ThistleTagFactory;Ljava/util/Map;)V
+	public final fun checkNoMoreArgs ()V
+	public final fun getArgs ()Ljava/util/Map;
+	public final fun getArgsVisited ()Ljava/util/List;
+	public final fun getTagFactory ()Lcom/copperleaf/thistle/core/parser/ThistleTagFactory;
+}
+
+public final class com/copperleaf/thistle/core/renderer/ThistleTagsArgsKt {
+	public static final fun boolean (Lcom/copperleaf/thistle/core/renderer/ThistleTagsArgs;Ljava/lang/Boolean;Ljava/lang/String;)Lkotlin/properties/ReadOnlyProperty;
+	public static synthetic fun boolean$default (Lcom/copperleaf/thistle/core/renderer/ThistleTagsArgs;Ljava/lang/Boolean;Ljava/lang/String;ILjava/lang/Object;)Lkotlin/properties/ReadOnlyProperty;
+	public static final fun double (Lcom/copperleaf/thistle/core/renderer/ThistleTagsArgs;Ljava/lang/Double;Ljava/lang/String;)Lkotlin/properties/ReadOnlyProperty;
+	public static synthetic fun double$default (Lcom/copperleaf/thistle/core/renderer/ThistleTagsArgs;Ljava/lang/Double;Ljava/lang/String;ILjava/lang/Object;)Lkotlin/properties/ReadOnlyProperty;
+	public static final fun int (Lcom/copperleaf/thistle/core/renderer/ThistleTagsArgs;Ljava/lang/Integer;Ljava/lang/String;)Lkotlin/properties/ReadOnlyProperty;
+	public static synthetic fun int$default (Lcom/copperleaf/thistle/core/renderer/ThistleTagsArgs;Ljava/lang/Integer;Ljava/lang/String;ILjava/lang/Object;)Lkotlin/properties/ReadOnlyProperty;
+	public static final fun string (Lcom/copperleaf/thistle/core/renderer/ThistleTagsArgs;Ljava/lang/String;Ljava/lang/String;)Lkotlin/properties/ReadOnlyProperty;
+	public static synthetic fun string$default (Lcom/copperleaf/thistle/core/renderer/ThistleTagsArgs;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lkotlin/properties/ReadOnlyProperty;
+}
+

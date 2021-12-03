@@ -213,7 +213,7 @@ class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, Tag : Any, Styl
             ThistleValueNode.ContextValue(
                 it.text,
                 { context: Map<String, Any> ->
-                    if(!context.containsKey(mapKeyNode.text)) {
+                    if (!context.containsKey(mapKeyNode.text)) {
                         throw ThistleMissingContextValueException(
                             nodeContext = mapKeyNode.context,
                             key = mapKeyNode.text,

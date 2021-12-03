@@ -1,0 +1,149 @@
+public final class com/copperleaf/thistle/android/BuildConfig {
+	public static final field APPLICATION_ID Ljava/lang/String;
+	public static final field BUILD_TYPE Ljava/lang/String;
+	public static final field DEBUG Z
+	public static final field VERSION_CODE I
+	public static final field VERSION_NAME Ljava/lang/String;
+	public fun <init> ()V
+}
+
+public final class com/copperleaf/thistle/android/Data {
+	public static final field INSTANCE Lcom/copperleaf/thistle/android/Data;
+	public final fun getHeaderTextContextColor ()Ljava/lang/String;
+	public final fun getHeaderTextContextCounter ()Ljava/lang/String;
+	public final fun getInputs ()Ljava/util/List;
+}
+
+public final class com/copperleaf/thistle/android/MainActivity : androidx/appcompat/app/AppCompatActivity {
+	public fun <init> ()V
+}
+
+public final class com/copperleaf/thistle/android/databinding/MainActivityBinding : androidx/viewbinding/ViewBinding {
+	public final field container Landroid/widget/FrameLayout;
+	public static fun bind (Landroid/view/View;)Lcom/copperleaf/thistle/android/databinding/MainActivityBinding;
+	public synthetic fun getRoot ()Landroid/view/View;
+	public fun getRoot ()Landroid/widget/FrameLayout;
+	public static fun inflate (Landroid/view/LayoutInflater;)Lcom/copperleaf/thistle/android/databinding/MainActivityBinding;
+	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lcom/copperleaf/thistle/android/databinding/MainActivityBinding;
+}
+
+public final class com/copperleaf/thistle/android/databinding/MainFragmentBinding : androidx/viewbinding/ViewBinding {
+	public final field cbShowAst Landroid/widget/CheckBox;
+	public final field etContextColor Lcom/google/android/material/textfield/TextInputEditText;
+	public final field headerArea Landroid/widget/LinearLayout;
+	public final field rvExamples Landroidx/recyclerview/widget/RecyclerView;
+	public final field tvColor Landroid/widget/TextView;
+	public final field tvCounter Landroid/widget/TextView;
+	public static fun bind (Landroid/view/View;)Lcom/copperleaf/thistle/android/databinding/MainFragmentBinding;
+	public synthetic fun getRoot ()Landroid/view/View;
+	public fun getRoot ()Landroidx/constraintlayout/widget/ConstraintLayout;
+	public static fun inflate (Landroid/view/LayoutInflater;)Lcom/copperleaf/thistle/android/databinding/MainFragmentBinding;
+	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lcom/copperleaf/thistle/android/databinding/MainFragmentBinding;
+}
+
+public final class com/copperleaf/thistle/android/databinding/ThistleExampleBinding : androidx/viewbinding/ViewBinding {
+	public final field ast Landroid/widget/TextView;
+	public final field astLayout Landroid/widget/FrameLayout;
+	public final field input Landroid/widget/TextView;
+	public final field output Landroid/widget/TextView;
+	public static fun bind (Landroid/view/View;)Lcom/copperleaf/thistle/android/databinding/ThistleExampleBinding;
+	public synthetic fun getRoot ()Landroid/view/View;
+	public fun getRoot ()Landroid/widget/LinearLayout;
+	public static fun inflate (Landroid/view/LayoutInflater;)Lcom/copperleaf/thistle/android/databinding/ThistleExampleBinding;
+	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lcom/copperleaf/thistle/android/databinding/ThistleExampleBinding;
+}
+
+public final class com/copperleaf/thistle/android/ui/main/ExampleAdapter : androidx/recyclerview/widget/RecyclerView$Adapter {
+	public fun <init> (Lcom/copperleaf/thistle/android/ui/main/MainViewModel$State;)V
+	public fun getItemCount ()I
+	public synthetic fun onBindViewHolder (Landroidx/recyclerview/widget/RecyclerView$ViewHolder;I)V
+	public fun onBindViewHolder (Lcom/copperleaf/thistle/android/ui/main/ExampleAdapter$ViewHolder;I)V
+	public synthetic fun onCreateViewHolder (Landroid/view/ViewGroup;I)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+	public fun onCreateViewHolder (Landroid/view/ViewGroup;I)Lcom/copperleaf/thistle/android/ui/main/ExampleAdapter$ViewHolder;
+	public final fun onNewState (Lcom/copperleaf/thistle/android/ui/main/MainViewModel$State;)V
+}
+
+public final class com/copperleaf/thistle/android/ui/main/ExampleAdapter$ViewHolder : androidx/recyclerview/widget/RecyclerView$ViewHolder {
+	public fun <init> (Lcom/copperleaf/thistle/android/databinding/ThistleExampleBinding;)V
+	public final fun bind (Lcom/copperleaf/thistle/android/ui/main/InputCache;Lcom/copperleaf/thistle/android/ui/main/MainViewModel$State;)V
+}
+
+public final class com/copperleaf/thistle/android/ui/main/ForegroundColorFromString : com/copperleaf/thistle/core/parser/ThistleTagFactory {
+	public fun <init> ()V
+	public fun invoke (Lcom/copperleaf/thistle/android/renderer/AndroidThistleRenderContext;)Ljava/lang/Object;
+	public synthetic fun invoke (Lcom/copperleaf/thistle/core/renderer/ThistleRenderContext;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/android/ui/main/InputCache {
+	public fun <init> (Ljava/lang/String;Lcom/copperleaf/thistle/core/node/ThistleRootNode;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lcom/copperleaf/thistle/core/node/ThistleRootNode;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Lcom/copperleaf/thistle/core/node/ThistleRootNode;Ljava/lang/String;)Lcom/copperleaf/thistle/android/ui/main/InputCache;
+	public static synthetic fun copy$default (Lcom/copperleaf/thistle/android/ui/main/InputCache;Ljava/lang/String;Lcom/copperleaf/thistle/core/node/ThistleRootNode;Ljava/lang/String;ILjava/lang/Object;)Lcom/copperleaf/thistle/android/ui/main/InputCache;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAstString ()Ljava/lang/String;
+	public final fun getRootNode ()Lcom/copperleaf/thistle/core/node/ThistleRootNode;
+	public final fun getText ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun render (Lcom/copperleaf/thistle/core/parser/ThistleParser;Ljava/util/Map;)Landroid/text/Spanned;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/copperleaf/thistle/android/ui/main/MainFragment : androidx/fragment/app/Fragment {
+	public fun <init> ()V
+	public fun onCreateView (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;)Landroid/view/View;
+	public fun onViewCreated (Landroid/view/View;Landroid/os/Bundle;)V
+}
+
+public final class com/copperleaf/thistle/android/ui/main/MainViewModel : androidx/lifecycle/ViewModel {
+	public fun <init> (Lcom/copperleaf/thistle/android/ui/main/MainViewModel$State;)V
+	public final fun getState ()Lkotlinx/coroutines/flow/StateFlow;
+	public final fun toggleShowAst ()V
+	public final fun updateColorInContext (Ljava/lang/String;)V
+	public final fun updateCounter (I)V
+}
+
+public final class com/copperleaf/thistle/android/ui/main/MainViewModel$State {
+	public static final field Companion Lcom/copperleaf/thistle/android/ui/main/MainViewModel$State$Companion;
+	public fun <init> (Lcom/copperleaf/thistle/core/parser/ThistleParser;Lcom/copperleaf/thistle/android/ui/main/InputCache;Lcom/copperleaf/thistle/android/ui/main/InputCache;Ljava/util/List;ZLjava/util/Map;)V
+	public fun <init> (Lcom/copperleaf/thistle/core/parser/ThistleParser;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;ZLjava/util/Map;)V
+	public final fun component1 ()Lcom/copperleaf/thistle/core/parser/ThistleParser;
+	public final fun component2 ()Lcom/copperleaf/thistle/android/ui/main/InputCache;
+	public final fun component3 ()Lcom/copperleaf/thistle/android/ui/main/InputCache;
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Z
+	public final fun component6 ()Ljava/util/Map;
+	public final fun copy (Lcom/copperleaf/thistle/core/parser/ThistleParser;Lcom/copperleaf/thistle/android/ui/main/InputCache;Lcom/copperleaf/thistle/android/ui/main/InputCache;Ljava/util/List;ZLjava/util/Map;)Lcom/copperleaf/thistle/android/ui/main/MainViewModel$State;
+	public static synthetic fun copy$default (Lcom/copperleaf/thistle/android/ui/main/MainViewModel$State;Lcom/copperleaf/thistle/core/parser/ThistleParser;Lcom/copperleaf/thistle/android/ui/main/InputCache;Lcom/copperleaf/thistle/android/ui/main/InputCache;Ljava/util/List;ZLjava/util/Map;ILjava/lang/Object;)Lcom/copperleaf/thistle/android/ui/main/MainViewModel$State;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getHeaderTextContextColor ()Lcom/copperleaf/thistle/android/ui/main/InputCache;
+	public final fun getHeaderTextContextCounter ()Lcom/copperleaf/thistle/android/ui/main/InputCache;
+	public final fun getInputs ()Ljava/util/List;
+	public final fun getShowAst ()Z
+	public final fun getThistle ()Lcom/copperleaf/thistle/core/parser/ThistleParser;
+	public final fun getThistleContext ()Ljava/util/Map;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/copperleaf/thistle/android/ui/main/MainViewModel$State$Companion {
+	public final fun parseFromThistle (Ljava/lang/String;Lcom/copperleaf/thistle/core/parser/ThistleParser;)Lcom/copperleaf/thistle/android/ui/main/InputCache;
+}
+
+public final class com/copperleaf/thistle/android/ui/main/MainViewModelFactory : androidx/lifecycle/ViewModelProvider$Factory {
+	public fun <init> (Landroid/content/Context;)V
+	public fun create (Ljava/lang/Class;)Landroidx/lifecycle/ViewModel;
+}
+
+public final class com/copperleaf/thistle/android/ui/main/OnClickDisplayInnerContent : com/copperleaf/thistle/core/parser/ThistleTagFactory {
+	public fun <init> ()V
+	public fun invoke (Lcom/copperleaf/thistle/android/renderer/AndroidThistleRenderContext;)Ljava/lang/Object;
+	public synthetic fun invoke (Lcom/copperleaf/thistle/core/renderer/ThistleRenderContext;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/android/ui/main/SimpleDividerItemDecoration : androidx/recyclerview/widget/RecyclerView$ItemDecoration {
+	public fun <init> (Landroid/content/Context;I)V
+	public fun onDrawOver (Landroid/graphics/Canvas;Landroidx/recyclerview/widget/RecyclerView;)V
+}
+

@@ -9,7 +9,7 @@ import com.copperleaf.kudzu.parser.Parser
 import com.copperleaf.kudzu.parser.ParserContext
 import com.copperleaf.kudzu.parser.ParserException
 import com.copperleaf.kudzu.parser.ParserResult
-import kotlin.test.*
+import kotlin.test.assertEquals
 
 fun <T : Node> ParserResult<T>?.parsedCorrectly(
     expected: String? = null,
@@ -125,13 +125,13 @@ fun <T> T.isEqualTo(other: Any?): T {
 }
 
 inline fun <reified T> Any.isA(): T {
-    check(this is T)
+    check(this is T) { "Expected this to be ${T::class}, got $this" }
 
     return this
 }
 
 fun <T> T.isSameInstanceAs(other: Any?): T {
-    check(this === other)
+    check(this === other) { "Expected same instances. This=$this, other=$other" }
 
     return this
 }
@@ -141,7 +141,7 @@ fun Boolean.isFalse() {
 }
 
 fun <T> T?.isNotNull(): T {
-    return checkNotNull(this)
+    return checkNotNull(this) { "Expected value to be non-null, but it was null" }
 }
 
 fun Boolean.isTrue() {

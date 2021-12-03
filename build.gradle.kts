@@ -3,3 +3,10 @@ plugins {
     `copper-leaf-version`
     id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.8.0"
 }
+
+apiValidation {
+    /**
+     * Sub-projects that are excluded from API validation
+     */
+    ignoredProjects.addAll(listOf("examples"))
+}

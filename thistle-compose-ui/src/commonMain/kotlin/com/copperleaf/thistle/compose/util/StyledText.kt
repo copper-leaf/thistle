@@ -127,7 +127,6 @@ fun Modifier.detectStyledTextClicks(
     }
 }
 
-
 /**
  * A continent version of [BasicText] component to be able to handle click event on the text.
  *
@@ -206,4 +205,3 @@ fun StyledText(
         }
     )
 }
-

@@ -2,6 +2,7 @@ package com.copperleaf.thistle.console
 
 import com.copperleaf.kudzu.parser.ParserException
 import com.copperleaf.thistle.core.parser.ThistleParser
+import com.copperleaf.thistle.core.parser.ThistleUnknownTagException
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -12,7 +13,7 @@ class TestConsoleRenderer {
 
     @Test
     fun consoleRendererTests() {
-        val thistle = ThistleParser(ConsoleDefaults)
+        val thistle = ThistleParser(ConsoleDefaults())
 
         listOf(
             "begin {{foreground color=red bright=false}}foreground{{/foreground}} end",
@@ -71,7 +72,7 @@ class TestConsoleRenderer {
 
     @Test
     fun testMismatchedEndTag() {
-        val thistle = ThistleParser(ConsoleDefaults)
+        val thistle = ThistleParser(ConsoleDefaults())
         assertFailsWith<ParserException> {
             printlnStyledText(thistle, "begin {{black}}normal black foreground{{/blue}}")
         }.also {
@@ -85,8 +86,8 @@ class TestConsoleRenderer {
 
     @Test
     fun testUnknownTagName() {
-        val thistle = ThistleParser(ConsoleDefaults)
-        assertFailsWith<IllegalStateException> {
+        val thistle = ThistleParser(ConsoleDefaults())
+        assertFailsWith<ThistleUnknownTagException> {
             printlnStyledText(thistle, "begin {{orange}}normal orange foreground{{/orange}}")
         }.also {
             assertEquals(

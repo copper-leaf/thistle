@@ -126,9 +126,9 @@ class TestParser {
                     expectCatching { getValue(contextMap) }
                         .second
                         .isNotNull()
-                        .isA<IllegalStateException>()
+                        .isA<ThistleMissingContextValueException>()
                         .message
-                        .isEqualTo("Error: Context must contain value for key 'three'")
+                        .isEqualTo("At NodeContext(1:9 to 1:14): Context must contain value for key 'three'")
                 }
         }
     }
@@ -285,9 +285,9 @@ class TestParser {
                     expectCatching { getValue(contextMap) }
                         .second
                         .isNotNull()
-                        .isA<IllegalStateException>()
+                        .isA<ThistleMissingContextValueException>()
                         .message
-                        .isEqualTo("Error: Context must contain value for key 'three'")
+                        .isEqualTo("At NodeContext(1:9 to 1:14): Context must contain value for key 'three'")
                 }
         }
     }
@@ -384,9 +384,9 @@ class TestParser {
                     expectCatching { wrapped.getValueMap(contextMap) }
                         .second
                         .isNotNull()
-                        .isA<IllegalStateException>()
+                        .isA<ThistleMissingContextValueException>()
                         .message
-                        .isEqualTo("Error: Context must contain value for key 'four'")
+                        .isEqualTo("At NodeContext(1:19 to 1:23): Context must contain value for key 'four'")
                 }
         }
     }
@@ -451,9 +451,9 @@ class TestParser {
                     expectCatching { wrapped.getValueMap(contextMap) }
                         .second
                         .isNotNull()
-                        .isA<IllegalStateException>()
+                        .isA<ThistleMissingContextValueException>()
                         .message
-                        .isEqualTo("Error: Context must contain value for key 'four'")
+                        .isEqualTo("At NodeContext(1:19 to 1:23): Context must contain value for key 'four'")
                 }
         }
 

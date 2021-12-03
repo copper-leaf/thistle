@@ -9,16 +9,16 @@ import com.copperleaf.thistle.core.parser.ThistleParser
 import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
 
 @ExperimentalStdlibApi
-typealias ComposeSyntaxBuilder
-    = ThistleSyntaxBuilder<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>
+typealias ComposeSyntaxBuilder =
+    ThistleSyntaxBuilder<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>
 
 @ExperimentalStdlibApi
-typealias ComposeSyntaxBuilderDefaults
-    = ThistleSyntaxBuilder.Defaults<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>
+typealias ComposeSyntaxBuilderDefaults =
+    ThistleSyntaxBuilder.Defaults<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>
 
 @ExperimentalStdlibApi
-typealias ComposeThistleParser
-    = ThistleParser<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>
+typealias ComposeThistleParser =
+    ThistleParser<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>
 
 @ExperimentalStdlibApi
 val LocalThistle = staticCompositionLocalOf<ComposeThistleParser> {

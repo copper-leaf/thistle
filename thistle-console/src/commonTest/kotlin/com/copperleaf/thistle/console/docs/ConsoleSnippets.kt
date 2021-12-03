@@ -2,12 +2,13 @@
 package com.copperleaf.thistle.console.docs
 
 import com.copperleaf.thistle.console.ConsoleDefaults
-import com.copperleaf.thistle.console.printlnStyledText
 import com.copperleaf.thistle.console.ansi.AnsiEscapeCode
+import com.copperleaf.thistle.console.printlnStyledText
 import com.copperleaf.thistle.console.renderer.ConsoleThistleRenderContext
 import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleParser
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
+import com.copperleaf.thistle.core.renderer.int
 
 /**
  * The snippets in this file are not actually tested now, but they are used in documentation.
@@ -19,10 +20,20 @@ import com.copperleaf.thistle.core.parser.ThistleTagFactory
 @ExperimentalStdlibApi
 class ConsoleSnippets {
 
+    fun consolePreview() {
+        // snippet::console-preview[console,preview]
+        val thistle = ThistleParser(ConsoleDefaults())
+        printlnStyledText(
+            thistle,
+            "Text with {{b}}bold{{/b}} or {{red}}red{{/red}} styles"
+        )
+        // end::console-preview
+    }
+
     fun consoleBasicUsage() {
         // snippet::console-basic-usage[console]
         // create the Thistle parser. It's best to create this once and inject it wherever needed
-        val thistle = ThistleParser(ConsoleDefaults) // add the default tags for rendering to the console
+        val thistle = ThistleParser(ConsoleDefaults()) // add the default tags for rendering to the console
 
         // parse a formatted string to a ANSI escape codes, and render that to the console with `println()`
         printlnStyledText(
@@ -46,7 +57,7 @@ class ConsoleSnippets {
             }
         }
 
-        val thistle = ThistleParser(ConsoleDefaults) {
+        val thistle = ThistleParser(ConsoleDefaults()) {
             // register your custom tab with the Thistle parser
             tag("customStyle") { CustomStyle() }
         }

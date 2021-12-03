@@ -20,8 +20,10 @@ import com.copperleaf.thistle.core.renderer.ThistleRenderContext
 import com.copperleaf.thistle.core.renderer.ThistleRenderer
 import com.copperleaf.thistle.core.renderer.ThistleTagsArgs
 
-inline fun <RenderContext : ThistleRenderContext, RendererResult : Any>
-ThistleTagFactory<RenderContext, RendererResult>.checkArgs(
+inline fun <
+    RenderContext : ThistleRenderContext,
+    RendererResult : Any
+    > ThistleTagFactory<RenderContext, RendererResult>.checkArgs(
     renderContext: RenderContext,
     crossinline block: ThistleTagsArgs.() -> RendererResult
 ): RendererResult {
@@ -80,7 +82,7 @@ private fun checkValidNode(
                 is ThistleInterpolateNode -> {
                 }
                 is ThistleValueMapNode -> {
-                    if(tagName !in parser.tagNames) {
+                    if (tagName !in parser.tagNames) {
                         throw ThistleUnknownTagException(
                             input = "",
                             position = node.opening.context,

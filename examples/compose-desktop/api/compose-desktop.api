@@ -1,0 +1,48 @@
+public final class com/copperleaf/thistle/compose/desktop/ComposableSingletons$MainKt {
+	public static final field INSTANCE Lcom/copperleaf/thistle/compose/desktop/ComposableSingletons$MainKt;
+	public static field lambda-1 Lkotlin/jvm/functions/Function2;
+	public static field lambda-2 Lkotlin/jvm/functions/Function3;
+	public static field lambda-3 Lkotlin/jvm/functions/Function3;
+	public fun <init> ()V
+	public final fun getLambda-1$compose_desktop ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda-2$compose_desktop ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda-3$compose_desktop ()Lkotlin/jvm/functions/Function3;
+}
+
+public final class com/copperleaf/thistle/compose/desktop/Data {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/copperleaf/thistle/compose/desktop/Data;
+	public final fun getHeaderTextContextColor ()Ljava/lang/String;
+	public final fun getHeaderTextContextCounter ()Ljava/lang/String;
+	public final fun getInputs ()Ljava/util/List;
+}
+
+public final class com/copperleaf/thistle/compose/desktop/MainKt {
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+}
+
+public final class com/copperleaf/thistle/compose/desktop/ui/main/ComposableSingletons$MainContentKt {
+	public static final field INSTANCE Lcom/copperleaf/thistle/compose/desktop/ui/main/ComposableSingletons$MainContentKt;
+	public static field lambda-1 Lkotlin/jvm/functions/Function2;
+	public static field lambda-2 Lkotlin/jvm/functions/Function2;
+	public fun <init> ()V
+	public final fun getLambda-1$compose_desktop ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda-2$compose_desktop ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class com/copperleaf/thistle/compose/desktop/ui/main/ForegroundColorFromString : com/copperleaf/thistle/core/parser/ThistleTagFactory {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun invoke (Lcom/copperleaf/thistle/compose/renderer/ComposeThistleRenderContext;)Lcom/copperleaf/thistle/compose/util/ComposeSpanWrapper;
+	public synthetic fun invoke (Lcom/copperleaf/thistle/core/renderer/ThistleRenderContext;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/compose/desktop/ui/main/MainContentKt {
+	public static final fun MainContent (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class com/copperleaf/thistle/compose/desktop/ui/main/ThistleConfigurationKt {
+	public static final fun ThistleConfiguration (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+}
+

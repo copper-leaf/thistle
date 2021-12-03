@@ -1,0 +1,134 @@
+public final class com/copperleaf/thistle/console/ConsoleDefaults : com/copperleaf/thistle/core/parser/ThistleSyntaxBuilder$Defaults {
+	public fun <init> ()V
+	public fun applyToBuilder (Lcom/copperleaf/thistle/core/parser/ThistleSyntaxBuilder;)V
+	public fun rendererFactory ()Lcom/copperleaf/thistle/core/ThistleRendererFactory;
+}
+
+public final class com/copperleaf/thistle/console/ConsoleUtilsKt {
+	public static final fun printlnStyledText (Lcom/copperleaf/thistle/core/parser/ThistleParser;Ljava/lang/String;Ljava/util/Map;)V
+	public static synthetic fun printlnStyledText$default (Lcom/copperleaf/thistle/core/parser/ThistleParser;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)V
+}
+
+public final class com/copperleaf/thistle/console/ansi/AnsiConstantsKt {
+	public static final field BG_BLACK I
+	public static final field BG_BLUE I
+	public static final field BG_CYAN I
+	public static final field BG_GREEN I
+	public static final field BG_MAGENTA I
+	public static final field BG_RED I
+	public static final field BG_WHITE I
+	public static final field BG_YELLOW I
+	public static final field FG_BLACK I
+	public static final field FG_BLUE I
+	public static final field FG_CYAN I
+	public static final field FG_GREEN I
+	public static final field FG_MAGENTA I
+	public static final field FG_RED I
+	public static final field FG_WHITE I
+	public static final field FG_YELLOW I
+	public static final field STYLE_BOLD I
+	public static final field STYLE_REVERSE I
+	public static final field STYLE_STRIKETHROUGH I
+	public static final field STYLE_UNDERLINE I
+	public static final fun getAnsiBackgroundColorsByName ()Ljava/util/Map;
+	public static final fun getAnsiForegroundColorsByName ()Ljava/util/Map;
+	public static final fun getAnsiStylesByName ()Ljava/util/Map;
+}
+
+public abstract interface annotation class com/copperleaf/thistle/console/ansi/AnsiDsl : java/lang/annotation/Annotation {
+}
+
+public final class com/copperleaf/thistle/console/ansi/AnsiDslKt {
+	public static final fun buildAnsiString (Lkotlin/jvm/functions/Function1;)Lcom/copperleaf/thistle/console/ansi/AnsiTreeNode;
+	public static final fun flatten (Lcom/copperleaf/thistle/console/ansi/AnsiTreeNode;Ljava/util/List;)Ljava/util/List;
+	public static synthetic fun flatten$default (Lcom/copperleaf/thistle/console/ansi/AnsiTreeNode;Ljava/util/List;ILjava/lang/Object;)Ljava/util/List;
+	public static final fun renderToString (Ljava/util/List;)Ljava/lang/String;
+}
+
+public final class com/copperleaf/thistle/console/ansi/AnsiEscapeCode {
+	public static final field Companion Lcom/copperleaf/thistle/console/ansi/AnsiEscapeCode$Companion;
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lcom/copperleaf/thistle/console/ansi/AnsiEscapeCode;
+	public static synthetic fun copy$default (Lcom/copperleaf/thistle/console/ansi/AnsiEscapeCode;Ljava/lang/String;ILjava/lang/Object;)Lcom/copperleaf/thistle/console/ansi/AnsiEscapeCode;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCode ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun renderCode ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/copperleaf/thistle/console/ansi/AnsiEscapeCode$Companion {
+	public final fun BackgroundColorEscapeCode (IZ)Lcom/copperleaf/thistle/console/ansi/AnsiEscapeCode;
+	public static synthetic fun BackgroundColorEscapeCode$default (Lcom/copperleaf/thistle/console/ansi/AnsiEscapeCode$Companion;IZILjava/lang/Object;)Lcom/copperleaf/thistle/console/ansi/AnsiEscapeCode;
+	public final fun ForegroundColorEscapeCode (IZ)Lcom/copperleaf/thistle/console/ansi/AnsiEscapeCode;
+	public static synthetic fun ForegroundColorEscapeCode$default (Lcom/copperleaf/thistle/console/ansi/AnsiEscapeCode$Companion;IZILjava/lang/Object;)Lcom/copperleaf/thistle/console/ansi/AnsiEscapeCode;
+	public final fun StyleEscapeCode (I)Lcom/copperleaf/thistle/console/ansi/AnsiEscapeCode;
+	public final fun renderResetCode ()Ljava/lang/String;
+}
+
+public abstract interface class com/copperleaf/thistle/console/ansi/AnsiNodeScope {
+	public abstract fun appendChild (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)V
+	public abstract fun appendText (Ljava/lang/String;)V
+}
+
+public final class com/copperleaf/thistle/console/ansi/AnsiNodeScopeImpl : com/copperleaf/thistle/console/ansi/AnsiNodeScope {
+	public fun <init> ()V
+	public fun appendChild (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)V
+	public fun appendText (Ljava/lang/String;)V
+}
+
+public final class com/copperleaf/thistle/console/ansi/AnsiStringComponent {
+	public fun <init> (Ljava/util/List;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/util/List;Ljava/lang/String;)Lcom/copperleaf/thistle/console/ansi/AnsiStringComponent;
+	public static synthetic fun copy$default (Lcom/copperleaf/thistle/console/ansi/AnsiStringComponent;Ljava/util/List;Ljava/lang/String;ILjava/lang/Object;)Lcom/copperleaf/thistle/console/ansi/AnsiStringComponent;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEscapeCodes ()Ljava/util/List;
+	public final fun getTextContent ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun renderComponent ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract class com/copperleaf/thistle/console/ansi/AnsiTreeNode {
+}
+
+public final class com/copperleaf/thistle/console/renderer/ConsoleThistleRenderContext : com/copperleaf/thistle/core/renderer/ThistleRenderContext {
+	public fun <init> (Ljava/util/Map;Ljava/util/Map;Ljava/lang/String;)V
+	public fun getArgs ()Ljava/util/Map;
+	public final fun getContent ()Ljava/lang/String;
+	public fun getContext ()Ljava/util/Map;
+}
+
+public final class com/copperleaf/thistle/console/renderer/ConsoleThistleRenderer : com/copperleaf/thistle/core/renderer/ThistleRenderer {
+	public fun <init> (Ljava/util/Map;)V
+	public synthetic fun render (Lcom/copperleaf/thistle/core/node/ThistleRootNode;Ljava/util/Map;)Ljava/lang/Object;
+	public fun render (Lcom/copperleaf/thistle/core/node/ThistleRootNode;Ljava/util/Map;)Ljava/lang/String;
+}
+
+public final class com/copperleaf/thistle/console/tags/ConsoleBackgroundColor : com/copperleaf/thistle/core/parser/ThistleTagFactory {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Integer;Ljava/lang/Boolean;)V
+	public synthetic fun <init> (Ljava/lang/Integer;Ljava/lang/Boolean;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun invoke (Lcom/copperleaf/thistle/console/renderer/ConsoleThistleRenderContext;)Lcom/copperleaf/thistle/console/ansi/AnsiEscapeCode;
+	public synthetic fun invoke (Lcom/copperleaf/thistle/core/renderer/ThistleRenderContext;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/console/tags/ConsoleForegroundColor : com/copperleaf/thistle/core/parser/ThistleTagFactory {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Integer;Ljava/lang/Boolean;)V
+	public synthetic fun <init> (Ljava/lang/Integer;Ljava/lang/Boolean;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun invoke (Lcom/copperleaf/thistle/console/renderer/ConsoleThistleRenderContext;)Lcom/copperleaf/thistle/console/ansi/AnsiEscapeCode;
+	public synthetic fun invoke (Lcom/copperleaf/thistle/core/renderer/ThistleRenderContext;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/console/tags/ConsoleStyle : com/copperleaf/thistle/core/parser/ThistleTagFactory {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Integer;)V
+	public synthetic fun <init> (Ljava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun invoke (Lcom/copperleaf/thistle/console/renderer/ConsoleThistleRenderContext;)Lcom/copperleaf/thistle/console/ansi/AnsiEscapeCode;
+	public synthetic fun invoke (Lcom/copperleaf/thistle/core/renderer/ThistleRenderContext;)Ljava/lang/Object;
+}
+

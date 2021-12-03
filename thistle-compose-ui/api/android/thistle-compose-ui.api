@@ -1,0 +1,187 @@
+public final class com/copperleaf/thistle/compose/BuildConfig {
+	public static final field BUILD_TYPE Ljava/lang/String;
+	public static final field DEBUG Z
+	public static final field LIBRARY_PACKAGE_NAME Ljava/lang/String;
+	public fun <init> ()V
+}
+
+public final class com/copperleaf/thistle/compose/ComposeDefaults : com/copperleaf/thistle/core/parser/ThistleSyntaxBuilder$Defaults {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun applyToBuilder (Lcom/copperleaf/thistle/core/parser/ThistleSyntaxBuilder;)V
+	public fun rendererFactory ()Lcom/copperleaf/thistle/core/ThistleRendererFactory;
+}
+
+public final class com/copperleaf/thistle/compose/renderer/ComposeThistleRenderContext : com/copperleaf/thistle/core/renderer/ThistleRenderContext {
+	public static final field $stable I
+	public fun <init> (Ljava/util/Map;Ljava/util/Map;Ljava/lang/String;)V
+	public fun getArgs ()Ljava/util/Map;
+	public final fun getContent ()Ljava/lang/String;
+	public fun getContext ()Ljava/util/Map;
+}
+
+public final class com/copperleaf/thistle/compose/renderer/ComposeThistleRenderer : com/copperleaf/thistle/core/renderer/ThistleRenderer {
+	public static final field $stable I
+	public fun <init> (Ljava/util/Map;)V
+	public fun render (Lcom/copperleaf/thistle/core/node/ThistleRootNode;Ljava/util/Map;)Lcom/copperleaf/thistle/compose/util/ComposeStyledText;
+	public synthetic fun render (Lcom/copperleaf/thistle/core/node/ThistleRootNode;Ljava/util/Map;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/compose/tags/Bold : com/copperleaf/thistle/core/parser/ThistleTagFactory {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun invoke (Lcom/copperleaf/thistle/compose/renderer/ComposeThistleRenderContext;)Lcom/copperleaf/thistle/compose/util/ComposeSpanWrapper;
+	public synthetic fun invoke (Lcom/copperleaf/thistle/core/renderer/ThistleRenderContext;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/compose/tags/ComposeBackgroundColor : com/copperleaf/thistle/core/parser/ThistleTagFactory {
+	public static final field $stable I
+	public synthetic fun <init> (Landroidx/compose/ui/graphics/Color;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Landroidx/compose/ui/graphics/Color;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun invoke (Lcom/copperleaf/thistle/compose/renderer/ComposeThistleRenderContext;)Lcom/copperleaf/thistle/compose/util/ComposeSpanWrapper;
+	public synthetic fun invoke (Lcom/copperleaf/thistle/core/renderer/ThistleRenderContext;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/compose/tags/ComposeBaselineShift : com/copperleaf/thistle/core/parser/ThistleTagFactory {
+	public static final field $stable I
+	public synthetic fun <init> (Landroidx/compose/ui/text/style/BaselineShift;JILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Landroidx/compose/ui/text/style/BaselineShift;JLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun invoke (Lcom/copperleaf/thistle/compose/renderer/ComposeThistleRenderContext;)Lcom/copperleaf/thistle/compose/util/ComposeSpanWrapper;
+	public synthetic fun invoke (Lcom/copperleaf/thistle/core/renderer/ThistleRenderContext;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/compose/tags/ComposeFontFamily : com/copperleaf/thistle/core/parser/ThistleTagFactory {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun <init> (Landroidx/compose/ui/text/font/FontFamily;)V
+	public synthetic fun <init> (Landroidx/compose/ui/text/font/FontFamily;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun invoke (Lcom/copperleaf/thistle/compose/renderer/ComposeThistleRenderContext;)Lcom/copperleaf/thistle/compose/util/ComposeSpanWrapper;
+	public synthetic fun invoke (Lcom/copperleaf/thistle/core/renderer/ThistleRenderContext;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/compose/tags/ComposeForegroundColor : com/copperleaf/thistle/core/parser/ThistleTagFactory {
+	public static final field $stable I
+	public synthetic fun <init> (Landroidx/compose/ui/graphics/Color;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Landroidx/compose/ui/graphics/Color;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun invoke (Lcom/copperleaf/thistle/compose/renderer/ComposeThistleRenderContext;)Lcom/copperleaf/thistle/compose/util/ComposeSpanWrapper;
+	public synthetic fun invoke (Lcom/copperleaf/thistle/core/renderer/ThistleRenderContext;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/compose/tags/ComposeInlineContent : com/copperleaf/thistle/core/parser/ThistleTagFactory {
+	public static final field $stable I
+	public fun <init> (Landroidx/compose/foundation/text/InlineTextContent;)V
+	public fun invoke (Lcom/copperleaf/thistle/compose/renderer/ComposeThistleRenderContext;)Lcom/copperleaf/thistle/compose/util/ComposeSpanWrapper;
+	public synthetic fun invoke (Lcom/copperleaf/thistle/core/renderer/ThistleRenderContext;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/compose/tags/ComposeLink : com/copperleaf/thistle/core/parser/ThistleTagFactory {
+	public static final field $stable I
+	public synthetic fun <init> (JLkotlin/jvm/functions/Function1;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (JLkotlin/jvm/functions/Function1;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun invoke (Lcom/copperleaf/thistle/compose/renderer/ComposeThistleRenderContext;)Lcom/copperleaf/thistle/compose/util/ComposeSpanWrapper;
+	public synthetic fun invoke (Lcom/copperleaf/thistle/core/renderer/ThistleRenderContext;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/compose/tags/ComposeStyle : com/copperleaf/thistle/core/parser/ThistleTagFactory {
+	public static final field $stable I
+	public synthetic fun <init> (Landroidx/compose/ui/text/font/FontWeight;Landroidx/compose/ui/text/font/FontStyle;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Landroidx/compose/ui/text/font/FontWeight;Landroidx/compose/ui/text/font/FontStyle;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun invoke (Lcom/copperleaf/thistle/compose/renderer/ComposeThistleRenderContext;)Lcom/copperleaf/thistle/compose/util/ComposeSpanWrapper;
+	public synthetic fun invoke (Lcom/copperleaf/thistle/core/renderer/ThistleRenderContext;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/compose/tags/ComposeTextDecoration : com/copperleaf/thistle/core/parser/ThistleTagFactory {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun <init> (Landroidx/compose/ui/text/style/TextDecoration;)V
+	public synthetic fun <init> (Landroidx/compose/ui/text/style/TextDecoration;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun invoke (Lcom/copperleaf/thistle/compose/renderer/ComposeThistleRenderContext;)Lcom/copperleaf/thistle/compose/util/ComposeSpanWrapper;
+	public synthetic fun invoke (Lcom/copperleaf/thistle/core/renderer/ThistleRenderContext;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/compose/tags/ComposeUrl : com/copperleaf/thistle/core/parser/ThistleTagFactory {
+	public static final field $stable I
+	public synthetic fun <init> (Landroidx/compose/ui/graphics/Color;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Landroidx/compose/ui/graphics/Color;Ljava/lang/String;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getColor-QN2ZGVo ()Landroidx/compose/ui/graphics/Color;
+	public final fun getHardcodedUrl ()Ljava/lang/String;
+	public fun invoke (Lcom/copperleaf/thistle/compose/renderer/ComposeThistleRenderContext;)Lcom/copperleaf/thistle/compose/util/ComposeSpanWrapper;
+	public synthetic fun invoke (Lcom/copperleaf/thistle/core/renderer/ThistleRenderContext;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/compose/util/ColorKt {
+	public static final fun color-bi-UJ9A (Lcom/copperleaf/thistle/core/renderer/ThistleTagsArgs;Landroidx/compose/ui/graphics/Color;Ljava/lang/String;)Lkotlin/properties/ReadOnlyProperty;
+	public static synthetic fun color-bi-UJ9A$default (Lcom/copperleaf/thistle/core/renderer/ThistleTagsArgs;Landroidx/compose/ui/graphics/Color;Ljava/lang/String;ILjava/lang/Object;)Lkotlin/properties/ReadOnlyProperty;
+	public static final fun parse (Landroidx/compose/ui/graphics/Color$Companion;Ljava/lang/String;)J
+	public static final fun serializeArgb-8_81llA (J)Ljava/lang/String;
+	public static final fun serializeRgb-8_81llA (J)Ljava/lang/String;
+}
+
+public final class com/copperleaf/thistle/compose/util/ComposeSpanWrapper {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun <init> (Landroidx/compose/ui/text/SpanStyle;Lkotlin/jvm/functions/Function0;Landroidx/compose/foundation/text/InlineTextContent;)V
+	public synthetic fun <init> (Landroidx/compose/ui/text/SpanStyle;Lkotlin/jvm/functions/Function0;Landroidx/compose/foundation/text/InlineTextContent;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Landroidx/compose/ui/text/SpanStyle;
+	public final fun component2 ()Lkotlin/jvm/functions/Function0;
+	public final fun component3 ()Landroidx/compose/foundation/text/InlineTextContent;
+	public final fun copy (Landroidx/compose/ui/text/SpanStyle;Lkotlin/jvm/functions/Function0;Landroidx/compose/foundation/text/InlineTextContent;)Lcom/copperleaf/thistle/compose/util/ComposeSpanWrapper;
+	public static synthetic fun copy$default (Lcom/copperleaf/thistle/compose/util/ComposeSpanWrapper;Landroidx/compose/ui/text/SpanStyle;Lkotlin/jvm/functions/Function0;Landroidx/compose/foundation/text/InlineTextContent;ILjava/lang/Object;)Lcom/copperleaf/thistle/compose/util/ComposeSpanWrapper;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getClickHandler ()Lkotlin/jvm/functions/Function0;
+	public final fun getInlineContent ()Landroidx/compose/foundation/text/InlineTextContent;
+	public final fun getSpanStyle ()Landroidx/compose/ui/text/SpanStyle;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract class com/copperleaf/thistle/compose/util/ComposeStyledText {
+	public static final field $stable I
+	public abstract fun getAst ()Lcom/copperleaf/thistle/core/node/ThistleRootNode;
+}
+
+public final class com/copperleaf/thistle/compose/util/ComposeStyledText$Failure : com/copperleaf/thistle/compose/util/ComposeStyledText {
+	public static final field $stable I
+	public fun <init> (Lcom/copperleaf/thistle/core/node/ThistleRootNode;Ljava/lang/Throwable;)V
+	public final fun component1 ()Lcom/copperleaf/thistle/core/node/ThistleRootNode;
+	public final fun component2 ()Ljava/lang/Throwable;
+	public final fun copy (Lcom/copperleaf/thistle/core/node/ThistleRootNode;Ljava/lang/Throwable;)Lcom/copperleaf/thistle/compose/util/ComposeStyledText$Failure;
+	public static synthetic fun copy$default (Lcom/copperleaf/thistle/compose/util/ComposeStyledText$Failure;Lcom/copperleaf/thistle/core/node/ThistleRootNode;Ljava/lang/Throwable;ILjava/lang/Object;)Lcom/copperleaf/thistle/compose/util/ComposeStyledText$Failure;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getAst ()Lcom/copperleaf/thistle/core/node/ThistleRootNode;
+	public final fun getThrowable ()Ljava/lang/Throwable;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/copperleaf/thistle/compose/util/ComposeStyledText$Success : com/copperleaf/thistle/compose/util/ComposeStyledText {
+	public static final field $stable I
+	public fun <init> (Lcom/copperleaf/thistle/core/node/ThistleRootNode;Landroidx/compose/ui/text/AnnotatedString;Ljava/util/List;Ljava/util/Map;)V
+	public final fun component1 ()Lcom/copperleaf/thistle/core/node/ThistleRootNode;
+	public final fun component2 ()Landroidx/compose/ui/text/AnnotatedString;
+	public final fun component4 ()Ljava/util/Map;
+	public final fun copy (Lcom/copperleaf/thistle/core/node/ThistleRootNode;Landroidx/compose/ui/text/AnnotatedString;Ljava/util/List;Ljava/util/Map;)Lcom/copperleaf/thistle/compose/util/ComposeStyledText$Success;
+	public static synthetic fun copy$default (Lcom/copperleaf/thistle/compose/util/ComposeStyledText$Success;Lcom/copperleaf/thistle/core/node/ThistleRootNode;Landroidx/compose/ui/text/AnnotatedString;Ljava/util/List;Ljava/util/Map;ILjava/lang/Object;)Lcom/copperleaf/thistle/compose/util/ComposeStyledText$Success;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getAst ()Lcom/copperleaf/thistle/core/node/ThistleRootNode;
+	public final fun getInlineContent ()Ljava/util/Map;
+	public final fun getResult ()Landroidx/compose/ui/text/AnnotatedString;
+	public fun hashCode ()I
+	public final fun onClick (I)V
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/copperleaf/thistle/compose/util/LocalsKt {
+	public static final fun ProvideAdditionalThistleConfiguration (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public static final fun ProvideAdditionalThistleContext (Ljava/util/Map;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public static final fun ProvideThistle (Lcom/copperleaf/thistle/core/parser/ThistleSyntaxBuilder$Defaults;Lkotlin/jvm/functions/Function1;Ljava/util/Map;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun getLocalThistle ()Landroidx/compose/runtime/ProvidableCompositionLocal;
+	public static final fun getLocalThistleContext ()Landroidx/compose/runtime/ProvidableCompositionLocal;
+}
+
+public final class com/copperleaf/thistle/compose/util/StyledTextKt {
+	public static final fun StyledText-7NebLg4 (Ljava/lang/String;Landroidx/compose/ui/Modifier;Lcom/copperleaf/thistle/core/parser/ThistleParser;Ljava/util/Map;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/text/TextStyle;ZIILkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
+	public static final fun detectStyledTextClicks (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/text/TextLayoutResult;Lcom/copperleaf/thistle/compose/util/ComposeStyledText;)Landroidx/compose/ui/Modifier;
+	public static final fun rememberStyledText (Ljava/lang/String;Lcom/copperleaf/thistle/core/parser/ThistleParser;Ljava/util/Map;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)Lcom/copperleaf/thistle/compose/util/ComposeStyledText;
+}
+

@@ -11,17 +11,49 @@ Kotlin multiplatform String markup library, inspired by [SRML](https://github.co
 
 ## Overview
 
+Thistle is a library for converting Strings with markup tags into text with inline styles. It 
+supports a variety of different targets, including Android, Compose UI, and Consoles, but with a 
+common markup syntax shared by all targets.
+
 **Example Usage**
 
 ```kotlin
-{% snippet 'main-basic-usage' %}
+// Android
+{% snippet 'android-preview' %}
+
+// Compose (both Android and Desktop)
+{% snippet 'compose-preview' %}
+
+// Console (ANSI codes)
+{% snippet 'console-preview' %}
 ```
 
-**Sample App**
+**Motivation**
 
-![sample_app]({{ 'assets/media/sample_android.gif'|asset }})
+All UI platforms have some concept of inline text styling (using a single "text view" but having 
+portions of the text with different colors, fonts, font weight, etc.). However, the API for actually
+using these inline styles is usually very verbose and difficult to understand, and the actual
+implementation of these styles varies greatly by platform. Some use a tree-like structure which is
+relatively easy to work with (HTML `<span>`, or KTX extensions for Android `Spannable`), while 
+others have you manually computing text offsets and attaching markup tags manually (Compose, iOS). 
+And don't even get me started on Console ANSI codes...
 
-[View sample app source](https://github.com/copper-leaf/thistle/tree/master/examples)
+Thistle aims to abstract all that complexity away, so that you don't need to know anything about the
+platform's underlying text-styling mechanisms. You just provide your Strings and mark them up with
+the intended styling, and Thistle will take care of the rest for you. The syntax is similar to many
+other markup languages, such as Twig or Handlebars, but can also be tweaked if needed.
+
+The initial idea came from an old Android library, [SRML](https://github.com/jasonwyatt/SRML). It's 
+a small library that has been a lifesaver for my team for years, and Thistle began as a 
+re-implementation of that library in Kotlin using a proper parser and AST instead of Regex. Having
+this intermediate AST representation allows Thistle to easily adapt the same syntax to the different 
+APIs needed for each target.
+
+_Important Note: Thistle is not designed to be a full template engine. The parser is not optimized
+for handling large inputs, and the syntax is intentionally limited to only work with styling and 
+simple interpolation, but no logic. This is to keep the library focused and avoid bloat, while also 
+maximizing the ability for sharing input Strings and internal code across platforms without major 
+compatibility issues._
 
 ## Installation
 
@@ -55,8 +87,9 @@ kotlin {
 
 ## Syntax
 
-The [sample app](https://github.com/copper-leaf/thistle/tree/master/app) demos a variety of different tags, use-cases,
-and customizations, but here's a rundown of the basic syntax (which can be [tweaked](#customization) to your needs).
+The [sample apps](https://github.com/copper-leaf/thistle/tree/master/examples) demo a variety of 
+different tags, use-cases, and customizations, but here's a rundown of the basic syntax (which can 
+be [tweaked](#customization) to your needs).
 
 The following examples all demonstrate usage on Android.
 
@@ -97,16 +130,16 @@ The `foreground` tag requires a `color` parameter to be set, which must be a hex
 Thistle recognizes the following formats for parameter values. You are also able to
 [provide your own value formats](#custom-value-formats) for aliasing or loading values from another source.
 
-| Type            | Example              | Notes                                                             |
-| --------------- | -------------------- | ----------------------------------------------------------------- |
-| Boolean         | `true`, `false`      |                                                                   |
-| Double          | `1.1`                |                                                                   |
-| Int             | `1`                  |                                                                   |
-| String          | `"This is a string"` | String in quotes may contain spaces and escaped unicode sequences |
-| Char            | `'c'`                |                                                                   |
-| Hex Color       | `#FF0000`            | Parsed to an Int with `FF` alpha channel                          |
-| Context Value   | `context.username`   | See "context data" below                                          |
-| Unquoted String | `monospace`          | Unquoted string must be a single ASCII word                       |
+| Type            | Example              | Notes                                                                          |
+| --------------- | -------------------- | ------------------------------------------------------------------------------ |
+| Boolean         | `true`, `false`      |                                                                                |
+| Double          | `1.1`                |                                                                                |
+| Int             | `1`                  |                                                                                |
+| String          | `"This is a string"` | String in quotes may contain spaces and escaped Unicode sequences              |
+| Char            | `'c'`                |                                                                                |
+| Hex Color       | `#FF0000`            | Parsed to an Int with `FF` alpha channel                                       |
+| Context Value   | `context.username`   | See "context data" below                                                       |
+| Unquoted String | `monospace`          | Unquoted string must be a single ASCII word with no spaces or Unicode sequences|
 {.table}
 
 ### Context Data
@@ -137,7 +170,7 @@ You can reference `themeRed` from the foreground tag parameters:
 Another useful feature of the context data is to render dynamic text into the output. This may be at the top-level, or
 within a tag's content. All objects in the context map are converted to text with `.toString()`, and Thistle does not
 support any further formatting or transformation on the interpolated values from the format string. Thus, if you need to
-customize the output of a variable, converting it manually to a string before adding it to the context data map.
+customize the output of a variable, you will need to convert it manually to a string before adding it to the context data map.
 
 For example, given the following context data map:
 
@@ -172,7 +205,7 @@ Both the parser and the resulting AST are fully immutable and thus are completel
 
 Each target will naturally have different rendering capabilities, which are documented in the sections below.
 
-### Android (Spanned String)
+### Android
 
 On Android, Thistle parses a String into a `Spanned` instance that can be set to a TextView. The Thistle format replaces
 "tags" with Android `Span`s, wrapping the appropriate text. The normal Span API can be a bit of a pain, and Thistle
@@ -181,6 +214,16 @@ makes this simpler, and also allows you to change the span formatting at runtime
 ```kotlin
 {% snippet 'android-basic-usage' %}
 ```
+
+The Android target also adds an additional value format for accessing application resources, using the
+same `@` syntax used in XML layouts.
+
+| Type              | Example                  | Notes  |
+| ----------------- | ------------------------ | ------ |
+| String resource   | `@string/app_name`       |        |
+| Color resource    | `@color/colorPrimary`    |        |
+| Drawable resource | `@drawable/ic_launcher`  |        |
+{.table}
 
 ![sample_android_app]({{ 'assets/media/sample_android.gif'|asset }})
 
@@ -211,7 +254,7 @@ makes this simpler, and also allows you to change the span formatting at runtime
 
 - [Android Example project](https://github.com/copper-leaf/thistle/tree/master/examples/android)
 
-### Compose UI (AnnotatedString)
+### Compose UI
 
 Thistle supporting rendering to Compose UI by building an `AnnotatedString`, which supports both 
 Android and Desktop. The set of available tags for Compose are the same as Android (except it is 
@@ -243,7 +286,6 @@ Compose Android renderers, if needed.
 | serif         | none                              | Change the typeface to serif                                       | `{{serif}}Text{{/serif}}`                            |
 | subscript     | none                              | Move text to a subscript                                           | `{{subscript}}Text{{/subscript}}`                    |
 | superscript   | none                              | Move text to a superscript                                         | `{{superscript}}Text{{/superscript}}`                |
-| url           | `url=[String]`                    | Make text a clickable link                                         | `{{url url="https://www.example.com/"}}Text{{/url}}` |
 {.table}
 
 {% endverbatim %}
@@ -251,19 +293,7 @@ Compose Android renderers, if needed.
 - [Compose Android Example project](https://github.com/copper-leaf/thistle/tree/master/examples/compose-android)
 - [Compose Desktop Example project](https://github.com/copper-leaf/thistle/tree/master/examples/compose-desktop)
 
-### iOS (NSAttributedString)
-
-TODO (follow issue [here](https://github.com/copper-leaf/thistle/issues/2))
-
-### JS (HTML DOM)
-
-TODO (follow issue [here](https://github.com/copper-leaf/thistle/issues/3))
-
-### Any (HTML Text)
-
-TODO (follow issue [here](https://github.com/copper-leaf/thistle/issues/4))
-
-### Any (Console ANSI Sequences)
+### Console
 
 For rendering to a console, Thistle converts the normal markup tags into 
 [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code). It currently supports 16-bit colors for both 
@@ -277,7 +307,7 @@ foreground and background, and some other basic styling options.
 
 **Default Tags**
 
-For rendering to the console, color tags support both normal and "bright" or "bold" colors. Typically, a tag name that 
+Color tags support both normal and "bright" or "bold" colors. Typically, a tag name that 
 is all uppercase letters will render the color in "bold", while all lowercase letters will either render in normal style
 or offer a parameter for manually configuring it.
 
@@ -309,6 +339,14 @@ nested tags after a reset, so using nested tags works exactly as you would expec
 {.table}
 
 {% endverbatim %}
+
+### iOS
+
+TODO (follow issue [here](https://github.com/copper-leaf/thistle/issues/2))
+
+### JS DOM
+
+TODO (follow issue [here](https://github.com/copper-leaf/thistle/issues/3))
 
 ## Customization
 
