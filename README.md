@@ -39,11 +39,11 @@ printlnStyledText(
 
 # Supported Platforms/Features
 
-| Platform   | Markup Target               |
-| ---------- | --------------------------- |
-| Android    | android.text.Spannable      |
-| Compose UI | AttributedString            |
-| Console    | ANSI Codes                  |
+| Platform   | Markup Target                                                                                              |
+| ---------- | ---------------------------------------------------------------------------------------------------------- |
+| Android    | [Spannable](https://developer.android.com/reference/android/text/Spannable)                                |
+| Compose UI | [AnnotatedString](https://developer.android.com/reference/kotlin/androidx/compose/ui/text/AnnotatedString) |
+| Console    | [ANSI Codes](https://en.wikipedia.org/wiki/ANSI_escape_code)                                               |
 | iOS        | NSAttributedString (TODO)   |
 | JS         | HTML DOM (TODO)             |
 
