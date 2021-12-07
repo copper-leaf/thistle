@@ -124,9 +124,8 @@ class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, Tag : Any, Styl
             CharInParser('='),
             buildAttrValueParser()
         )
-    ) {
-        val (key, _, value) = it.children
-        key.text to (value as ThistleValueNode)
+    ) { (_, key, _, value) ->
+        key.text to value
     }
 
     internal fun buildAttrListParser(): Parser<ValueNode<Map<String, ThistleValueNode>>> = MappedParser(
@@ -193,9 +192,7 @@ class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, Tag : Any, Styl
                     times = 6
                 ),
             )
-        ) {
-            val (_, hexDigits) = it.children
-
+        ) { (_, _, hexDigits) ->
             // TODO: does this need to be converted by the platform? Wrapped in some other manner?
             hexDigits.text.toInt(16) or -0x1000000 // Set the alpha value
         }.asThistleValueParser()
@@ -208,10 +205,9 @@ class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, Tag : Any, Styl
                 LiteralTokenParser("context."),
                 AnyTokenParser(),
             )
-        ) {
-            val (_, mapKeyNode) = it.children
+        ) { (nodeContext, _, mapKeyNode) ->
             ThistleValueNode.ContextValue(
-                it.text,
+                mapKeyNode.text,
                 { context: Map<String, Any> ->
                     if (!context.containsKey(mapKeyNode.text)) {
                         throw ThistleMissingContextValueException(
@@ -223,7 +219,7 @@ class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, Tag : Any, Styl
 
                     context[mapKeyNode.text]!!
                 },
-                it.context
+                nodeContext,
             )
         }
     }

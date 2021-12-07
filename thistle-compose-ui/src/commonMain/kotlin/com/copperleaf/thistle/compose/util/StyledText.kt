@@ -191,8 +191,16 @@ fun StyledText(
         }
     }
 
+    val inlineContent: Map<String, InlineTextContent> by derivedStateOf {
+        when (styledText) {
+            is ComposeStyledText.Success -> styledText.inlineContent
+            is ComposeStyledText.Failure -> emptyMap()
+        }
+    }
+
     BasicText(
         text = displayedText,
+        inlineContent = inlineContent,
         modifier = modifier
             .detectStyledTextClicks(layoutResult.value, styledText),
         style = style,

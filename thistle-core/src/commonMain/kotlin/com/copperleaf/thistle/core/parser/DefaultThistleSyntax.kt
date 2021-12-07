@@ -8,6 +8,7 @@ import com.copperleaf.kudzu.parser.mapped.FlatMappedParser
 import com.copperleaf.kudzu.parser.predict.PredictionParser
 import com.copperleaf.kudzu.parser.sequence.SequenceParser
 import com.copperleaf.kudzu.parser.text.AnyTokenParser
+import com.copperleaf.kudzu.parser.text.IdentifierTokenParser
 import com.copperleaf.kudzu.parser.text.OptionalWhitespaceParser
 import com.copperleaf.thistle.core.node.ThistleInterpolateNode
 import com.copperleaf.thistle.core.node.ThistleValueMapNode
@@ -76,14 +77,12 @@ class DefaultThistleSyntax(
                 SequenceParser(
                     interpolateStartToken,
                     OptionalWhitespaceParser(),
-                    AnyTokenParser(),
+                    IdentifierTokenParser(),
                     OptionalWhitespaceParser(),
                     interpolateEndToken,
                 )
-            ) {
-                val (_, _, name, _, _) = it.children
-
-                ThistleInterpolateNode(name.text, it.context)
+            ) { (context, _, _, name, _, _) ->
+                ThistleInterpolateNode(name.text, context)
             }
         )
     }

@@ -1,3 +1,8 @@
+## 2.0.2 - 2021-12-06
+
+- Use identifier instead of letter/number parser for interpolated value keys
+- Fix issue displaying inline content in Compose renderer
+
 ## 2.0.1 - 2021-12-03
 
 - Fix publishing

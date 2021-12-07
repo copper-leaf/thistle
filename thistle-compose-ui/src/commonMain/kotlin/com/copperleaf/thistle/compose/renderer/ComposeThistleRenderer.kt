@@ -10,8 +10,8 @@ import com.copperleaf.kudzu.node.NonTerminalNode
 import com.copperleaf.kudzu.node.many.ManyNode
 import com.copperleaf.kudzu.node.tag.TagNode
 import com.copperleaf.kudzu.node.text.TextNode
-import com.copperleaf.thistle.compose.util.ComposeStyledText
 import com.copperleaf.thistle.compose.util.ComposeSpanWrapper
+import com.copperleaf.thistle.compose.util.ComposeStyledText
 import com.copperleaf.thistle.core.ThistleTagMap
 import com.copperleaf.thistle.core.node.ThistleInterpolateNode
 import com.copperleaf.thistle.core.node.ThistleRootNode
@@ -71,7 +71,14 @@ class ComposeThistleRenderer(
                 when (openingTagNode) {
                     is ThistleInterpolateNode -> {
                         val interpolatedValue = openingTagNode.getValue(context)
-                        append(interpolatedValue.toString())
+
+                        if (interpolatedValue is InlineTextContent) {
+                            appendInlineContent("$inlineContentId")
+                            inlineContentHandlers["$inlineContentId"] = interpolatedValue
+                            inlineContentId++
+                        } else {
+                            append(interpolatedValue.toString())
+                        }
                     }
                     is ThistleValueMapNode -> {
                         val tagArgs = openingTagNode.getValueMap(context)
@@ -129,7 +136,9 @@ class ComposeThistleRenderer(
         return when (this) {
             is ThistleInterpolateNode -> getValue(context).toString()
             is TextNode -> text
-            is NonTerminalNode -> { children.joinToString(separator = "") { it.textContent(context) } }
+            is NonTerminalNode -> {
+                children.joinToString(separator = "") { it.textContent(context) }
+            }
             else -> ""
         }
     }
