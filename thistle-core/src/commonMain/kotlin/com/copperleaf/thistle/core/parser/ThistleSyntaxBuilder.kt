@@ -113,9 +113,7 @@ class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, Tag : Any, Styl
     private val tags: LinkedHashMap<String, () -> ThistleTagFactory<RenderContext, Tag>> = linkedMapOf()
 
     internal fun buildAttrValueParser(): Parser<ThistleValueNode> = FlatMappedParser(
-        ExactChoiceParser(
-            *valueParsers.toTypedArray()
-        )
+        ExactChoiceParser(valueParsers)
     ) { it.node as ThistleValueNode }
 
     internal fun buildAttrParser(): Parser<ValueNode<Pair<String, ThistleValueNode>>> = MappedParser(

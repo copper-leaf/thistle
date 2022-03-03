@@ -56,10 +56,6 @@ object Data {
 
         "this is an {{inc}}increment{{/inc}} link",
         "this is an {{dec}}decrement{{/dec}} link",
-        "this is an {{url url=\"https://www.example.com/\"}}www.example.com{{/url}} link",
-
-        "this is an {{icon drawable=@drawable/ic_android}}icon{{/icon}}",
-        "this is an {{androidIcon}}androidIcon{{/androidIcon}}",
 
         "this is {{monospace}}monospace{{/monospace}} text",
         "this is {{sans}}sans-serif{{/sans}} text",

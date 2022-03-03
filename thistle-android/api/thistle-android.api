@@ -10,11 +10,38 @@ public final class com/copperleaf/thistle/android/AndroidUtilsKt {
 	public static synthetic fun applyStyledText$default (Landroid/widget/TextView;Lcom/copperleaf/thistle/core/parser/ThistleParser;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)V
 }
 
+public final class com/copperleaf/thistle/android/parser/ColorResourceReferenceNode : com/copperleaf/thistle/android/parser/ResourceReferenceNode {
+	public fun <init> (Ljava/lang/String;Lcom/copperleaf/kudzu/node/NodeContext;)V
+	public fun getValue (Landroid/content/Context;Ljava/lang/String;)Ljava/lang/Integer;
+	public synthetic fun getValue (Landroid/content/Context;Ljava/lang/String;)Ljava/lang/Object;
+}
+
+public final class com/copperleaf/thistle/android/parser/DrawableResourceReferenceNode : com/copperleaf/thistle/android/parser/ResourceReferenceNode {
+	public fun <init> (Ljava/lang/String;Lcom/copperleaf/kudzu/node/NodeContext;)V
+	public fun getValue (Landroid/content/Context;Ljava/lang/String;)Landroid/graphics/drawable/Drawable;
+	public synthetic fun getValue (Landroid/content/Context;Ljava/lang/String;)Ljava/lang/Object;
+}
+
+public abstract class com/copperleaf/thistle/android/parser/ResourceReferenceNode : com/copperleaf/kudzu/node/TerminalNode {
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/copperleaf/kudzu/node/NodeContext;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getResourceName ()Ljava/lang/String;
+	public final fun getResourceType ()Ljava/lang/String;
+	public fun getText ()Ljava/lang/String;
+	public abstract fun getValue (Landroid/content/Context;Ljava/lang/String;)Ljava/lang/Object;
+	protected final fun resourceId (Landroid/content/Context;Ljava/lang/String;)I
+}
+
 public final class com/copperleaf/thistle/android/parser/ResourceReferenceParser : com/copperleaf/kudzu/parser/Parser {
-	public fun <init> (Landroid/content/Context;Ljava/lang/String;)V
+	public fun <init> ()V
 	public fun getParse ()Lkotlin/DeepRecursiveFunction;
-	public final fun getParser ()Lcom/copperleaf/kudzu/parser/mapped/MappedParser;
+	public final fun getParser ()Lcom/copperleaf/kudzu/parser/mapped/FlatMappedParser;
 	public fun predict (Lcom/copperleaf/kudzu/parser/ParserContext;)Z
+}
+
+public final class com/copperleaf/thistle/android/parser/StringResourceReferenceNode : com/copperleaf/thistle/android/parser/ResourceReferenceNode {
+	public fun <init> (Ljava/lang/String;Lcom/copperleaf/kudzu/node/NodeContext;)V
+	public synthetic fun getValue (Landroid/content/Context;Ljava/lang/String;)Ljava/lang/Object;
+	public fun getValue (Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
 }
 
 public final class com/copperleaf/thistle/android/renderer/AndroidThistleRenderContext : com/copperleaf/thistle/core/renderer/ThistleRenderContext {

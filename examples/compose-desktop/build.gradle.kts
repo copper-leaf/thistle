@@ -18,8 +18,7 @@ kotlin {
                 implementation(project(":thistle-compose-ui"))
                 implementation(compose.desktop.currentOs)
                 implementation(compose.material)
-                implementation(compose.uiTooling)
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
             }
         }
     }

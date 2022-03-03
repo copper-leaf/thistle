@@ -36,7 +36,8 @@ public class StringResourceReferenceNode(
         uiContext: Context,
         packageName: String,
     ): String {
-        return uiContext.resources.getString(resourceId(uiContext, packageName))
+        val id = resourceId(uiContext, packageName)
+        return uiContext.resources.getString(id)
     }
 }
 
@@ -50,10 +51,11 @@ public class ColorResourceReferenceNode(
         uiContext: Context,
         packageName: String,
     ): Int {
+        val id = resourceId(uiContext, packageName)
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            uiContext.resources.getColor(resourceId(uiContext, packageName), uiContext.theme)
+            uiContext.resources.getColor(id, uiContext.theme)
         } else {
-            uiContext.resources.getColor(resourceId(uiContext, packageName))
+            uiContext.resources.getColor(id)
         }
     }
 }
@@ -62,6 +64,8 @@ public class DrawableResourceReferenceNode(
     resourceName: String,
     nodeContext: NodeContext,
 ) : ResourceReferenceNode<Drawable>("drawable", resourceName, nodeContext) {
+
+    @Suppress("DEPRECATION")
     override fun getValue(
         uiContext: Context,
         packageName: String,
@@ -74,4 +78,3 @@ public class DrawableResourceReferenceNode(
         }
     }
 }
-

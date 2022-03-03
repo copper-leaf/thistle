@@ -28,5 +28,4 @@ class TestResourceReferenceParser {
         assertIs<DrawableResourceReferenceNode>(parseDrawableRefResult)
         assertEquals("drawable_value", parseDrawableRefResult.resourceName)
     }
-
 }

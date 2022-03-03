@@ -2,11 +2,9 @@ public final class com/copperleaf/thistle/compose/desktop/ComposableSingletons$M
 	public static final field INSTANCE Lcom/copperleaf/thistle/compose/desktop/ComposableSingletons$MainKt;
 	public static field lambda-1 Lkotlin/jvm/functions/Function2;
 	public static field lambda-2 Lkotlin/jvm/functions/Function3;
-	public static field lambda-3 Lkotlin/jvm/functions/Function3;
 	public fun <init> ()V
 	public final fun getLambda-1$compose_desktop ()Lkotlin/jvm/functions/Function2;
 	public final fun getLambda-2$compose_desktop ()Lkotlin/jvm/functions/Function3;
-	public final fun getLambda-3$compose_desktop ()Lkotlin/jvm/functions/Function3;
 }
 
 public final class com/copperleaf/thistle/compose/desktop/Data {

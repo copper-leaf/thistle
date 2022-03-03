@@ -52,7 +52,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":thistle-core"))
-                api("io.github.copper-leaf:kudzu-core:3.0.0")
+                api("io.github.copper-leaf:kudzu-core:3.1.0")
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.ui)
@@ -67,7 +67,7 @@ kotlin {
 
         val jvmMain by getting {
             dependencies {
-                api("io.github.copper-leaf:kudzu-core:3.0.0")
+                api("io.github.copper-leaf:kudzu-core:3.1.0")
             }
         }
         val jvmTest by getting {

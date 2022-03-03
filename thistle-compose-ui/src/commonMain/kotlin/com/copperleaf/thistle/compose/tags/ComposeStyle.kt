@@ -15,28 +15,13 @@ class ComposeStyle(
 ) : ThistleTagFactory<ComposeThistleRenderContext, ComposeSpanWrapper> {
     override fun invoke(renderContext: ComposeThistleRenderContext): ComposeSpanWrapper {
         return checkArgs(renderContext) {
-//            val fontWeight: FontWeight by enum(hardcodedWeight) {
-//                mapOf(
-//                    "thin" to FontWeight.Thin,
-//                    "extraLight" to FontWeight.ExtraLight,
-//                    "light" to FontWeight.Light,
-//                    "normal" to FontWeight.Normal,
-//                    "medium" to FontWeight.Medium,
-//                    "semiBold" to FontWeight.SemiBold,
-//                    "bold" to FontWeight.Bold,
-//                    "extraBold" to FontWeight.ExtraBold,
-//                    "black" to FontWeight.Black,
-//                )
-//            }
-//
-//            val style: FontStyle by enum(hardcodedStyle) {
-//                mapOf(
-//                    "normal" to FontStyle.Normal,
-//                    "italic" to FontStyle.Italic,
-//                )
-//            }
+            val hardcodedValue = if (hardcodedWeight != null || hardcodedStyle != null) {
+                hardcodedWeight to hardcodedStyle
+            } else {
+                null
+            }
 
-            val style: Pair<FontWeight?, FontStyle?> by enum(hardcodedWeight to hardcodedStyle) {
+            val style: Pair<FontWeight?, FontStyle?> by enum(hardcodedValue) {
                 mapOf(
                     "bold" to (FontWeight.Bold to null),
                     "italic" to (null to FontStyle.Italic),
