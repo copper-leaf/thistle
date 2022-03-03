@@ -9,7 +9,7 @@ import com.copperleaf.kudzu.parser.Parser
 import com.copperleaf.kudzu.parser.ParserContext
 import com.copperleaf.kudzu.parser.ParserException
 import com.copperleaf.kudzu.parser.ParserResult
-import kotlin.test.*
+import kotlin.test.assertEquals
 
 fun <T : Node> ParserResult<T>?.parsedCorrectly(
     expected: String? = null,
@@ -64,8 +64,10 @@ fun ParserResult<*>?.remainingText(): String? {
     var token = ""
 
     while (!remaining.isEmpty()) {
-        token += remaining.next()
-        remaining = remaining.remaining()
+        val next = remaining.nextChar()
+
+        token += next.first
+        remaining = next.second
     }
 
     return token

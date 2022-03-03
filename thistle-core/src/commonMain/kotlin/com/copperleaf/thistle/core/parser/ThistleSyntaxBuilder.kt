@@ -114,7 +114,7 @@ class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, Tag : Any, Styl
 
     internal fun buildAttrValueParser(): Parser<ThistleValueNode> = FlatMappedParser(
         ExactChoiceParser(
-            valueParsers
+            *valueParsers.toTypedArray()
         )
     ) { it.node as ThistleValueNode }
 

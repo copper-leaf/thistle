@@ -77,8 +77,14 @@ class TestConsoleRenderer {
             printlnStyledText(thistle, "begin {{black}}normal black foreground{{/blue}}")
         }.also {
             assertEquals(
-                "Parse error: Mismatched closing tag: Expected tag name to be 'black', got 'blue' " +
-                    "(SimpleTagParser at 1:7)",
+                """
+                |Parse error at 1:7 (SimpleTagParser)
+                |
+                |Mismatched closing tag: Expected tag name to be 'black', got 'blue'
+                |
+                |1|begin {{black}}normal black foreground{{/blue}}
+                |>>>>>>>>^
+                """.trimMargin(),
                 it.message
             )
         }

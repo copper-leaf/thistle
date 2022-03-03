@@ -41,7 +41,6 @@ tasks.withType<Test> {
     }
 }
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions.useIR = true
     kotlinOptions {
         jvmTarget = Config.javaVersion
     }

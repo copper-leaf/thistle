@@ -1,34 +1,27 @@
 package com.copperleaf.thistle.android.parser
 
-import android.content.Context
-import android.graphics.drawable.Drawable
-import android.os.Build
-import com.copperleaf.kudzu.node.mapped.ValueNode
 import com.copperleaf.kudzu.parser.Parser
 import com.copperleaf.kudzu.parser.ParserContext
 import com.copperleaf.kudzu.parser.ParserResult
 import com.copperleaf.kudzu.parser.chars.CharInParser
 import com.copperleaf.kudzu.parser.choice.ExactChoiceParser
-import com.copperleaf.kudzu.parser.mapped.MappedParser
+import com.copperleaf.kudzu.parser.mapped.FlatMappedParser
 import com.copperleaf.kudzu.parser.sequence.SequenceParser
 import com.copperleaf.kudzu.parser.text.IdentifierTokenParser
 import com.copperleaf.kudzu.parser.text.LiteralTokenParser
 
 @ExperimentalStdlibApi
-class ResourceReferenceParser(
-    private val uiContext: Context,
-    private val packageName: String,
-) : Parser<ValueNode<Any>> {
+class ResourceReferenceParser : Parser<ResourceReferenceNode<*>> {
 
     override fun predict(input: ParserContext): Boolean {
         return parser.predict(input)
     }
 
-    override val parse: DeepRecursiveFunction<ParserContext, ParserResult<ValueNode<Any>>>
+    override val parse: DeepRecursiveFunction<ParserContext, ParserResult<ResourceReferenceNode<*>>>
         get() = parser.parse
 
     val parser by lazy {
-        MappedParser(
+        FlatMappedParser(
             SequenceParser(
                 CharInParser('@'),
                 ExactChoiceParser(
@@ -37,42 +30,18 @@ class ResourceReferenceParser(
                     LiteralTokenParser("drawable"),
                 ),
                 CharInParser('/'),
-                IdentifierTokenParser()
+                IdentifierTokenParser(),
             )
-        ) {
-            val (_, stringOrColorChoiceNode, _, resourceNameNode) = it.children
-
+        ) { (nodeContext, _, stringOrColorChoiceNode, _, resourceNameNode) ->
             val resourceType = stringOrColorChoiceNode.text
-
-            val resourceId = uiContext.resources.getIdentifier(
-                resourceNameNode.text,
-                resourceType,
-                packageName
-            )
+            val resourceName = resourceNameNode.text
 
             when (resourceType) {
-                "string" -> getStringResource(resourceId)
-                "color" -> getColorResource(resourceId)
-                "drawable" -> getDrawableResource(resourceId)
+                "string" -> StringResourceReferenceNode(resourceName, nodeContext)
+                "color" -> ColorResourceReferenceNode(resourceName, nodeContext)
+                "drawable" -> DrawableResourceReferenceNode(resourceName, nodeContext)
                 else -> error("Unknown resource type: $resourceType")
             }
         }
-    }
-
-    private fun getStringResource(resourceId: Int): String {
-        return uiContext.resources.getString(resourceId)
-    }
-
-    @Suppress("DEPRECATION")
-    private fun getColorResource(resourceId: Int): Int {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            uiContext.resources.getColor(resourceId, uiContext.theme)
-        } else {
-            uiContext.resources.getColor(resourceId)
-        }
-    }
-
-    private fun getDrawableResource(resourceId: Int): Drawable {
-        return uiContext.resources.getDrawable(resourceId, uiContext.theme)
     }
 }

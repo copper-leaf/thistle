@@ -64,8 +64,10 @@ fun ParserResult<*>?.remainingText(): String? {
     var token = ""
 
     while (!remaining.isEmpty()) {
-        token += remaining.next()
-        remaining = remaining.remaining()
+        val next = remaining.nextChar()
+
+        token += next.first
+        remaining = next.second
     }
 
     return token

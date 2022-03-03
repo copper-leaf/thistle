@@ -1,3 +1,7 @@
+## 3.0.0 - 2022-03-02
+
+- Updates Kotlin version to 1.6.10
+
 ## 2.0.2 - 2021-12-06
 
 - Use identifier instead of letter/number parser for interpolated value keys

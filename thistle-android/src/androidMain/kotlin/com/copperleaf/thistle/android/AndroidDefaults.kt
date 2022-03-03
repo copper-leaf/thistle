@@ -3,6 +3,7 @@ package com.copperleaf.thistle.android
 import android.content.Context
 import android.graphics.Typeface
 import android.text.Spanned
+import com.copperleaf.kudzu.parser.mapped.MappedParser
 import com.copperleaf.thistle.android.parser.ResourceReferenceParser
 import com.copperleaf.thistle.android.renderer.AndroidThistleRenderContext
 import com.copperleaf.thistle.android.renderer.AndroidThistleRenderer
@@ -60,7 +61,9 @@ class AndroidDefaults(
             tag("u") { AndroidUnderline() }
 
             valueFormat {
-                ResourceReferenceParser(uiContext, packageName).asThistleValueParser()
+                MappedParser(ResourceReferenceParser()) {
+                    it.getValue(uiContext, packageName)
+                }.asThistleValueParser()
             }
         }
     }

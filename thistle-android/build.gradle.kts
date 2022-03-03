@@ -46,6 +46,12 @@ kotlin {
     }
 
     sourceSets {
+        all {
+            languageSettings {
+                optIn("kotlin.Experimental")
+            }
+        }
+
         // Common Sourcesets
         val commonMain by getting {
             dependencies {
@@ -85,7 +91,6 @@ tasks.withType<Test> {
     }
 }
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions.useIR = true
     kotlinOptions {
         jvmTarget = Config.javaVersion
     }

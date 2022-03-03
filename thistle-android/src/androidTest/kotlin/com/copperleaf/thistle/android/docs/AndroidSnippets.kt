@@ -36,7 +36,7 @@ class AndroidSnippets {
 
     fun mainBasicUsage() {
         // snippet::android-preview[android,preview]
-        val thistle = ThistleParser(AndroidDefaults(context))
+        val thistle = ThistleParser(AndroidDefaults(context.applicationContext))
         binding.textView.applyStyledText(
             thistle,
             "Text with {{b}}bold{{/b}} or {{foreground color=#ff0000}}red{{/foreground}} styles"
@@ -47,7 +47,7 @@ class AndroidSnippets {
     fun androidBasicUsage() {
         // snippet::android-basic-usage[android]
         // create the Thistle parser. It's best to create this once and inject it wherever needed
-        val thistle = ThistleParser(AndroidDefaults(context)) // add the default tags for Android
+        val thistle = ThistleParser(AndroidDefaults(context.applicationContext)) // add the default tags for Android
 
         // parse a formatted string to a Spanned instance, and set that as the text of a TextView
         binding.textView.applyStyledText(
@@ -72,7 +72,7 @@ class AndroidSnippets {
             }
         }
 
-        val thistle = ThistleParser(AndroidDefaults(context)) {
+        val thistle = ThistleParser(AndroidDefaults(context.applicationContext)) {
             // register your custom tab with the Thistle parser
             tag("customStyle") { CustomStyle() }
 
@@ -90,7 +90,7 @@ class AndroidSnippets {
 
     fun androidCustomValueFormats() {
         // snippet::android-custom-value-formats[android]
-        val thistle = ThistleParser(AndroidDefaults(context)) {
+        val thistle = ThistleParser(AndroidDefaults(context.applicationContext)) {
             valueFormat {
                 MappedParser(
                     LiteralTokenParser("@color/red")
@@ -107,7 +107,7 @@ class AndroidSnippets {
 
     fun androidCustomStartEndTokens() {
         // snippet::android-custom-start-end-tokens[android]
-        val thistle = ThistleParser(AndroidDefaults(context)) {
+        val thistle = ThistleParser(AndroidDefaults(context.applicationContext)) {
             // customize syntax to use Django/Twig/Pebble-style tags
             customSyntax(
                 openTagStartToken = LiteralTokenParser("{%"),

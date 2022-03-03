@@ -51,10 +51,16 @@ kotlin {
     ios { }
 
     sourceSets {
+        all {
+            languageSettings {
+                optIn("kotlin.Experimental")
+            }
+        }
+
         // Common Sourcesets
         val commonMain by getting {
             dependencies {
-                api("io.github.copper-leaf:kudzu-core:2.6.0")
+                api("io.github.copper-leaf:kudzu-core:3.0.0")
             }
         }
         val commonTest by getting {
@@ -120,7 +126,6 @@ tasks.withType<Test> {
     }
 }
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions.useIR = true
     kotlinOptions {
         jvmTarget = Config.javaVersion
     }
