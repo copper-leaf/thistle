@@ -6,7 +6,7 @@ import com.copperleaf.thistle.compose.util.ComposeSpanWrapper
 import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
 
-class ComposeInlineContent(
+public class ComposeInlineContent(
     private val content: InlineTextContent
 ) : ThistleTagFactory<ComposeThistleRenderContext, ComposeSpanWrapper> {
     override fun invoke(renderContext: ComposeThistleRenderContext): ComposeSpanWrapper {

@@ -8,7 +8,7 @@ import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
 import com.copperleaf.thistle.core.renderer.enum
 
-class ComposeTextDecoration(
+public class ComposeTextDecoration(
     private val hardcodedTextDecoration: TextDecoration? = null,
 ) : ThistleTagFactory<ComposeThistleRenderContext, ComposeSpanWrapper> {
     override fun invoke(renderContext: ComposeThistleRenderContext): ComposeSpanWrapper {

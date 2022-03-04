@@ -13,7 +13,7 @@ import com.copperleaf.thistle.core.parser.ThistleTagFactory
 import com.copperleaf.thistle.core.renderer.ThistleRenderer
 
 @ExperimentalStdlibApi
-class AndroidThistleRenderer(
+public class AndroidThistleRenderer(
     val uiContext: Context,
     tags: Map<String, ThistleTagFactory<AndroidThistleRenderContext, Any>>
 ) : ThistleRenderer<AndroidThistleRenderContext, Any, Spanned>(tags) {

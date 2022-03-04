@@ -9,16 +9,16 @@ internal const val ansiReset = "[0m"
 // Foreground
 // ---------------------------------------------------------------------------------------------------------------------
 
-const val FG_BLACK = 30
-const val FG_RED = 31
-const val FG_GREEN = 32
-const val FG_YELLOW = 33
-const val FG_BLUE = 34
-const val FG_MAGENTA = 35
-const val FG_CYAN = 36
-const val FG_WHITE = 37
+internal const val FG_BLACK = 30
+internal const val FG_RED = 31
+internal const val FG_GREEN = 32
+internal const val FG_YELLOW = 33
+internal const val FG_BLUE = 34
+internal const val FG_MAGENTA = 35
+internal const val FG_CYAN = 36
+internal const val FG_WHITE = 37
 
-val ansiForegroundColorsByName
+internal val ansiForegroundColorsByName
     get() = mapOf(
         "black" to FG_BLACK,
         "red" to FG_RED,
@@ -33,16 +33,16 @@ val ansiForegroundColorsByName
 // Background
 // ---------------------------------------------------------------------------------------------------------------------
 
-const val BG_BLACK = 40
-const val BG_RED = 41
-const val BG_GREEN = 42
-const val BG_YELLOW = 43
-const val BG_BLUE = 44
-const val BG_MAGENTA = 45
-const val BG_CYAN = 46
-const val BG_WHITE = 47
+internal const val BG_BLACK = 40
+internal const val BG_RED = 41
+internal const val BG_GREEN = 42
+internal const val BG_YELLOW = 43
+internal const val BG_BLUE = 44
+internal const val BG_MAGENTA = 45
+internal const val BG_CYAN = 46
+internal const val BG_WHITE = 47
 
-val ansiBackgroundColorsByName
+internal val ansiBackgroundColorsByName
     get() = mapOf(
         "black" to BG_BLACK,
         "red" to BG_RED,
@@ -57,12 +57,12 @@ val ansiBackgroundColorsByName
 // Styles
 // ---------------------------------------------------------------------------------------------------------------------
 
-const val STYLE_BOLD = 1
-const val STYLE_UNDERLINE = 4
-const val STYLE_REVERSE = 7
-const val STYLE_STRIKETHROUGH = 9
+internal const val STYLE_BOLD = 1
+internal const val STYLE_UNDERLINE = 4
+internal const val STYLE_REVERSE = 7
+internal const val STYLE_STRIKETHROUGH = 9
 
-val ansiStylesByName
+internal val ansiStylesByName
     get() = mapOf(
         "bold" to STYLE_BOLD,
         "underline" to STYLE_UNDERLINE,

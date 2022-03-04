@@ -4,7 +4,7 @@ import android.text.style.SubscriptSpan
 import com.copperleaf.thistle.android.renderer.AndroidThistleRenderContext
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
 
-class AndroidSubscript : ThistleTagFactory<AndroidThistleRenderContext, Any> {
+public class AndroidSubscript : ThistleTagFactory<AndroidThistleRenderContext, Any> {
     override fun invoke(renderContext: AndroidThistleRenderContext): Any {
         return SubscriptSpan()
     }

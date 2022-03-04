@@ -8,7 +8,7 @@ import com.copperleaf.thistle.compose.util.color
 import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
 
-class ComposeBackgroundColor(
+public class ComposeBackgroundColor(
     private val hardcodedColor: Color? = null
 ) : ThistleTagFactory<ComposeThistleRenderContext, ComposeSpanWrapper> {
     override fun invoke(renderContext: ComposeThistleRenderContext): ComposeSpanWrapper {

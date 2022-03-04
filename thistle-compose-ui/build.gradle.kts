@@ -42,6 +42,8 @@ android {
 }
 
 kotlin {
+    explicitApi()
+
     jvm { }
     android {
         publishAllLibraryVariants()

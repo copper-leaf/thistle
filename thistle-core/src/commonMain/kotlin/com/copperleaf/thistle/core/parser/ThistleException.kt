@@ -2,13 +2,13 @@ package com.copperleaf.thistle.core.parser
 
 import com.copperleaf.kudzu.node.NodeContext
 
-sealed class ThistleException(message: String) : Exception(message)
+public sealed class ThistleException(message: String) : Exception(message)
 
-class ThistleUnknownTagException(
-    val input: String,
-    val position: NodeContext,
-    val unknownTagName: String,
-    val validTagNames: Set<String>,
+public class ThistleUnknownTagException(
+    public val input: String,
+    public val position: NodeContext,
+    public val unknownTagName: String,
+    public val validTagNames: Set<String>,
 ) : ThistleException(
     createErrorMessage(
         input,
@@ -18,7 +18,7 @@ class ThistleUnknownTagException(
     )
 ) {
 
-    companion object {
+    public companion object {
         @Suppress("UNUSED_PARAMETER")
         private fun createErrorMessage(
             input: String,
@@ -31,10 +31,10 @@ class ThistleUnknownTagException(
     }
 }
 
-class ThistleMissingContextValueException(
-    val nodeContext: NodeContext,
-    val key: String,
-    val context: Map<String, Any>,
+public class ThistleMissingContextValueException(
+    public val nodeContext: NodeContext,
+    public val key: String,
+    public val context: Map<String, Any>,
 ) : ThistleException(
     createErrorMessage(
         nodeContext,
@@ -43,7 +43,7 @@ class ThistleMissingContextValueException(
     )
 ) {
 
-    companion object {
+    public companion object {
         @Suppress("UNUSED_PARAMETER")
         private fun createErrorMessage(
             nodeContext: NodeContext,

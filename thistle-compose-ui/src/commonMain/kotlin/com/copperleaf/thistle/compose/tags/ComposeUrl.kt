@@ -9,9 +9,9 @@ import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
 import com.copperleaf.thistle.core.renderer.string
 
-class ComposeUrl(
-    val color: Color? = null,
-    val hardcodedUrl: String? = null,
+public class ComposeUrl(
+    private val color: Color? = null,
+    private val hardcodedUrl: String? = null,
     private val handler: (String) -> Unit
 ) : ThistleTagFactory<ComposeThistleRenderContext, ComposeSpanWrapper> {
     override fun invoke(renderContext: ComposeThistleRenderContext): ComposeSpanWrapper {

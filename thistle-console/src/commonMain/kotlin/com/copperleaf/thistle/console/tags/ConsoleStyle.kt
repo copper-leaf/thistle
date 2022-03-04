@@ -8,7 +8,7 @@ import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
 import com.copperleaf.thistle.core.renderer.enum
 
-class ConsoleStyle(
+public class ConsoleStyle(
     private val hardcodedStyle: Int? = null
 ) : ThistleTagFactory<ConsoleThistleRenderContext, AnsiEscapeCode> {
     override fun invoke(renderContext: ConsoleThistleRenderContext): AnsiEscapeCode {

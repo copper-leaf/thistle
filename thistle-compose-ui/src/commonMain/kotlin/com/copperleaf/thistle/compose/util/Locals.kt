@@ -2,6 +2,7 @@ package com.copperleaf.thistle.compose.util
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.staticCompositionLocalOf
 import com.copperleaf.thistle.compose.ComposeDefaults
 import com.copperleaf.thistle.compose.renderer.ComposeThistleRenderContext
@@ -9,24 +10,24 @@ import com.copperleaf.thistle.core.parser.ThistleParser
 import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
 
 @ExperimentalStdlibApi
-typealias ComposeSyntaxBuilder =
+internal typealias ComposeSyntaxBuilder =
     ThistleSyntaxBuilder<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>
 
 @ExperimentalStdlibApi
-typealias ComposeSyntaxBuilderDefaults =
+internal typealias ComposeSyntaxBuilderDefaults =
     ThistleSyntaxBuilder.Defaults<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>
 
 @ExperimentalStdlibApi
-typealias ComposeThistleParser =
+public typealias ComposeThistleParser =
     ThistleParser<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>
 
 @ExperimentalStdlibApi
-val LocalThistle = staticCompositionLocalOf<ComposeThistleParser> {
+public val LocalThistle: ProvidableCompositionLocal<ComposeThistleParser> = staticCompositionLocalOf {
     error("CompositionLocal LocalThistle not present")
 }
 
 @ExperimentalStdlibApi
-val LocalThistleContext = staticCompositionLocalOf<Map<String, Any>> {
+public val LocalThistleContext: ProvidableCompositionLocal<Map<String, Any>> = staticCompositionLocalOf {
     error("CompositionLocal LocalThistleContext not present")
 }
 
@@ -45,7 +46,7 @@ private val LocalThistleConfiguration = staticCompositionLocalOf<List<ComposeSyn
  */
 @ExperimentalStdlibApi
 @Composable
-fun ProvideThistle(
+public fun ProvideThistle(
     defaults: ComposeSyntaxBuilderDefaults = ComposeDefaults(),
     additionalConfiguration: ComposeSyntaxBuilder.() -> Unit = {},
     context: Map<String, Any> = emptyMap(),
@@ -67,7 +68,7 @@ fun ProvideThistle(
  */
 @ExperimentalStdlibApi
 @Composable
-fun ProvideAdditionalThistleConfiguration(
+public fun ProvideAdditionalThistleConfiguration(
     additionalConfiguration: ComposeSyntaxBuilder.() -> Unit,
     content: @Composable () -> Unit,
 ) {
@@ -93,7 +94,7 @@ fun ProvideAdditionalThistleConfiguration(
  */
 @ExperimentalStdlibApi
 @Composable
-fun ProvideAdditionalThistleContext(
+public fun ProvideAdditionalThistleContext(
     additionalContext: Map<String, Any>,
     content: @Composable () -> Unit,
 ) {

@@ -15,7 +15,7 @@ import com.copperleaf.thistle.core.node.ThistleValueMapNode
 
 @ExperimentalStdlibApi
 @Suppress("UNCHECKED_CAST")
-class DefaultThistleSyntax(
+public class DefaultThistleSyntax(
     private val openTagStartToken: Parser<*>,
     private val openTagEndToken: Parser<*>,
     private val closeTagStartToken: Parser<*>,

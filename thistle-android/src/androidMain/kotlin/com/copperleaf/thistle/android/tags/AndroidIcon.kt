@@ -6,7 +6,7 @@ import com.copperleaf.thistle.android.renderer.AndroidThistleRenderContext
 import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
 
-class AndroidIcon(
+public class AndroidIcon(
     private val hardcodedDrawable: Drawable? = null
 ) : ThistleTagFactory<AndroidThistleRenderContext, Any> {
     override fun invoke(renderContext: AndroidThistleRenderContext): Any {

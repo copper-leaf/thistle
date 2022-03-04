@@ -1,6 +1,9 @@
-## 3.0.0 - 2022-03-02
+## 3.1.0 - 2022-03-02
 
 - Updates Kotlin version to 1.6.10
+- Enables ExplicitApi and BinaryCompatibilityValidator on the repo, to improve the stability of its API
+- [`thistle-compose-ui`] Adds a `noLinkClickedHandler` callback to `StyledText`, to help propagate clicks that do not
+  fall onto clickable regions of text.
 
 ## 2.0.2 - 2021-12-06
 

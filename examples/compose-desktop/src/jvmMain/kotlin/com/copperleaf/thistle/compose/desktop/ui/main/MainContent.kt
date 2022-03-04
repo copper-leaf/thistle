@@ -25,12 +25,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import com.copperleaf.thistle.compose.tags.ComposeLink
 import com.copperleaf.thistle.compose.util.ProvideAdditionalThistleConfiguration
 import com.copperleaf.thistle.compose.util.ProvideAdditionalThistleContext
@@ -39,6 +41,7 @@ import com.copperleaf.thistle.compose.util.rememberStyledText
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalStdlibApi::class)
+@Suppress("UNCHECKED_CAST")
 @Composable
 fun MainContent(
     headerTextContextCounter: String,
@@ -93,80 +96,95 @@ fun MainContent(
                         "userId" to "123456789",
                     ).filterValues { it != null } as Map<String, Any>
                 ) {
-                    Column(modifier = Modifier.padding(horizontal = 16.dp)) {
-                        SnackbarHost(snackbarHostState)
-                        Row(Modifier.padding(vertical = 16.dp)) {
-                            Column(Modifier.weight(1f)) {
-                                Text("Counter", fontSize = 24.sp)
+                    Box(modifier = Modifier.padding(horizontal = 16.dp)) {
+                        SnackbarHost(snackbarHostState, modifier = Modifier.align(Alignment.BottomCenter).zIndex(10f))
 
-                                StyledText(
-                                    text = headerTextContextCounter,
-                                    onErrorDefaultTo = { it.message ?: "" },
-                                )
+                        Column(modifier = Modifier.fillMaxSize()) {
+                            Row(Modifier.padding(vertical = 16.dp)) {
+                                Column(Modifier.weight(1f)) {
+                                    Text("Counter", fontSize = 24.sp)
+
+                                    StyledText(
+                                        text = headerTextContextCounter,
+                                        onErrorDefaultTo = { it.message ?: "" },
+                                    )
+                                }
+                                Column(Modifier.weight(1f)) {
+                                    Text("Input", fontSize = 24.sp)
+
+                                    StyledText(
+                                        text = headerTextContextColor,
+                                        onErrorDefaultTo = { it.message ?: "" },
+                                        noLinkClickedHandler = {
+                                        },
+                                    )
+                                    TextField(
+                                        inputText,
+                                        { inputText = it },
+                                        label = { Text("context.color") }
+                                    )
+                                }
                             }
-                            Column(Modifier.weight(1f)) {
-                                Text("Input", fontSize = 24.sp)
 
-                                StyledText(
-                                    text = headerTextContextColor,
-                                    onErrorDefaultTo = { it.message ?: "" },
-                                )
-                                TextField(
-                                    inputText,
-                                    { inputText = it },
-                                    label = { Text("context.color") }
-                                )
+                            Column(Modifier.padding(vertical = 16.dp)) {
+                                Text("Options", fontSize = 24.sp)
+                                Row(Modifier) {
+                                    Checkbox(showAst, { showAst = it })
+                                    Text("Show AST")
+                                }
                             }
-                        }
 
-                        Column(Modifier.padding(vertical = 16.dp)) {
-                            Text("Options", fontSize = 24.sp)
-                            Row(Modifier) {
-                                Checkbox(showAst, { showAst = it })
-                                Text("Show AST")
-                            }
-                        }
-
-                        LazyColumn(
-                            modifier = Modifier.padding(top = 16.dp),
-                        ) {
-                            itemsIndexed(inputs) { _, item ->
-                                Box(modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(vertical = 8.dp)) {
-                                    Card(
-                                        elevation = 8.dp,
+                            LazyColumn(
+                                modifier = Modifier.padding(top = 16.dp),
+                            ) {
+                                itemsIndexed(inputs) { _, item ->
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .wrapContentHeight()
+                                            .padding(vertical = 8.dp)
                                     ) {
-                                        Column(Modifier.fillMaxSize()) {
-                                            Column(
-                                                Modifier
-                                                    .fillMaxWidth()
-                                                    .wrapContentHeight()
-                                                    .background(MaterialTheme.colors.onSurface.copy(alpha = 0.25f))
-                                                    .clip(RoundedCornerShape(4.dp))
-                                                    .padding(16.dp)
-                                            ) {
-                                                Text(item)
-                                                if (showAst) {
-                                                    Divider(Modifier.padding(vertical = 8.dp))
-                                                    val styledTextAst = rememberStyledText(
-                                                        input = item,
-                                                        onErrorDefaultTo = { it.message ?: "" },
-                                                    )
-                                                    Text(styledTextAst.ast.toString())
+                                        Card(
+                                            elevation = 8.dp,
+                                        ) {
+                                            Column(Modifier.fillMaxSize()) {
+                                                Column(
+                                                    Modifier
+                                                        .fillMaxWidth()
+                                                        .wrapContentHeight()
+                                                        .background(MaterialTheme.colors.onSurface.copy(alpha = 0.25f))
+                                                        .clip(RoundedCornerShape(4.dp))
+                                                        .padding(16.dp)
+                                                ) {
+                                                    Text(item)
+                                                    if (showAst) {
+                                                        Divider(Modifier.padding(vertical = 8.dp))
+                                                        val styledTextAst = rememberStyledText(
+                                                            input = item,
+                                                            onErrorDefaultTo = { it.message ?: "" },
+                                                        )
+                                                        Text(styledTextAst.ast.toString())
+                                                    }
                                                 }
-                                            }
 
-                                            Divider()
+                                                Divider()
 
-                                            Column(
-                                                Modifier
-                                                    .fillMaxWidth()
-                                                    .wrapContentHeight()
-                                                    .padding(16.dp)
-                                            ) {
-                                                StyledText(
-                                                    text = item,
-                                                    onErrorDefaultTo = { it.message ?: "" },
-                                                )
+                                                Column(
+                                                    Modifier
+                                                        .fillMaxWidth()
+                                                        .wrapContentHeight()
+                                                        .padding(16.dp)
+                                                ) {
+                                                    StyledText(
+                                                        text = item,
+                                                        onErrorDefaultTo = { it.message ?: "" },
+                                                        noLinkClickedHandler = {
+                                                            coroutineScope.launch {
+                                                                snackbarHostState.showSnackbar("Not handled")
+                                                            }
+                                                        },
+                                                    )
+                                                }
                                             }
                                         }
                                     }

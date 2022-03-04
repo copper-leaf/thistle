@@ -8,7 +8,7 @@ import com.copperleaf.thistle.android.renderer.AndroidThistleRenderContext
 import com.copperleaf.thistle.core.parser.ThistleParser
 
 @ExperimentalStdlibApi
-fun TextView.applyStyledText(
+public fun TextView.applyStyledText(
     thistle: ThistleParser<AndroidThistleRenderContext, Any, Spanned>,
     input: String,
     context: Map<String, Any> = emptyMap()

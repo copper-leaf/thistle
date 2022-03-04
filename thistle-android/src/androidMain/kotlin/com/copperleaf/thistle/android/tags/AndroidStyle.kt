@@ -7,7 +7,7 @@ import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
 import com.copperleaf.thistle.core.renderer.enum
 
-class AndroidStyle(
+public class AndroidStyle(
     private val hardcodedStyle: Int? = null
 ) : ThistleTagFactory<AndroidThistleRenderContext, Any> {
     override fun invoke(renderContext: AndroidThistleRenderContext): Any {

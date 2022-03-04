@@ -20,8 +20,8 @@ import com.copperleaf.thistle.core.parser.ThistleTagFactory
 import com.copperleaf.thistle.core.renderer.ThistleRenderer
 
 @ExperimentalStdlibApi
-class ComposeThistleRenderer(
-    tags: ThistleTagMap<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>
+public class ComposeThistleRenderer(
+    tags: ThistleTagMap<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>,
 ) : ThistleRenderer<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>(tags) {
 
     private var linkId = 0

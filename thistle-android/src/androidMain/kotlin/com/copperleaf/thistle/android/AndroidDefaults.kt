@@ -22,7 +22,7 @@ import com.copperleaf.thistle.core.asThistleValueParser
 import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
 
 @ExperimentalStdlibApi
-class AndroidDefaults(
+public class AndroidDefaults(
     private val uiContext: Context,
     private val packageName: String = uiContext.applicationContext.packageName
 ) : ThistleSyntaxBuilder.Defaults<AndroidThistleRenderContext, Any, Spanned> {

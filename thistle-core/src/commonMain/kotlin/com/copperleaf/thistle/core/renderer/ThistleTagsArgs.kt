@@ -6,20 +6,20 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
 @Suppress("NOTHING_TO_INLINE")
-class ThistleTagsArgs(
-    val tagFactory: ThistleTagFactory<*, *>,
-    val args: Map<String, Any>
+public class ThistleTagsArgs(
+    public val tagFactory: ThistleTagFactory<*, *>,
+    public val args: Map<String, Any>
 ) {
-    val argsVisited: MutableList<String> = mutableListOf()
+    public val argsVisited: MutableList<String> = mutableListOf()
 
-    fun checkNoMoreArgs() {
+    public fun checkNoMoreArgs() {
         val extraParams = args.keys - argsVisited
         check(extraParams.isEmpty()) {
             "Unknown parameters '$extraParams' for $tagFactory"
         }
     }
 
-    inline fun <reified ParameterType : Any> parameter(
+    public inline fun <reified ParameterType : Any> parameter(
         hardcodedValue: ParameterType? = null,
         name: String? = null,
     ): ReadOnlyProperty<Nothing?, ParameterType> = LazyThistleParameterProvider<ParameterType, ParameterType>(
@@ -33,7 +33,7 @@ class ThistleTagsArgs(
         mapper = { _, it -> it }
     )
 
-    inline fun <reified InputParameterType : Any, reified OutputParameterType : Any> parameter(
+    public inline fun <reified InputParameterType : Any, reified OutputParameterType : Any> parameter(
         hardcodedValue: OutputParameterType? = null,
         name: String? = null,
         noinline mapper: (String, InputParameterType) -> OutputParameterType
@@ -50,7 +50,7 @@ class ThistleTagsArgs(
 }
 
 @Suppress("UNCHECKED_CAST")
-class LazyThistleParameterProvider<InputParameterType : Any, OutputParameterType : Any>(
+public class LazyThistleParameterProvider<InputParameterType : Any, OutputParameterType : Any>(
     private val thistleTagsArgs: ThistleTagsArgs,
     private val hardcodedValue: OutputParameterType? = null,
     private val name: String? = null,
@@ -115,31 +115,31 @@ class LazyThistleParameterProvider<InputParameterType : Any, OutputParameterType
 }
 
 @Suppress("NOTHING_TO_INLINE")
-inline fun ThistleTagsArgs.int(
+public inline fun ThistleTagsArgs.int(
     value: Int? = null,
     name: String? = null,
 ): ReadOnlyProperty<Nothing?, Int> = parameter(value, name)
 
 @Suppress("NOTHING_TO_INLINE")
-inline fun ThistleTagsArgs.double(
+public inline fun ThistleTagsArgs.double(
     value: Double? = null,
     name: String? = null,
 ): ReadOnlyProperty<Nothing?, Double> = parameter(value, name)
 
 @Suppress("NOTHING_TO_INLINE")
-inline fun ThistleTagsArgs.string(
+public inline fun ThistleTagsArgs.string(
     value: String? = null,
     name: String? = null,
 ): ReadOnlyProperty<Nothing?, String> = parameter(value, name)
 
 @Suppress("NOTHING_TO_INLINE")
-inline fun ThistleTagsArgs.boolean(
+public inline fun ThistleTagsArgs.boolean(
     value: Boolean? = null,
     name: String? = null,
 ): ReadOnlyProperty<Nothing?, Boolean> = parameter(value, name)
 
 @Suppress("NOTHING_TO_INLINE")
-inline fun <reified ParameterType : Any> ThistleTagsArgs.enum(
+public inline fun <reified ParameterType : Any> ThistleTagsArgs.enum(
     value: ParameterType? = null,
     name: String? = null,
     crossinline options: () -> Map<String, ParameterType>,

@@ -9,7 +9,7 @@ import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
 import com.copperleaf.thistle.core.renderer.enum
 
-class ComposeStyle(
+public class ComposeStyle(
     private val hardcodedWeight: FontWeight? = null,
     private val hardcodedStyle: FontStyle? = null,
 ) : ThistleTagFactory<ComposeThistleRenderContext, ComposeSpanWrapper> {

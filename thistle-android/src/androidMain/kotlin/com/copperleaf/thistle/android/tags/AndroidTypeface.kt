@@ -8,7 +8,7 @@ import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
 import com.copperleaf.thistle.core.renderer.enum
 
-class AndroidTypeface(
+public class AndroidTypeface(
     private val hardcodedTypeface: Typeface? = null
 ) : ThistleTagFactory<AndroidThistleRenderContext, Any> {
 

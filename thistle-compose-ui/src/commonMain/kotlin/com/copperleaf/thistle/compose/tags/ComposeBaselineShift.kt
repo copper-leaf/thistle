@@ -10,7 +10,7 @@ import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
 import com.copperleaf.thistle.core.renderer.enum
 
-class ComposeBaselineShift(
+public class ComposeBaselineShift(
     private val hardcodedBaselineShift: BaselineShift? = null,
     private val fontSize: TextUnit = 10.sp,
 ) : ThistleTagFactory<ComposeThistleRenderContext, ComposeSpanWrapper> {

@@ -8,7 +8,7 @@ import com.copperleaf.thistle.compose.util.ComposeSpanWrapper
 import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
 
-class ComposeLink(
+public class ComposeLink(
     private val color: Color = Color.Unspecified,
     private val handler: (String) -> Unit
 ) : ThistleTagFactory<ComposeThistleRenderContext, ComposeSpanWrapper> {

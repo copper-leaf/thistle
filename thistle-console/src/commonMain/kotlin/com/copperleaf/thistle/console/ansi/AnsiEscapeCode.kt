@@ -1,18 +1,18 @@
 package com.copperleaf.thistle.console.ansi
 
-data class AnsiEscapeCode(
+public data class AnsiEscapeCode(
     val code: String
 ) {
-    fun renderCode(): String {
+    public fun renderCode(): String {
         return "$ansiControlCode$code"
     }
 
-    companion object {
-        fun renderResetCode(): String {
+    public companion object {
+        public fun renderResetCode(): String {
             return "$ansiControlCode$ansiReset"
         }
 
-        fun ForegroundColorEscapeCode(
+        public fun ForegroundColorEscapeCode(
             color: Int,
             bright: Boolean = false
         ): AnsiEscapeCode {
@@ -25,7 +25,7 @@ data class AnsiEscapeCode(
             }
         }
 
-        fun BackgroundColorEscapeCode(
+        public fun BackgroundColorEscapeCode(
             color: Int,
             bright: Boolean = false
         ): AnsiEscapeCode {
@@ -38,7 +38,7 @@ data class AnsiEscapeCode(
             }
         }
 
-        fun StyleEscapeCode(
+        public fun StyleEscapeCode(
             style: Int,
         ): AnsiEscapeCode {
             check(style in ansiStylesByName.values) { "$style is not a valid ANSI style" }

@@ -1,9 +1,9 @@
 package com.copperleaf.thistle.console.ansi
 
 @DslMarker
-annotation class AnsiDsl
+internal annotation class AnsiDsl
 
-fun AnsiTreeNode.flatten(
+internal fun AnsiTreeNode.flatten(
     parentCodes: List<AnsiEscapeCode> = emptyList()
 ): List<AnsiStringComponent> {
     return when (this) {
@@ -19,18 +19,18 @@ fun AnsiTreeNode.flatten(
     }
 }
 
-fun List<AnsiStringComponent>.renderToString(): String {
+internal fun List<AnsiStringComponent>.renderToString(): String {
     return this.joinToString(separator = "") { it.renderComponent() }
 }
 
-interface AnsiNodeScope {
+internal interface AnsiNodeScope {
 
-    fun appendText(textContent: String)
+    public fun appendText(textContent: String)
 
-    fun appendChild(ansiEscapeCode: (String) -> AnsiEscapeCode, block: AnsiNodeScope.() -> Unit)
+    public fun appendChild(ansiEscapeCode: (String) -> AnsiEscapeCode, block: AnsiNodeScope.() -> Unit)
 }
 
-class AnsiNodeScopeImpl : AnsiNodeScope {
+internal class AnsiNodeScopeImpl : AnsiNodeScope {
     private val nodes = mutableListOf<AnsiTreeNode>()
 
     private fun textContent(): String {
@@ -59,7 +59,7 @@ class AnsiNodeScopeImpl : AnsiNodeScope {
     }
 }
 
-fun buildAnsiString(block: AnsiNodeScope.() -> Unit): AnsiTreeNode {
+internal fun buildAnsiString(block: AnsiNodeScope.() -> Unit): AnsiTreeNode {
     return AnsiNodeScopeImpl()
         .apply(block)
         .toRootNode()

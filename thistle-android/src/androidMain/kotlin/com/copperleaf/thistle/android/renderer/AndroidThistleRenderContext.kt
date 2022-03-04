@@ -3,7 +3,7 @@ package com.copperleaf.thistle.android.renderer
 import android.content.Context
 import com.copperleaf.thistle.core.renderer.ThistleRenderContext
 
-class AndroidThistleRenderContext(
+public class AndroidThistleRenderContext(
     val uiContext: Context,
 
     internal val startIndex: Int,

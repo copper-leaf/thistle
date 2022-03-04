@@ -17,7 +17,7 @@ import com.copperleaf.thistle.core.parser.ThistleTagFactory
 import com.copperleaf.thistle.core.renderer.ThistleRenderer
 
 @ExperimentalStdlibApi
-class ConsoleThistleRenderer(
+public class ConsoleThistleRenderer(
     tags: ThistleTagMap<ConsoleThistleRenderContext, AnsiEscapeCode, String>
 ) : ThistleRenderer<ConsoleThistleRenderContext, AnsiEscapeCode, String>(tags) {
 

@@ -12,7 +12,7 @@ import com.copperleaf.thistle.core.renderer.ThistleRenderContext
 import com.copperleaf.thistle.core.renderer.ThistleRenderer
 
 @ExperimentalStdlibApi
-class ThistleParser<
+public class ThistleParser<
     RenderContext : ThistleRenderContext,
     Tag : Any,
     StyledText : Any
@@ -24,7 +24,7 @@ class ThistleParser<
 
     internal val tagNames: Set<String> = tags.keys
 
-    fun parse(parserContext: ParserContext): ThistleRootNode {
+    public fun parse(parserContext: ParserContext): ThistleRootNode {
         return checkParsedCorrectly(
             this,
             parserContext,
@@ -32,10 +32,10 @@ class ThistleParser<
         )
     }
 
-    fun newRenderer(): ThistleRenderer<RenderContext, Tag, StyledText> = rendererFactory.newRenderer(tags)
+    public fun newRenderer(): ThistleRenderer<RenderContext, Tag, StyledText> = rendererFactory.newRenderer(tags)
 
-    companion object {
-        operator fun <RenderContext : ThistleRenderContext, Tag : Any, StyledText : Any> invoke(
+    public companion object {
+        public operator fun <RenderContext : ThistleRenderContext, Tag : Any, StyledText : Any> invoke(
             defaults: ThistleSyntaxBuilder.Defaults<RenderContext, Tag, StyledText>,
             block: ThistleSyntaxBuilder<RenderContext, Tag, StyledText>.() -> Unit = {}
         ): ThistleParser<RenderContext, Tag, StyledText> {

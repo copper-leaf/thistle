@@ -7,11 +7,11 @@ import com.copperleaf.thistle.core.node.ThistleInterpolateNode
 import com.copperleaf.thistle.core.node.ThistleValueMapNode
 
 @ExperimentalStdlibApi
-interface ThistleSyntax {
+public interface ThistleSyntax {
 
-    fun tagStart(): Parser<TagNameNode<ThistleValueMapNode>>
+    public fun tagStart(): Parser<TagNameNode<ThistleValueMapNode>>
 
-    fun tagEnd(): Parser<TagNameNode<Node>>
+    public fun tagEnd(): Parser<TagNameNode<Node>>
 
-    fun interpolate(): Parser<ThistleInterpolateNode>
+    public fun interpolate(): Parser<ThistleInterpolateNode>
 }

@@ -19,7 +19,7 @@ import com.copperleaf.thistle.core.ThistleRendererFactory
 import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
 
 @ExperimentalStdlibApi
-class ComposeDefaults() : ThistleSyntaxBuilder.Defaults<
+public class ComposeDefaults() : ThistleSyntaxBuilder.Defaults<
         ComposeThistleRenderContext,
         ComposeSpanWrapper,
         ComposeStyledText> {

@@ -4,14 +4,14 @@ import com.copperleaf.kudzu.node.NodeContext
 import com.copperleaf.kudzu.node.TerminalNode
 
 @ExperimentalStdlibApi
-sealed class ThistleValueNode(
+public sealed class ThistleValueNode(
     context: NodeContext
 ) : TerminalNode(context) {
 
-    abstract fun getValue(context: Map<String, Any>): Any
+    public abstract fun getValue(context: Map<String, Any>): Any
 
-    class StaticValue(
-        val value: Any,
+    public class StaticValue(
+        public val value: Any,
         context: NodeContext
     ) : ThistleValueNode(context) {
         override val text: String
@@ -22,9 +22,9 @@ sealed class ThistleValueNode(
         }
     }
 
-    class ContextValue(
+    public class ContextValue(
         override val text: String,
-        val valueFn: (Map<String, Any>) -> Any,
+        public val valueFn: (Map<String, Any>) -> Any,
         context: NodeContext
     ) : ThistleValueNode(context) {
         override fun getValue(context: Map<String, Any>): Any {

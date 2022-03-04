@@ -9,6 +9,8 @@ plugins {
 description = "Kotlin Multiplatform String markup and formatting utility"
 
 kotlin {
+    explicitApi()
+
     jvm { }
 //    js(BOTH) {
 //        browser { }

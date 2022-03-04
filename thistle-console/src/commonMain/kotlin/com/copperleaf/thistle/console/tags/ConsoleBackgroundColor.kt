@@ -9,7 +9,7 @@ import com.copperleaf.thistle.core.parser.ThistleTagFactory
 import com.copperleaf.thistle.core.renderer.boolean
 import com.copperleaf.thistle.core.renderer.enum
 
-class ConsoleBackgroundColor(
+public class ConsoleBackgroundColor(
     private val hardcodedColor: Int? = null,
     private val hardcodedBright: Boolean? = null,
 ) : ThistleTagFactory<ConsoleThistleRenderContext, AnsiEscapeCode> {

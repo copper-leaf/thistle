@@ -22,7 +22,7 @@ import com.copperleaf.thistle.core.ThistleRendererFactory
 import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
 
 @ExperimentalStdlibApi
-class ConsoleDefaults : ThistleSyntaxBuilder.Defaults<ConsoleThistleRenderContext, AnsiEscapeCode, String> {
+public class ConsoleDefaults : ThistleSyntaxBuilder.Defaults<ConsoleThistleRenderContext, AnsiEscapeCode, String> {
 
     override fun rendererFactory(): ThistleRendererFactory<ConsoleThistleRenderContext, AnsiEscapeCode, String> {
         return ThistleRendererFactory { ConsoleThistleRenderer(it) }

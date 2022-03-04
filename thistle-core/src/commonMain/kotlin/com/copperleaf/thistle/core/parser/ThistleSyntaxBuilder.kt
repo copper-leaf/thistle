@@ -31,39 +31,39 @@ import com.copperleaf.thistle.core.node.ThistleValueNode
 import com.copperleaf.thistle.core.renderer.ThistleRenderContext
 
 @ExperimentalStdlibApi
-class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, Tag : Any, StyledText : Any> {
+public class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, Tag : Any, StyledText : Any> {
 
-    interface Defaults<RenderContext : ThistleRenderContext, Tag : Any, StyledText : Any> {
-        fun applyToBuilder(builder: ThistleSyntaxBuilder<RenderContext, Tag, StyledText>)
+    public interface Defaults<RenderContext : ThistleRenderContext, Tag : Any, StyledText : Any> {
+        public fun applyToBuilder(builder: ThistleSyntaxBuilder<RenderContext, Tag, StyledText>)
 
-        fun rendererFactory(): ThistleRendererFactory<RenderContext, Tag, StyledText>
+        public fun rendererFactory(): ThistleRendererFactory<RenderContext, Tag, StyledText>
     }
 
 // Public API
 // ---------------------------------------------------------------------------------------------------------------------
 
-    fun from(other: ThistleSyntaxBuilder.Defaults<RenderContext, Tag, StyledText>) {
+    public fun from(other: ThistleSyntaxBuilder.Defaults<RenderContext, Tag, StyledText>) {
         other.applyToBuilder(this)
     }
 
-    fun tag(
+    public fun tag(
         tagName: String,
         tagFactory: () -> ThistleTagFactory<RenderContext, Tag>
     ) {
         tags[tagName] = tagFactory
     }
 
-    fun valueFormat(
+    public fun valueFormat(
         parser: () -> Parser<ThistleValueNode>
     ) {
         valueParsers.add(parser())
     }
 
-    fun customSyntax(syntax: (Parser<ThistleValueMapNode>) -> ThistleSyntax) {
+    public fun customSyntax(syntax: (Parser<ThistleValueMapNode>) -> ThistleSyntax) {
         this.syntax = syntax
     }
 
-    fun customSyntax(
+    public fun customSyntax(
         openTagStartToken: Parser<*> = LiteralTokenParser("{{"),
         openTagEndToken: Parser<*> = LiteralTokenParser("}}"),
         closeTagStartToken: Parser<*> = LiteralTokenParser("{{/"),
@@ -152,7 +152,7 @@ class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, Tag : Any, Styl
         return FlatMappedParser(this) { TagNameNode(tagName, it, it.context) }
     }
 
-    fun build(): Pair<TagBuilder<*, *>, Map<String, ThistleTagConfiguration<RenderContext, Tag>>> {
+    public fun build(): Pair<TagBuilder<*, *>, Map<String, ThistleTagConfiguration<RenderContext, Tag>>> {
         val syntax = syntax(buildAttrMapParser())
 
         val interpolate = TagBuilder(
@@ -181,8 +181,8 @@ class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, Tag : Any, Styl
 // Companion
 // ---------------------------------------------------------------------------------------------------------------------
 
-    companion object {
-        val hexColorAsIntValueParser: Parser<ThistleValueNode> = MappedParser(
+    public companion object {
+        public val hexColorAsIntValueParser: Parser<ThistleValueNode> = MappedParser(
             SequenceParser(
                 CharInParser('#'),
                 TimesParser(
@@ -195,10 +195,10 @@ class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, Tag : Any, Styl
             hexDigits.text.toInt(16) or -0x1000000 // Set the alpha value
         }.asThistleValueParser()
 
-        val unquotedStringValueValueParser: Parser<ThistleValueNode> = MappedParser(AnyTokenParser()) { it.text }
+        public val unquotedStringValueValueParser: Parser<ThistleValueNode> = MappedParser(AnyTokenParser()) { it.text }
             .asThistleValueParser()
 
-        val contextValueParser: Parser<ThistleValueNode> = FlatMappedParser(
+        public val contextValueParser: Parser<ThistleValueNode> = FlatMappedParser(
             SequenceParser(
                 LiteralTokenParser("context."),
                 AnyTokenParser(),

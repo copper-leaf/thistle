@@ -5,9 +5,9 @@ import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.AnnotatedString
@@ -41,7 +41,7 @@ import com.copperleaf.thistle.core.parser.ThistleUnknownTagException
  */
 @ExperimentalStdlibApi
 @Composable
-fun rememberStyledText(
+public fun rememberStyledText(
     input: String,
     thistle: ThistleParser<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText> = LocalThistle.current,
     context: Map<String, Any> = LocalThistleContext.current,
@@ -77,51 +77,76 @@ fun rememberStyledText(
     return rendered
 }
 
-data class ComposeSpanWrapper(
+public data class ComposeSpanWrapper(
     val spanStyle: SpanStyle? = null,
     val clickHandler: (() -> Unit)? = null,
     val inlineContent: InlineTextContent? = null,
 )
 
-sealed class ComposeStyledText {
+public sealed class ComposeStyledText {
 
-    abstract val ast: ThistleRootNode
+    public abstract val ast: ThistleRootNode
 
-    data class Success(
+    public data class Success(
         override val ast: ThistleRootNode,
-        val result: AnnotatedString,
+        internal val result: AnnotatedString,
         private val clickHandlers: List<() -> Unit>,
-        val inlineContent: Map<String, InlineTextContent>,
+        internal val inlineContent: Map<String, InlineTextContent>,
     ) : ComposeStyledText() {
-        fun onClick(offset: Int) {
-            result
+        internal fun onClick(offset: Int, noLinkClickedHandler: () -> Unit) {
+            val clickedAnnotation = result
                 .getStringAnnotations(
                     tag = "thistleLinkHandler",
                     start = offset,
                     end = offset,
                 )
                 .firstOrNull()
-                ?.let { annotation ->
-                    val index = annotation.item.toInt()
-                    clickHandlers[index].invoke()
-                }
+
+            if (clickedAnnotation != null) {
+                // the click corresponded to a clickable region of text. Invoke its registered callback function.
+                val index = clickedAnnotation.item.toInt()
+                clickHandlers[index].invoke()
+            } else {
+                // the click was intercepted by the BasicText, but did not correspond to a clickable region of text.
+                // It may have been another annotation, or have been unstyled text. Either way, we can't tell Compose to
+                // not consume the click such that it bubbles up to the parent, so we have to manually notify that the
+                // click was not handled by the StyledText and should fall back to the default click handler.
+                noLinkClickedHandler()
+            }
         }
     }
 
-    data class Failure(
+    public data class Failure(
         override val ast: ThistleRootNode,
-        val throwable: Throwable,
+        public val throwable: Throwable,
     ) : ComposeStyledText()
 }
 
-fun Modifier.detectStyledTextClicks(
+public fun Modifier.detectStyledTextClicks(
     layoutResult: TextLayoutResult?,
-    styledText: ComposeStyledText
+    styledText: ComposeStyledText,
+    noLinkClickedHandler: () -> Unit,
 ): Modifier {
     return this.pointerInput(layoutResult, styledText) {
         detectTapGestures { pos ->
-            layoutResult?.let {
-                (styledText as? ComposeStyledText.Success)?.onClick(it.getOffsetForPosition(pos))
+            if (layoutResult != null) {
+                when (styledText) {
+                    is ComposeStyledText.Failure -> {
+                        // the text was not parsed correctly, so treat all clicks as if they were intercepted by not
+                        // handled, to fall back to the default click handler
+                        noLinkClickedHandler()
+                    }
+                    is ComposeStyledText.Success -> {
+                        // the text was parsed correctly. Attempt to figure out if the click corresponded to a clickable
+                        // region of text, or else fall back to the default click handler
+                        styledText.onClick(
+                            offset = layoutResult.getOffsetForPosition(pos),
+                            noLinkClickedHandler = noLinkClickedHandler,
+                        )
+                    }
+                }
+            } else {
+                // ignore, the text is not ready yet
             }
         }
     }
@@ -162,7 +187,7 @@ fun Modifier.detectStyledTextClicks(
  */
 @ExperimentalStdlibApi
 @Composable
-fun StyledText(
+public fun StyledText(
     text: String,
     modifier: Modifier = Modifier,
     thistle: ThistleParser<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText> = LocalThistle.current,
@@ -172,7 +197,8 @@ fun StyledText(
     softWrap: Boolean = true,
     overflow: TextOverflow = TextOverflow.Clip,
     maxLines: Int = Int.MAX_VALUE,
-    onTextLayout: (TextLayoutResult) -> Unit = {},
+    noLinkClickedHandler: () -> Unit = { },
+    onTextLayout: (TextLayoutResult) -> Unit = { },
 ) {
     val styledText = rememberStyledText(
         input = text,
@@ -202,7 +228,7 @@ fun StyledText(
         text = displayedText,
         inlineContent = inlineContent,
         modifier = modifier
-            .detectStyledTextClicks(layoutResult.value, styledText),
+            .detectStyledTextClicks(layoutResult.value, styledText, noLinkClickedHandler),
         style = style,
         softWrap = softWrap,
         overflow = overflow,

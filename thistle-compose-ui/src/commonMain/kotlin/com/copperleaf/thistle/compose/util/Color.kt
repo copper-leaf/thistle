@@ -6,7 +6,7 @@ import com.copperleaf.thistle.core.renderer.ThistleTagsArgs
 import kotlin.properties.ReadOnlyProperty
 
 @Suppress("NOTHING_TO_INLINE")
-inline fun ThistleTagsArgs.color(
+public inline fun ThistleTagsArgs.color(
     value: Color? = null,
     name: String? = null,
 ): ReadOnlyProperty<Nothing?, Color> = parameter<Any, Color>(
@@ -24,19 +24,19 @@ inline fun ThistleTagsArgs.color(
     }
 }
 
-fun Color.Companion.parse(input: String): Color {
+public fun Color.Companion.parse(input: String): Color {
     val trimmed = input.trim()
     return parseColorAsName(trimmed)
         ?: parseColorAsHex(trimmed)
         ?: Color.Unspecified
 }
 
-fun Color.serializeArgb(): String {
+public fun Color.serializeArgb(): String {
     val v = (0xFFFFFFFFu and this.toArgb().toUInt()).toString(16).padStart(8, '0')
     return "#$v"
 }
 
-fun Color.serializeRgb(): String {
+public fun Color.serializeRgb(): String {
     val v = (0xFFFFFFu and this.toArgb().toUInt()).toString(16).padStart(6, '0')
     return "#$v"
 }

@@ -1,6 +1,6 @@
 package com.copperleaf.thistle.console.ansi
 
-data class AnsiStringComponent(
+internal data class AnsiStringComponent(
     val escapeCodes: List<AnsiEscapeCode>,
     val textContent: String,
 ) {

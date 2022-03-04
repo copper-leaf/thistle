@@ -11,7 +11,7 @@ import com.copperleaf.kudzu.parser.text.IdentifierTokenParser
 import com.copperleaf.kudzu.parser.text.LiteralTokenParser
 
 @ExperimentalStdlibApi
-class ResourceReferenceParser : Parser<ResourceReferenceNode<*>> {
+public class ResourceReferenceParser : Parser<ResourceReferenceNode<*>> {
 
     override fun predict(input: ParserContext): Boolean {
         return parser.predict(input)

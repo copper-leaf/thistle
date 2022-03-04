@@ -6,7 +6,7 @@ import com.copperleaf.thistle.core.checkArgs
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
 import com.copperleaf.thistle.core.renderer.int
 
-class AndroidBackgroundColor(
+public class AndroidBackgroundColor(
     private val hardcodedColor: Int? = null
 ) : ThistleTagFactory<AndroidThistleRenderContext, Any> {
     override fun invoke(renderContext: AndroidThistleRenderContext): Any {

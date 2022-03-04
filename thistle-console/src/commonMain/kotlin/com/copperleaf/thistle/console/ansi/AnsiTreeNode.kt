@@ -1,7 +1,7 @@
 package com.copperleaf.thistle.console.ansi
 
 @AnsiDsl
-sealed class AnsiTreeNode {
+internal sealed class AnsiTreeNode {
     internal data class TextNode(
         var textContent: String
     ) : AnsiTreeNode()

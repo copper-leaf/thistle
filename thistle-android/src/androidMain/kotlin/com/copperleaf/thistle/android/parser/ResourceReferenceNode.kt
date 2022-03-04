@@ -7,8 +7,8 @@ import com.copperleaf.kudzu.node.NodeContext
 import com.copperleaf.kudzu.node.TerminalNode
 
 public sealed class ResourceReferenceNode<T : Any>(
-    val resourceType: String,
-    val resourceName: String,
+    public val resourceType: String,
+    public val resourceName: String,
     nodeContext: NodeContext
 ) : TerminalNode(nodeContext) {
     abstract fun getValue(
