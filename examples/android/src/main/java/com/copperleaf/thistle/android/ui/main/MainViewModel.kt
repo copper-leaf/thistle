@@ -11,9 +11,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime
 
-@ExperimentalStdlibApi
 @ExperimentalTime
-@ExperimentalUnsignedTypes
 class MainViewModel(initialState: State) : ViewModel() {
 
     data class State(

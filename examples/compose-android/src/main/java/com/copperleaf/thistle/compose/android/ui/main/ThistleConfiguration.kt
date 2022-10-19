@@ -14,7 +14,6 @@ import com.copperleaf.thistle.compose.tags.ComposeTextDecoration
 import com.copperleaf.thistle.compose.util.ProvideThistle
 import com.copperleaf.thistle.core.asThistleValueParser
 
-@OptIn(ExperimentalStdlibApi::class)
 @Composable
 fun ThistleConfiguration(
     content: @Composable () -> Unit

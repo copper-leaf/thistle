@@ -15,7 +15,7 @@ import com.copperleaf.thistle.android.databinding.MainFragmentBinding
 import kotlinx.coroutines.flow.collect
 import kotlin.time.ExperimentalTime
 
-@OptIn(ExperimentalStdlibApi::class, ExperimentalTime::class, ExperimentalUnsignedTypes::class)
+@OptIn(ExperimentalTime::class)
 class MainFragment : Fragment() {
 
     private var binding: MainFragmentBinding? = null

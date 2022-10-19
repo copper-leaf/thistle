@@ -9,34 +9,27 @@ import com.copperleaf.thistle.compose.renderer.ComposeThistleRenderContext
 import com.copperleaf.thistle.core.parser.ThistleParser
 import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
 
-@ExperimentalStdlibApi
 internal typealias ComposeSyntaxBuilder =
     ThistleSyntaxBuilder<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>
 
-@ExperimentalStdlibApi
 internal typealias ComposeSyntaxBuilderDefaults =
     ThistleSyntaxBuilder.Defaults<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>
 
-@ExperimentalStdlibApi
 public typealias ComposeThistleParser =
     ThistleParser<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>
 
-@ExperimentalStdlibApi
 public val LocalThistle: ProvidableCompositionLocal<ComposeThistleParser> = staticCompositionLocalOf {
     error("CompositionLocal LocalThistle not present")
 }
 
-@ExperimentalStdlibApi
 public val LocalThistleContext: ProvidableCompositionLocal<Map<String, Any>> = staticCompositionLocalOf {
     error("CompositionLocal LocalThistleContext not present")
 }
 
-@ExperimentalStdlibApi
 private val LocalThistleDefaults = staticCompositionLocalOf<ComposeSyntaxBuilderDefaults> {
     error("CompositionLocal LocalThistleDefaults not present")
 }
 
-@ExperimentalStdlibApi
 private val LocalThistleConfiguration = staticCompositionLocalOf<List<ComposeSyntaxBuilder.() -> Unit>> {
     error("CompositionLocal LocalThistleConfiguration not present")
 }
@@ -44,7 +37,6 @@ private val LocalThistleConfiguration = staticCompositionLocalOf<List<ComposeSyn
 /**
  * Provide a LocalThistle for [StyledText] composables.
  */
-@ExperimentalStdlibApi
 @Composable
 public fun ProvideThistle(
     defaults: ComposeSyntaxBuilderDefaults = ComposeDefaults(),
@@ -66,7 +58,6 @@ public fun ProvideThistle(
 /**
  * Using the current configuration provided by [ProvideThistle], add new configuration tags to [content].
  */
-@ExperimentalStdlibApi
 @Composable
 public fun ProvideAdditionalThistleConfiguration(
     additionalConfiguration: ComposeSyntaxBuilder.() -> Unit,
@@ -92,7 +83,6 @@ public fun ProvideAdditionalThistleConfiguration(
 /**
  * Using the current Thistle Context provided by [ProvideThistle], add new context values to [content].
  */
-@ExperimentalStdlibApi
 @Composable
 public fun ProvideAdditionalThistleContext(
     additionalContext: Map<String, Any>,

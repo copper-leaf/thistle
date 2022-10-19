@@ -11,7 +11,6 @@ import com.copperleaf.thistle.core.node.ThistleRootNode
 import com.copperleaf.thistle.core.renderer.ThistleRenderContext
 import com.copperleaf.thistle.core.renderer.ThistleRenderer
 
-@ExperimentalStdlibApi
 public class ThistleParser<
     RenderContext : ThistleRenderContext,
     Tag : Any,

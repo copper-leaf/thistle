@@ -3,7 +3,6 @@ package com.copperleaf.thistle.core.node
 import com.copperleaf.kudzu.node.NodeContext
 import com.copperleaf.kudzu.node.TerminalNode
 
-@ExperimentalStdlibApi
 public class ThistleValueMapNode(
     public val valueMap: Map<String, ThistleValueNode>,
     context: NodeContext

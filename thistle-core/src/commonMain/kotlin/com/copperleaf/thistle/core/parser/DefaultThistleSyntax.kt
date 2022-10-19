@@ -13,7 +13,6 @@ import com.copperleaf.kudzu.parser.text.OptionalWhitespaceParser
 import com.copperleaf.thistle.core.node.ThistleInterpolateNode
 import com.copperleaf.thistle.core.node.ThistleValueMapNode
 
-@ExperimentalStdlibApi
 @Suppress("UNCHECKED_CAST")
 public class DefaultThistleSyntax(
     private val openTagStartToken: Parser<*>,

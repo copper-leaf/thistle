@@ -10,114 +10,84 @@ import com.copperleaf.thistle.core.node.ThistleValueMapNode
 import com.copperleaf.thistle.core.renderer.ThistleRenderContext
 import com.copperleaf.thistle.core.renderer.ThistleRenderer
 import com.copperleaf.thistle.expectCatching
-import com.copperleaf.thistle.expectThat
 import com.copperleaf.thistle.isA
-import com.copperleaf.thistle.isEqualTo
-import com.copperleaf.thistle.isFalse
 import com.copperleaf.thistle.isNotNull
-import com.copperleaf.thistle.isTrue
 import com.copperleaf.thistle.node
 import com.copperleaf.thistle.parsedCorrectly
 import com.copperleaf.thistle.parsedIncorrectly
 import com.copperleaf.thistle.test
-import kotlin.test.Test
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 
-@ExperimentalUnsignedTypes
-@ExperimentalStdlibApi
-class TestParser {
+class TestParser : StringSpec({
 
-    class TestRenderContext(
-        override val context: Map<String, Any> = emptyMap(),
-        override val args: Map<String, Any> = emptyMap()
-    ) : ThistleRenderContext
-
-    class TestRenderer : ThistleRenderer<TestRenderContext, Any, Any>(emptyMap()) {
-        override fun render(rootNode: ThistleRootNode, context: Map<String, Any>): Any {
-            return Unit
-        }
-    }
-
-    object TestDefaults : ThistleSyntaxBuilder.Defaults<TestRenderContext, Any, Any> {
-        override fun applyToBuilder(builder: ThistleSyntaxBuilder<TestRenderContext, Any, Any>) {
-            with(builder) {
-            }
-        }
-
-        override fun rendererFactory(): ThistleRendererFactory<TestRenderContext, Any, Any> {
-            return ThistleRendererFactory { TestRenderer() }
-        }
-    }
-
-    @Test
-    fun testHexColorAsIntValueParser() {
+    "testHexColorAsIntValueParser" {
         val underTest = ThistleSyntaxBuilder.hexColorAsIntValueParser
         "#00ff00".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext).parsedCorrectly()
         }
 
         "#00FF00".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext).parsedCorrectly()
         }
 
         "00ff00".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isFalse()
+            underTest.predict(parserContext) shouldBe false
             underTest.test(parserContext).parsedIncorrectly()
         }
     }
 
-    @Test
-    fun testUnquotedStringValueParser() {
+    "testUnquotedStringValueParser" {
         val underTest = ThistleSyntaxBuilder.unquotedStringValueValueParser
         val contextMap = emptyMap<String, Any>()
 
         "one".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext)
                 .parsedCorrectly()
                 .node()
                 .isNotNull()
                 .apply {
-                    getValue(contextMap).isEqualTo("one")
+                    getValue(contextMap) shouldBe "one"
                 }
         }
     }
 
-    @Test
-    fun testContextValueParser() {
+    "testContextValueParser" {
         val underTest = ThistleSyntaxBuilder.contextValueParser
         val contextMap = mapOf("one" to 1, "two" to 2.2)
 
         "context.one".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext)
                 .parsedCorrectly()
                 .node()
                 .isNotNull()
                 .apply {
-                    getValue(contextMap).isEqualTo(1)
+                    getValue(contextMap) shouldBe 1
                 }
         }
         "context.two".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext)
                 .parsedCorrectly()
                 .node()
                 .isNotNull()
                 .apply {
-                    getValue(contextMap).isEqualTo(2.2)
+                    getValue(contextMap) shouldBe 2.2
                 }
         }
         "context.three".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext)
                 .parsedCorrectly()
                 .node()
@@ -127,156 +97,154 @@ class TestParser {
                         .second
                         .isNotNull()
                         .isA<ThistleMissingContextValueException>()
-                        .message
-                        .isEqualTo("At NodeContext(1:9 to 1:14): Context must contain value for key 'three'")
+                        .message shouldBe "At NodeContext(1:9 to 1:14): Context must contain value for key 'three'"
                 }
         }
     }
 
-    @Test
-    fun testAttrValueParser() {
+    "testAttrValueParser" {
         val underTest = ThistleSyntaxBuilder<TestRenderContext, Any, Any>().buildAttrValueParser()
         val contextMap = mapOf("one" to 1, "two" to 2.2)
 
         // boolean value
         "true".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext)
                 .parsedCorrectly()
                 .node()
                 .isNotNull()
                 .apply {
-                    getValue(contextMap).isEqualTo(true)
+                    getValue(contextMap) shouldBe true
                 }
         }
         "false".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext)
                 .parsedCorrectly()
                 .node()
                 .isNotNull()
                 .apply {
-                    getValue(contextMap).isEqualTo(false)
+                    getValue(contextMap) shouldBe false
                 }
         }
 
         // double value
         "1.1".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext)
                 .parsedCorrectly()
                 .node()
                 .isNotNull()
                 .apply {
-                    getValue(contextMap).isEqualTo(1.1)
+                    getValue(contextMap) shouldBe 1.1
                 }
         }
 
         // int value
         "2".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext)
                 .parsedCorrectly()
                 .node()
                 .isNotNull()
                 .apply {
-                    getValue(contextMap).isEqualTo(2)
+                    getValue(contextMap) shouldBe 2
                 }
         }
 
         // string value
         "\"a string value\"".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext)
                 .parsedCorrectly()
                 .node()
                 .isNotNull()
                 .apply {
-                    getValue(contextMap).isEqualTo("a string value")
+                    getValue(contextMap) shouldBe "a string value"
                 }
         }
 
         // char value
         "'c'".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext)
                 .parsedCorrectly()
                 .node()
                 .isNotNull()
                 .apply {
-                    getValue(contextMap).isEqualTo('c')
+                    getValue(contextMap) shouldBe 'c'
                 }
         }
 
         // unquoted string value
         "monospace".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext, logErrors = true)
                 .parsedCorrectly()
                 .node()
                 .isNotNull()
                 .apply {
-                    getValue(contextMap).isEqualTo("monospace")
+                    getValue(contextMap) shouldBe "monospace"
                 }
         }
 
         // color value
         "#00ff00".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext)
                 .parsedCorrectly()
                 .node()
                 .isNotNull()
                 .apply {
-                    getValue(contextMap).isEqualTo(0xFF00FF00u.toInt())
+                    getValue(contextMap) shouldBe 0xFF00FF00u.toInt()
                 }
         }
         "#888888".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext)
                 .parsedCorrectly()
                 .node()
                 .isNotNull()
                 .apply {
-                    getValue(contextMap).isEqualTo(0xFF888888u.toInt())
+                    getValue(contextMap) shouldBe 0xFF888888u.toInt()
                 }
         }
 
         // context value
         "context.one".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext)
                 .parsedCorrectly()
                 .node()
                 .isNotNull()
                 .apply {
-                    getValue(contextMap).isEqualTo(1)
+                    getValue(contextMap) shouldBe 1
                 }
         }
         "context.two".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext)
                 .parsedCorrectly()
                 .node()
                 .isNotNull()
                 .apply {
-                    getValue(contextMap).isEqualTo(2.2)
+                    getValue(contextMap) shouldBe 2.2
                 }
         }
         "context.three".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext)
                 .parsedCorrectly()
                 .node()
@@ -286,113 +254,104 @@ class TestParser {
                         .second
                         .isNotNull()
                         .isA<ThistleMissingContextValueException>()
-                        .message
-                        .isEqualTo("At NodeContext(1:9 to 1:14): Context must contain value for key 'three'")
+                        .message shouldBe "At NodeContext(1:9 to 1:14): Context must contain value for key 'three'"
                 }
         }
     }
 
-    @Test
-    fun testAttrMapParser() {
+    "testAttrMapParser" {
         val underTest = ThistleSyntaxBuilder<TestRenderContext, Any, Any>().buildAttrMapParser()
         val contextMap = mapOf("one" to 1, "two" to 2.2)
+        val input = "truthy=true " +
+            "one=1 " +
+            "two=2.2 " +
+            "color=#00ff00 " +
+            "string=\"a string value\" " +
+            "char='c' " +
+            "unquoted=monospace cxt1=context.one cxt2=context.two"
 
         // boolean value
-        (
-            "truthy=true " +
-                "one=1 " +
-                "two=2.2 " +
-                "color=#00ff00 " +
-                "string=\"a string value\" " +
-                "char='c' " +
-                "unquoted=monospace cxt1=context.one cxt2=context.two"
-            ).apply {
-            val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
-            underTest.test(parserContext)
-                .parsedCorrectly()
-                .node()
-                .isNotNull()
-                .apply {
-                    getValueMap(contextMap).isEqualTo(
-                        mapOf(
-                            "truthy" to true,
-                            "one" to 1,
-                            "two" to 2.2,
-                            "color" to 0xFF00FF00u.toInt(),
-                            "string" to "a string value",
-                            "char" to 'c',
-                            "unquoted" to "monospace",
-                            "cxt1" to 1,
-                            "cxt2" to 2.2,
-                        )
-                    )
-                }
-        }
+
+        val parserContext = ParserContext.fromString(input)
+        underTest.predict(parserContext) shouldBe true
+        underTest.test(parserContext)
+            .parsedCorrectly()
+            .node()
+            .isNotNull()
+            .apply {
+                getValueMap(contextMap) shouldBe mapOf(
+                    "truthy" to true,
+                    "one" to 1,
+                    "two" to 2.2,
+                    "color" to 0xFF00FF00u.toInt(),
+                    "string" to "a string value",
+                    "char" to 'c',
+                    "unquoted" to "monospace",
+                    "cxt1" to 1,
+                    "cxt2" to 2.2,
+                )
+            }
     }
 
-    @Test
-    fun testSyntaxTagStartParser() {
+    "testSyntaxTagStartParser" {
         val syntax = ThistleSyntaxBuilder<TestRenderContext, Any, Any>().buildSyntaxParser()
         val contextMap = mapOf("one" to 1, "two" to 2.2)
         val underTest = syntax.tagStart()
 
         "{{one".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
         }
 
         "{{two".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
         }
 
         "{{one}}".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext)
                 .parsedCorrectly()
                 .node()
                 .isNotNull()
                 .apply {
-                    tagName.isEqualTo("one")
-                    wrapped.getValueMap(contextMap).isEqualTo(emptyMap<String, Any>())
+                    tagName shouldBe "one"
+                    wrapped.getValueMap(contextMap) shouldBe emptyMap<String, Any>()
                 }
         }
 
         "{{one one=1}}".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext)
                 .parsedCorrectly()
                 .node()
                 .isNotNull()
                 .apply {
-                    tagName.isEqualTo("one")
-                    wrapped.getValueMap(contextMap).isEqualTo(mapOf<String, Any>("one" to 1))
+                    tagName shouldBe "one"
+                    wrapped.getValueMap(contextMap) shouldBe mapOf<String, Any>("one" to 1)
                 }
         }
         "{{one one=context.four}}".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext)
                 .parsedCorrectly()
                 .node()
                 .isNotNull()
                 .apply {
-                    tagName.isEqualTo("one")
+                    tagName shouldBe "one"
                     expectCatching { wrapped.getValueMap(contextMap) }
                         .second
                         .isNotNull()
                         .isA<ThistleMissingContextValueException>()
-                        .message
-                        .isEqualTo("At NodeContext(1:19 to 1:23): Context must contain value for key 'four'")
+                        .message shouldBe "At NodeContext(1:19 to 1:23): Context must contain value for key 'four'"
                 }
         }
     }
 
-    @Test
-    fun testFullParser() {
+    "testFullParser" {
         val thistle = ThistleParser(TestDefaults) {
             tag("one") { ThistleTagFactory { } }
         }
@@ -401,7 +360,7 @@ class TestParser {
 
         "{{one}}two{{/one}}".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext, logErrors = true)
                 .parsedCorrectly()
                 .node()
@@ -412,14 +371,14 @@ class TestParser {
                 .opening
                 .isA<TagNameNode<ThistleValueMapNode>>()
                 .apply {
-                    tagName.isEqualTo("one")
-                    wrapped.getValueMap(contextMap).isEqualTo(emptyMap<String, Any>())
+                    tagName shouldBe "one"
+                    wrapped.getValueMap(contextMap) shouldBe emptyMap<String, Any>()
                 }
         }
 
         "{{one one=1}}two{{/one}}".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext, logErrors = true)
                 .parsedCorrectly()
                 .node()
@@ -430,13 +389,13 @@ class TestParser {
                 .opening
                 .isA<TagNameNode<ThistleValueMapNode>>()
                 .apply {
-                    tagName.isEqualTo("one")
-                    wrapped.getValueMap(contextMap).isEqualTo(mapOf<String, Any>("one" to 1))
+                    tagName shouldBe "one"
+                    wrapped.getValueMap(contextMap) shouldBe mapOf<String, Any>("one" to 1)
                 }
         }
         "{{one one=context.four}}two{{/one}}".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext, logErrors = true)
                 .parsedCorrectly()
                 .node()
@@ -447,19 +406,18 @@ class TestParser {
                 .opening
                 .isA<TagNameNode<ThistleValueMapNode>>()
                 .apply {
-                    tagName.isEqualTo("one")
+                    tagName shouldBe "one"
                     expectCatching { wrapped.getValueMap(contextMap) }
                         .second
                         .isNotNull()
                         .isA<ThistleMissingContextValueException>()
-                        .message
-                        .isEqualTo("At NodeContext(1:19 to 1:23): Context must contain value for key 'four'")
+                        .message shouldBe "At NodeContext(1:19 to 1:23): Context must contain value for key 'four'"
                 }
         }
 
         "interpolate {username} here".apply {
             val parserContext = ParserContext.fromString(this)
-            expectThat(underTest.predict(parserContext)).isTrue()
+            underTest.predict(parserContext) shouldBe true
             underTest.test(parserContext, logErrors = true)
                 .parsedCorrectly()
                 .node()
@@ -468,9 +426,34 @@ class TestParser {
                     val tagNode = it.nodeList[1].isA<TagNode<*, *, *>>()
 
                     val interpolateNode = tagNode.opening.wrapped as ThistleInterpolateNode
-                    interpolateNode.key.isEqualTo("username")
-                    interpolateNode.getValue(contextMap).isEqualTo("AliceBob123")
+                    interpolateNode.key shouldBe "username"
+                    interpolateNode.getValue(contextMap) shouldBe "AliceBob123"
                 }
+        }
+    }
+}) {
+
+    companion object {
+        class TestRenderContext(
+            override val context: Map<String, Any> = emptyMap(),
+            override val args: Map<String, Any> = emptyMap()
+        ) : ThistleRenderContext
+
+        class TestRenderer : ThistleRenderer<TestRenderContext, Any, Any>(emptyMap()) {
+            override fun render(rootNode: ThistleRootNode, context: Map<String, Any>): Any {
+                return Unit
+            }
+        }
+
+        object TestDefaults : ThistleSyntaxBuilder.Defaults<TestRenderContext, Any, Any> {
+            override fun applyToBuilder(builder: ThistleSyntaxBuilder<TestRenderContext, Any, Any>) {
+                with(builder) {
+                }
+            }
+
+            override fun rendererFactory(): ThistleRendererFactory<TestRenderContext, Any, Any> {
+                return ThistleRendererFactory { TestRenderer() }
+            }
         }
     }
 }

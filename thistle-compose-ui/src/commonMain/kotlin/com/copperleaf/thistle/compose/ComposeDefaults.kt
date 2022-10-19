@@ -18,7 +18,6 @@ import com.copperleaf.thistle.compose.util.ComposeStyledText
 import com.copperleaf.thistle.core.ThistleRendererFactory
 import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
 
-@ExperimentalStdlibApi
 public class ComposeDefaults() : ThistleSyntaxBuilder.Defaults<
         ComposeThistleRenderContext,
         ComposeSpanWrapper,

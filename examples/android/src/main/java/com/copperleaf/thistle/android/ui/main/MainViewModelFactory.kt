@@ -26,9 +26,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime
 
 @Suppress("UNCHECKED_CAST")
-@ExperimentalStdlibApi
 @ExperimentalTime
-@ExperimentalUnsignedTypes
 class MainViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
 
     private lateinit var vm: MainViewModel

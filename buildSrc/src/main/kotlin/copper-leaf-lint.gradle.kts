@@ -1,4 +1,4 @@
-import org.gradle.kotlin.dsl.kotlin
+ import org.gradle.kotlin.dsl.kotlin
 
 plugins {
     id("org.jlleitschuh.gradle.ktlint")

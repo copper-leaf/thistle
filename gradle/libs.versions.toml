@@ -1,0 +1,12 @@
+[versions]
+kotest = "5.5.1"
+
+[libraries]
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version = "1.6.4" }
+
+kudzu-core = { module = "io.github.copper-leaf:kudzu-core", version = "4.0.0" }
+
+kotest-engine = { module = "io.kotest:kotest-framework-engine", version.ref = "kotest" }
+kotest-assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+kotest-dataTest = { module = "io.kotest:kotest-framework-datatest", version.ref = "kotest" }
+kotest-propertyTest = { module = "io.kotest:kotest-property", version.ref = "kotest" }

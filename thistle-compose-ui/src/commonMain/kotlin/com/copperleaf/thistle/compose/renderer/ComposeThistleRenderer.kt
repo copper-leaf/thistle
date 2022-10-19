@@ -19,7 +19,6 @@ import com.copperleaf.thistle.core.node.ThistleValueMapNode
 import com.copperleaf.thistle.core.parser.ThistleTagFactory
 import com.copperleaf.thistle.core.renderer.ThistleRenderer
 
-@ExperimentalStdlibApi
 public class ComposeThistleRenderer(
     tags: ThistleTagMap<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>,
 ) : ThistleRenderer<ComposeThistleRenderContext, ComposeSpanWrapper, ComposeStyledText>(tags) {

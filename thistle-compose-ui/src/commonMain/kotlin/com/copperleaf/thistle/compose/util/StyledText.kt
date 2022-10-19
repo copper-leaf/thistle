@@ -39,7 +39,6 @@ import com.copperleaf.thistle.core.parser.ThistleUnknownTagException
  * The renderer result is also cached with [remember], and will get re-evaluated every time [input] or [context]
  * changes.
  */
-@ExperimentalStdlibApi
 @Composable
 public fun rememberStyledText(
     input: String,
@@ -185,7 +184,6 @@ public fun Modifier.detectStyledTextClicks(
  * @param onClick Callback that is executed when users click the text. This callback is called
  * with clicked character's offset.
  */
-@ExperimentalStdlibApi
 @Composable
 public fun StyledText(
     text: String,

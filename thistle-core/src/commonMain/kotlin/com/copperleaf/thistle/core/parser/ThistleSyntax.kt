@@ -6,7 +6,6 @@ import com.copperleaf.kudzu.parser.Parser
 import com.copperleaf.thistle.core.node.ThistleInterpolateNode
 import com.copperleaf.thistle.core.node.ThistleValueMapNode
 
-@ExperimentalStdlibApi
 public interface ThistleSyntax {
 
     public fun tagStart(): Parser<TagNameNode<ThistleValueMapNode>>

@@ -13,7 +13,6 @@ import com.copperleaf.thistle.compose.util.StyledText
  */
 /* ktlint-disable max-line-length */
 @Suppress("UNUSED_ANONYMOUS_PARAMETER", "UNUSED_PARAMETER")
-@ExperimentalStdlibApi
 class ComposeSnippets {
 
     @Composable

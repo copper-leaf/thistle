@@ -40,7 +40,6 @@ import com.copperleaf.thistle.compose.util.StyledText
 import com.copperleaf.thistle.compose.util.rememberStyledText
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalStdlibApi::class)
 @Suppress("UNCHECKED_CAST")
 @Composable
 fun MainContent(

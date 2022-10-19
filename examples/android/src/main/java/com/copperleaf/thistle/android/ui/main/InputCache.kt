@@ -8,9 +8,7 @@ import com.copperleaf.thistle.core.parser.ThistleParser
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime
 
-@ExperimentalStdlibApi
 @ExperimentalTime
-@ExperimentalUnsignedTypes
 data class InputCache(
     val text: String,
     val rootNode: ThistleRootNode,

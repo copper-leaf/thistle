@@ -1,3 +1,7 @@
+## 4.0.0 - 2022-10-17
+
+- Updates Kotlin version to 1.7.20
+
 ## 3.1.0 - 2022-03-02
 
 - Updates Kotlin version to 1.6.10

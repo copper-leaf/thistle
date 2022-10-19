@@ -17,7 +17,6 @@ import com.copperleaf.thistle.core.renderer.int
  */
 /* ktlint-disable max-line-length */
 @Suppress("UNUSED_ANONYMOUS_PARAMETER")
-@ExperimentalStdlibApi
 class ConsoleSnippets {
 
     fun consolePreview() {

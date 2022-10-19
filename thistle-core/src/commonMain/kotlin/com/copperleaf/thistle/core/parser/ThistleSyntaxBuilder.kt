@@ -30,7 +30,6 @@ import com.copperleaf.thistle.core.node.ThistleValueMapNode
 import com.copperleaf.thistle.core.node.ThistleValueNode
 import com.copperleaf.thistle.core.renderer.ThistleRenderContext
 
-@ExperimentalStdlibApi
 public class ThistleSyntaxBuilder<RenderContext : ThistleRenderContext, Tag : Any, StyledText : Any> {
 
     public interface Defaults<RenderContext : ThistleRenderContext, Tag : Any, StyledText : Any> {

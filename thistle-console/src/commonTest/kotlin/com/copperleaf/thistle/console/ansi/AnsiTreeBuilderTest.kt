@@ -1,12 +1,11 @@
 package com.copperleaf.thistle.console.ansi
 
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 
-class AnsiTreeBuilderTest {
+class AnsiTreeBuilderTest : StringSpec({
 
-    @Test
-    fun testBuildSingleComponent() {
+    "testBuildSingleComponent" {
         var text1 = ""
         var text2 = ""
         var text3 = ""
@@ -26,18 +25,15 @@ class AnsiTreeBuilderTest {
         }.flatten()
             .renderToString()
             .also {
-                assertEquals(
-                    "\u001B[32m(one escape code)\u001B[0m" +
-                        "(no escape codes)" +
-                        "\u001B[32m(before)\u001B[0m" +
-                        "\u001B[32m\u001B[47m(multiple escape codes)\u001B[0m" +
-                        "\u001B[32m(after)\u001B[0m",
-                    it
-                )
+                it shouldBe "\u001B[32m(one escape code)\u001B[0m" +
+                    "(no escape codes)" +
+                    "\u001B[32m(before)\u001B[0m" +
+                    "\u001B[32m\u001B[47m(multiple escape codes)\u001B[0m" +
+                    "\u001B[32m(after)\u001B[0m"
 
-                assertEquals("(one escape code)", text1)
-                assertEquals("(before)(multiple escape codes)(after)", text2)
-                assertEquals("(multiple escape codes)", text3)
+                text1 shouldBe "(one escape code)"
+                text2 shouldBe "(before)(multiple escape codes)(after)"
+                text3 shouldBe "(multiple escape codes)"
             }
     }
-}
+})

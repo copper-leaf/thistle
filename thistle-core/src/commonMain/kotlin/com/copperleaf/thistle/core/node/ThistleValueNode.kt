@@ -3,7 +3,6 @@ package com.copperleaf.thistle.core.node
 import com.copperleaf.kudzu.node.NodeContext
 import com.copperleaf.kudzu.node.TerminalNode
 
-@ExperimentalStdlibApi
 public sealed class ThistleValueNode(
     context: NodeContext
 ) : TerminalNode(context) {

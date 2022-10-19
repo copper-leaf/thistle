@@ -21,7 +21,6 @@ import com.copperleaf.thistle.core.ThistleRendererFactory
 import com.copperleaf.thistle.core.asThistleValueParser
 import com.copperleaf.thistle.core.parser.ThistleSyntaxBuilder
 
-@ExperimentalStdlibApi
 public class AndroidDefaults(
     private val uiContext: Context,
     private val packageName: String = uiContext.applicationContext.packageName

@@ -3,16 +3,13 @@ package com.copperleaf.thistle.console
 import com.copperleaf.kudzu.parser.ParserException
 import com.copperleaf.thistle.core.parser.ThistleParser
 import com.copperleaf.thistle.core.parser.ThistleUnknownTagException
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
+import io.kotest.assertions.throwables.shouldThrowWithMessage
+import io.kotest.core.spec.style.StringSpec
 
-@OptIn(ExperimentalStdlibApi::class)
 /* ktlint-disable max-line-length */
-class TestConsoleRenderer {
+class TestConsoleRenderer : StringSpec({
 
-    @Test
-    fun consoleRendererTests() {
+    "consoleRendererTests" {
         val thistle = ThistleParser(ConsoleDefaults())
 
         listOf(
@@ -70,38 +67,30 @@ class TestConsoleRenderer {
         }
     }
 
-    @Test
-    fun testMismatchedEndTag() {
+    "testMismatchedEndTag" {
         val thistle = ThistleParser(ConsoleDefaults())
-        assertFailsWith<ParserException> {
+        shouldThrowWithMessage<ParserException>(
+            """
+            |Parse error at 1:7 (SimpleTagParser)
+            |
+            |Mismatched closing tag: Expected tag name to be 'black', got 'blue'
+            |
+            |1|begin {{black}}normal black foreground{{/blue}}
+            |>>>>>>>>^
+            """.trimMargin()
+        ) {
             printlnStyledText(thistle, "begin {{black}}normal black foreground{{/blue}}")
-        }.also {
-            assertEquals(
-                """
-                |Parse error at 1:7 (SimpleTagParser)
-                |
-                |Mismatched closing tag: Expected tag name to be 'black', got 'blue'
-                |
-                |1|begin {{black}}normal black foreground{{/blue}}
-                |>>>>>>>>^
-                """.trimMargin(),
-                it.message
-            )
         }
     }
 
-    @Test
-    fun testUnknownTagName() {
+    "testUnknownTagName" {
         val thistle = ThistleParser(ConsoleDefaults())
-        assertFailsWith<ThistleUnknownTagException> {
+        shouldThrowWithMessage<ThistleUnknownTagException>(
+            "Unknown tag: orange. Valid tag names: [background, foreground, black, red, green, " +
+                "yellow, blue, magenta, cyan, white, BACKGROUND, FOREGROUND, BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, " +
+                "CYAN, WHITE, style, strikethrough, reverse, b, u]"
+        ) {
             printlnStyledText(thistle, "begin {{orange}}normal orange foreground{{/orange}}")
-        }.also {
-            assertEquals(
-                "Unknown tag: orange. Valid tag names: [background, foreground, black, red, green, yellow, blue, " +
-                    "magenta, cyan, white, BACKGROUND, FOREGROUND, BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, " +
-                    "WHITE, style, strikethrough, reverse, b, u]",
-                it.message
-            )
         }
     }
-}
+})

@@ -5,7 +5,6 @@ import com.copperleaf.thistle.console.ansi.AnsiEscapeCode
 import com.copperleaf.thistle.console.renderer.ConsoleThistleRenderContext
 import com.copperleaf.thistle.core.parser.ThistleParser
 
-@ExperimentalStdlibApi
 public fun printlnStyledText(
     thistle: ThistleParser<ConsoleThistleRenderContext, AnsiEscapeCode, String>,
     input: String,

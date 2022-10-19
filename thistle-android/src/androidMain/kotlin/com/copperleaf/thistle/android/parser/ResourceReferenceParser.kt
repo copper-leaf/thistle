@@ -10,7 +10,6 @@ import com.copperleaf.kudzu.parser.sequence.SequenceParser
 import com.copperleaf.kudzu.parser.text.IdentifierTokenParser
 import com.copperleaf.kudzu.parser.text.LiteralTokenParser
 
-@ExperimentalStdlibApi
 public class ResourceReferenceParser : Parser<ResourceReferenceNode<*>> {
 
     override fun predict(input: ParserContext): Boolean {

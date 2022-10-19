@@ -7,7 +7,6 @@ import com.copperleaf.kudzu.parser.ParserContext
 import com.copperleaf.thistle.android.renderer.AndroidThistleRenderContext
 import com.copperleaf.thistle.core.parser.ThistleParser
 
-@ExperimentalStdlibApi
 public fun TextView.applyStyledText(
     thistle: ThistleParser<AndroidThistleRenderContext, Any, Spanned>,
     input: String,

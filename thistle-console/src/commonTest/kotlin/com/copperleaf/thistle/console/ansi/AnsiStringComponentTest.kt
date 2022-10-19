@@ -1,18 +1,17 @@
 package com.copperleaf.thistle.console.ansi
 
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 
-class AnsiStringComponentTest {
+class AnsiStringComponentTest : StringSpec({
 
-    @Test
-    fun testBuildSingleComponent() {
+    "testBuildSingleComponent" {
         AnsiStringComponent(
             emptyList(),
             "(no escape codes)"
         ).renderComponent()
             .also {
-                assertEquals("(no escape codes)", it)
+                it shouldBe "(no escape codes)"
             }
 
         AnsiStringComponent(
@@ -22,7 +21,7 @@ class AnsiStringComponentTest {
             "(one escape code)"
         ).renderComponent()
             .also {
-                assertEquals("\u001B[32m(one escape code)\u001B[0m", it)
+                it shouldBe "\u001B[32m(one escape code)\u001B[0m"
             }
 
         AnsiStringComponent(
@@ -33,12 +32,11 @@ class AnsiStringComponentTest {
             "(multiple escape codes)"
         ).renderComponent()
             .also {
-                assertEquals("\u001B[32m\u001B[47m(multiple escape codes)\u001B[0m", it)
+                it shouldBe "\u001B[32m\u001B[47m(multiple escape codes)\u001B[0m"
             }
     }
 
-    @Test
-    fun testBuildComponentList() {
+    "testBuildComponentList" {
         listOf(
             AnsiStringComponent(
                 listOf(
@@ -59,12 +57,9 @@ class AnsiStringComponentTest {
             )
         ).renderToString()
             .also {
-                assertEquals(
-                    "\u001B[32m(one escape code)\u001B[0m" +
-                        "(no escape codes)" +
-                        "\u001B[32m\u001B[47m(multiple escape codes)\u001B[0m",
-                    it
-                )
+                it shouldBe "\u001B[32m(one escape code)\u001B[0m" +
+                    "(no escape codes)" +
+                    "\u001B[32m\u001B[47m(multiple escape codes)\u001B[0m"
             }
     }
-}
+})
