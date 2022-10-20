@@ -1,8 +1,10 @@
 plugins {
     `copper-leaf-android`
-    `copper-leaf-targets-compose`
+    `copper-leaf-targets`
     `copper-leaf-base`
     `copper-leaf-version`
+    `copper-leaf-compose`
+    `copper-leaf-testing`
     `copper-leaf-lint`
     `copper-leaf-publish`
 }

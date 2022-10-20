@@ -41,4 +41,22 @@ object Config {
             jetbrainsMarketplaceToken = project.loadProperty("jb_marketplace_token"),
         )
     }
+
+    fun customProperties(project: Project): Map<String, Any> {
+        return project
+            .properties
+            .entries
+            .filter { it.key.startsWith("copperleaf") && it.value != null }
+            .map {
+                val stringValue = it.value!!.toString()
+                val booleanValue = when (stringValue) {
+                    "true" -> true
+                    "false" -> false
+                    else -> null
+                }
+
+                it.key to (booleanValue ?: stringValue)
+            }
+            .toMap()
+    }
 }

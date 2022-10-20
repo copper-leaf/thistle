@@ -4,55 +4,30 @@ import org.gradle.accessors.dm.LibrariesForLibs
 
 plugins {
     kotlin("multiplatform")
+    id("io.kotest.multiplatform")
 }
 
 val libs = the<LibrariesForLibs>()
 val customProperties = Config.customProperties(project)
 
 kotlin {
-    explicitApi()
-
-    // targets
-    if (customProperties["copperleaf.targets.jvm"] == true) {
-        jvm { }
-    }
-    if (customProperties["copperleaf.targets.android"] == true) {
-        android {
-            publishAllLibraryVariants()
-        }
-    }
-    if (customProperties["copperleaf.targets.js"] == true) {
-        js(BOTH) {
-            browser {
-                testTask {
-                    enabled = false
-                }
-            }
-        }
-    }
-    if (customProperties["copperleaf.targets.ios"] == true) {
-        nativeTargetGroup(
-            "ios",
-            iosArm32(),
-            iosArm64(),
-            iosX64(),
-            iosSimulatorArm64(),
-        )
-    }
-
     // sourcesets
     sourceSets {
-        all {
-            languageSettings.apply {
-            }
-        }
-
         // Common Sourcesets
         val commonMain by getting {
             dependencies { }
         }
         val commonTest by getting {
-            dependencies { }
+            dependencies {
+                implementation(kotlin("test-common"))
+                implementation(kotlin("test-annotations-common"))
+                implementation(libs.kotlinx.coroutines.test)
+
+                implementation(libs.kotest.engine)
+                implementation(libs.kotest.assertions)
+                implementation(libs.kotest.dataTest)
+                implementation(libs.kotest.propertyTest)
+            }
         }
 
         if (customProperties["copperleaf.targets.jvm"] == true) {
@@ -60,7 +35,10 @@ kotlin {
                 dependencies { }
             }
             val jvmTest by getting {
-                dependencies { }
+                dependencies {
+                    implementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
+                    runtimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+                }
             }
         }
 
@@ -70,7 +48,10 @@ kotlin {
                 dependencies { }
             }
             val androidTest by getting {
-                dependencies { }
+                dependencies {
+                    implementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
+                    runtimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+                }
             }
         }
 
@@ -96,12 +77,18 @@ kotlin {
     }
 }
 
-tasks.withType<JavaCompile> {
-    sourceCompatibility = Config.javaVersion
-    targetCompatibility = Config.javaVersion
-}
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = Config.javaVersion
+tasks.withType<Test> {
+    useJUnitPlatform()
+    filter {
+        isFailOnNoMatchingTests = false
+    }
+    testLogging {
+        showExceptions = true
+        showStandardStreams = true
+        events = setOf(
+            org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED,
+            org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
+        )
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
     }
 }

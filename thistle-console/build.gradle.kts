@@ -3,6 +3,7 @@ plugins {
     `copper-leaf-targets`
     `copper-leaf-base`
     `copper-leaf-version`
+    `copper-leaf-testing`
     `copper-leaf-lint`
     `copper-leaf-publish`
 }
