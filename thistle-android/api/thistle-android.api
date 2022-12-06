@@ -10,6 +10,13 @@ public final class com/copperleaf/thistle/android/AndroidUtilsKt {
 	public static synthetic fun applyStyledText$default (Landroid/widget/TextView;Lcom/copperleaf/thistle/core/parser/ThistleParser;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)V
 }
 
+public final class com/copperleaf/thistle/android/BuildConfig {
+	public static final field BUILD_TYPE Ljava/lang/String;
+	public static final field DEBUG Z
+	public static final field LIBRARY_PACKAGE_NAME Ljava/lang/String;
+	public fun <init> ()V
+}
+
 public final class com/copperleaf/thistle/android/parser/ColorResourceReferenceNode : com/copperleaf/thistle/android/parser/ResourceReferenceNode {
 	public fun <init> (Ljava/lang/String;Lcom/copperleaf/kudzu/node/NodeContext;)V
 	public fun getValue (Landroid/content/Context;Ljava/lang/String;)Ljava/lang/Integer;
@@ -135,12 +142,5 @@ public final class com/copperleaf/thistle/android/tags/AndroidUrl : com/copperle
 	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun invoke (Lcom/copperleaf/thistle/android/renderer/AndroidThistleRenderContext;)Ljava/lang/Object;
 	public synthetic fun invoke (Lcom/copperleaf/thistle/core/renderer/ThistleRenderContext;)Ljava/lang/Object;
-}
-
-public final class com/copperleaf/thistle/compose/BuildConfig {
-	public static final field BUILD_TYPE Ljava/lang/String;
-	public static final field DEBUG Z
-	public static final field LIBRARY_PACKAGE_NAME Ljava/lang/String;
-	public fun <init> ()V
 }
 

@@ -5,7 +5,7 @@ import org.gradle.kotlin.dsl.provideDelegate
 
 object Config {
     val groupId = "io.github.copper-leaf"
-    val githubUrl = "https://github.com/copper-leaf/thistle"
+    val githubUrl = "https://github.com/copper-leaf/kodiak"
     val license = License.BSD3
     val javaVersion = JavaVersion.VERSION_1_8.toString()
 

@@ -1,3 +1,8 @@
+## 4.0.1 - 2022-12-06
+
+- Fix an issue where `thistle-android` and `thistle-compose-ui` artifacts both generated the same Android `BuildConfig`
+  class, causing an issue when both libraries are used in the same app.
+
 ## 4.0.0 - 2022-10-17
 
 - Updates Kotlin version to 1.7.20

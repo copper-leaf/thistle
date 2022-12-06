@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.copperleaf.thistle.android.databinding.ThistleExampleBinding
+import com.copperleaf.thistle.android.example.databinding.ThistleExampleBinding
 import kotlin.time.ExperimentalTime
 
 @ExperimentalTime

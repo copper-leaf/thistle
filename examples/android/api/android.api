@@ -1,12 +1,3 @@
-public final class com/copperleaf/thistle/android/BuildConfig {
-	public static final field APPLICATION_ID Ljava/lang/String;
-	public static final field BUILD_TYPE Ljava/lang/String;
-	public static final field DEBUG Z
-	public static final field VERSION_CODE I
-	public static final field VERSION_NAME Ljava/lang/String;
-	public fun <init> ()V
-}
-
 public final class com/copperleaf/thistle/android/Data {
 	public static final field INSTANCE Lcom/copperleaf/thistle/android/Data;
 	public final fun getHeaderTextContextColor ()Ljava/lang/String;
@@ -18,39 +9,48 @@ public final class com/copperleaf/thistle/android/MainActivity : androidx/appcom
 	public fun <init> ()V
 }
 
-public final class com/copperleaf/thistle/android/databinding/MainActivityBinding : androidx/viewbinding/ViewBinding {
-	public final field container Landroid/widget/FrameLayout;
-	public static fun bind (Landroid/view/View;)Lcom/copperleaf/thistle/android/databinding/MainActivityBinding;
-	public synthetic fun getRoot ()Landroid/view/View;
-	public fun getRoot ()Landroid/widget/FrameLayout;
-	public static fun inflate (Landroid/view/LayoutInflater;)Lcom/copperleaf/thistle/android/databinding/MainActivityBinding;
-	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lcom/copperleaf/thistle/android/databinding/MainActivityBinding;
+public final class com/copperleaf/thistle/android/example/BuildConfig {
+	public static final field APPLICATION_ID Ljava/lang/String;
+	public static final field BUILD_TYPE Ljava/lang/String;
+	public static final field DEBUG Z
+	public static final field VERSION_CODE I
+	public static final field VERSION_NAME Ljava/lang/String;
+	public fun <init> ()V
 }
 
-public final class com/copperleaf/thistle/android/databinding/MainFragmentBinding : androidx/viewbinding/ViewBinding {
+public final class com/copperleaf/thistle/android/example/databinding/MainActivityBinding : androidx/viewbinding/ViewBinding {
+	public final field container Landroid/widget/FrameLayout;
+	public static fun bind (Landroid/view/View;)Lcom/copperleaf/thistle/android/example/databinding/MainActivityBinding;
+	public synthetic fun getRoot ()Landroid/view/View;
+	public fun getRoot ()Landroid/widget/FrameLayout;
+	public static fun inflate (Landroid/view/LayoutInflater;)Lcom/copperleaf/thistle/android/example/databinding/MainActivityBinding;
+	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lcom/copperleaf/thistle/android/example/databinding/MainActivityBinding;
+}
+
+public final class com/copperleaf/thistle/android/example/databinding/MainFragmentBinding : androidx/viewbinding/ViewBinding {
 	public final field cbShowAst Landroid/widget/CheckBox;
 	public final field etContextColor Lcom/google/android/material/textfield/TextInputEditText;
 	public final field headerArea Landroid/widget/LinearLayout;
 	public final field rvExamples Landroidx/recyclerview/widget/RecyclerView;
 	public final field tvColor Landroid/widget/TextView;
 	public final field tvCounter Landroid/widget/TextView;
-	public static fun bind (Landroid/view/View;)Lcom/copperleaf/thistle/android/databinding/MainFragmentBinding;
+	public static fun bind (Landroid/view/View;)Lcom/copperleaf/thistle/android/example/databinding/MainFragmentBinding;
 	public synthetic fun getRoot ()Landroid/view/View;
 	public fun getRoot ()Landroidx/constraintlayout/widget/ConstraintLayout;
-	public static fun inflate (Landroid/view/LayoutInflater;)Lcom/copperleaf/thistle/android/databinding/MainFragmentBinding;
-	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lcom/copperleaf/thistle/android/databinding/MainFragmentBinding;
+	public static fun inflate (Landroid/view/LayoutInflater;)Lcom/copperleaf/thistle/android/example/databinding/MainFragmentBinding;
+	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lcom/copperleaf/thistle/android/example/databinding/MainFragmentBinding;
 }
 
-public final class com/copperleaf/thistle/android/databinding/ThistleExampleBinding : androidx/viewbinding/ViewBinding {
+public final class com/copperleaf/thistle/android/example/databinding/ThistleExampleBinding : androidx/viewbinding/ViewBinding {
 	public final field ast Landroid/widget/TextView;
 	public final field astLayout Landroid/widget/FrameLayout;
 	public final field input Landroid/widget/TextView;
 	public final field output Landroid/widget/TextView;
-	public static fun bind (Landroid/view/View;)Lcom/copperleaf/thistle/android/databinding/ThistleExampleBinding;
+	public static fun bind (Landroid/view/View;)Lcom/copperleaf/thistle/android/example/databinding/ThistleExampleBinding;
 	public synthetic fun getRoot ()Landroid/view/View;
 	public fun getRoot ()Landroid/widget/LinearLayout;
-	public static fun inflate (Landroid/view/LayoutInflater;)Lcom/copperleaf/thistle/android/databinding/ThistleExampleBinding;
-	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lcom/copperleaf/thistle/android/databinding/ThistleExampleBinding;
+	public static fun inflate (Landroid/view/LayoutInflater;)Lcom/copperleaf/thistle/android/example/databinding/ThistleExampleBinding;
+	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lcom/copperleaf/thistle/android/example/databinding/ThistleExampleBinding;
 }
 
 public final class com/copperleaf/thistle/android/ui/main/ExampleAdapter : androidx/recyclerview/widget/RecyclerView$Adapter {
@@ -64,7 +64,7 @@ public final class com/copperleaf/thistle/android/ui/main/ExampleAdapter : andro
 }
 
 public final class com/copperleaf/thistle/android/ui/main/ExampleAdapter$ViewHolder : androidx/recyclerview/widget/RecyclerView$ViewHolder {
-	public fun <init> (Lcom/copperleaf/thistle/android/databinding/ThistleExampleBinding;)V
+	public fun <init> (Lcom/copperleaf/thistle/android/example/databinding/ThistleExampleBinding;)V
 	public final fun bind (Lcom/copperleaf/thistle/android/ui/main/InputCache;Lcom/copperleaf/thistle/android/ui/main/MainViewModel$State;)V
 }
 

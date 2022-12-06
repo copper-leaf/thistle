@@ -12,14 +12,9 @@ import com.copperleaf.kudzu.parser.mapped.MappedParser
 import com.copperleaf.kudzu.parser.text.LiteralTokenParser
 import com.copperleaf.thistle.android.AndroidDefaults
 import com.copperleaf.thistle.android.Data
-import com.copperleaf.thistle.android.R
+import com.copperleaf.thistle.android.example.R
 import com.copperleaf.thistle.android.renderer.AndroidThistleRenderContext
-import com.copperleaf.thistle.android.tags.AndroidBackgroundColor
-import com.copperleaf.thistle.android.tags.AndroidForegroundColor
-import com.copperleaf.thistle.android.tags.AndroidIcon
-import com.copperleaf.thistle.android.tags.AndroidLink
-import com.copperleaf.thistle.android.tags.AndroidStyle
-import com.copperleaf.thistle.android.tags.AndroidUnderline
+import com.copperleaf.thistle.android.tags.*
 import com.copperleaf.thistle.core.asThistleValueParser
 import com.copperleaf.thistle.core.parser.ThistleParser
 import kotlin.time.ExperimentalTime

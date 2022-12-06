@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.addRepeatingJob
-import com.copperleaf.thistle.android.R
-import com.copperleaf.thistle.android.databinding.MainFragmentBinding
+import com.copperleaf.thistle.android.example.R
+import com.copperleaf.thistle.android.example.databinding.MainFragmentBinding
 import kotlinx.coroutines.flow.collect
 import kotlin.time.ExperimentalTime
 
