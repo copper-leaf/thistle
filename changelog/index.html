@@ -1,0 +1,774 @@
+
+
+<!DOCTYPE html>
+<html class="">
+<head>
+
+
+
+
+
+
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid 0.21.1"/>
+<link rel="icon" href="https://copper-leaf.github.io/thistle/favicon.ico">
+
+
+<meta name="robots" content="index, follow">
+
+
+
+<title>Changelog</title>
+
+
+<meta name="description" content="Kotlin Multiplatform String markup and formatting utility">
+
+
+
+
+
+<!-- start:inject styles -->
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/thistle/Copper/2f57be5b/assets/css/bulma.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/thistle/Copper/2f57be5b/assets/css/extraCss.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/thistle/Copper/2f57be5b/assets/css/bulma-tooltip.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/thistle/Copper/2f57be5b/assets/css/bulma-accordion.min.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/thistle/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/thistle/PrismJS/prism-themes/master/themes/prism-duotone-light.css"  />
+<!-- end:inject styles -->
+
+
+
+<script>
+    window.site = {"orchidVersion":"0.21.1","baseUrl":"https://copper-leaf.github.io/thistle","environment":"prod","version":"4.0.1"};
+</script>
+
+
+    <!-- start:inject meta-components [head] -->
+    
+    <!-- end:inject meta-components [head] -->
+
+
+
+    <!-- start:inject meta-components [head] -->
+    
+
+        
+            
+        
+
+        
+            
+        
+            
+        
+    
+    <!-- end:inject meta-components [head] -->
+
+
+
+
+
+
+
+</head>
+<body class="">
+
+
+
+
+
+    <!-- start:inject meta-components [bodyStart] -->
+    
+    <!-- end:inject meta-components [bodyStart] -->
+
+
+
+    <!-- start:inject meta-components [bodyStart] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyStart] -->
+
+
+
+
+
+<div class="columns is-marginless is-desktop">
+
+  <div class="column is-one-third-desktop is-one-quarter-widescreen is-one-fifth-fullhd is-paddingless column-main-left is-hidden-mobile is-hidden-touch">
+  
+
+
+    
+
+
+<section class="hero is-primary is-bold is-fullheight">
+
+
+<!-- Hero header: will stick at the top -->
+<div class="hero-head" style="padding: 0 1.5rem">
+  <a href="https://copper-leaf.github.io/thistle"><img src="https://copper-leaf.github.io/thistle/assets/svg/orchid/logo_top_dark.svg" style="padding: 40px 40px 0 40px;"></a>
+  <p class="subtitle is-4 has-text-centered">Kotlin Multiplatform String markup and formatting utility</p>
+
+  <div class="columns is-mobile has-text-centered">
+  
+
+
+  
+
+
+  </div>
+</div>
+
+
+
+
+<!-- Hero content: will be in the middle -->
+<div class="hero-body">
+  <div class="container sidebar-menu">
+    <details class="is-hidden-desktop">
+      <summary>
+        Menu
+      </summary>
+      <div id="mobile-sidebar-menu"></div>
+    </details>
+    <div class="is-hidden-touch">
+      <aside class="menu" id="responsive-menu-content">
+      
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle/changelog 2322399 -->
+  <!-- menuItem.page=https://copper-leaf.github.io/thistle 1280512370 -->
+  <a href="https://copper-leaf.github.io/thistle" class="">
+  
+  Home
+  </a>
+</li>
+
+</ul>
+  
+
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle/changelog 2322399 -->
+  <!-- menuItem.page=https://copper-leaf.github.io/thistle/changelog 2322399 -->
+  <a href="https://copper-leaf.github.io/thistle/changelog" class="is-active">
+  
+  Changelog
+  </a>
+</li>
+
+</ul>
+  
+
+  
+  
+    <ul class="menu-list">
+
+</ul>
+  
+
+
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function copyElem(fromId, toId) {
+    var fromElementContent = document.getElementById(fromId);
+    var toElementContent = document.getElementById(toId);
+    toElementContent.outerHTML = fromElementContent.outerHTML;
+  }
+
+  document.addEventListener("DOMContentLoaded", function (event) {
+    copyElem('responsive-menu-content', 'mobile-sidebar-menu');
+  });
+</script>
+
+
+</section>
+
+  </div>
+  <div class="column is-one-third-desktop is-one-quarter-widescreen is-one-fifth-fullhd is-paddingless column-main-left is-hidden-desktop">
+  
+
+
+    
+
+
+<section class="hero is-primary is-bold ">
+
+
+<!-- Hero header: will stick at the top -->
+<div class="hero-head" style="padding: 0 1.5rem">
+  <a href="https://copper-leaf.github.io/thistle"><img src="https://copper-leaf.github.io/thistle/assets/svg/orchid/logo_top_dark.svg" style="padding: 40px 40px 0 40px;"></a>
+  <p class="subtitle is-4 has-text-centered">Kotlin Multiplatform String markup and formatting utility</p>
+
+  <div class="columns is-mobile has-text-centered">
+  
+
+
+  
+
+
+  </div>
+</div>
+
+
+
+
+<!-- Hero content: will be in the middle -->
+<div class="hero-body">
+  <div class="container sidebar-menu">
+    <details class="is-hidden-desktop">
+      <summary>
+        Menu
+      </summary>
+      <div id="mobile-sidebar-menu"></div>
+    </details>
+    <div class="is-hidden-touch">
+      <aside class="menu" id="responsive-menu-content">
+      
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle/changelog 2322399 -->
+  <!-- menuItem.page=https://copper-leaf.github.io/thistle 1280512370 -->
+  <a href="https://copper-leaf.github.io/thistle" class="">
+  
+  Home
+  </a>
+</li>
+
+</ul>
+  
+
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle/changelog 2322399 -->
+  <!-- menuItem.page=https://copper-leaf.github.io/thistle/changelog 2322399 -->
+  <a href="https://copper-leaf.github.io/thistle/changelog" class="is-active">
+  
+  Changelog
+  </a>
+</li>
+
+</ul>
+  
+
+  
+  
+    <ul class="menu-list">
+
+</ul>
+  
+
+
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function copyElem(fromId, toId) {
+    var fromElementContent = document.getElementById(fromId);
+    var toElementContent = document.getElementById(toId);
+    toElementContent.outerHTML = fromElementContent.outerHTML;
+  }
+
+  document.addEventListener("DOMContentLoaded", function (event) {
+    copyElem('responsive-menu-content', 'mobile-sidebar-menu');
+  });
+</script>
+
+
+</section>
+
+  </div>
+
+  <div class="column is-two-thirds-desktop is-three-quarters-widescreen is-four-fifths-fullhd is-paddingless column-main-right">
+  
+
+<nav
+  class="navbar is-white border-bottom"
+  role="navigation"
+  aria-label="main navigation"
+>
+  <div class="container">
+    <div class="navbar-brand is-marginless">
+
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMain">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu is-marginless" id="navbarMain">
+      <div class="navbar-start">
+      
+<div class="navbar-item">
+  <form id="search-input" data-orchid-search>
+    <div class="field is-marginless" id="search">
+      <div class="control has-icons-left input-control">
+        <input class="input" type="text" name="query" placeholder="Search Thistle">
+
+        <span class="icon is-small is-left">
+          <i class="fas fa-search"></i>
+        </span>
+
+        <div id="search-progress" data-orchid-search-progress style="display: none;">
+          <div class="loader">Loading...</div>
+        </div>
+      </div>
+    </div>
+    <div id="search-results" data-orchid-search-results style="display: none;">
+      <div class="carat"></div>
+      <b>
+        Search Results
+        <i class="fa fa-times" aria-hidden="true" onclick="$('[data-orchid-search-results]').hide()"></i>
+      </b>
+      <ul></ul>
+    </div>
+  </form>
+</div>
+
+      
+
+  
+  
+    
+
+<a class="navbar-item " href="https://github.com/orchidhq/Orchid">
+Orchid
+</a>
+
+
+  
+
+  
+  
+    
+<div class="navbar-item has-dropdown is-hoverable">
+
+
+<a class="navbar-item " href="">
+Copper Leaf
+</a>
+
+
+  <div class="navbar-dropdown">
+  
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/common">
+Common
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/clog">
+Clog
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/kudzu">
+Kudzu
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/trellis">
+Trellis
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/thistle">
+Thistle
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/kodiak">
+Kodiak
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/krow">
+Krow
+</a>
+
+
+    
+  </div>
+</div>
+
+  
+
+
+      </div>
+
+      <div class="navbar-end">
+      
+
+<div class="navbar-item social-item">
+  <a class="icon" href="https://github.com/copper-leaf" title="Copper Leaf Home">
+    <i class="fas fa-home"></i>
+  </a>
+</div>
+
+<div class="navbar-item social-item">
+  <a class="icon" href="https://github.com/copper-leaf/thistle" title="Github">
+    <i class="fab fa-github"></i>
+  </a>
+</div>
+
+<div class="navbar-item social-item">
+  <a class="icon" href="https://twitter.com/OrchidSSG" title="Twitter">
+    <i class="fab fa-twitter"></i>
+  </a>
+</div>
+
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+    <div class="textured container" style="width: 100%;">
+    
+    
+
+    
+    
+      <article style="position: relative; margin-top: 60px; margin-bottom: 60px;" role="main">
+      
+      
+        <div class="box">
+        
+
+<div class="columns">
+  <div class="column is-three-quarters-desktop">
+  
+    <!-- start:inject components -->
+    
+        
+            
+                
+                    
+                        <div class="component component-changelog component-order-0">
+                            
+
+
+<section class="accordions" id="changelog">
+
+  <article class="accordion is-active">
+    <div class="accordion-header toggle">
+      <p>4.0.1 - 2022-12-06</p>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content content is-medium-tablet is-large-fullhd">
+      <ul>
+<li>Fix an issue where <code>thistle-android</code> and <code>thistle-compose-ui</code> artifacts both generated the same Android <code>BuildConfig</code>
+class, causing an issue when both libraries are used in the same app.</li>
+</ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="accordion ">
+    <div class="accordion-header toggle">
+      <p>4.0.0 - 2022-10-17</p>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content content is-medium-tablet is-large-fullhd">
+      <ul>
+<li>Updates Kotlin version to 1.7.20</li>
+</ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="accordion ">
+    <div class="accordion-header toggle">
+      <p>3.1.0 - 2022-03-02</p>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content content is-medium-tablet is-large-fullhd">
+      <ul>
+<li>Updates Kotlin version to 1.6.10</li>
+<li>Enables ExplicitApi and BinaryCompatibilityValidator on the repo, to improve the stability of its API</li>
+<li>[<code>thistle-compose-ui</code>] Adds a <code>noLinkClickedHandler</code> callback to <code>StyledText</code>, to help propagate clicks that do not
+fall onto clickable regions of text.</li>
+</ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="accordion ">
+    <div class="accordion-header toggle">
+      <p>2.0.2 - 2021-12-06</p>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content content is-medium-tablet is-large-fullhd">
+      <ul>
+<li>Use identifier instead of letter/number parser for interpolated value keys</li>
+<li>Fix issue displaying inline content in Compose renderer</li>
+</ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="accordion ">
+    <div class="accordion-header toggle">
+      <p>2.0.1 - 2021-12-03</p>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content content is-medium-tablet is-large-fullhd">
+      <ul>
+<li>Fix publishing</li>
+</ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="accordion ">
+    <div class="accordion-header toggle">
+      <p>2.0.0 - 2021-12-03</p>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content content is-medium-tablet is-large-fullhd">
+      <ul>
+<li>Adds Compose target</li>
+<li>Splits Android and Console targets into separate artifacts</li>
+<li>Other minor refactoring of core APIs (some class names/packages may be slightly different)</li>
+</ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="accordion ">
+    <div class="accordion-header toggle">
+      <p>1.4.0 - 2021-07-15</p>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content content is-medium-tablet is-large-fullhd">
+      <ul>
+<li>Make tag names dynamic and checked against configured tags to ensure no tag is left unparsed, and undeclared tags throw and error</li>
+<li>Renames a couple classes to prevent ambiguity:
+<ul>
+<li><code>ThistleTag</code> is now <code>ThistleTagFactory</code></li>
+<li><code>ThistleTagBuilder</code> is now <code>ThistleTagConfiguration</code></li>
+</ul>
+</li>
+</ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="accordion ">
+    <div class="accordion-header toggle">
+      <p>1.3.0 - 2021-07-14</p>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content content is-medium-tablet is-large-fullhd">
+      <ul>
+<li>Rewrites Console renderer builder to use an intermediary tree structure to collect nested ASNI codes, rather than
+managing a local stack. This allows the tags for the console to have access to their own content during creation,
+like with the Android renderer.</li>
+</ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="accordion ">
+    <div class="accordion-header toggle">
+      <p>1.2.0 - 2021-07-13</p>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content content is-medium-tablet is-large-fullhd">
+      <ul>
+<li>Refactors <code>AndroidThistleRenderer</code> so that creating the actual Spans happens after recursion, to allow access to
+their nested content and the View's <code>Context</code> when creating the Span.</li>
+<li>Changes signature of <code>ThistleTag</code> to accept a generic <code>ThistleRenderContext</code> instead of the context and args as
+separate parameters. This requires the parsing and rendering context to match by the renderer's specific
+RenderContext implementation and provide additional information for that render target.</li>
+</ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="accordion ">
+    <div class="accordion-header toggle">
+      <p>1.1.0 - 2021-05-17</p>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content content is-medium-tablet is-large-fullhd">
+      <ul>
+<li>Adds console renderer, improves APIs to better support multiple renderer types</li>
+</ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="accordion ">
+    <div class="accordion-header toggle">
+      <p>1.0.0 - 2021-04-15</p>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content content is-medium-tablet is-large-fullhd">
+      <ul>
+<li>Initial Commit</li>
+</ul>
+      </div>
+    </div>
+  </article>
+
+</section>
+
+
+
+                        </div>
+                    
+                
+            
+        
+    
+    <!-- end:inject components -->
+
+
+  </div>
+  
+    <div class="column is-one-quarter is-hidden-touch">
+      <div class="sticky-menu" style="position: sticky; top: 30px;">
+  
+  
+    
+<p class="menu-label">In This Page</p>
+  
+
+</div>
+    </div>
+  
+</div>
+
+        </div>
+      
+      
+      </article>
+    
+      <div class="grow"></div>
+      <div class="page-footer">
+      
+        <nav class="pagination is-rounded footer-pagination" role="navigation" aria-label="pagination">
+
+  <a class="pagination-previous" disabled>
+    <span class="inner">
+      <span class="icon"><i class="fas fa-chevron-left"></i></span>
+      Previous
+    </span>
+  </a>
+
+
+
+  <a class="pagination-next" disabled>
+    <span class="inner">
+      Next
+      <span class="icon"><i class="fas fa-chevron-right"></i></span>
+    </span>
+  </a>
+
+</nav>
+
+<footer class="footer border-top">
+  <div class="content is-small">
+  <p>
+  Site proudly built with <a href="https://orchid.run/">Orchid</a>.<br>
+</p>
+
+  </div>
+</footer>
+
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+    <!-- start:inject meta-components [bodyEnd] -->
+    
+    <!-- end:inject meta-components [bodyEnd] -->
+
+
+
+    <!-- start:inject meta-components [bodyEnd] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyEnd] -->
+
+
+
+
+<!-- start:inject scripts -->
+<script defer data-search-pseudo-elements="true" src="https://copper-leaf.github.io/thistle/Copper/2f57be5b/releases/v5.4.0/js/all.js"></script>
+<script  src="https://copper-leaf.github.io/thistle/Copper/2f57be5b/assets/js/bulma.js"></script>
+<script  src="https://copper-leaf.github.io/thistle/Copper/2f57be5b/assets/js/bulma-accordion.min.js"></script>
+<script  src="https://copper-leaf.github.io/thistle/Copper/2f57be5b/assets/js/bulma-tabs.js"></script>
+<script  src="https://copper-leaf.github.io/thistle/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="https://copper-leaf.github.io/thistle/lunr/lunr.js"></script>
+<script  src="https://copper-leaf.github.io/thistle/assets/js/orchidSearch.js"></script>
+<script  src="https://copper-leaf.github.io/thistle/ajax/libs/prism/1.17.1/prism.min.js"></script>
+<script  src="https://copper-leaf.github.io/thistle/ajax/libs/prism/1.17.1/components/prism-kotlin.min.js"></script>
+<script  src="https://copper-leaf.github.io/thistle/ajax/libs/prism/1.17.1/components/prism-java.min.js"></script>
+<script  src="https://copper-leaf.github.io/thistle/ajax/libs/prism/1.17.1/components/prism-groovy.min.js"></script>
+<!-- end:inject scripts -->
+
+
+</body>
+</html>

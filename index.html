@@ -1,0 +1,1280 @@
+
+
+<!DOCTYPE html>
+<html class="">
+<head>
+
+
+
+
+
+
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid 0.21.1"/>
+<link rel="icon" href="https://copper-leaf.github.io/thistle/favicon.ico">
+
+
+<meta name="robots" content="index, follow">
+
+
+
+<title>Home</title>
+
+
+<meta name="description" content="Kotlin Multiplatform String markup and formatting utility">
+
+
+
+
+
+<!-- start:inject styles -->
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/thistle/Copper/2f57be5b/assets/css/bulma.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/thistle/Copper/2f57be5b/assets/css/extraCss.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/thistle/Copper/2f57be5b/assets/css/bulma-tooltip.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/thistle/Copper/2f57be5b/assets/css/bulma-accordion.min.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/thistle/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://copper-leaf.github.io/thistle/PrismJS/prism-themes/master/themes/prism-duotone-light.css"  />
+<!-- end:inject styles -->
+
+
+
+<script>
+    window.site = {"orchidVersion":"0.21.1","baseUrl":"https://copper-leaf.github.io/thistle","environment":"prod","version":"4.0.1"};
+</script>
+
+
+    <!-- start:inject meta-components [head] -->
+    
+    <!-- end:inject meta-components [head] -->
+
+
+
+    <!-- start:inject meta-components [head] -->
+    
+
+        
+            
+        
+
+        
+            
+        
+            
+        
+    
+    <!-- end:inject meta-components [head] -->
+
+
+
+
+
+
+
+</head>
+<body class="">
+
+
+
+
+
+    <!-- start:inject meta-components [bodyStart] -->
+    
+    <!-- end:inject meta-components [bodyStart] -->
+
+
+
+    <!-- start:inject meta-components [bodyStart] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyStart] -->
+
+
+
+
+
+<div class="columns is-marginless is-desktop">
+
+  <div class="column is-one-third-desktop is-one-quarter-widescreen is-one-fifth-fullhd is-paddingless column-main-left is-hidden-mobile is-hidden-touch">
+  
+
+
+    
+
+
+<section class="hero is-primary is-bold is-fullheight">
+
+
+<!-- Hero header: will stick at the top -->
+<div class="hero-head" style="padding: 0 1.5rem">
+  <a href="https://copper-leaf.github.io/thistle"><img src="https://copper-leaf.github.io/thistle/assets/svg/orchid/logo_top_dark.svg" style="padding: 40px 40px 0 40px;"></a>
+  <p class="subtitle is-4 has-text-centered">Kotlin Multiplatform String markup and formatting utility</p>
+
+  <div class="columns is-mobile has-text-centered">
+  
+
+
+  
+
+
+  </div>
+</div>
+
+
+
+
+<!-- Hero content: will be in the middle -->
+<div class="hero-body">
+  <div class="container sidebar-menu">
+    <details class="is-hidden-desktop">
+      <summary>
+        Menu
+      </summary>
+      <div id="mobile-sidebar-menu"></div>
+    </details>
+    <div class="is-hidden-touch">
+      <aside class="menu" id="responsive-menu-content">
+      
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=https://copper-leaf.github.io/thistle 1280512370 -->
+  <a href="https://copper-leaf.github.io/thistle" class="">
+  
+  Home
+  </a>
+</li>
+
+</ul>
+  
+
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=https://copper-leaf.github.io/thistle/changelog 2322399 -->
+  <a href="https://copper-leaf.github.io/thistle/changelog" class="">
+  
+  Changelog
+  </a>
+</li>
+
+</ul>
+  
+
+  
+  
+    <ul class="menu-list">
+
+</ul>
+  
+
+
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function copyElem(fromId, toId) {
+    var fromElementContent = document.getElementById(fromId);
+    var toElementContent = document.getElementById(toId);
+    toElementContent.outerHTML = fromElementContent.outerHTML;
+  }
+
+  document.addEventListener("DOMContentLoaded", function (event) {
+    copyElem('responsive-menu-content', 'mobile-sidebar-menu');
+  });
+</script>
+
+
+</section>
+
+  </div>
+  <div class="column is-one-third-desktop is-one-quarter-widescreen is-one-fifth-fullhd is-paddingless column-main-left is-hidden-desktop">
+  
+
+
+    
+
+
+<section class="hero is-primary is-bold ">
+
+
+<!-- Hero header: will stick at the top -->
+<div class="hero-head" style="padding: 0 1.5rem">
+  <a href="https://copper-leaf.github.io/thistle"><img src="https://copper-leaf.github.io/thistle/assets/svg/orchid/logo_top_dark.svg" style="padding: 40px 40px 0 40px;"></a>
+  <p class="subtitle is-4 has-text-centered">Kotlin Multiplatform String markup and formatting utility</p>
+
+  <div class="columns is-mobile has-text-centered">
+  
+
+
+  
+
+
+  </div>
+</div>
+
+
+
+
+<!-- Hero content: will be in the middle -->
+<div class="hero-body">
+  <div class="container sidebar-menu">
+    <details class="is-hidden-desktop">
+      <summary>
+        Menu
+      </summary>
+      <div id="mobile-sidebar-menu"></div>
+    </details>
+    <div class="is-hidden-touch">
+      <aside class="menu" id="responsive-menu-content">
+      
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=https://copper-leaf.github.io/thistle 1280512370 -->
+  <a href="https://copper-leaf.github.io/thistle" class="">
+  
+  Home
+  </a>
+</li>
+
+</ul>
+  
+
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=https://copper-leaf.github.io/thistle/changelog 2322399 -->
+  <a href="https://copper-leaf.github.io/thistle/changelog" class="">
+  
+  Changelog
+  </a>
+</li>
+
+</ul>
+  
+
+  
+  
+    <ul class="menu-list">
+
+</ul>
+  
+
+
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function copyElem(fromId, toId) {
+    var fromElementContent = document.getElementById(fromId);
+    var toElementContent = document.getElementById(toId);
+    toElementContent.outerHTML = fromElementContent.outerHTML;
+  }
+
+  document.addEventListener("DOMContentLoaded", function (event) {
+    copyElem('responsive-menu-content', 'mobile-sidebar-menu');
+  });
+</script>
+
+
+</section>
+
+  </div>
+
+  <div class="column is-two-thirds-desktop is-three-quarters-widescreen is-four-fifths-fullhd is-paddingless column-main-right">
+  
+
+<nav
+  class="navbar is-white border-bottom"
+  role="navigation"
+  aria-label="main navigation"
+>
+  <div class="container">
+    <div class="navbar-brand is-marginless">
+
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMain">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu is-marginless" id="navbarMain">
+      <div class="navbar-start">
+      
+<div class="navbar-item">
+  <form id="search-input" data-orchid-search>
+    <div class="field is-marginless" id="search">
+      <div class="control has-icons-left input-control">
+        <input class="input" type="text" name="query" placeholder="Search Thistle">
+
+        <span class="icon is-small is-left">
+          <i class="fas fa-search"></i>
+        </span>
+
+        <div id="search-progress" data-orchid-search-progress style="display: none;">
+          <div class="loader">Loading...</div>
+        </div>
+      </div>
+    </div>
+    <div id="search-results" data-orchid-search-results style="display: none;">
+      <div class="carat"></div>
+      <b>
+        Search Results
+        <i class="fa fa-times" aria-hidden="true" onclick="$('[data-orchid-search-results]').hide()"></i>
+      </b>
+      <ul></ul>
+    </div>
+  </form>
+</div>
+
+      
+
+  
+  
+    
+
+<a class="navbar-item " href="https://github.com/orchidhq/Orchid">
+Orchid
+</a>
+
+
+  
+
+  
+  
+    
+<div class="navbar-item has-dropdown is-hoverable">
+
+
+<a class="navbar-item " href="">
+Copper Leaf
+</a>
+
+
+  <div class="navbar-dropdown">
+  
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/common">
+Common
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/clog">
+Clog
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/kudzu">
+Kudzu
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/trellis">
+Trellis
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/thistle">
+Thistle
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/kodiak">
+Kodiak
+</a>
+
+
+    
+      
+
+<a class="navbar-item " href="https://github.com/copper-leaf/krow">
+Krow
+</a>
+
+
+    
+  </div>
+</div>
+
+  
+
+
+      </div>
+
+      <div class="navbar-end">
+      
+
+<div class="navbar-item social-item">
+  <a class="icon" href="https://github.com/copper-leaf" title="Copper Leaf Home">
+    <i class="fas fa-home"></i>
+  </a>
+</div>
+
+<div class="navbar-item social-item">
+  <a class="icon" href="https://github.com/copper-leaf/thistle" title="Github">
+    <i class="fab fa-github"></i>
+  </a>
+</div>
+
+<div class="navbar-item social-item">
+  <a class="icon" href="https://twitter.com/OrchidSSG" title="Twitter">
+    <i class="fab fa-twitter"></i>
+  </a>
+</div>
+
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+    <div class="textured container" style="width: 100%;">
+    
+    
+
+    
+    
+      <article style="position: relative; margin-top: 60px; margin-bottom: 60px;" role="main">
+      
+      
+        <div class="box">
+        
+
+<div class="columns">
+  <div class="column is-three-quarters-desktop">
+  
+    <!-- start:inject components -->
+    
+        
+            
+                
+                    
+                        <div class="content is-medium-tablet is-large-fullhd">
+<h1 id="thistle"><a href="#thistle" id="thistle" class="anchor"></a>Thistle</h1>
+<p>Kotlin multiplatform String markup library, inspired by <a href="https://github.com/jasonwyatt/SRML">SRML</a>.</p>
+<p><img src="https://img.shields.io/github/v/release/copper-leaf/thistle" alt="GitHub release (latest by date)" />
+<img src="https://img.shields.io/maven-central/v/io.github.copper-leaf/thistle-core" alt="Maven Central" />
+<img src="https://img.shields.io/badge/Kotlin-1.6.10-orange" alt="Kotlin Version" /></p>
+<h2 id="overview"><a href="#overview" id="overview" class="anchor"></a>Overview</h2>
+<p>Thistle is a library for converting Strings with markup tags into text with inline styles. It
+supports a variety of different targets, including Android, Compose UI, and Consoles, but with a
+common markup syntax shared by all targets.</p>
+<p><strong>Example Usage</strong></p>
+<pre><code class="language-kotlin">// Android
+val thistle = ThistleParser(AndroidDefaults(context.applicationContext))
+binding.textView.applyStyledText(
+    thistle,
+    &quot;Text with {{b}}bold{{/b}} or {{foreground color=#ff0000}}red{{/foreground}} styles&quot;
+)
+
+
+// Compose (both Android and Desktop)
+MaterialTheme {
+    ProvideThistle {
+        StyledText(&quot;Text with {{b}}bold{{/b}} or {{foreground color=#ff0000}}red{{/foreground}} styles&quot;)
+    }
+}
+
+
+// Console (ANSI codes)
+val thistle = ThistleParser(ConsoleDefaults())
+printlnStyledText(
+    thistle,
+    &quot;Text with {{b}}bold{{/b}} or {{red}}red{{/red}} styles&quot;
+)
+
+</code></pre>
+<p><strong>Motivation</strong></p>
+<p>All UI platforms have some concept of inline text styling (using a single &quot;text view&quot; but having
+portions of the text with different colors, fonts, font weight, etc.). However, the API for actually
+using these inline styles is usually very verbose and difficult to understand, and the actual
+implementation of these styles varies greatly by platform. Some use a tree-like structure which is
+relatively easy to work with (HTML <code>&lt;span&gt;</code>, or KTX extensions for Android <code>Spannable</code>), while
+others have you manually computing text offsets and attaching markup tags manually (Compose, iOS).
+And don't even get me started on Console ANSI codes...</p>
+<p>Thistle aims to abstract all that complexity away, so that you don't need to know anything about the
+platform's underlying text-styling mechanisms. You just provide your Strings and mark them up with
+the intended styling, and Thistle will take care of the rest for you. The syntax is similar to many
+other markup languages, such as Twig or Handlebars, but can also be tweaked if needed.</p>
+<p>The initial idea came from an old Android library, <a href="https://github.com/jasonwyatt/SRML">SRML</a>. It's
+a small library that has been a lifesaver for my team for years, and Thistle began as a
+re-implementation of that library in Kotlin using a proper parser and AST instead of Regex. Having
+this intermediate AST representation allows Thistle to easily adapt the same syntax to the different
+APIs needed for each target.</p>
+<p><em>Important Note: Thistle is not designed to be a full template engine. The parser is not optimized
+for handling large inputs, and the syntax is intentionally limited to only work with styling and
+simple interpolation, but no logic. This is to keep the library focused and avoid bloat, while also
+maximizing the ability for sharing input Strings and internal code across platforms without major
+compatibility issues.</em></p>
+<h2 id="installation"><a href="#installation" id="installation" class="anchor"></a>Installation</h2>
+<pre><code class="language-kotlin">repositories {
+    mavenCentral()
+}
+
+// for plain JVM or Android projects
+dependencies {
+    implementation(&quot;io.github.copper-leaf:thistle-core:4.0.1&quot;)
+    implementation(&quot;io.github.copper-leaf:thistle-android:4.0.1&quot;)
+    implementation(&quot;io.github.copper-leaf:thistle-compose-ui:4.0.1&quot;)
+    implementation(&quot;io.github.copper-leaf:thistle-console:4.0.1&quot;)
+}
+
+// for multiplatform projects
+kotlin {
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation(&quot;io.github.copper-leaf:thistle-core:4.0.1&quot;)
+                implementation(&quot;io.github.copper-leaf:thistle-android:4.0.1&quot;)
+                implementation(&quot;io.github.copper-leaf:thistle-compose-ui:4.0.1&quot;)
+                implementation(&quot;io.github.copper-leaf:thistle-console:4.0.1&quot;)
+            }
+        }
+    }
+}
+</code></pre>
+<h2 id="syntax"><a href="#syntax" id="syntax" class="anchor"></a>Syntax</h2>
+<p>The <a href="https://github.com/copper-leaf/thistle/tree/main/examples">sample apps</a> demo a variety of
+different tags, use-cases, and customizations, but here's a rundown of the basic syntax (which can
+be <a href="#customization">tweaked</a> to your needs).</p>
+<p>The following examples all demonstrate usage on Android.</p>
+<h3 id="tags"><a href="#tags" id="tags" class="anchor"></a>Tags</h3>
+<p>Tags work similar to inline HTML tags. They can be interspersed throughout the main text, and they can also be nested
+within each other arbitrarily deep.</p>
+<p>The following example shows usage of both the <code>foreground</code> and <code>background</code> tags placed inside normal text:</p>
+<pre><code>This text will be {{foreground color=#FF0000}}red{{/foreground}}, while this one has a {{background color=#0000FF}}blue{{/background}} background.
+</code></pre>
+<p><img src="https://copper-leaf.github.io/thistle/assets/media/syntax_tags.png" alt="syntax_tags" /></p>
+<h3 id="tag-parameters"><a href="#tag-parameters" id="tag-parameters" class="anchor"></a>Tag Parameters</h3>
+<p>Also like HTML tags, Thistle tags may be parameterized to tweak their rendering behavior. Parameters are assumed to be
+required (though this may be relaxed in the future), and they are strongly-typed. Values of a different type will not be
+coerced, and will instead just throw an exception.</p>
+<p>Tag parameters are a list of <code>key=value</code> pairs separated by whitespace. Unlike HTML parameters, however, Thistle
+parameters should not be wrapped in quotes (<code>&quot;</code>) unless the value is actually intended to be a String.</p>
+<p>The <code>foreground</code> tag requires a <code>color</code> parameter to be set, which must be a hex color literal:</p>
+<pre><code>{{foreground color=#FF0000}}red{{/foreground}}
+</code></pre>
+<p><img src="https://copper-leaf.github.io/thistle/assets/media/syntax_parameters.png" alt="syntax_parameters" /></p>
+<p>Thistle recognizes the following formats for parameter values. You are also able to
+<a href="#custom-value-formats">provide your own value formats</a> for aliasing or loading values from another source.</p>
+<table class="table">
+<thead>
+<tr><th>Type</th><th>Example</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Boolean</td><td><code>true</code>, <code>false</code></td><td> </td></tr>
+<tr><td>Double</td><td><code>1.1</code></td><td> </td></tr>
+<tr><td>Int</td><td><code>1</code></td><td> </td></tr>
+<tr><td>String</td><td><code>&quot;This is a string&quot;</code></td><td>String in quotes may contain spaces and escaped Unicode sequences</td></tr>
+<tr><td>Char</td><td><code>'c'</code></td><td> </td></tr>
+<tr><td>Hex Color</td><td><code>#FF0000</code></td><td>Parsed to an Int with <code>FF</code> alpha channel</td></tr>
+<tr><td>Context Value</td><td><code>context.username</code></td><td>See &quot;context data&quot; below</td></tr>
+<tr><td>Unquoted String</td><td><code>monospace</code></td><td>Unquoted string must be a single ASCII word with no spaces or Unicode sequences</td></tr>
+</tbody>
+</table>
+<h3 id="context-data"><a href="#context-data" id="context-data" class="anchor"></a>Context Data</h3>
+<p>Thistle renders each format string with an optional &quot;context data&quot; map. The values in this map can be accessed as tag
+parameters, and they can also be interpolated into the output as dynamic text.</p>
+<p>For example, given the following context data map:</p>
+<pre><code class="language-kotlin">val contextData = mapOf(
+    &quot;themeRed&quot; to Color.RED
+)
+</code></pre>
+<p>You can reference <code>themeRed</code> from the foreground tag parameters:</p>
+<pre><code>{{foreground color=context.themeRed}}red{{/foreground}}
+</code></pre>
+<p><img src="https://copper-leaf.github.io/thistle/assets/media/syntax_context_data.png" alt="syntax_context_data" /></p>
+<h3 id="interpolation"><a href="#interpolation" id="interpolation" class="anchor"></a>Interpolation</h3>
+<p>Another useful feature of the context data is to render dynamic text into the output. This may be at the top-level, or
+within a tag's content. All objects in the context map are converted to text with <code>.toString()</code>, and Thistle does not
+support any further formatting or transformation on the interpolated values from the format string. Thus, if you need to
+customize the output of a variable, you will need to convert it manually to a string before adding it to the context data map.</p>
+<p>For example, given the following context data map:</p>
+<pre><code class="language-kotlin">val contextData = mapOf(
+    &quot;username&quot; to &quot;AliceBob123&quot;,
+    &quot;userId&quot; to &quot;123456789&quot;,
+)
+</code></pre>
+<p><code>username</code> and <code>userId</code> can be rendered into the output dynamically:</p>
+<pre><code>Account: {{b}} {username} {{/b}} ({userId})
+</code></pre>
+<p><img src="https://copper-leaf.github.io/thistle/assets/media/syntax_interpolation.png" alt="syntax_interpolation" /></p>
+<h2 id="targets"><a href="#targets" id="targets" class="anchor"></a>Targets</h2>
+<p>Thistle uses a common parser, and a variety of renderers to format text at runtime. It supports both inline-styling, and
+basic interpolation. Currently, only the Android renderer is built, but more targets are planned.</p>
+<p>Thistle also parses inputs to an Abstract Syntax Tree (AST) that can be cached and rendered multiple times for
+performance. For small inputs or only rendering once, this may not be necessary, but parsing is significantly slower
+than rendering (on the order of 10s of milliseconds for parsing, vs microseconds for rendering), so caching the AST
+can be quite useful for text that gets re-rendered many times per second.</p>
+<p>Both the parser and the resulting AST are fully immutable and thus are completely thread-safe.</p>
+<p>Each target will naturally have different rendering capabilities, which are documented in the sections below.</p>
+<h3 id="android"><a href="#android" id="android" class="anchor"></a>Android</h3>
+<p>On Android, Thistle parses a String into a <code>Spanned</code> instance that can be set to a TextView. The Thistle format replaces
+&quot;tags&quot; with Android <code>Span</code>s, wrapping the appropriate text. The normal Span API can be a bit of a pain, and Thistle
+makes this simpler, and also allows you to change the span formatting at runtime rather than compile time.</p>
+<pre><code class="language-kotlin">// create the Thistle parser. It's best to create this once and inject it wherever needed
+val thistle = ThistleParser(AndroidDefaults(context.applicationContext)) // add the default tags for Android
+
+// parse a formatted string to a Spanned instance, and set that as the text of a TextView
+binding.textView.applyStyledText(
+    thistle,
+    &quot;This is a {{b}}very important{{/b}}, {{foreground color=#ff0000}}urgent{{/foreground}} message!&quot;
+)
+
+</code></pre>
+<p>The Android target also adds an additional value format for accessing application resources, using the
+same <code>@</code> syntax used in XML layouts.</p>
+<table class="table">
+<thead>
+<tr><th>Type</th><th>Example</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>String resource</td><td><code>@string/app_name</code></td><td> </td></tr>
+<tr><td>Color resource</td><td><code>@color/colorPrimary</code></td><td> </td></tr>
+<tr><td>Drawable resource</td><td><code>@drawable/ic_launcher</code></td><td> </td></tr>
+</tbody>
+</table>
+<p><img src="https://copper-leaf.github.io/thistle/assets/media/sample_android.gif" alt="sample_android_app" /></p>
+<p><strong>Default Tags</strong></p>
+<table class="table">
+<thead>
+<tr><th>Tag Name</th><th>Params</th><th>Description</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>foreground</td><td><code>color=[hex color]</code></td><td>Change text color</td><td><code>{{foreground color=#FFFF00}}Text{{/foreground}}</code></td></tr>
+<tr><td>background</td><td><code>color=[hex color]</code></td><td>Change background color</td><td><code>{{background color=#FFFF00}}Text{{/background}}</code></td></tr>
+<tr><td>style</td><td><code>style=[bold,italic]</code></td><td>Set text to bold or italic by argument</td><td><code>{{style style=bold}}Text{{/style}}</code></td></tr>
+<tr><td>b</td><td>none</td><td>Set text style to bold</td><td><code>{{b}}Text{{/b}}</code></td></tr>
+<tr><td>i</td><td>none</td><td>Set text style to italic</td><td><code>{{i}}Text{{/i}}</code></td></tr>
+<tr><td>u</td><td>none</td><td>Add underline to text</td><td><code>{{u}}Text{{/u}}</code></td></tr>
+<tr><td>strikethrough</td><td>none</td><td>Add strikethrough to text</td><td><code>{{strikethrough}}Text{{/strikethrough}}</code></td></tr>
+<tr><td>typeface</td><td><code>typeface=[monospace,sans,serif]</code></td><td>Change the typeface to monospace, serif, or sans-serif by argument</td><td><code>{{typeface typeface=serif}}Text{{/typeface}}</code></td></tr>
+<tr><td>monospace</td><td>none</td><td>Change the typeface to monospace</td><td><code>{{monospace}}Text{{/monospace}}</code></td></tr>
+<tr><td>sans</td><td>none</td><td>Change the typeface to sans-serif</td><td><code>{{sans}}Text{{/sans}}</code></td></tr>
+<tr><td>serif</td><td>none</td><td>Change the typeface to serif</td><td><code>{{serif}}Text{{/serif}}</code></td></tr>
+<tr><td>subscript</td><td>none</td><td>Move text to a subscript</td><td><code>{{subscript}}Text{{/subscript}}</code></td></tr>
+<tr><td>superscript</td><td>none</td><td>Move text to a superscript</td><td><code>{{superscript}}Text{{/superscript}}</code></td></tr>
+<tr><td>icon</td><td><code>drawable=[@drawable/]</code></td><td>Replace text with an inline icon drawable</td><td><code>{{icon drawable=@drawable/icon}}Text{{/icon}}</code></td></tr>
+<tr><td>url</td><td><code>url=[String]</code></td><td>Make text a clickable link</td><td><code>{{url url=&quot;https://www.example.com/&quot;}}Text{{/url}}</code></td></tr>
+</tbody>
+</table>
+<ul>
+<li><a href="https://github.com/copper-leaf/thistle/tree/main/examples/android">Android Example project</a></li>
+</ul>
+<h3 id="compose-ui"><a href="#compose-ui" id="compose-ui" class="anchor"></a>Compose UI</h3>
+<p>Thistle supporting rendering to Compose UI by building an <code>AnnotatedString</code>, which supports both
+Android and Desktop. The set of available tags for Compose are the same as Android (except it is
+missing <code>icon</code> and <code>url</code>), allowing one to freely share Thistle strings between the standard and
+Compose Android renderers, if needed.</p>
+<pre><code class="language-kotlin">// configure the Thistle parser at your UI root, right after the Theme. It can be updated or replaced further down the tree, if needed
+MaterialTheme {
+    ProvideThistle {
+
+        // Add additional tags to the root Thistle configuration for sub-trees of your UI. Especially useful for
+        // configuring Link tags that are only relevant for a small section of UI, without having to define
+        // those at the application root.
+        //
+        // This can be nested multiple times, but must be a child of `ProvideThistle`.
+        ProvideAdditionalThistleConfiguration({
+            tag(&quot;newTag&quot;) { TODO() }
+        }) {
+        }
+
+        // Add data to the Thistle Context variables for the UI sub-tree.
+        //
+        // This can be nested multiple times, but must be a child of `ProvideThistle`.
+        ProvideAdditionalThistleContext(
+            mapOf(&quot;a&quot; to &quot;b&quot;)
+        ) {
+        }
+
+        // Parse a formatted string to an AnnotatedString instance, and set that as the text of a BasicText
+        // composable. The resulting AnnotatedString is cached both from the input String and the Context: changed
+        // to the input String will be re-parsed and re-evaluated, while changes to the Context will only be
+        // re-evaluated with the new context values.
+        //
+        // This will typically be used as a child of `ProvideThistle`, but you can manually provide the Thistle
+        // instance and Context as function properties if needed, for more manual control.
+        StyledText(
+            &quot;This is a {{b}}very important{{/b}}, {{foreground color=#ff0000}}urgent{{/foreground}} message!&quot;
+        )
+    }
+}
+
+</code></pre>
+<p><img src="https://copper-leaf.github.io/thistle/assets/media/sample_compose.png" alt="sample_android_app" /></p>
+<p><strong>Default Tags</strong></p>
+<table class="table">
+<thead>
+<tr><th>Tag Name</th><th>Params</th><th>Description</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>foreground</td><td><code>color=[hex color]</code></td><td>Change text color</td><td><code>{{foreground color=#FFFF00}}Text{{/foreground}}</code></td></tr>
+<tr><td>background</td><td><code>color=[hex color]</code></td><td>Change background color</td><td><code>{{background color=#FFFF00}}Text{{/background}}</code></td></tr>
+<tr><td>style</td><td><code>style=[bold,italic]</code></td><td>Set text to bold or italic by argument</td><td><code>{{style style=bold}}Text{{/style}}</code></td></tr>
+<tr><td>b</td><td>none</td><td>Set text style to bold</td><td><code>{{b}}Text{{/b}}</code></td></tr>
+<tr><td>i</td><td>none</td><td>Set text style to italic</td><td><code>{{i}}Text{{/i}}</code></td></tr>
+<tr><td>u</td><td>none</td><td>Add underline to text</td><td><code>{{u}}Text{{/u}}</code></td></tr>
+<tr><td>strikethrough</td><td>none</td><td>Add strikethrough to text</td><td><code>{{strikethrough}}Text{{/strikethrough}}</code></td></tr>
+<tr><td>typeface</td><td><code>typeface=[monospace,sans,serif]</code></td><td>Change the typeface to monospace, serif, or sans-serif by argument</td><td><code>{{typeface typeface=serif}}Text{{/typeface}}</code></td></tr>
+<tr><td>monospace</td><td>none</td><td>Change the typeface to monospace</td><td><code>{{monospace}}Text{{/monospace}}</code></td></tr>
+<tr><td>sans</td><td>none</td><td>Change the typeface to sans-serif</td><td><code>{{sans}}Text{{/sans}}</code></td></tr>
+<tr><td>serif</td><td>none</td><td>Change the typeface to serif</td><td><code>{{serif}}Text{{/serif}}</code></td></tr>
+<tr><td>subscript</td><td>none</td><td>Move text to a subscript</td><td><code>{{subscript}}Text{{/subscript}}</code></td></tr>
+<tr><td>superscript</td><td>none</td><td>Move text to a superscript</td><td><code>{{superscript}}Text{{/superscript}}</code></td></tr>
+</tbody>
+</table>
+<ul>
+<li><a href="https://github.com/copper-leaf/thistle/tree/main/examples/compose-android">Compose Android Example project</a></li>
+<li><a href="https://github.com/copper-leaf/thistle/tree/main/examples/compose-desktop">Compose Desktop Example project</a></li>
+</ul>
+<h3 id="console"><a href="#console" id="console" class="anchor"></a>Console</h3>
+<p>For rendering to a console, Thistle converts the normal markup tags into
+<a href="https://en.wikipedia.org/wiki/ANSI_escape_code">ANSI escape codes</a>. It currently supports 16-bit colors for both
+foreground and background, and some other basic styling options.</p>
+<pre><code class="language-kotlin">// create the Thistle parser. It's best to create this once and inject it wherever needed
+val thistle = ThistleParser(ConsoleDefaults()) // add the default tags for rendering to the console
+
+// parse a formatted string to a ANSI escape codes, and render that to the console with `println()`
+printlnStyledText(
+    thistle,
+    &quot;This is a {{b}}very important{{/b}}, {{red}}urgent{{/red}} message!&quot;
+)
+
+</code></pre>
+<p><img src="https://copper-leaf.github.io/thistle/assets/media/sample_console.png" alt="sample_console" /></p>
+<p><strong>Default Tags</strong></p>
+<p>Color tags support both normal and &quot;bright&quot; or &quot;bold&quot; colors. Typically, a tag name that
+is all uppercase letters will render the color in &quot;bold&quot;, while all lowercase letters will either render in normal style
+or offer a parameter for manually configuring it.</p>
+<p>Unless otherwise specified, in the table below <code>ansi color</code> will refer to one of the following color values: <code>black</code>,
+<code>red</code>, <code>green</code>, <code>yellow</code>, <code>blue</code>, <code>magenta</code>, <code>cyan</code>, <code>white</code>.</p>
+<p>By default, when an ANSI &quot;reset&quot; code is encountered, all styling is reset. Thistle automatically handles re-applying
+nested tags after a reset, so using nested tags works exactly as you would expect them to.</p>
+<table class="table">
+<thead>
+<tr><th>Tag Name</th><th>Params</th><th>Description</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>foreground/FOREGROUND</td><td><code>color=[ansi color]</code>, <code>bold=[true,false]</code></td><td>Change text color</td><td><code>{{foreground color=red bold=true}}Text{{/foreground}}</code></td></tr>
+<tr><td>background/FOREGROUND</td><td><code>color=[ansi color]</code>, <code>bold=[true,false]</code></td><td>Change background color</td><td><code>{{background color=red bold=true}}Text{{/background}}</code></td></tr>
+<tr><td>style</td><td><code>style=[bold,underline,strikethrough,reverse]</code></td><td>Set text to bold, underline, strikethrough, or reverse by argument</td><td><code>{{style style=bold}}Text{{/style}}</code></td></tr>
+<tr><td>black/BLACK</td><td>none</td><td>Set foreground color to black</td><td><code>{{black}}Text{{/black}}</code></td></tr>
+<tr><td>red/RED</td><td>none</td><td>Set foreground color to red</td><td><code>{{red}}Text{{/red}}</code></td></tr>
+<tr><td>green/GREEN</td><td>none</td><td>Set foreground color to green</td><td><code>{{green}}Text{{/green}}</code></td></tr>
+<tr><td>yellow/YELLOW</td><td>none</td><td>Set foreground color to yellow</td><td><code>{{yellow}}Text{{/yellow}}</code></td></tr>
+<tr><td>blue/BLUE</td><td>none</td><td>Set foreground color to blue</td><td><code>{{blue}}Text{{/blue}}</code></td></tr>
+<tr><td>magenta/MAGENTA</td><td>none</td><td>Set foreground color to magenta</td><td><code>{{magenta}}Text{{/magenta}}</code></td></tr>
+<tr><td>cyan/CYAN</td><td>none</td><td>Set foreground color to cyan</td><td><code>{{cyan}}Text{{/cyan}}</code></td></tr>
+<tr><td>white/WHITE</td><td>none</td><td>Set foreground color to white</td><td><code>{{white}}Text{{/white}}</code></td></tr>
+<tr><td>b</td><td>none</td><td>Set text style to bold</td><td><code>{{b}}Text{{/b}}</code></td></tr>
+<tr><td>u</td><td>none</td><td>Add underline to text</td><td><code>{{u}}Text{{/u}}</code></td></tr>
+<tr><td>reverse</td><td>none</td><td>Add underline to text</td><td><code>{{reverse}}Text{{/reverse}}</code></td></tr>
+<tr><td>strikethrough</td><td>none</td><td>Add strikethrough to text</td><td><code>{{strikethrough}}Text{{/strikethrough}}</code></td></tr>
+</tbody>
+</table>
+<h3 id="ios"><a href="#ios" id="ios" class="anchor"></a>iOS</h3>
+<p>TODO (follow issue <a href="https://github.com/copper-leaf/thistle/issues/2">here</a>)</p>
+<h3 id="js-dom"><a href="#js-dom" id="js-dom" class="anchor"></a>JS DOM</h3>
+<p>TODO (follow issue <a href="https://github.com/copper-leaf/thistle/issues/3">here</a>)</p>
+<h2 id="customization"><a href="#customization" id="customization" class="anchor"></a>Customization</h2>
+<p>All targets use the same Parser implementation, and only differ in the available tags and value formats. The following
+customizations are available for all platforms.</p>
+<h3 id="custom-tags"><a href="#custom-tags" id="custom-tags" class="anchor"></a>Custom Tags</h3>
+<p>Thistle ships with several useful tags out-of-the-box, but for highly stylized text, using all the tags in the format
+string can get very tedious and muck up the original intent of the text: which is to do simple decoration of your text
+without much fuss.</p>
+<p>Do do this, you'll first need to provide Thistle with a custom <code>ThistleTag</code> implementation that parses the tag name and
+tag attributes from the format string. That Tag must then return the appropriate Android <code>Span</code> to apply the formatting
+you need.</p>
+<p>Custom tag arguments are assumed to always be required. This may be relaxed in a future version, or you can ignore it by
+not using <code>checkArgs</code> and pulling values from the <code>args</code> map manually.</p>
+<pre><code class="language-kotlin">// create a custom implementation of ThistleTag
+class CustomStyle : ThistleTagFactory&lt;AndroidThistleRenderContext, Any&gt; {
+    override fun invoke(renderContext: AndroidThistleRenderContext): Any {
+        // use checkArgs to safely pull properties from the input args and ensure incorrect args are not set
+        return checkArgs(renderContext) {
+            val color: Int by int()
+
+            // return anything that can be set to a `SpannableStringBuilder`
+            BackgroundColorSpan(color)
+        }
+    }
+}
+
+val thistle = ThistleParser(AndroidDefaults(context.applicationContext)) {
+    // register your custom tab with the Thistle parser
+    tag(&quot;customStyle&quot;) { CustomStyle() }
+
+    // the Link ThistleTag is useful for making portions of text clickable
+    tag(&quot;inc&quot;) { AndroidLink { widget: View -&gt; /* do something on link-click */ } }
+    tag(&quot;dec&quot;) { AndroidLink { widget: View -&gt; /* do something on link-click */ } }
+}
+
+binding.textView.applyStyledText(
+    thistle,
+    &quot;{{inc}}+{{/inc}} {{customStyle}}count:{{/customStyle}} {{dec}}-{{/dec}}&quot;
+)
+
+</code></pre>
+<h3 id="custom-value-formats"><a href="#custom-value-formats" id="custom-value-formats" class="anchor"></a>Custom Value Formats</h3>
+<p>Want to create new formats for literals not handled out-of-the-box, or create custom aliases? No problem! You can
+provide custom Kudzu parsers for that too. You'll need to use a <code>MappedParser</code> to wrap your syntax and format the text
+value to the intended literal value.</p>
+<pre><code class="language-kotlin">val thistle = ThistleParser(AndroidDefaults(context.applicationContext)) {
+    valueFormat {
+        MappedParser(
+            LiteralTokenParser(&quot;@color/red&quot;)
+        ) { Color.RED }.asThistleValueParser()
+    }
+}
+
+binding.textView.applyStyledText(
+    thistle,
+    &quot;{{foreground color=@color/red}}|{{/foreground}}&quot;
+)
+
+</code></pre>
+<h3 id="custom-startend-tokens"><a href="#custom-startend-tokens" id="custom-startend-tokens" class="anchor"></a>Custom Start/End Tokens</h3>
+<p>Thistle allows you full control over the syntax for each tag, also you're also free to create new tags for your needs.
+By providing custom Kudzu token parsers for the open or close tags, you can tweak the look to match your preferences.</p>
+<pre><code class="language-kotlin">val thistle = ThistleParser(AndroidDefaults(context.applicationContext)) {
+    // customize syntax to use Django/Twig/Pebble-style tags
+    customSyntax(
+        openTagStartToken = LiteralTokenParser(&quot;{%&quot;),
+        openTagEndToken = LiteralTokenParser(&quot;%}&quot;),
+        closeTagStartToken = LiteralTokenParser(&quot;{%&quot;),
+        closeTagEndToken = LiteralTokenParser(&quot;%}&quot;),
+        interpolateStartToken = LiteralTokenParser(&quot;{{&quot;),
+        interpolateEndToken = LiteralTokenParser(&quot;}}&quot;),
+    )
+}
+
+binding.textView.applyStyledText(
+    thistle,
+    &quot;{% inc %}Click Me!{% inc %}    {% foreground color=#ff0000%}|{% foreground %}    {% dec %}Don't Click Me!{% dec %}&quot;
+)
+
+</code></pre>
+
+</div>
+
+                    
+                
+            
+        
+    
+    <!-- end:inject components -->
+
+
+  </div>
+  
+    <div class="column is-one-quarter is-hidden-touch">
+      <div class="sticky-menu" style="position: sticky; top: 30px;">
+  
+  
+    
+<p class="menu-label">In This Page</p>
+  
+
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=  -->
+  <a href="#overview" class="">
+  
+  Overview
+  </a>
+</li>
+
+</ul>
+  
+
+  
+  
+    <ul class="menu-list">
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=  -->
+  <a href="#installation" class="">
+  
+  Installation
+  </a>
+</li>
+
+</ul>
+  
+
+  
+  
+    
+<ul class="menu-list">
+
+  
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=  -->
+  <a href="#syntax" class="">
+  
+  Syntax
+  </a>
+</li>
+
+
+
+  <li>
+    <ul>
+    
+      
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=  -->
+  <a href="#tags" class="">
+  
+  Tags
+  </a>
+</li>
+
+
+    
+      
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=  -->
+  <a href="#tag-parameters" class="">
+  
+  Tag Parameters
+  </a>
+</li>
+
+
+    
+      
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=  -->
+  <a href="#context-data" class="">
+  
+  Context Data
+  </a>
+</li>
+
+
+    
+      
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=  -->
+  <a href="#interpolation" class="">
+  
+  Interpolation
+  </a>
+</li>
+
+
+    
+    </ul>
+  </li>
+</ul>
+
+  
+
+  
+  
+    
+<ul class="menu-list">
+
+  
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=  -->
+  <a href="#targets" class="">
+  
+  Targets
+  </a>
+</li>
+
+
+
+  <li>
+    <ul>
+    
+      
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=  -->
+  <a href="#android" class="">
+  
+  Android
+  </a>
+</li>
+
+
+    
+      
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=  -->
+  <a href="#compose-ui" class="">
+  
+  Compose UI
+  </a>
+</li>
+
+
+    
+      
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=  -->
+  <a href="#console" class="">
+  
+  Console
+  </a>
+</li>
+
+
+    
+      
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=  -->
+  <a href="#ios" class="">
+  
+  iOS
+  </a>
+</li>
+
+
+    
+      
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=  -->
+  <a href="#js-dom" class="">
+  
+  JS DOM
+  </a>
+</li>
+
+
+    
+    </ul>
+  </li>
+</ul>
+
+  
+
+  
+  
+    
+<ul class="menu-list">
+
+  
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=  -->
+  <a href="#customization" class="">
+  
+  Customization
+  </a>
+</li>
+
+
+
+  <li>
+    <ul>
+    
+      
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=  -->
+  <a href="#custom-tags" class="">
+  
+  Custom Tags
+  </a>
+</li>
+
+
+    
+      
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=  -->
+  <a href="#custom-value-formats" class="">
+  
+  Custom Value Formats
+  </a>
+</li>
+
+
+    
+      
+
+<li>
+  <!-- page=https://copper-leaf.github.io/thistle 258027623 -->
+  <!-- menuItem.page=  -->
+  <a href="#custom-startend-tokens" class="">
+  
+  Custom Start/End Tokens
+  </a>
+</li>
+
+
+    
+    </ul>
+  </li>
+</ul>
+
+  
+
+</div>
+    </div>
+  
+</div>
+
+        </div>
+      
+      
+      </article>
+    
+      <div class="grow"></div>
+      <div class="page-footer">
+      
+        <nav class="pagination is-rounded footer-pagination" role="navigation" aria-label="pagination">
+
+  <a class="pagination-previous" disabled>
+    <span class="inner">
+      <span class="icon"><i class="fas fa-chevron-left"></i></span>
+      Previous
+    </span>
+  </a>
+
+
+
+  <a class="pagination-next" disabled>
+    <span class="inner">
+      Next
+      <span class="icon"><i class="fas fa-chevron-right"></i></span>
+    </span>
+  </a>
+
+</nav>
+
+<footer class="footer border-top">
+  <div class="content is-small">
+  <p>
+  Site proudly built with <a href="https://orchid.run/">Orchid</a>.<br>
+</p>
+
+  </div>
+</footer>
+
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+    <!-- start:inject meta-components [bodyEnd] -->
+    
+    <!-- end:inject meta-components [bodyEnd] -->
+
+
+
+    <!-- start:inject meta-components [bodyEnd] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyEnd] -->
+
+
+
+
+<!-- start:inject scripts -->
+<script defer data-search-pseudo-elements="true" src="https://copper-leaf.github.io/thistle/Copper/2f57be5b/releases/v5.4.0/js/all.js"></script>
+<script  src="https://copper-leaf.github.io/thistle/Copper/2f57be5b/assets/js/bulma.js"></script>
+<script  src="https://copper-leaf.github.io/thistle/Copper/2f57be5b/assets/js/bulma-accordion.min.js"></script>
+<script  src="https://copper-leaf.github.io/thistle/Copper/2f57be5b/assets/js/bulma-tabs.js"></script>
+<script  src="https://copper-leaf.github.io/thistle/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="https://copper-leaf.github.io/thistle/lunr/lunr.js"></script>
+<script  src="https://copper-leaf.github.io/thistle/assets/js/orchidSearch.js"></script>
+<script  src="https://copper-leaf.github.io/thistle/ajax/libs/prism/1.17.1/prism.min.js"></script>
+<script  src="https://copper-leaf.github.io/thistle/ajax/libs/prism/1.17.1/components/prism-kotlin.min.js"></script>
+<script  src="https://copper-leaf.github.io/thistle/ajax/libs/prism/1.17.1/components/prism-java.min.js"></script>
+<script  src="https://copper-leaf.github.io/thistle/ajax/libs/prism/1.17.1/components/prism-groovy.min.js"></script>
+<!-- end:inject scripts -->
+
+
+</body>
+</html>
